@@ -16,7 +16,7 @@ import android.view.View;
 import ca.hss.heatmaplib.HeatMap;
 
 public class HeatMapHolder extends HeatMap {
-    private int idResource;//사실 필요가 없음..
+    private int idResource;
     public HeatMapHolder(Context context, int idResource) {
         super(context);
         this.idResource=idResource;
@@ -26,9 +26,11 @@ public class HeatMapHolder extends HeatMap {
         super(context, attrs);
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs,R.styleable.HeatMapHolder,0,0);
         try{
-            this.idResource = R.drawable.face;
-            //원래는
-            //this.curValue = a.getInteger(R.styleable.MyProgressBar_curValue,0);
+
+            //이미지 바꾸고 싶으면 여기!!
+            this.idResource = R.drawable.crop_reverse_shoes;
+            //나중에 여기서 말고 xml에서 지정하게 할 수도 있어요 ㅠㅠ
+            //this.idResource = a.getInteger(R.styleable.HeatMapHolder_img_on_top,0);
         }finally {
         }
     }
@@ -70,7 +72,6 @@ public class HeatMapHolder extends HeatMap {
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
         //paint.setFilterBitmap(true);
         paint.setColor(0xFF0000FF);
-
         canvas.drawBitmap(bitmap,null,whereToDraw,null);
     }
 }

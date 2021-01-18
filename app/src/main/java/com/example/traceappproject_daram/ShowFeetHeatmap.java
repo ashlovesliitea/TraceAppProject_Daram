@@ -25,7 +25,8 @@ import ca.hss.heatmaplib.HeatMap;
 import ca.hss.heatmaplib.HeatMapMarkerCallback;
 
 public class ShowFeetHeatmap extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
-
+    //한번은 화면 터치해야 점들이 나와요
+    //지금은 터치할 때마다 점들이 리셋돼요
     private HeatMapHolder map;
     private boolean testAsync = false;
 

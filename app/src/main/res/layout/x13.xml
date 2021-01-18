@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/purple_300">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="30dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/num_walk_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="30dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="20/50"
+        android:textStyle="bold"
+        android:textSize="30dp" />
+
+
+    <!-- 태블릿의 경우엔 잘 안될지도..
+     image_on_top attribute를 정의하긴 했는데 오류나서 쓰진 못함-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <com.example.traceappproject_daram.HeatMapHolder
+            android:id="@+id/example_map"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:blur="0.001"
+            app:maxDrawingHeight="200dp"
+            app:maxDrawingWidth="200dp"
+            app:maxOpacity="255"
+            app:minOpacity="0"
+            app:transparentBackground="false" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="70dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:padding="20dp"
+        android:textSize="30dp"
+        android:text="녹화시작" />
+
+
+</LinearLayout>

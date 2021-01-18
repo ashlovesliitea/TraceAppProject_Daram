@@ -21,6 +21,7 @@
         app:maxDrawingHeight="200dp"
         app:maxDrawingWidth="200dp"
         app:transparentBackground="false"
+        app:img_on_top="@drawable/ic_launcher_background"
         />
 
     <CheckBox
