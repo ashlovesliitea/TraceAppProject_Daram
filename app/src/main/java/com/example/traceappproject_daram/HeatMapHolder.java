@@ -26,15 +26,11 @@ public class HeatMapHolder extends HeatMap {
         super(context, attrs);
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs,R.styleable.HeatMapHolder,0,0);
         try{
-            this.idResource = R.mipmap.face;
+            this.idResource = R.drawable.face;
             //원래는
             //this.curValue = a.getInteger(R.styleable.MyProgressBar_curValue,0);
         }finally {
-
         }
-
-
-
     }
 
     public HeatMapHolder(Context context) {
@@ -63,7 +59,7 @@ public class HeatMapHolder extends HeatMap {
         canvas.drawCircle(500,500,100,paint);
         Resources r = getResources();
 
-        BitmapDrawable bitmapDrawable = (BitmapDrawable) r.getDrawable(R.mipmap.instag);
+        BitmapDrawable bitmapDrawable = (BitmapDrawable) r.getDrawable(idResource);
         Bitmap bitmap = bitmapDrawable.getBitmap();
         int width = 1000;
         int height = 1000;
@@ -74,7 +70,6 @@ public class HeatMapHolder extends HeatMap {
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
         //paint.setFilterBitmap(true);
         paint.setColor(0xFF0000FF);
-
 
         canvas.drawBitmap(bitmap,null,whereToDraw,null);
     }
