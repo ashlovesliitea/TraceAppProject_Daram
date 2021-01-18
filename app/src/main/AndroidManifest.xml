@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TraceAppProject_Daram">
         <activity android:name=".MainActivity">
+
+        </activity>
+        <activity android:name=".ShowFeetHeatmap">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
