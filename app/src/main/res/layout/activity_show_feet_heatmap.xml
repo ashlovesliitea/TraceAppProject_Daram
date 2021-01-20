@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".ShowFeetHeatmap">
+
+    <com.example.traceappproject_daram.HeatMapHolder
+        android:id="@+id/example_map"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:minOpacity="0"
+        app:maxOpacity="255"
+        app:blur="0.001"
+        app:maxDrawingHeight="200dp"
+        app:maxDrawingWidth="200dp"
+        app:transparentBackground="false"
+        app:img_on_top="@drawable/ic_launcher_background"
+        />
+
+    <CheckBox
+        android:id="@+id/change_async_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/render_async"/>
+</LinearLayout>
