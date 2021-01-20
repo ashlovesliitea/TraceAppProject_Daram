@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">TraceAppProject_Daram</string>
+    <string name="trace">Trace</string>
+    <string name="some_id">
+당신이 남길 발자국을 위하여
+</string>
+    <string name="X_9_id">Ashie</string>
+    <string name="X_9_order">주문 내역</string>
+    <string name="X_9_name">회원 사진</string>
 </resources>
