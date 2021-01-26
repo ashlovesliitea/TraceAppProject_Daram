@@ -1,10 +1,12 @@
 package com.example.traceappproject_daram;
 //왼발 오른발 관계 없이
 //발 한 짝
-public class Feet {
+public class FootOneFrame {
     public static final int SENSOR_NUM =9;
     public double[] ps = new double[SENSOR_NUM];
     //일단 거의 고정돼있음
+    //얘네는 static 하면 안됨! 왼발 오른발이 있어서
+    //나중에 static 처리하면서 왼발 오른발 페어 만드셈
     public float[] ratioW = new float[SENSOR_NUM];
     public float[] ratioH = new float[SENSOR_NUM];
     //왼발 기준 좌표
@@ -13,6 +15,7 @@ public class Feet {
     public static final int[] EX_WIDTH = {1650,1850,1950,1450,1500,1700,1500,1900,1750};
     public static final int[] EX_HEIGHT = {1000,1000,1400,1650,2450,2400,3250,3400,3600};
     */
+    //밑에건 그냥 임의로 예쁘게 매핑한거
     public static final int[] EX_WIDTH ={1550,1900, 1900,1475,1500,1550,1575,1725,1900};
     public static final int[] EX_HEIGHT = {1250,1200,1700,1625,2200,2600,3125,3425,3100};
 
@@ -20,12 +23,26 @@ public class Feet {
     public static final int EX_FULL_HEIGHT = 4418;
     public boolean isleft = true;
 
-    public Feet(boolean isleft){
+    public FootOneFrame(boolean isleft){
+        //calcRatio();//이건 static 하게 만들어서 처음에 한 번만 호출되게 하자
         calcRatio();
         setPsAsExample();
         this.isleft = isleft;
         if(!isleft){
             makeMeRight();
+            setPsAsExample2();
+        }
+    }
+    public FootOneFrame(boolean isleft,int version){
+        calcRatio();
+        this.isleft = isleft;
+        if(!isleft){
+            makeMeRight();
+        }
+        if(version==0){
+            setPsAsExample();
+        }
+        else if(version==1){
             setPsAsExample2();
         }
     }
@@ -43,7 +60,6 @@ public class Feet {
         for(int i = 0;i<SENSOR_NUM;i++){
             ratioW[i] = (float) EX_WIDTH[i]/(float) EX_FULL_WIDTH;
             ratioH[i] = (float) EX_HEIGHT[i]/(float) EX_FULL_HEIGHT;
-
         }
     }
     public void setPsAsExample2() {

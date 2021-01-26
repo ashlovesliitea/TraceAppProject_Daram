@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".ShowFeetHeatmap">
+    tools:context=".OldShowFeetHeatmap">
 
     <com.example.traceappproject_daram.HeatMapHolder
         android:id="@+id/example_map"
