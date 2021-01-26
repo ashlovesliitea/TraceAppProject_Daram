@@ -17,16 +17,16 @@ public class SubActivity extends AppCompatActivity {
 
 
     private EditText login_email, login_password;
-    private Button login_button;
+    private Button button2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
-        setContentView( R.layout.button_login );
+        setContentView( R.layout.x_2);
 
 
-        login_button = findViewById( R.id.login_button );
-        login_button.setOnClickListener( new View.OnClickListener() {
+        button2 = findViewById( R.id.button2 );
+        button2.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String UserEmail = login_email.getText().toString();
@@ -46,7 +46,7 @@ public class SubActivity extends AppCompatActivity {
                                 String UserName = jsonObject.getString( "UserName" );
 
                                 Toast.makeText( getApplicationContext(), String.format("%s님 환영합니다.", UserName), Toast.LENGTH_SHORT ).show();
-                                Intent intent = new Intent( LoginActivity.this, MainActivity.class );
+                                Intent intent = new Intent(SubActivity.this, MainActivity.class );
 
                                 intent.putExtra( "UserEmail", UserEmail );
                                 intent.putExtra( "UserPwd", UserPwd );
