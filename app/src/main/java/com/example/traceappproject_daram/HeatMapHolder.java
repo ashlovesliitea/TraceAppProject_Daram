@@ -17,6 +17,8 @@ import ca.hss.heatmaplib.HeatMap;
 
 public class HeatMapHolder extends HeatMap {
     private int idResource;
+    private static final String TAG ="HeatMapHolder";
+    //2개 발 넣음됨
     public HeatMapHolder(Context context, int idResource) {
         super(context);
         this.idResource=idResource;
@@ -48,9 +50,20 @@ public class HeatMapHolder extends HeatMap {
         super.onDraw(canvas);
         addOverlayImage(canvas);
     }
+    //mj0125
+
+
+
+    private void setDetailedImage(){
+
+    }
+
+
+
     //mj01150219 add overlayimage
     public void addOverlayImage(Canvas canvas){
         //점추가하는 코드랑 비슷하게 해보자
+
         Paint paint = new Paint();
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
         //paint.setFilterBitmap(true);
@@ -58,13 +71,13 @@ public class HeatMapHolder extends HeatMap {
 
 
         Log.i("mj","overlay alpha : "+paint.getAlpha());
-        canvas.drawCircle(500,500,100,paint);
+        //canvas.drawCircle(500,500,100,paint);
         Resources r = getResources();
 
         BitmapDrawable bitmapDrawable = (BitmapDrawable) r.getDrawable(idResource);
         Bitmap bitmap = bitmapDrawable.getBitmap();
-        int width = 1000;
-        int height = 1000;
+        int width = getWidth();
+        int height = getHeight();
         Rect frameToDraw = new Rect(0, 0, width, height);
         RectF whereToDraw = new RectF(0, 0, width, height);
 
@@ -73,5 +86,11 @@ public class HeatMapHolder extends HeatMap {
         //paint.setFilterBitmap(true);
         paint.setColor(0xFF0000FF);
         canvas.drawBitmap(bitmap,null,whereToDraw,null);
+        int midWidth = width/2;
+        int midHeight = height/2;
+
+
+
+        Log.i(TAG,"size retrieved : "+width+" , "+height);
     }
 }
