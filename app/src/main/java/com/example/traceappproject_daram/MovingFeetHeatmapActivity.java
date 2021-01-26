@@ -5,6 +5,8 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 
 import androidx.annotation.AnyThread;
@@ -22,17 +24,17 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
     //한번은 화면 터치해야 점들이 나와요
     //지금은 터치할 때마다 점들이 리셋돼요
     private HeatMapHolder map;
-    private boolean testAsync = false;
+    private boolean testAsync = true;
     private FootMultiFrames frames;
     public int showIdx = 0;
     private static final String TAG = "MovingFeetHeatmap";
-
+    private Button btnReplay;
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.x13);
-
+        btnReplay = (Button) findViewById(R.id.replay);
         frames = new FootMultiFrames();//일단은 여기서 프레임들 다 초기화됨
         //CheckBox box = findViewById(R.id.change_async_status);
         //box.setOnCheckedChangeListener(this);
@@ -56,23 +58,32 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
             float stop = ((float) i) / 20.0f;
             int color;
             //gradient 주는 강도 바꾸고싶어서?..
+            /*
             if(i<10){
                 color = doGradient(i * 50, 0, 100, 0xff0000ff, 0xffff3000);
             }
             else {
                 color = doGradient(i * 5, 0, 100, 0xff0000ff, 0xffff3000);
             }
+             */
+            color = doGradient(i * 5, 0, 100, 0xff0000ff, 0xffff3000);
             colors.put(stop, color);
         }
         map.setColorStops(colors);
-
+        /*
         map.setOnMapClickListener(new HeatMap.OnMapClickListener() {
             @Override
             public void onMapClicked(int x, int y, HeatMap.DataPoint closest) {
                 addData();
             }
         });
-
+        */
+        btnReplay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addData();
+            }
+        });
     }
 
 
@@ -81,14 +92,21 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
             AsyncTask.execute(new Runnable() {
                 @Override
                 public void run() {
-                    drawNewMap();
-                    map.forceRefreshOnWorkerThread();
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            map.invalidate();
+                    for(int i =0;i<5;i++) {
+                        drawNewMap();
+                        map.forceRefreshOnWorkerThread();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                map.invalidate();
+                            }
+                        });
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
-                    });
+                    }
                 }
             });
         } else {

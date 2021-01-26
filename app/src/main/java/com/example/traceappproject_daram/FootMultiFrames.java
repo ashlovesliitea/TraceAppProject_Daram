@@ -27,6 +27,7 @@ public class FootMultiFrames {
     public FootOneFrame[] retrieveFrame(int idx){
         Log.i(TAG,"retrieving frame idx "+idx);
         Log.i(TAG,"first value of each foot "+frames[idx][0].ratioW[0]+" , "+frames[idx][1].ratioW[0]);
+        Log.i(TAG,"first value of each foot "+frames[idx][0].ps[2]+" , "+frames[idx][1].ps[2]);
         return frames[idx];
     }
 }

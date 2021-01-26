@@ -12,18 +12,16 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingLeft="30dp"
-        android:text="TextView" />
+        android:text="걸음수" />
 
     <TextView
         android:id="@+id/num_walk_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="30dp"
-        android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:text="20/50"
         android:textStyle="bold"
@@ -43,12 +41,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:blur="0.001"
+            app:blur="0.01"
             app:maxDrawingHeight="200dp"
             app:maxDrawingWidth="200dp"
             app:maxOpacity="255"
             app:minOpacity="0"
             app:transparentBackground="false" />
+
+        <Button
+            android:id="@+id/replay"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/white"
+            android:textColor="@color/purple_300"
+            android:text="다시보기" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -130,14 +138,15 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/start_recording"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_margin="30dp"
+        android:padding="10dp"
         android:textSize="30dp"
         android:text="녹화시작"
-        android:textColor="@color/design_default_color_secondary"
-
+        android:background="@color/white"
+        android:textColor="@color/purple_300"
         />
 
 
