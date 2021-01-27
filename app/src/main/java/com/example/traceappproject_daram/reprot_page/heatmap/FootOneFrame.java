@@ -1,12 +1,12 @@
-package com.example.traceappproject_daram;
+package com.example.traceappproject_daram.reprot_page.heatmap;
 //왼발 오른발 관계 없이
 //발 한 짝
 public class FootOneFrame {
     public static final int SENSOR_NUM =9;
     public double[] ps = new double[SENSOR_NUM];
     //일단 거의 고정돼있음
-    //얘네는 static 하면 안됨! 왼발 오른발이 있어서
-    //나중에 static 처리하면서 왼발 오른발 페어 만드셈
+    //얘네는 static 하면 지금은 안됨! 왼발 오른발에 따라 계산하고 있어서
+    //나중에 static 처리된 왼발 오른발 페어 만드셈
     public float[] ratioW = new float[SENSOR_NUM];
     public float[] ratioH = new float[SENSOR_NUM];
     //왼발 기준 좌표

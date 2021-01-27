@@ -1,4 +1,4 @@
-package com.example.traceappproject_daram;
+package com.example.traceappproject_daram.reprot_page.heatmap;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -11,7 +11,8 @@ import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.View;
+
+import com.example.traceappproject_daram.R;
 
 import ca.hss.heatmaplib.HeatMap;
 
@@ -26,11 +27,11 @@ public class HeatMapHolder extends HeatMap {
     public HeatMapHolder(Context context, AttributeSet attrs) {
 
         super(context, attrs);
-        TypedArray a = context.getTheme().obtainStyledAttributes(attrs,R.styleable.HeatMapHolder,0,0);
+        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.HeatMapHolder,0,0);
         try{
 
             //이미지 바꾸고 싶으면 여기!!
-            this.idResource = R.drawable.crop_reverse_shoes;
+            this.idResource = R.drawable.crop_reverse_shoes_pur;
             //나중에 여기서 말고 xml에서 지정하게 할 수도 있어요 ㅠㅠ
             //this.idResource = a.getInteger(R.styleable.HeatMapHolder_img_on_top,0);
         }finally {
