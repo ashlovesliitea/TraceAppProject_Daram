@@ -1,4 +1,4 @@
-package com.example.traceappproject_daram;
+package com.example.manifest;
 
 import org.junit.Test;
 

@@ -27,6 +27,7 @@ public class SubActivity extends AppCompatActivity {
 
         button2 = findViewById( R.id.button2 );
         button2.setOnClickListener( new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 String UserEmail = login_email.getText().toString();

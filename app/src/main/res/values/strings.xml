@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">TraceAppProject_Daram</string>
+    <string name="subline">
+
+당신이 남길 발자국을 위하여
+</string>
+
+    <string name="trace">
+
+Trace
+</string>
 </resources>
