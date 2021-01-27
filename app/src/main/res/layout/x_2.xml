@@ -67,4 +67,12 @@
         android:textColor="#6A6B8C"
         android:textSize="18sp"
         app:backgroundTint="#F9F9F9" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginTop="40dp"
+        android:text="아이디 찾기 | 비밀번호 찾기 | 회원가입"
+        android:textStyle="bold" />
+
 </LinearLayout>
