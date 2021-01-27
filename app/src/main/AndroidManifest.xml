@@ -12,7 +12,7 @@
         <activity android:name=".MainActivity">
 
         </activity>
-        <activity android:name=".MovingFeetHeatmapActivity">
+        <activity android:name=".reprot_page.MovingFeetHeatmapActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

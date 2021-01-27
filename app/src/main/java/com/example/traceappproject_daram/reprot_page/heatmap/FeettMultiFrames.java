@@ -1,13 +1,13 @@
-package com.example.traceappproject_daram;
+package com.example.traceappproject_daram.reprot_page.heatmap;
 
 import android.util.Log;
 
-public class FootMultiFrames {
+public class FeettMultiFrames {
     private FootOneFrame[][] frames= new FootOneFrame[NUM_FRAMES][2];;//첫번째 인덱스는 시간, 두번째는 오왼
     private int insertIdx=0;
     public static final int NUM_FRAMES = 5;
     public String TAG = "FootMultiFrames";
-    public FootMultiFrames(){
+    public FeettMultiFrames(){
         initFramesForTest();
     }
     //foot one frame을 어케 저장할까..
