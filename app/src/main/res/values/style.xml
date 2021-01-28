@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- Base application theme. -->
-    <style name="Apptheme" parent="Theme.Appompat.Light.NoActionBar">
-        <!--Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-    </style>
-</resources>
