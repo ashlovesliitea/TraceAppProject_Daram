@@ -18,7 +18,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.collection.ArrayMap;
 
 import com.example.traceappproject_daram.R;
-import com.example.traceappproject_daram.reprot_page.heatmap.FeettMultiFrames;
+import com.example.traceappproject_daram.data.Cons;
+import com.example.traceappproject_daram.reprot_page.heatmap.FeetMultiFrames;
 import com.example.traceappproject_daram.reprot_page.heatmap.FootOneFrame;
 import com.example.traceappproject_daram.reprot_page.heatmap.HeatMapHolder;
 
@@ -37,7 +38,7 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
     //다시보기 누르면 움짤
     private HeatMapHolder map;
     private boolean testAsync = true;
-    private FeettMultiFrames frames;
+    private FeetMultiFrames frames;
     public int showIdx = 0;
     private static final String TAG = "MovingFeetHeatmap";
     private Button btnReplay;
@@ -47,7 +48,7 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
         super.onCreate(savedInstanceState);
         setContentView(R.layout.x13);
         btnReplay = (Button) findViewById(R.id.replay);
-        frames = new FeettMultiFrames();//일단은 여기서 프레임들 다 초기화됨
+        frames = new FeetMultiFrames();//일단은 여기서 프레임들 다 초기화됨
         map = (HeatMapHolder) findViewById(R.id.feetmap);
         map.setMinimum(0.0);
         map.setMaximum(9.0);//강도의 최대값은 얼마냐
@@ -97,15 +98,6 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
                 e.printStackTrace();
             }
         }
-        //another code
-        /*
-        try (FileOutputStream out = new FileOutputStream(filename)) {
-            bmp.compress(Bitmap.CompressFormat.PNG, 100, out); // bmp is your Bitmap instance
-            // PNG is a lossless format, the compression factor (100) is ignored
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-         */
     }
 
     public Bitmap getBitmapFromView() {
@@ -164,14 +156,14 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
         FootOneFrame[] feet = frames.retrieveFrame(showIdx);
         passFeetToHeatMap(feet[0],map);
         passFeetToHeatMap(feet[1],map);
-        Log.i(TAG,"left or right of each foot : "+feet[0].isleft+" , "+feet[1].isleft);
+        Log.i(TAG,"left or right of each foot : "+feet[0].isRight +" , "+feet[1].isRight);
         showIdx++;
-        if(showIdx>= FeettMultiFrames.NUM_FRAMES){
+        if(showIdx>= Cons.NUM_FRAMES){
             showIdx =0;
         }
     }
     private void passFeetToHeatMap(FootOneFrame footOneFrame, HeatMapHolder map) {
-        for (int i = 0; i < FootOneFrame.SENSOR_NUM; i++) {
+        for (int i = 0; i < Cons.SENSOR_PER_FOOT; i++) {
             float c1 = footOneFrame.ratioW[i];
             float c2 = footOneFrame.ratioH[i];
             double c3 = footOneFrame.ps[i];
