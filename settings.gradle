@@ -1,2 +1,3 @@
+include ':app:manifest'
 include ':app'
 rootProject.name = "TraceAppProject_Daram"

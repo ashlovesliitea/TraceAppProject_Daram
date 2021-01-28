@@ -10,7 +10,6 @@ import androidx.annotation.AnyThread;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.collection.ArrayMap;
-
 import com.example.traceappproject_daram.R;
 import com.example.traceappproject_daram.reprot_page.heatmap.FootOneFrame;
 import com.example.traceappproject_daram.reprot_page.heatmap.HeatMapHolder;

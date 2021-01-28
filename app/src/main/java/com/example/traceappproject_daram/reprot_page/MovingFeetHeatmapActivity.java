@@ -14,10 +14,10 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.collection.ArrayMap;
 
-import com.example.traceappproject_daram.R;
 import com.example.traceappproject_daram.reprot_page.heatmap.FeettMultiFrames;
 import com.example.traceappproject_daram.reprot_page.heatmap.FootOneFrame;
 import com.example.traceappproject_daram.reprot_page.heatmap.HeatMapHolder;
+import com.example.traceappproject_daram.R;
 
 import java.util.Map;
 import java.util.Random;
@@ -28,6 +28,7 @@ import ca.hss.heatmaplib.HeatMapMarkerCallback;
 public class MovingFeetHeatmapActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
     //한번은 화면 터치해야 점들이 나와요
     //지금은 터치할 때마다 점들이 리셋돼요
+    //dfd
     private HeatMapHolder map;
     private boolean testAsync = true;
     private FeettMultiFrames frames;

@@ -1,4 +1,4 @@
-package com.example.traceappproject_daram;
+package com.example.manifest;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.example.ui", appContext.getPackageName());
+        assertEquals("com.example.manifest", appContext.getPackageName());
     }
 }
