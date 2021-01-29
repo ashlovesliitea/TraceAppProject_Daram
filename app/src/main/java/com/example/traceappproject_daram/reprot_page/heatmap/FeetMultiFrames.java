@@ -5,15 +5,21 @@ import android.util.Log;
 import com.example.traceappproject_daram.data.Cons;
 
 public class FeetMultiFrames {
-    private FootOneFrame[][] frames= new FootOneFrame[Cons.NUM_FRAMES][2];;//첫번째 인덱스는 시간, 두번째는 오왼
+    private FootOneFrame[][] frames= new FootOneFrame[Cons.HEATMAP_FRAMES_NUM][2];;//첫번째 인덱스는 시간, 두번째는 왼오
     private int insertIdx=0;
     public String TAG = "FootMultiFrames";
     public FeetMultiFrames(){
         initFramesForTest();
     }
+    public void appendFootFrame(FootOneFrame left, FootOneFrame right){
+        frames[insertIdx][0] = left;
+        frames[insertIdx][1] = right;
+        insertIdx++;
+    }
+
     //foot one frame을 어케 저장할까..
     public void initFramesForTest(){
-        for(int i = 0; i< Cons.NUM_FRAMES; i++){
+        for(int i = 0; i< Cons.HEATMAP_FRAMES_NUM; i++){
             if(i%2 ==0){
                 frames[i][0] = new FootOneFrame(false,0);
                 frames[i][1] = new FootOneFrame(true,0);

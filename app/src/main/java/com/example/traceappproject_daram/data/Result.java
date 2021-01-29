@@ -1,5 +1,8 @@
 package com.example.traceappproject_daram.data;
 
+import com.example.traceappproject_daram.reprot_page.heatmap.FeetMultiFrames;
+import com.example.traceappproject_daram.reprot_page.heatmap.FootOneFrame;
+
 import java.util.Date;
 
 public class Result {
@@ -15,11 +18,11 @@ public class Result {
         this.loginInfo = loginInfo;
         this.archLevel = archLevel;
         this.backLevel = backLevel;
-        data= new byte[Cons.NUM_MAX_FRAMES];
+        data= new byte[Cons.MAX_FRAMES_NUM];
         idxInput=0;
     }
     public void cleatData(){
-        data=new byte[Cons.NUM_MAX_FRAMES];
+        data=new byte[Cons.MAX_FRAMES_NUM];
         idxInput =0;
     }
     public void setData(byte[] data) {
@@ -43,15 +46,22 @@ public class Result {
         return true;
     }
     public boolean isValidFrames(){
-        return idxInput>= Cons.NUM_MIN_FRAMES&&idxInput<= Cons.NUM_MAX_FRAMES;
+        return idxInput>= Cons.MIN_FRAMES_NUM &&idxInput<= Cons.MAX_FRAMES_NUM;
     }
+    /*
     boolean isLeft(int idx){
-        return (idx%16< Cons.SENSOR_PER_FOOT);
+        return (idx%16< Cons.SENSOR_NUM_FOOT);
     }
-    int calcIdx(int frameIdx, boolean isRight,int sensorPos){
-        return (frameIdx+ (isRight?0:1))* Cons.SENSOR_PER_FOOT +sensorPos;
+     */
+    int calcIdx(int frameIdx, boolean isRight,int sensorPos){ //calc idx by frame idx
+        return frameIdx* Cons.SENSOR_NUM_FOOT*2+(isRight?0:Cons.SENSOR_NUM_FOOT) +sensorPos;
     }
-
+    int calcIdx(int frameIdx){
+        return calcIdx(frameIdx,false, 0);
+    }
+    int calcIdx(int frameIdx, boolean isRight){
+        return calcIdx(frameIdx, isRight, 0);
+    }
     //딥러닝 써서 할 수도 있겠지만 일단 산술적인 코드
     public boolean isBack(int frameIdx,boolean isRight){
         boolean allActivated = true;
@@ -75,24 +85,37 @@ public class Result {
         }
         return allActivated;
     }
-    public int calcEndFSize(){
-        return idxInput/(Cons.SENSOR_PER_FOOT *2);
+    public static boolean isFoot(int sidx){
+        return (sidx%Cons.SENSOR_NUM_FOOT==0);
     }
-
+    public int calcEndFSize(){
+        return idxInput/(Cons.SENSOR_NUM_FOOT *2);
+    }
+    public static int calcSecToIdx(int sec){
+        return Cons.MEASURE_NUM_1SEC*Cons.SENSOR_NUM_FOOT*2*sec;
+    }
+    public static int calcSecToFrame(int sec){
+        return Cons.MEASURE_NUM_1SEC*sec;
+    }
     //대표할 수 있는 한 걸음을 추출하기
     //알고리즘 선택해야됨
     //구현할 땐 index range로 multi frames로 변환하기
-    /*
+
     public FeetMultiFrames extractRepresentive(){
         if(!isValidFrames()) return null;
-        //representive한 거 뽑는 방법을 모르겠지만 일단 구현
-        int ctrLeftBack=0, ctrLeftArch=0,ctrRightBack = 0, ctrRightArch =0;
-        for(int fidx = 0;fidx<calcEndFSize();fidx++){
-            //activation and die 알고리즘 짜기
-        }
+        //걍 특정 시간대로 고정시키기
+        FeetMultiFrames frames = new FeetMultiFrames();
 
+        //int ctrLeftBack=0, ctrLeftArch=0,ctrRightBack = 0, ctrRightArch =0;
+        for(int fidx = Cons.REP_START_FRAME;fidx<Cons.REP_END_FRAME;fidx++){
+            //복사
+            FootOneFrame left = new FootOneFrame(this.data,calcIdx(fidx,false));
+            FootOneFrame right = new FootOneFrame(data, calcIdx(fidx, true));
+            frames.appendFootFrame(left,right);
+        }
+        return frames;
     }
-     */
+
 
 
 

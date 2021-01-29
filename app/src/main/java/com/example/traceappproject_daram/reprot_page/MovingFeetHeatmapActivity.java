@@ -158,12 +158,12 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
         passFeetToHeatMap(feet[1],map);
         Log.i(TAG,"left or right of each foot : "+feet[0].isRight +" , "+feet[1].isRight);
         showIdx++;
-        if(showIdx>= Cons.NUM_FRAMES){
+        if(showIdx>= Cons.HEATMAP_FRAMES_NUM){
             showIdx =0;
         }
     }
     private void passFeetToHeatMap(FootOneFrame footOneFrame, HeatMapHolder map) {
-        for (int i = 0; i < Cons.SENSOR_PER_FOOT; i++) {
+        for (int i = 0; i < Cons.SENSOR_NUM_FOOT; i++) {
             float c1 = footOneFrame.ratioW[i];
             float c2 = footOneFrame.ratioH[i];
             double c3 = footOneFrame.ps[i];

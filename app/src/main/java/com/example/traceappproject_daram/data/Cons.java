@@ -1,13 +1,25 @@
 package com.example.traceappproject_daram.data;
 
-public class Cons {
-    public static final int NUM_FRAMES = 5; //constants
-    public static final int SENSOR_PER_FOOT =9;
-    public static final int MAX_RAWDATA_IDX = SENSOR_PER_FOOT * NUM_FRAMES *2;
+public class Cons {//constants
+    public static final int HEATMAP_FRAMES_NUM = 5;//Result.java에선 안 쓸거고 heatmap 폴더에서만 적용돼있음
+    public static final int SENSOR_NUM_FOOT =9;
     public static final int BACK_SENSOR_NUM = 3;
-    public static final int ARCH_SENSOR_NUM= SENSOR_PER_FOOT -BACK_SENSOR_NUM;
-    public static final int MEASURE_INTERVAL= 10;//ms 단위
-    public static final int NUM_MIN_FRAMES = (1000-MEASURE_INTERVAL)*5;
-    public static final int NUM_MAX_FRAMES=(1000-MEASURE_INTERVAL)*20;//10ms마다 측정&20초 걷기
     public static final int THRESH_ACTIVATED = 9;
+    public static final int REP_START_SEC = 5;
+    public static final int REP_END_SEC = 7;
+    public static final int ARCH_SENSOR_NUM= SENSOR_NUM_FOOT -BACK_SENSOR_NUM;
+    public static final int MEASURE_INTERVAL_MS = 10;//ms 단위
+    public static final int MEASURE_NUM_1SEC= 1000 / MEASURE_INTERVAL_MS;
+    public static final int MIN_MEASURE_SEC = 2;
+    public static final int MAX_MEASURE_SEC = 30;
+    public static final int MIN_FRAMES_NUM = MEASURE_NUM_1SEC*MIN_MEASURE_SEC;
+    public static final int MAX_FRAMES_NUM = MEASURE_NUM_1SEC*MAX_MEASURE_SEC;//10ms마다 측정&20초 걷기
+    public static final int MIN_RAWDATA_IDX = Result.calcSecToIdx(MIN_MEASURE_SEC);
+    public static final int MAX_RAWDATA_IDX = Result.calcSecToIdx(MAX_MEASURE_SEC);
+
+    public static final int REP_START_IDX = Result.calcSecToIdx(REP_START_SEC);
+    public static final int REP_END_IDX = Result.calcSecToIdx(REP_END_SEC);
+    public static final int REP_START_FRAME = Result.calcSecToFrame(REP_START_SEC);
+    public static final int REP_END_FRAME = Result.calcSecToFrame(REP_END_SEC);
+
 }
