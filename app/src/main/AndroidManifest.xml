@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TraceAppProject_Daram">
-        <activity android:name=".MainActivity">
+        <activity android:name=".x_1Activity">
 
         </activity>
         <activity android:name=".reprot_page.MovingFeetHeatmapActivity">
@@ -19,7 +19,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".x_2Activity"></activity>
+        <activity android:name=".x_15Activity"></activity>
     </application>
 
 </manifest>
