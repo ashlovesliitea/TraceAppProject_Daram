@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.collection.ArrayMap;
 
 import com.example.traceappproject_daram.R;
+import com.example.traceappproject_daram.data.Cons;
 import com.example.traceappproject_daram.reprot_page.heatmap.FootOneFrame;
 import com.example.traceappproject_daram.reprot_page.heatmap.HeatMapHolder;
 
@@ -142,7 +143,7 @@ public class HeatMapFeetOneFrame extends AppCompatActivity implements CompoundBu
     }
 
     private void passFeetToHeatMap(FootOneFrame footOneFrame, HeatMapHolder map) {
-        for (int i = 0; i < FootOneFrame.SENSOR_NUM; i++) {
+        for (int i = 0; i < Cons.SENSOR_NUM_FOOT; i++) {
             float c1 = footOneFrame.ratioW[i];
             float c2 = footOneFrame.ratioH[i];
             double c3 = footOneFrame.ps[i];

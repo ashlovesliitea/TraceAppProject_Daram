@@ -2,17 +2,24 @@ package com.example.traceappproject_daram.reprot_page.heatmap;
 
 import android.util.Log;
 
-public class FeettMultiFrames {
-    private FootOneFrame[][] frames= new FootOneFrame[NUM_FRAMES][2];;//첫번째 인덱스는 시간, 두번째는 오왼
+import com.example.traceappproject_daram.data.Cons;
+
+public class FeetMultiFrames {
+    private FootOneFrame[][] frames= new FootOneFrame[Cons.HEATMAP_FRAMES_NUM][2];;//첫번째 인덱스는 시간, 두번째는 왼오
     private int insertIdx=0;
-    public static final int NUM_FRAMES = 5;
     public String TAG = "FootMultiFrames";
-    public FeettMultiFrames(){
+    public FeetMultiFrames(){
         initFramesForTest();
     }
+    public void appendFootFrame(FootOneFrame left, FootOneFrame right){
+        frames[insertIdx][0] = left;
+        frames[insertIdx][1] = right;
+        insertIdx++;
+    }
+
     //foot one frame을 어케 저장할까..
     public void initFramesForTest(){
-        for(int i = 0;i<NUM_FRAMES;i++){
+        for(int i = 0; i< Cons.HEATMAP_FRAMES_NUM; i++){
             if(i%2 ==0){
                 frames[i][0] = new FootOneFrame(false,0);
                 frames[i][1] = new FootOneFrame(true,0);
@@ -23,7 +30,6 @@ public class FeettMultiFrames {
             }
         }
     }
-    //이게 될지 모르겠다
     public FootOneFrame[] retrieveFrame(int idx){
         Log.i(TAG,"retrieving frame idx "+idx);
         Log.i(TAG,"first value of each foot "+frames[idx][0].ratioW[0]+" , "+frames[idx][1].ratioW[0]);

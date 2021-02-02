@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/purple_300">
+    android:background="#6A6B8C">
 
 
     <TextView
@@ -15,7 +15,8 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingLeft="30dp"
-        android:text="걸음수" />
+        android:text="걸음수"
+        android:textColor="#FFE090"/>
 
     <TextView
         android:id="@+id/num_walk_text"
@@ -25,7 +26,8 @@
         android:paddingBottom="10dp"
         android:text="20/50"
         android:textStyle="bold"
-        android:textSize="30dp" />
+        android:textSize="30dp"
+        android:textColor="#FFFFFF"/>
 
 
     <!-- 태블릿의 경우엔 잘 안될지도..
@@ -34,7 +36,52 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"
+            android:layout_gravity="bottom"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/arch0"
+                android:layout_width="20dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center|bottom"
+                android:layout_marginBottom="5dp"
+                android:background="#FFE090"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/arch1"
+                android:layout_width="20dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center|bottom"
+                android:layout_marginBottom="5dp"
+                android:background="#FFE090"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/arch2"
+                android:layout_width="20dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center|bottom"
+                android:layout_marginBottom="10dp"
+                android:background="#FFE090"
+                android:text="" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:paddingLeft="10dp"
+                android:text=" 아치 "
+                android:textColor="#F9F9F9"
+                android:textStyle="bold"
+                android:textSize="20dp" />
+        </LinearLayout>
 
         <com.example.traceappproject_daram.reprot_page.heatmap.HeatMapHolder
             android:id="@+id/feetmap"
@@ -48,106 +95,76 @@
             app:minOpacity="0"
             app:transparentBackground="false" />
 
-        <Button
-            android:id="@+id/replay"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center_horizontal"
-            android:background="@color/white"
-            android:textColor="@color/purple_300"
-            android:text="다시보기" />
-
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:textSize="20dp"
-                android:gravity="right|center_vertical"
-                android:paddingRight="10dp"
-                android:text="아치" />
-
-            <TextView
-                android:id="@+id/arch0"
-                android:layout_width="50dp"
-                android:layout_height="20dp"
-                android:gravity="left"
-                android:layout_marginLeft="5dp"
-                android:background="@color/purple_700"
-                android:text="" />
-
-            <TextView
-                android:id="@+id/arch1"
-                android:layout_width="50dp"
-                android:layout_height="20dp"
-                android:gravity="left"
-                android:layout_marginLeft="5dp"
-                android:background="@color/purple_700"
-                android:text="" />
-
-            <TextView
-                android:id="@+id/arch2"
-                android:layout_width="50dp"
-                android:layout_height="20dp"
-                android:gravity="left"
-                android:layout_marginLeft="5dp"
-                android:background="@color/purple_700"
-                android:text="" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:gravity="right|center_vertical"
-                android:paddingRight="10dp"
-                android:textSize="20dp"
-                android:text="뒤꿈치" />
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"
+            android:layout_gravity="bottom"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/back0"
-                android:layout_width="50dp"
-                android:layout_height="20dp"
-                android:gravity="left"
-                android:layout_marginLeft="5dp"
-
-                android:background="@color/purple_700"
+                android:layout_width="20dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
+                android:background="#FFE090"
                 android:text="" />
 
             <TextView
                 android:id="@+id/back1"
-                android:layout_width="50dp"
-                android:layout_height="20dp"
-                android:gravity="left"
-                android:layout_marginLeft="5dp"
-
-                android:background="@color/purple_700"
+                android:layout_width="20dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
+                android:background="#FFE090"
                 android:text="" />
 
             <TextView
                 android:id="@+id/back2"
-                android:layout_width="50dp"
-                android:layout_height="20dp"
-                android:gravity="left"
-                android:layout_marginLeft="5dp"
-                android:background="@color/purple_700"
+                android:layout_width="20dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:background="#C4C4C4"
                 android:text="" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:paddingRight="10dp"
+                android:text="뒤꿈치"
+                android:textStyle="bold"
+                android:textColor="#F9F9F9"
+                android:textSize="20dp" />
+
         </LinearLayout>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/replay"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/button_round_sign_up"
+        android:text="다시보기"
+        android:textColor="#6A6B8C"
+        android:textStyle="bold"
+        app:backgroundTint="#F9F9F9" />
+
 
     <Button
         android:id="@+id/start_recording"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_margin="30dp"
+        android:background="@drawable/button_round_sign_up"
         android:padding="10dp"
-        android:textSize="30dp"
         android:text="녹화시작"
-        android:background="@color/white"
-        android:textColor="@color/purple_300"
-        />
+        android:textColor="#6A6B8C"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        app:backgroundTint="#F9F9F9" />
 
 
 </LinearLayout>

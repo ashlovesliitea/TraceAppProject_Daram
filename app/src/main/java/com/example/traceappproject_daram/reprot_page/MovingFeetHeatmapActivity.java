@@ -1,6 +1,9 @@
 package com.example.traceappproject_daram.reprot_page;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,10 +18,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.collection.ArrayMap;
 
 import com.example.traceappproject_daram.R;
-import com.example.traceappproject_daram.reprot_page.heatmap.FeettMultiFrames;
+import com.example.traceappproject_daram.data.Cons;
+import com.example.traceappproject_daram.reprot_page.heatmap.FeetMultiFrames;
 import com.example.traceappproject_daram.reprot_page.heatmap.FootOneFrame;
 import com.example.traceappproject_daram.reprot_page.heatmap.HeatMapHolder;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Map;
 import java.util.Random;
 
@@ -26,11 +34,11 @@ import ca.hss.heatmaplib.HeatMap;
 import ca.hss.heatmaplib.HeatMapMarkerCallback;
 
 public class MovingFeetHeatmapActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
-    //한번은 화면 터치해야 점들이 나와요
-    //지금은 터치할 때마다 점들이 리셋돼요
+    //reportpage
+    //다시보기 누르면 움짤
     private HeatMapHolder map;
     private boolean testAsync = true;
-    private FeettMultiFrames frames;
+    private FeetMultiFrames frames;
     public int showIdx = 0;
     private static final String TAG = "MovingFeetHeatmap";
     private Button btnReplay;
@@ -40,7 +48,7 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
         super.onCreate(savedInstanceState);
         setContentView(R.layout.x13);
         btnReplay = (Button) findViewById(R.id.replay);
-        frames = new FeettMultiFrames();//일단은 여기서 프레임들 다 초기화됨
+        frames = new FeetMultiFrames();//일단은 여기서 프레임들 다 초기화됨
         map = (HeatMapHolder) findViewById(R.id.feetmap);
         map.setMinimum(0.0);
         map.setMaximum(9.0);//강도의 최대값은 얼마냐
@@ -69,8 +77,48 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
             }
         });
     }
+    public void saveBitmap(Bitmap bitmap, String strFilePath, String filename) {
+        File file = new File(strFilePath);
+        Log.i(TAG,"bitmap path : "+file.getAbsolutePath());
+        if (!file.exists())
+            file.mkdirs();
+        File fileCacheItem = new File(strFilePath + filename);
+        Log.i(TAG,"bitmap path : "+fileCacheItem.getAbsolutePath());
+        OutputStream out = null;
+        try {
+            fileCacheItem.createNewFile();
+            out = new FileOutputStream(fileCacheItem);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
-
+    public Bitmap getBitmapFromView() {
+        HeatMapHolder view = map;
+        //Define a bitmap with the same size as the view
+        Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(),Bitmap.Config.ARGB_8888);
+        //Bind a canvas to it
+        Canvas canvas = new Canvas(returnedBitmap);
+        //Get the view's background
+        Drawable bgDrawable =view.getBackground();
+        if (bgDrawable!=null)
+            //has background drawable, then draw it on the canvas
+            bgDrawable.draw(canvas);
+        else
+            //does not have background drawable, then draw white background on the canvas
+            canvas.drawColor(Color.WHITE);
+        // draw the view on the canvas
+        view.draw(canvas);//이건 왜 필요한겨..?
+        //return the bitmap
+        return returnedBitmap;
+    }
     private void addData() {
         if (testAsync) {
             AsyncTask.execute(new Runnable() {
@@ -79,6 +127,7 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
                     for(int i =0;i<5;i++) {
                         drawNewMap();
                         map.forceRefreshOnWorkerThread();
+                        saveBitmap(getBitmapFromView(),getApplicationContext().getFilesDir().getPath().toString(),"/bitm"+i+".jpg");
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -107,14 +156,14 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
         FootOneFrame[] feet = frames.retrieveFrame(showIdx);
         passFeetToHeatMap(feet[0],map);
         passFeetToHeatMap(feet[1],map);
-        Log.i(TAG,"left or right of each foot : "+feet[0].isleft+" , "+feet[1].isleft);
+        Log.i(TAG,"left or right of each foot : "+feet[0].isRight +" , "+feet[1].isRight);
         showIdx++;
-        if(showIdx>= FeettMultiFrames.NUM_FRAMES){
+        if(showIdx>= Cons.HEATMAP_FRAMES_NUM){
             showIdx =0;
         }
     }
     private void passFeetToHeatMap(FootOneFrame footOneFrame, HeatMapHolder map) {
-        for (int i = 0; i < FootOneFrame.SENSOR_NUM; i++) {
+        for (int i = 0; i < Cons.SENSOR_NUM_FOOT; i++) {
             float c1 = footOneFrame.ratioW[i];
             float c2 = footOneFrame.ratioH[i];
             double c3 = footOneFrame.ps[i];
