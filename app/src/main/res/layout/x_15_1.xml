@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F9F9F9"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:text="Trace"
+        android:textStyle="bold"/>
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"
+        android:text="회원가입"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="64dp"
+        android:text="*는 필수항목입니다."
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="아이디*"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp" />
+
+    <EditText
+        android:id="@+id/join_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="20dp"
+        android:ems="20"
+        android:hint="4-20자: 영문 소문자, 숫자조합"
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="비밀번호*"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp"/>
+
+
+    <EditText
+        android:id="@+id/join_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:ems="20"
+        android:hint="4-20자: 영문 소문자, 숫자조합"
+        android:inputType="textPassword"
+        android:layout_marginLeft="20dp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="비밀번호 확인*"
+        android:textSize="20sp"
+        android:textStyle="bold"
+       android:layout_marginLeft="20dp" />
+
+    <EditText
+        android:id="@+id/join_pwck"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:ems="20"
+        android:hint="4-20자: 영문 소문자, 숫자조합"
+        android:inputType="textPassword"
+       android:layout_marginLeft="20dp"/>
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="이름*"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp"/>
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:ems="10"
+        android:inputType="text"
+        android:layout_marginLeft="20dp"/>
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="휴대전화*"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="98dp"
+            android:layout_height="68dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text= " - "
+            android:textSize="40sp"
+            android:textStyle="bold"
+            />
+
+        <EditText
+            android:id="@+id/spin"
+            android:layout_width="169dp"
+            android:layout_height="68dp"
+            android:ems="4"
+            android:inputType="text"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" - "
+            android:textSize="40sp"
+            android:textStyle="bold"
+            />
+
+        <EditText
+            android:id="@+id/spin2"
+            android:layout_width="169dp"
+            android:layout_height="68dp"
+            android:ems="4"
+            android:inputType="text"
+            android:layout_marginBottom="4dp" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="배송지*"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/receive"
+            android:layout_width="551dp"
+            android:layout_height="73dp"
+            android:layout_marginLeft="20dp" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="20dp"
+            android:background="#6A6B8C"
+            android:text="검색하기"
+            android:textColor="#6A6B8C"
+            app:backgroundTint="#F9F9F9" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="발사이즈*"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp" />
+
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="98dp"
+        android:layout_height="68dp"
+        tools:layout_editor_absoluteY="707dp"
+        android:layout_marginLeft="20dp"/>
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="성별"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="10dp"
+            android:text="남자"
+            app:backgroundTint="#F9F9F9"
+            tools:textColor="#6A6B8C" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:text="여자"
+            app:backgroundTint="#6A6B8C" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="몸무게"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp"/>
+
+
+    <Spinner
+        android:id="@+id/spinner3"
+        android:layout_width="98dp"
+        android:layout_height="68dp"
+        tools:layout_editor_absoluteY="878dp"
+        android:layout_marginLeft="20dp"/>
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="키"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp" />
+
+    <Spinner
+        android:id="@+id/spinner4"
+        android:layout_width="98dp"
+        android:layout_height="68dp"
+        tools:layout_editor_absoluteY="964dp" />
+
+    <Button
+        android:id="@+id/buttonSign"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="204dp"
+        android:background="@drawable/button_round"
+        android:backgroundTint="#6A6B8C"
+        android:text="회원가입"
+        android:textColor="#F9F9F9"
+        android:textSize="18sp"
+        app:backgroundTint="#6A6B8C"
+        tools:layout_editor_absoluteX="47dp" />
+
+
+</LinearLayout>
