@@ -13,13 +13,15 @@
 
         </activity>
         <activity android:name=".reprot_page.MovingFeetHeatmapActivity">
+
+        </activity>
+        <activity android:name=".x_2Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".x_2Activity"></activity>
         <activity android:name=".x_15Activity"></activity>
     </application>
 

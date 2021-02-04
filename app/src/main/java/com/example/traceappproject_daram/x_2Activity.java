@@ -1,4 +1,4 @@
-package com.example.experiment;
+package com.example.traceappproject_daram;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -27,12 +27,10 @@ import org.w3c.dom.Text;
 
 public class x_2Activity extends AppCompatActivity {
 
-
     private EditText login_email, login_password;
     private Button button2;
     private Button button3;
     private TextView text;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +85,7 @@ public class x_2Activity extends AppCompatActivity {
             }
         });
 
-        text = findViewById(R.id.text);
+        text = findViewById(R.id.go_to_x_15);
         text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
