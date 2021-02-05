@@ -1,6 +1,7 @@
 package com.example.traceappproject_daram.reprot_page;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -18,15 +19,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.collection.ArrayMap;
 
 import com.example.traceappproject_daram.R;
+import com.example.traceappproject_daram.Util;
 import com.example.traceappproject_daram.data.Cons;
+import com.example.traceappproject_daram.data.Result;
 import com.example.traceappproject_daram.reprot_page.heatmap.FeetMultiFrames;
 import com.example.traceappproject_daram.reprot_page.heatmap.FootOneFrame;
 import com.example.traceappproject_daram.reprot_page.heatmap.HeatMapHolder;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Calendar;
 import java.util.Map;
 import java.util.Random;
 
@@ -42,6 +48,7 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
     public int showIdx = 0;
     private static final String TAG = "MovingFeetHeatmap";
     private Button btnReplay;
+    private Result result;
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,18 +84,20 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
             }
         });
     }
-    public void saveBitmap(Bitmap bitmap, String strFilePath, String filename) {
+    public void saveBitmap(Bitmap bitmap,Calendar resultTime,int idx) {
+        String strFilePath = Util.makeFolderPath(this, resultTime);
+
         File file = new File(strFilePath);
         Log.i(TAG,"bitmap path : "+file.getAbsolutePath());
         if (!file.exists())
             file.mkdirs();
-        File fileCacheItem = new File(strFilePath + filename);
+        File fileCacheItem = new File(Util.make_path(this,resultTime,idx));
         Log.i(TAG,"bitmap path : "+fileCacheItem.getAbsolutePath());
         OutputStream out = null;
         try {
             fileCacheItem.createNewFile();
             out = new FileOutputStream(fileCacheItem);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -124,10 +133,11 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
             AsyncTask.execute(new Runnable() {
                 @Override
                 public void run() {
-                    for(int i =0;i<5;i++) {
+                    for(int i =0;i<frames.getFramesSz();i++) {
                         drawNewMap();
                         map.forceRefreshOnWorkerThread();
-                        saveBitmap(getBitmapFromView(),getApplicationContext().getFilesDir().getPath().toString(),"/bitm"+i+".jpg");
+                        //getApplicationContext().getFilesDir().getPath().toString(),"/bitm"+i+".jpg"
+                        saveBitmap(getBitmapFromView(),result.getCalendar(),i);
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {

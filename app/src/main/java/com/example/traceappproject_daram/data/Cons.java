@@ -1,5 +1,6 @@
 package com.example.traceappproject_daram.data;
-
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 public class Cons {//constants
     public static final int HEATMAP_FRAMES_NUM = 5;//Result.java에선 안 쓸거고 heatmap 폴더에서만 적용돼있음
     public static final int SENSOR_NUM_FOOT =9;
@@ -21,5 +22,6 @@ public class Cons {//constants
     public static final int REP_END_IDX = Result.calcSecToIdx(REP_END_SEC);
     public static final int REP_START_FRAME = Result.calcSecToFrame(REP_START_SEC);
     public static final int REP_END_FRAME = Result.calcSecToFrame(REP_END_SEC);
+    public static final String IMG_EXT = ".png";
 
 }

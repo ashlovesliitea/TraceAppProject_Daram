@@ -46,7 +46,7 @@ public class x_2Activity extends AppCompatActivity {
             public void onClick(View view) {
                 String UserEmail = login_email.getText().toString();
                 String UserPwd = login_password.getText().toString();
-
+                //response 말고 request로 바꾸기
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

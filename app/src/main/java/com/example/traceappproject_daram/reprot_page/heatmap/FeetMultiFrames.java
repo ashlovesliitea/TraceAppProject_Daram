@@ -5,9 +5,11 @@ import android.util.Log;
 import com.example.traceappproject_daram.data.Cons;
 
 public class FeetMultiFrames {
+    //frame이 상수로 박혀있는 건 좋지 않은 듯
     private FootOneFrame[][] frames= new FootOneFrame[Cons.HEATMAP_FRAMES_NUM][2];;//첫번째 인덱스는 시간, 두번째는 왼오
     private int insertIdx=0;
     public String TAG = "FootMultiFrames";
+    //나중에 파라미터 받을 수 있게되면 동적할당버전 만들기
     public FeetMultiFrames(){
         initFramesForTest();
     }
@@ -29,6 +31,9 @@ public class FeetMultiFrames {
                 frames[i][1] = new FootOneFrame(true,1);
             }
         }
+    }
+    public int getFramesSz(){
+        return frames.length;
     }
     public FootOneFrame[] retrieveFrame(int idx){
         Log.i(TAG,"retrieving frame idx "+idx);
