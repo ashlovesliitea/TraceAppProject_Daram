@@ -1,14 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="trace">
-
-    <item name="android:textSize">
-        64sp
-    </item>
-
-    <item name="android:textColor">
-        #6A6B8C
-    </item>
-    </style>
 
 </resources>

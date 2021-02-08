@@ -20,7 +20,7 @@ public class FootOneFrame {
     */
     //밑에건 그냥 임의로 예쁘게 매핑한거
     //사진 크롭하게 되면서 FINAL 이 빠지게됨
-    public static int[] EX_WIDTH =  {600,750,600,400,700,600,500,750};
+    public static int[] EX_WIDTH =  {500,750,600,400,700,600,500,750};
     public static int[] EX_HEIGHT = {500,500,850,1200,1200,1800,2350,2350};
 
     //crop후 width
@@ -63,7 +63,7 @@ public class FootOneFrame {
     public void makeMeRight(){
         //양발이 같은 높이이기 때문에 w만 대칭
         for(int i = 0; i< Cons.SENSOR_NUM_FOOT; i++) {
-            ratioW[i] = (float) ratioW[i] + (700/(float)EX_FULL_WIDTH);
+            ratioW[i] = (float) ratioW[i] + (float)((float)800/(double)EX_FULL_WIDTH);
         }
     }
     //calc ratio of the picture

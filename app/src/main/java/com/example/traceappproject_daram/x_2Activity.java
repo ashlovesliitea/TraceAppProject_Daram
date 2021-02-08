@@ -1,4 +1,5 @@
 package com.example.traceappproject_daram;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Response;
+import com.example.traceappproject_daram.reprot_page.MovingFeetHeatmapActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,6 +48,9 @@ public class x_2Activity extends AppCompatActivity {
             public void onClick(View view) {
                 String UserEmail = login_email.getText().toString();
                 String UserPwd = login_password.getText().toString();
+                Intent intent = new Intent(x_2Activity.this, MovingFeetHeatmapActivity.class);
+                startActivity(intent);
+
                 //response 말고 request로 바꾸기
                 /*
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
