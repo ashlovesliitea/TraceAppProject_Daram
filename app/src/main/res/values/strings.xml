@@ -10,4 +10,11 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="trace">Trace</string>
+    <string name="some_id">
+당신이 남길 발자국을 위하여
+</string>
+    <string name="X_9_id">Ashie</string>
+    <string name="X_9_order">주문 내역</string>
+    <string name="X_9_name">회원 사진</string>
 </resources>
