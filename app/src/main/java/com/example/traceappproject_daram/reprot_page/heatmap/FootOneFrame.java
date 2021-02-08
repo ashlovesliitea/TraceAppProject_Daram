@@ -20,15 +20,12 @@ public class FootOneFrame {
     */
     //밑에건 그냥 임의로 예쁘게 매핑한거
     //사진 크롭하게 되면서 FINAL 이 빠지게됨
-    public static int[] EX_WIDTH = {1550,1900, 1900,1475,1500/*,1550*/,1575,1725,1900};
-    public static int[] EX_HEIGHT = {1250,1200,1700,1625,2200/*,2600*/,3125,3425,3100};
-    /*
-    public static final int EX_FULL_WIDTH = 4521;
-    public static final int EX_FULL_HEIGHT = 4418;
-    */
+    public static int[] EX_WIDTH =  {600,750,600,400,700,600,500,750};
+    public static int[] EX_HEIGHT = {500,500,850,1200,1200,1800,2350,2350};
+
     //crop후 width
-    public static final int EX_FULL_WIDTH = 2975;
-    public static final int EX_FULL_HEIGHT = 3289;
+    public static final int EX_FULL_WIDTH = 2080;
+    public static final int EX_FULL_HEIGHT = 2863;
 
     public boolean isRight = false;
 
@@ -50,14 +47,15 @@ public class FootOneFrame {
         }
 
     }
-
-    public FootOneFrame(byte[] rawData, int sidx){
-        if(!Result.isFoot(sidx)){
-            //not valid
+    public FootOneFrame(byte[] rawData,boolean isRight){
+        calcRatio();
+        if(isRight){
+            makeMeRight();
         }
-        for(int i = sidx;i<Cons.SENSOR_NUM_FOOT;i++){
+        for(int i = 0;i<Cons.SENSOR_NUM_FOOT;i++){
             ps[i] = (double)rawData[i];
         }
+
     }
     public void setPtIdx(int idx, double p){//assign pressure to points
         ps[idx] = p;
@@ -65,15 +63,12 @@ public class FootOneFrame {
     public void makeMeRight(){
         //양발이 같은 높이이기 때문에 w만 대칭
         for(int i = 0; i< Cons.SENSOR_NUM_FOOT; i++) {
-            ratioW[i] = (float) (0.5+(0.5-ratioW[i]));
+            ratioW[i] = (float) ratioW[i] + (700/(float)EX_FULL_WIDTH);
         }
     }
     //calc ratio of the picture
     public void calcRatio(){
-        for(int i = 0;i<Cons.SENSOR_NUM_FOOT;i++){
-            EX_WIDTH[i]-=865;
-            EX_HEIGHT[i]-=464;
-        }
+
 
         for(int i = 0; i< Cons.SENSOR_NUM_FOOT; i++){
             ratioW[i] = (float) EX_WIDTH[i]/(float) EX_FULL_WIDTH;
