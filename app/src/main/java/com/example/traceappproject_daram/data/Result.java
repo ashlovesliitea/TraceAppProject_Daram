@@ -57,9 +57,9 @@ public class Result {
     boolean isLeft(int idx){
         return (idx%16< Cons.SENSOR_NUM_FOOT);
     }
-     */
+    */
     int calcIdx(int frameIdx, boolean isRight,int sensorPos){ //calc idx by frame idx
-        return frameIdx* Cons.SENSOR_NUM_FOOT*2+(isRight?0:Cons.SENSOR_NUM_FOOT) +sensorPos;
+        return frameIdx* Cons.SENSOR_NUM_FOOT*2+(isRight?Cons.SENSOR_NUM_FOOT:0) +sensorPos;
     }
     int calcIdx(int frameIdx){
         return calcIdx(frameIdx,false, 0);
