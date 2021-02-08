@@ -47,6 +47,7 @@ public class x_2Activity extends AppCompatActivity {
                 String UserEmail = login_email.getText().toString();
                 String UserPwd = login_password.getText().toString();
                 //response 말고 request로 바꾸기
+                /*
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -78,10 +79,11 @@ public class x_2Activity extends AppCompatActivity {
                         }
                     }
                 };
+
+                 */
                 // LoginRequest loginRequest = new LoginRequest(UserEmail, UserPwd, responseListener );
                 //RequestQueue queue = Volley.newRequestQueue( x_2Activity.this );
                 //queue.add( loginRequest );//서버연동내용이었네요
-
             }
         });
 

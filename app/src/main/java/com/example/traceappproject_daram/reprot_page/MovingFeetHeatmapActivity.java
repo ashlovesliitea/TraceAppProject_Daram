@@ -137,7 +137,7 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
                         drawNewMap();
                         map.forceRefreshOnWorkerThread();
                         //getApplicationContext().getFilesDir().getPath().toString(),"/bitm"+i+".jpg"
-                        saveBitmap(getBitmapFromView(),result.getCalendar(),i);
+                        //saveBitmap(getBitmapFromView(),result.getCalendar(),i);
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {

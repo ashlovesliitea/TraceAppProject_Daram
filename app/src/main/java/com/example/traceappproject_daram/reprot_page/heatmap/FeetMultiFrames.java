@@ -9,6 +9,18 @@ public class FeetMultiFrames {
     private FootOneFrame[][] frames= new FootOneFrame[Cons.HEATMAP_FRAMES_NUM][2];;//첫번째 인덱스는 시간, 두번째는 왼오
     private int insertIdx=0;
     public String TAG = "FootMultiFrames";
+
+    //             0 1 2 3 4 5 6 7 8
+    int[] empty = {0,0,0,0,0,0,0,0,0};
+    int[] back1 = {0,0,0,0,0,0,7,7,9};
+    int[] back2 = {0,0,0,0,0,0,0,7,9};
+    int[] midd1 = {0,0,0,0,0,6,6,6,6};
+    int[] midd2 = {0,0,0,0,0,6,6,6,6};
+    int[] arch1 = {7,7,7,0,0,0,0,1,1};
+    int[] arch2 = {9,7,5,0,0,0,0,3,3};
+
+
+
     //나중에 파라미터 받을 수 있게되면 동적할당버전 만들기
     public FeetMultiFrames(){
         initFramesForTest();
@@ -21,16 +33,7 @@ public class FeetMultiFrames {
 
     //foot one frame을 어케 저장할까..
     public void initFramesForTest(){
-        for(int i = 0; i< Cons.HEATMAP_FRAMES_NUM; i++){
-            if(i%2 ==0){
-                frames[i][0] = new FootOneFrame(false,0);
-                frames[i][1] = new FootOneFrame(true,0);
-            }
-            else{
-                frames[i][0] = new FootOneFrame(false,1);
-                frames[i][1] = new FootOneFrame(true,1);
-            }
-        }
+        frames[0][0] = new FootOneFrame(back1,0);
     }
     public int getFramesSz(){
         return frames.length;

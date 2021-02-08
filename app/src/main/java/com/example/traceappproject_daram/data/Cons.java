@@ -3,7 +3,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 public class Cons {//constants
     public static final int HEATMAP_FRAMES_NUM = 5;//Result.java에선 안 쓸거고 heatmap 폴더에서만 적용돼있음
-    public static final int SENSOR_NUM_FOOT =9;
+    public static final int SENSOR_NUM_FOOT =8;
     public static final int BACK_SENSOR_NUM = 3;
     public static final int THRESH_ACTIVATED = 9;
     public static final int REP_START_SEC = 5;

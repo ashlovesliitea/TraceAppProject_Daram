@@ -8,7 +8,11 @@ public class LoginInfo {
         this.id = id;
         this.pw = pw;
     }
-
+    public LoginInfo(){
+        //dummy
+        this.id = "daram01";
+        this.pw = "dldmsdk";
+    }
     public String getId() {
         return id;
     }

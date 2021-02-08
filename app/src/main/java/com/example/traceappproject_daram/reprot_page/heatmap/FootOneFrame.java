@@ -19,12 +19,17 @@ public class FootOneFrame {
     public static final int[] EX_HEIGHT = {1000,1000,1400,1650,2450,2400,3250,3400,3600};
     */
     //밑에건 그냥 임의로 예쁘게 매핑한거
-
-    public static final int[] EX_WIDTH ={1550,1900, 1900,1475,1500,1550,1575,1725,1900};
-    public static final int[] EX_HEIGHT = {1250,1200,1700,1625,2200,2600,3125,3425,3100};
-
+    //사진 크롭하게 되면서 FINAL 이 빠지게됨
+    public static int[] EX_WIDTH = {1550,1900, 1900,1475,1500/*,1550*/,1575,1725,1900};
+    public static int[] EX_HEIGHT = {1250,1200,1700,1625,2200/*,2600*/,3125,3425,3100};
+    /*
     public static final int EX_FULL_WIDTH = 4521;
     public static final int EX_FULL_HEIGHT = 4418;
+    */
+    //crop후 width
+    public static final int EX_FULL_WIDTH = 2975;
+    public static final int EX_FULL_HEIGHT = 3289;
+
     public boolean isRight = false;
 
     public FootOneFrame(boolean isRight){
@@ -43,13 +48,9 @@ public class FootOneFrame {
         if(!isRight){
             makeMeRight();
         }
-        if(version==0){
-            setPsAsExample();
-        }
-        else if(version==1){
-            setPsAsExample2();
-        }
+
     }
+
     public FootOneFrame(byte[] rawData, int sidx){
         if(!Result.isFoot(sidx)){
             //not valid
@@ -69,6 +70,11 @@ public class FootOneFrame {
     }
     //calc ratio of the picture
     public void calcRatio(){
+        for(int i = 0;i<Cons.SENSOR_NUM_FOOT;i++){
+            EX_WIDTH[i]-=865;
+            EX_HEIGHT[i]-=464;
+        }
+
         for(int i = 0; i< Cons.SENSOR_NUM_FOOT; i++){
             ratioW[i] = (float) EX_WIDTH[i]/(float) EX_FULL_WIDTH;
             ratioH[i] = (float) EX_HEIGHT[i]/(float) EX_FULL_HEIGHT;
