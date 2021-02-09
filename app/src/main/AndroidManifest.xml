@@ -25,7 +25,8 @@
         <activity android:name=".x_2Activity">
         </activity>
         <activity android:name=".x_15Activity" />
-
+        <activity android:name=".x9.RecyclerViewActivity">
+        </activity>
 
     </application>
 

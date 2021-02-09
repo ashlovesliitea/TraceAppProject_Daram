@@ -29,6 +29,9 @@ public class FootOneFrame {
 
     public boolean isRight = false;
 
+
+
+
     public FootOneFrame(boolean isRight){
         //calcRatio();//이건 static 하게 만들어서 처음에 한 번만 호출되게 하자
         calcRatio();

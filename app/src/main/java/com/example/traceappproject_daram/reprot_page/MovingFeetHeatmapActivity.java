@@ -83,6 +83,9 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
                 addData();
             }
         });
+        //처음에 누르고 페이지 나오자마자 히트맵 로드되게..?
+
+        drawNewMap();
     }
     public void saveBitmap(Bitmap bitmap,Calendar resultTime,int idx) {
         String strFilePath = Util.makeFolderPath(this, resultTime);
@@ -145,7 +148,7 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
                             }
                         });
                         try {
-                            Thread.sleep(1000);
+                            Thread.sleep(500);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }

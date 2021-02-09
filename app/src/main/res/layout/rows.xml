@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="260dp"
+    android:layout_height="160dp"
+    android:orientation="vertical"
+    android:background="@drawable/button_round_sign_up"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--겹쳐지는 레이아웃은 relative layout-->
+
+
+   <TextView
+       android:id="@+id/CardDate"
+       android:layout_width="200dp"
+       android:layout_height="30dp"
+       android:text="2020/12/08 22:39"
+       android:textSize="10sp"
+       android:layout_marginTop="10dp"
+       android:layout_marginLeft="15dp"
+       android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/CardMeasure"
+        android:layout_width="240dp"
+        android:layout_height="77dp"
+        android:layout_marginLeft="20dp"
+        android:text="아치 2단계, 발꿈치 3단계"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:id="@+id/cardButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        >
+     <androidx.appcompat.widget.AppCompatButton
+         android:id="@+id/button_delete"
+         android:layout_width="100dp"
+         android:layout_height="30dp"
+         android:text="삭제"
+         android:textColor="#6A6B8C"
+         android:background="@drawable/button_round2"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_send"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/button_delete"
+            android:layout_width="100dp"
+            android:text="전송"
+            android:textColor="@color/white"
+            android:layout_height="30dp"
+            android:background="@drawable/button_round" />
+    </RelativeLayout>
+
+</LinearLayout>

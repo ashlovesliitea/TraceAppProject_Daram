@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Response;
 import com.example.traceappproject_daram.reprot_page.MovingFeetHeatmapActivity;
+import com.example.traceappproject_daram.x9.RecyclerViewActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,7 +49,7 @@ public class x_2Activity extends AppCompatActivity {
             public void onClick(View view) {
                 String UserEmail = login_email.getText().toString();
                 String UserPwd = login_password.getText().toString();
-                Intent intent = new Intent(x_2Activity.this, MovingFeetHeatmapActivity.class);
+                Intent intent = new Intent(x_2Activity.this, RecyclerViewActivity.class);
                 startActivity(intent);
 
                 //response 말고 request로 바꾸기

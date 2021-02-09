@@ -1,53 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/x_9"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:outlineProvider="background"
-    android:background="@drawable/x_9"
-    >
-
-    <View
-        android:id="@+id/rectangle_3"
-        android:layout_width="match_parent"
-        android:layout_height="306dp"
-        android:background="@drawable/x9_rectangle_3">
-    </View>
+    android:background="@drawable/x_9">
 
     <ImageView
-        android:id="@+id/ellipse_22"
-        android:layout_width="68dp"
-        android:layout_height="68dp"
-        android:contentDescription="@string/X_9_name"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="167dp"
-        android:layout_marginStart="167dp"
-        android:layout_marginTop="82dp"
-        android:background="@drawable/x9_ellipse_22" />
+        android:id="@+id/rectangle_3"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@color/trace_purple"
+        android:background="@drawable/x9_rectangle_3"
+        android:scaleType="fitXY"></ImageView>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="168dp"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:text="@string/X_9_id"/>
+        android:layout_marginTop="90dp"
+        android:src="@drawable/peanut" />
 
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="160dp"
+        android:text="반소희"
+        android:textColor="@color/text_on_purple"
+        android:textSize="20sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/MyRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="173dp"
+        android:layout_marginTop="210dp"
+        android:scrollbars="horizontal" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/X_9_order"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        android:layout_marginTop="400dp"
         android:layout_marginStart="50dp"
         android:layout_marginLeft="50dp"
-        />
+        android:layout_marginTop="400dp"
+        android:text="주문 내역"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
     <View
         android:layout_width="350dp"
         android:layout_height="2dp"
@@ -55,9 +56,10 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="440dp"
         />
+
     <ListView
         android:layout_width="350dp"
-        android:layout_height="wrap_content"
+        android:layout_height="246dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="461dp"/>
+        android:layout_marginTop="461dp" />
 </RelativeLayout>

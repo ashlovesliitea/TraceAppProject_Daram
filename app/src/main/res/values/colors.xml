@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name = "dark_purple">#FF4A4A61</color>
+    <color name="trace_purple">#FF6A6B8C</color>
+    <color name="text_on_purple">#FFFDFBF3</color>
 </resources>

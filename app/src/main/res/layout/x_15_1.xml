@@ -137,7 +137,7 @@
 
         <Spinner
             android:id="@+id/spinner"
-            android:layout_width="98dp"
+            android:layout_width="110dp"
             android:layout_height="68dp"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
@@ -146,10 +146,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text= " - "
+            android:text=" - "
             android:textSize="40sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/spin"
@@ -159,20 +158,19 @@
             android:inputType="text"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="47dp"
             android:layout_height="wrap_content"
             android:text=" - "
             android:textSize="40sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/spin2"
             android:layout_width="wrap_content"
             android:layout_height="68dp"
+            android:layout_marginBottom="4dp"
             android:ems="4"
-            android:inputType="text"
-            android:layout_marginBottom="4dp" />
+            android:inputType="text" />
 
     </LinearLayout>
 
@@ -224,10 +222,10 @@
 
     <Spinner
         android:id="@+id/spinner2"
-        android:layout_width="98dp"
+        android:layout_width="100dp"
         android:layout_height="68dp"
-        tools:layout_editor_absoluteY="707dp"
-        android:layout_marginLeft="20dp"/>
+        android:layout_marginLeft="20dp"
+        tools:layout_editor_absoluteY="707dp" />
 
     <TextView
         android:id="@+id/textView11"
@@ -252,7 +250,7 @@
             android:layout_marginTop="10dp"
             android:text="남자"
             app:backgroundTint="#F9F9F9"
-            tools:textColor="#6A6B8C" />
+            android:textColor="@color/trace_purple" />
 
         <Button
             android:id="@+id/button5"
@@ -279,7 +277,7 @@
 
     <Spinner
         android:id="@+id/spinner3"
-        android:layout_width="98dp"
+        android:layout_width="100dp"
         android:layout_height="68dp"
         tools:layout_editor_absoluteY="878dp"
         android:layout_marginLeft="20dp"/>
@@ -295,7 +293,7 @@
 
     <Spinner
         android:id="@+id/spinner4"
-        android:layout_width="98dp"
+        android:layout_width="100dp"
         android:layout_height="68dp"
         android:layout_marginLeft="20dp"
         tools:layout_editor_absoluteY="964dp" />
