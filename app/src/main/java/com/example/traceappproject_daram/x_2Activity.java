@@ -39,9 +39,11 @@ public class x_2Activity extends AppCompatActivity {
 
         login_email = findViewById(R.id.login_email);
         login_password = findViewById(R.id.login_password);
-
         button2 = findViewById(R.id.button2);
+
         button2.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View view) {
                 String UserEmail = login_email.getText().toString();

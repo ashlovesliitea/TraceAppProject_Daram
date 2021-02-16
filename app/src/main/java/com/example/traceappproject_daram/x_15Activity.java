@@ -1,17 +1,27 @@
 package com.example.traceappproject_daram;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
 public class x_15Activity extends AppCompatActivity {
 
@@ -21,7 +31,7 @@ public class x_15Activity extends AppCompatActivity {
         setContentView(R.layout.x_15_1);
         Spinner spinner = findViewById(R.id.spinner);
 
-        String[] items = new String[]{"010","011","016","02","031"};
+        String[] items = new String[]{"010", "011", "016", "02", "031"};
 
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
@@ -29,10 +39,9 @@ public class x_15Activity extends AppCompatActivity {
 
         spinner.setAdapter(adapter);
 
-
         Spinner spinner2 = findViewById(R.id.spinner2);
 
-        String[] items2 = new String[]{"220","225","230","235","240","245","250","255","260","265","270"};
+        String[] items2 = new String[]{"220", "225", "230", "235", "240", "245", "250", "255", "260", "265", "270"};
 
 
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(
@@ -42,7 +51,7 @@ public class x_15Activity extends AppCompatActivity {
 
         Spinner spinner3 = findViewById(R.id.spinner3);
 
-        String[] items3 = new String[]{"30","40","50","60","70","80","90","100","110","120"};
+        String[] items3 = new String[]{"30", "40", "50", "60", "70", "80", "90", "100", "110", "120"};
 
 
         ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(
@@ -52,13 +61,20 @@ public class x_15Activity extends AppCompatActivity {
 
         Spinner spinner4 = findViewById(R.id.spinner4);
 
-        String[] items4 = new String[]{"130","140","150","160","170","180","190","200"};
+        String[] items4 = new String[]{"130", "140", "150", "160", "170", "180", "190", "200"};
 
 
         ArrayAdapter<String> adapter4 = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_dropdown_item, items4);
 
         spinner4.setAdapter(adapter4);
+        };
+
+
+
+
+
+
 
 
 
@@ -86,5 +102,21 @@ public class x_15Activity extends AppCompatActivity {
         });
         */
 
-    }
+
+
+
 }
+
+    /*@NonNull
+    @Override
+    public void onClick(View view) {
+        TextView textView1 =(TextView) findViewById(R.id.gendertext)
+                switch(view.getId()){
+                    case R.id.button4 :
+                        gendertext.setText("남자") ;
+                        gendertext.buttonColor(#6A6B8C);
+                        break;
+
+                    case R.id.button5 :
+                        gendertext.setText("여자") ;
+                        gendertext.buttonColor*/
