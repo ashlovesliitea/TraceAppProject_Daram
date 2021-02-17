@@ -55,6 +55,8 @@ public class BlinkyManager extends ObservableBleManager {
 
 	private final MutableLiveData<Boolean> ledState = new MutableLiveData<>();
 	private final MutableLiveData<Boolean> buttonState = new MutableLiveData<>();
+	//mj 0217 update
+	private final MutableLiveData<Boolean> curVal = new MutableLiveData<>();
 
 	private BluetoothGattCharacteristic buttonCharacteristic, ledCharacteristic;
 	private LogSession logSession;
@@ -64,6 +66,7 @@ public class BlinkyManager extends ObservableBleManager {
 	public BlinkyManager(@NonNull final Context context) {
 		super(context);
 	}
+	//여기서 led state 받는 거 말고 걍 데이터 받는 거 작성해야할덧
 
 	public final LiveData<Boolean> getLedState() {
 		return ledState;

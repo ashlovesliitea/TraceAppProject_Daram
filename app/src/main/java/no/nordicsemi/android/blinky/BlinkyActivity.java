@@ -64,7 +64,7 @@ public class BlinkyActivity extends AppCompatActivity {
 		final MaterialToolbar toolbar = findViewById(R.id.toolbar);
 		toolbar.setTitle(deviceName != null ? deviceName : getString(R.string.unknown_device));
 		toolbar.setSubtitle(deviceAddress);
-		setSupportActionBar(toolbar);
+		setSupportActionBar(toolbar);//errorneous
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		// Configure the view model.

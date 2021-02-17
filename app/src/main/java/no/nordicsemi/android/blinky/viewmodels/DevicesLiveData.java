@@ -105,6 +105,7 @@ public class DevicesLiveData extends LiveData<List<DiscoveredBluetoothDevice>> {
 	/**
 	 * Refreshes the filtered device list based on the filter flags.
 	 */
+	//여기에 filter 기준 우리 깔창 기기로 바꾸기
 	/* package */ synchronized boolean applyFilter() {
 		final List<DiscoveredBluetoothDevice> tmp = new ArrayList<>();
 		for (final DiscoveredBluetoothDevice device : devices) {
