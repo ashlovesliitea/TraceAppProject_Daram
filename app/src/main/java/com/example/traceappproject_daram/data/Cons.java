@@ -17,7 +17,6 @@ public class Cons {//constants
     public static final int MAX_FRAMES_NUM = MEASURE_NUM_1SEC*MAX_MEASURE_SEC;//10ms마다 측정&20초 걷기
     public static final int MIN_RAWDATA_IDX = Result.calcSecToIdx(MIN_MEASURE_SEC);
     public static final int MAX_RAWDATA_IDX = Result.calcSecToIdx(MAX_MEASURE_SEC);
-
     public static final int REP_START_IDX = Result.calcSecToIdx(REP_START_SEC);
     public static final int REP_END_IDX = Result.calcSecToIdx(REP_END_SEC);
     public static final int REP_START_FRAME = Result.calcSecToFrame(REP_START_SEC);

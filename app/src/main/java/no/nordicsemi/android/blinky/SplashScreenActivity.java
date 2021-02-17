@@ -44,7 +44,6 @@ public class SplashScreenActivity extends Activity {
 			finish();
 		}, DURATION);
 	}
-
 	@Override
 	public void onBackPressed() {
 		// We don't want the splash screen to be interrupted

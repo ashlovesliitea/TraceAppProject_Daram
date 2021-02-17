@@ -76,7 +76,8 @@ public class ScannerActivity extends AppCompatActivity implements DevicesAdapter
 
         final MaterialToolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.app_name);
-        setSupportActionBar(toolbar);
+        //일단 주석처리 해놨음
+        //setSupportActionBar(toolbar);
 
         // Create view model containing utility methods for scanning
         scannerViewModel = new ViewModelProvider(this).get(ScannerViewModel.class);
