@@ -35,5 +35,5 @@ public interface BlinkyByteCallback {
      * @param pressed true if the button was pressed, false if released.
      */
 
-    void onByteStateChanged(@NonNull final BluetoothDevice device, final boolean pressed);
+    void onByteStateChanged(@NonNull final BluetoothDevice device, final boolean recieved);
 }
