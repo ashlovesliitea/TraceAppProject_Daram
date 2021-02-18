@@ -34,11 +34,15 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.traceappproject_daram.data.LoginInfo;
+import com.example.traceappproject_daram.data.Result;
+
 import java.util.UUID;
 
 import no.nordicsemi.android.ble.data.Data;
 import no.nordicsemi.android.ble.livedata.ObservableBleManager;
 import no.nordicsemi.android.blinky.profile.callback.BlinkyButtonDataCallback;
+import no.nordicsemi.android.blinky.profile.callback.BlinkyByteDataCallback;
 import no.nordicsemi.android.blinky.profile.callback.BlinkyLedDataCallback;
 import no.nordicsemi.android.blinky.profile.data.BlinkyLED;
 import no.nordicsemi.android.log.LogContract;
@@ -62,9 +66,11 @@ public class BlinkyManager extends ObservableBleManager {
 	private LogSession logSession;
 	private boolean supported;
 	private boolean ledOn;
+	private Result result;
 
 	public BlinkyManager(@NonNull final Context context) {
 		super(context);
+		result = new Result(new LoginInfo("dummy","data"),0,0);
 	}
 	//여기서 led state 받는 거 말고 걍 데이터 받는 거 작성해야할덧
 
@@ -150,6 +156,12 @@ public class BlinkyManager extends ObservableBleManager {
 										  @NonNull final Data data) {
 			// Data can only invalid if we read them. We assume the app always sends correct data.
 			log(Log.WARN, "Invalid data received: " + data);
+		}
+	};
+	private final BlinkyByteDataCallback byteCallback = new BlinkyByteDataCallback(result) {
+		@Override
+		public void onByteRecieved(@NonNull BluetoothDevice device, Data data) {
+			log(Log.DEBUG, "byte data recieved : "+data);
 		}
 	};
 

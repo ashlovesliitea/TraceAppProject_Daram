@@ -25,15 +25,17 @@ package no.nordicsemi.android.blinky.profile.callback;
 import android.bluetooth.BluetoothDevice;
 
 import androidx.annotation.NonNull;
+
+import no.nordicsemi.android.ble.data.Data;
+
 //mj0217
 public interface BlinkyByteCallback {
 
     /**
      * Called when a button was pressed or released on device.
-     *
-     * @param device the target device.
-     * @param pressed true if the button was pressed, false if released.
+     *  @param device the target device.
+     * @param data true if the button was pressed, false if released.
      */
 
-    void onByteStateChanged(@NonNull final BluetoothDevice device, final boolean recieved);
+    void onByteRecieved (@NonNull final BluetoothDevice device, final Data data);
 }
