@@ -61,7 +61,7 @@ public abstract class BlinkyByteDataCallback implements ProfileDataCallback, Bli
             return;
         }
         //final byte recieved = data.getByte(0);//일단 1byte라 이렇게 채워넣음 byte 배열도 있긴 한데 안함
-
+        /*
         //version2 m커맨드시 2개 받는다 치기
         final byte[] rcvarr = data.getValue();
         int mode = rcvarr[0];
@@ -90,8 +90,8 @@ public abstract class BlinkyByteDataCallback implements ProfileDataCallback, Bli
             else if(mode == Constants.MODE_MEASURE_RIGHT){
                 result.appendOneFrame(foot);
             }
-
         }
+        */
         //version 3
         byte oneb = data.getByte(0);
         if(pastMode==EMPTY_PASTMODE){

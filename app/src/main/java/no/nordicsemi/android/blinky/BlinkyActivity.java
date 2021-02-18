@@ -24,6 +24,7 @@ package no.nordicsemi.android.blinky;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -47,7 +48,7 @@ public class BlinkyActivity extends AppCompatActivity {
 	public static final String EXTRA_DEVICE = "no.nordicsemi.android.blinky.EXTRA_DEVICE";
 
 	private BlinkyViewModel viewModel;
-
+	private String TAG ="MJBlinkyActivity";
 	@BindView(R.id.led_switch) SwitchMaterial led;
 	@BindView(R.id.button_state) TextView buttonState;
 	@Override
@@ -64,7 +65,7 @@ public class BlinkyActivity extends AppCompatActivity {
 		final MaterialToolbar toolbar = findViewById(R.id.toolbar);
 		toolbar.setTitle(deviceName != null ? deviceName : getString(R.string.unknown_device));
 		toolbar.setSubtitle(deviceAddress);
-		setSupportActionBar(toolbar);//errorneous
+		//setSupportActionBar(toolbar);//errorneous 그래서 뺌
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		// Configure the view model.
@@ -80,6 +81,8 @@ public class BlinkyActivity extends AppCompatActivity {
 
 		led.setOnCheckedChangeListener((buttonView, isChecked) -> viewModel.setLedState(isChecked));
 		viewModel.getConnectionState().observe(this, state -> {
+			Log.i(TAG,"current state : "+state);
+
 			switch (state.getState()) {
 				case CONNECTING:
 					progressContainer.setVisibility(View.VISIBLE);
@@ -107,6 +110,7 @@ public class BlinkyActivity extends AppCompatActivity {
 					onConnectionStateChanged(false);
 					break;
 			}
+
 		});
 		viewModel.getLedState().observe(this, isOn -> {
 			ledState.setText(isOn ? R.string.turn_on : R.string.turn_off);
