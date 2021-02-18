@@ -1,6 +1,9 @@
 package com.example.traceappproject_daram.bluetoothme;
 
 public class ClientHelper {
+    //이젠 사용하지 않는 클래스
+
+
     public byte[] appendByte = new byte[3000];//지금까지 받았던 byte들 다 수집
     int idx= 0;//2byte의 숫자를 취급하기 위해
 
@@ -23,6 +26,7 @@ public class ClientHelper {
         }
         return m;
     }
+    /*
     public int parseDataSlicedByteVersion(byte[] barr){//홀수일 때만 의미있는 값이겠지만 일단은 리턴
         int b = barr[0];
         if(idx %2 ==0){//윗부분, refresh
@@ -74,4 +78,6 @@ public class ClientHelper {
         return data;
     }
     //s-m-d(16)-e 순으로 들어오는데 한 개의 byte로 받는 경우
+     */
+
 }
