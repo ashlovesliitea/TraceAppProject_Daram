@@ -230,17 +230,22 @@ public class BlinkyManager extends ObservableBleManager {
 			this.on = false;
 			return;
 		}
+		/*
 		writeCharacteristic(ledCharacteristic,Data.opCode(Constants.MODE_RUN)).with(ledCallback).enqueue();
+
 		writeCharacteristic(ledCharacteristic,Data.opCode(Constants.MODE_VERSION)).with(ledCallback).enqueue();
-		writeCharacteristic(ledCharacteristic,Data.opCode((byte)(0X31))).with(ledCallback).enqueue();
+
+		 */
+		writeCharacteristic(ledCharacteristic,Data.opCode((byte)(0X33))).with(ledCallback).enqueue();
 		//writeCharacteristic(ledCharacteristic,Data.opCode(Constants.MODE_VERSION)).with(ledCallback).enqueue();
 		//반복적으로 10ms마다
 		int ctr = 0;
+		/*
 		Log.i("BlinkyManager","measure횟수 : "+Cons.MAX_FRAMES_NUM);
 		String log = "";
 		long beforeTime = System.currentTimeMillis(); //코드 실행 전에 시간 받아오기
 		Log.i(TAG,"시작 : "+beforeTime);
-		while(ctr < Cons.MAX_FRAMES_NUM /*ctr<50*/){
+		while(ctr < Cons.MAX_FRAMES_NUM ctr<50){
 			writeCharacteristic(ledCharacteristic,Data.opCode((byte)(0X33))).with(ledCallback).enqueue();
 
 			//writeCharacteristic(ledCharacteristic,Data.opCode(Constants.MODE_MEASURE_RIGHT)).with(ledCallback).enqueue();
@@ -257,6 +262,7 @@ public class BlinkyManager extends ObservableBleManager {
 		long msecDiffTime = (afterTime - beforeTime); //두 시간에 차 계산
 		System.out.println("시간차이(m) : "+msecDiffTime);
 		writeCharacteristic(ledCharacteristic,Data.opCode(Constants.MODE_MEASURE_END)).with(ledCallback).enqueue();
+		*/
 		Log.i("BlinkyManager","measure 자동종료");
 	}
 }

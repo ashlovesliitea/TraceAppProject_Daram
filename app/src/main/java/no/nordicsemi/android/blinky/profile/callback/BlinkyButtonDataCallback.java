@@ -44,6 +44,7 @@ public abstract class BlinkyButtonDataCallback implements ProfileDataCallback, B
     private int idx=0;
     private byte[] bytes;
     private Result result;
+    private long beforeTime;
     //version 정보도 따로 파
     public BlinkyButtonDataCallback(Result result){
         this.result = result;
@@ -54,7 +55,20 @@ public abstract class BlinkyButtonDataCallback implements ProfileDataCallback, B
             onInvalidDataReceived(device, data);
             return;
         }
-        Log.i(TAG,"data recieved : "+data.toString());
+        Log.i(TAG,"data recieved"+idx +" : "+data.toString());
+        if(idx ==1){
+            beforeTime = System.currentTimeMillis();
+        }
+
+        idx++;
+        if(idx%12 ==0){
+            Log.i(TAG,"========================================");
+        }
+        if(idx>70) {
+            long afterTime = System.currentTimeMillis(); // 코드 실행 후에 시간 받아오기
+            long msecDiffTime = (afterTime - beforeTime); //두 시간에 차 계산
+            System.out.println("시간차이(m) : " + msecDiffTime);
+        }
         /*
         final int state = data.getIntValue(Data.FORMAT_UINT8, 0);
         if (state == STATE_PRESSED) {
@@ -65,7 +79,9 @@ public abstract class BlinkyButtonDataCallback implements ProfileDataCallback, B
             onInvalidDataReceived(device, data);
         }
         */
+
         byte oneb = data.getByte(0);
+        /*
         if(pastMode==EMPTY_PASTMODE){
             pastMode = oneb;
             idx=0;
@@ -99,5 +115,7 @@ public abstract class BlinkyButtonDataCallback implements ProfileDataCallback, B
             }
 
         }
+
+         */
     }
 }
