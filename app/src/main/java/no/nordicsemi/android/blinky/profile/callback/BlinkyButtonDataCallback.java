@@ -27,6 +27,10 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import no.nordicsemi.android.blinky.profile.data.Constants;
+import com.example.traceappproject_daram.data.Cons;
+import com.example.traceappproject_daram.data.Result;
+
 import no.nordicsemi.android.ble.callback.profile.ProfileDataCallback;
 import no.nordicsemi.android.ble.data.Data;
 
@@ -35,6 +39,15 @@ public abstract class BlinkyButtonDataCallback implements ProfileDataCallback, B
     private static final int STATE_RELEASED = 0x00;
     private static final int STATE_PRESSED = 0x01;
     private static final String TAG= "MJBUTTONCALLBACK";
+    private byte EMPTY_PASTMODE = 0x11;//-1
+    private byte pastMode;
+    private int idx=0;
+    private byte[] bytes;
+    private Result result;
+    //version 정보도 따로 파
+    public BlinkyButtonDataCallback(Result result){
+        this.result = result;
+    }
     @Override
     public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
         if (data.size() != 1) {
@@ -42,7 +55,7 @@ public abstract class BlinkyButtonDataCallback implements ProfileDataCallback, B
             return;
         }
         Log.i(TAG,"data recieved : "+data.toString());
-
+        /*
         final int state = data.getIntValue(Data.FORMAT_UINT8, 0);
         if (state == STATE_PRESSED) {
             onButtonStateChanged(device, true);
@@ -50,6 +63,41 @@ public abstract class BlinkyButtonDataCallback implements ProfileDataCallback, B
             onButtonStateChanged(device, false);
         } else {
             onInvalidDataReceived(device, data);
+        }
+        */
+        byte oneb = data.getByte(0);
+        if(pastMode==EMPTY_PASTMODE){
+            pastMode = oneb;
+            idx=0;
+            if(pastMode == Constants.MODE_MEASURE_LEFT||pastMode == Constants.MODE_MEASURE_RIGHT){
+                //시간 되면 left->right인지도 검사하기
+                bytes = new byte[Cons.SENSOR_NUM_FOOT];
+            }
+            if(pastMode == Constants.MODE_VERSION){
+                //do nothing
+            }
+            if(pastMode == Constants.MODE_MEASURE_END){
+                //block 돼 있던 거 풀어야댐
+                onMeasureEnd(device,data);
+            }
+        }
+        else{ //EMPTY가 아님
+            if(pastMode == Constants.MODE_RUN){
+                idx = 0;
+            }
+            else if(pastMode == Constants.MODE_MEASURE_LEFT||pastMode == Constants.MODE_MEASURE_RIGHT){
+                bytes[idx] = oneb;
+                idx++;
+                if(idx == Cons.SENSOR_NUM_FOOT){
+                    pastMode = EMPTY_PASTMODE;
+                    //append to result
+                    result.appendOneFrame(bytes);//왼발 오른발 구분은 left->right라 상관 ㄴ
+                }
+            }
+            if(pastMode ==Constants.MODE_VERSION){
+                result.setVersion(3);
+            }
+
         }
     }
 }

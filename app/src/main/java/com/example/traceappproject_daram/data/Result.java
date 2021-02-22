@@ -14,13 +14,15 @@ public class Result {
     //string 합치는 작업이 자바는 O(N)이래서 byte[]로 하고 저장할 때 변환하겠습니다
     byte[] data;
     private int idxInput;
-    public Result(LoginInfo loginInfo, int archLevel, int backLevel) {
+    public Result(LoginInfo loginInfo) {
         this.calendar = Calendar.getInstance();
         this.loginInfo = loginInfo;
-        this.archLevel = archLevel;
-        this.backLevel = backLevel;
         data= new byte[Cons.MAX_FRAMES_NUM];
         idxInput=0;
+    }
+    public void setVersion(int v){
+        archLevel = 3;
+        backLevel=3;
     }
     public void clearData(){
         data=new byte[Cons.MAX_FRAMES_NUM];

@@ -23,6 +23,8 @@
 package no.nordicsemi.android.blinky.profile.callback;
 
 import android.bluetooth.BluetoothDevice;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import no.nordicsemi.android.ble.callback.DataSentCallback;
@@ -37,11 +39,15 @@ public abstract class BlinkyLedDataCallback implements ProfileDataCallback, Data
     @Override
     public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
         parse(device, data);
+
+        Log.i("BlinkyLedDataCallback","ondataReceived data : "+data);
     }
 
     @Override
     public void onDataSent(@NonNull final BluetoothDevice device, @NonNull final Data data) {
         parse(device, data);
+
+        Log.i("BlinkyLedDataCallback","ondatasent data : "+data);
     }
 
     private void parse(@NonNull final BluetoothDevice device, @NonNull final Data data) {
@@ -49,8 +55,8 @@ public abstract class BlinkyLedDataCallback implements ProfileDataCallback, Data
             onInvalidDataReceived(device, data);
             return;
         }
-
-        final int state = data.getIntValue(Data.FORMAT_UINT8, 0);
+        /*
+        final int state = data.getByte();
         if (state == STATE_ON) {
             onLedStateChanged(device, true);
         } else if (state == STATE_OFF) {
@@ -58,5 +64,9 @@ public abstract class BlinkyLedDataCallback implements ProfileDataCallback, Data
         } else {
             onInvalidDataReceived(device, data);
         }
+
+         */
+
+
     }
 }

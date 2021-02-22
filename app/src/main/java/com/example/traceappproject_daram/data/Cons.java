@@ -12,7 +12,7 @@ public class Cons {//constants
     public static final int MEASURE_INTERVAL_MS = 10;//ms 단위
     public static final int MEASURE_NUM_1SEC= 1000 / MEASURE_INTERVAL_MS;
     public static final int MIN_MEASURE_SEC = 2;
-    public static final int MAX_MEASURE_SEC = 30;
+    public static final int MAX_MEASURE_SEC = 5;
     public static final int MIN_FRAMES_NUM = MEASURE_NUM_1SEC*MIN_MEASURE_SEC;
     public static final int MAX_FRAMES_NUM = MEASURE_NUM_1SEC*MAX_MEASURE_SEC;//10ms마다 측정&20초 걷기
     public static final int MIN_RAWDATA_IDX = Result.calcSecToIdx(MIN_MEASURE_SEC);

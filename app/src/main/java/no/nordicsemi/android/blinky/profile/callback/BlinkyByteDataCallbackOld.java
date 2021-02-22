@@ -23,20 +23,17 @@
 package no.nordicsemi.android.blinky.profile.callback;
 
 import android.bluetooth.BluetoothDevice;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.traceappproject_daram.bluetoothme.Constants;
-import com.example.traceappproject_daram.data.Cons;
+import no.nordicsemi.android.blinky.profile.data.Constants;
 import com.example.traceappproject_daram.data.Result;
-import com.example.traceappproject_daram.reprot_page.heatmap.FootOneFrame;
 
 import no.nordicsemi.android.ble.callback.profile.ProfileDataCallback;
 import no.nordicsemi.android.ble.data.Data;
 
 @SuppressWarnings("ConstantConditions")
-public abstract class BlinkyByteDataCallback implements ProfileDataCallback, BlinkyByteCallback {
+public abstract class BlinkyByteDataCallbackOld implements ProfileDataCallback, BlinkyButtonCallback {
     /*
     private static final int STATE_RELEASED = 0x00;
     private static final int STATE_PRESSED = 0x01;
@@ -48,7 +45,7 @@ public abstract class BlinkyByteDataCallback implements ProfileDataCallback, Bli
     private int idx=0;
     private byte[] bytes;
 
-    public BlinkyByteDataCallback(Result emptyResult){
+    public BlinkyByteDataCallbackOld(Result emptyResult){
         result= emptyResult;
     }
 

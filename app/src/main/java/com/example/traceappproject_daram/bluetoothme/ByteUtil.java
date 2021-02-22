@@ -10,6 +10,7 @@ public class ByteUtil {
     public static byte[] stringToBytes(String s){
         return s.getBytes();
     }
+
     public static void logByteAskii(byte[] bytes){
         String res = "";
         for(int i = 0;i<bytes.length;i++){
