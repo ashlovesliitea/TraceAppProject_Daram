@@ -23,32 +23,29 @@
 package no.nordicsemi.android.blinky.profile.callback;
 
 import android.bluetooth.BluetoothDevice;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import no.nordicsemi.android.blinky.profile.data.Constants;
-import com.example.traceappproject_daram.data.Cons;
 import com.example.traceappproject_daram.data.Result;
 
 import no.nordicsemi.android.ble.callback.profile.ProfileDataCallback;
 import no.nordicsemi.android.ble.data.Data;
 
 @SuppressWarnings("ConstantConditions")
-public abstract class BlinkyButtonDataCallback implements ProfileDataCallback, BlinkyButtonCallback {
+public abstract class BlinkyButtonDataCallbackLRSep implements ProfileDataCallback, BlinkyButtonCallback {
     private static final String TAG= "MJBUTTONCALLBACK";
     private byte EMPTY_PASTMODE = 0x11;//-1
     private byte pastMode;
     private int idx=0;
-    private byte[] bytes;
+    private byte[] leftBytes;
+    private byte[] rightBytes;
     private Result result;
     private long beforeTime;
     private int inv =0;
     //version 정보도 따로 파
-    public BlinkyButtonDataCallback(Result result){
+    public BlinkyButtonDataCallbackLRSep(Result result){
         this.result = result;
     }
-
     @Override
     public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
         if (data.size() != 1) {

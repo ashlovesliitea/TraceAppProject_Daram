@@ -116,7 +116,7 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
         //Bind a canvas to it
         Canvas canvas = new Canvas(returnedBitmap);
         //Get the view's background
-        Drawable bgDrawable =view.getBackground();
+        Drawable bgDrawable = view.getBackground();
         if (bgDrawable!=null)
             //has background drawable, then draw it on the canvas
             bgDrawable.draw(canvas);

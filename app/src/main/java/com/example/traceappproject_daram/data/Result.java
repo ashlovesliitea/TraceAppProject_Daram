@@ -11,6 +11,7 @@ public class Result {
     LoginInfo loginInfo;
     int archLevel;
     int backLevel;
+
     //string 합치는 작업이 자바는 O(N)이래서 byte[]로 하고 저장할 때 변환하겠습니다
     byte[] data;
     private int idxInput;

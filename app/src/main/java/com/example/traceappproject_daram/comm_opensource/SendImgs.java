@@ -71,6 +71,7 @@ public class SendImgs {
             }
         }
     }
+    //측정 날짜+idx만 알면 비트맵으로 변환 가능
     public Bitmap readBitmap(/*String strFilePath,String filename*/Calendar resultTime, int idx){
         String fullpath = Util.make_path(parent, resultTime,idx);
         BitmapFactory.Options options = new BitmapFactory.Options();
