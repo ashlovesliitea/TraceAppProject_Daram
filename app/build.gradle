@@ -57,5 +57,5 @@ dependencies {
     // To add BLE Library as a module, replace the above dependency with the following
     // and uncomment 2 lines in settings.gradle file.
     // implementation project(":ble-livedata")
-
+    implementation 'org.jsoup:jsoup:1.11.3'
 }

@@ -1,6 +1,10 @@
 package com.example.traceappproject_daram;
 
 import android.content.Context;
+import android.content.DialogInterface;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
@@ -29,5 +33,18 @@ public class Util {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss");//날짜(시간까지)
         String strDate = sdf.format(calendar.getTime());
         return upperPath+"/"+strDate+"/"+pureName+IMG_EXT;
+    }
+
+    public static void showWarning(AppCompatActivity cmp,String msg){
+        AlertDialog.Builder a=new AlertDialog.Builder(cmp);
+        a.setTitle("Warning-Message");
+        a.setMessage(msg);
+        a.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        a.show();
     }
 }
