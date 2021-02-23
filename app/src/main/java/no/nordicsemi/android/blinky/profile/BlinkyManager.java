@@ -27,11 +27,13 @@ import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
 import android.content.Context;
+import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -41,6 +43,7 @@ import com.example.traceappproject_daram.data.Result;
 
 import java.util.UUID;
 
+import no.nordicsemi.android.ble.ConnectionPriorityRequest;
 import no.nordicsemi.android.ble.data.Data;
 import no.nordicsemi.android.ble.livedata.ObservableBleManager;
 import no.nordicsemi.android.blinky.profile.callback.BlinkyButtonDataCallback;
@@ -69,9 +72,12 @@ public class BlinkyManager extends ObservableBleManager {
 	private boolean on;
 	private Result result;
 
+	@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 	public BlinkyManager(@NonNull final Context context) {
 		super(context);
 		result = new Result(new LoginInfo("dummy","data"));
+		this.requestConnectionPriority(ConnectionPriorityRequest.CONNECTION_PRIORITY_HIGH);
+
 	}
 	//여기서 led state 받는 거 말고 걍 데이터 받는 거 작성해야할덧
 

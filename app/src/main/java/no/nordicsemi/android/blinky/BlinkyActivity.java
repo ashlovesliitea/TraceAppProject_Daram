@@ -66,7 +66,7 @@ public class BlinkyActivity extends AppCompatActivity {
 		toolbar.setTitle(deviceName != null ? deviceName : getString(R.string.unknown_device));
 		toolbar.setSubtitle(deviceAddress);
 		//setSupportActionBar(toolbar);//errorneous 그래서 뺌
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		//getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		// Configure the view model.
 		viewModel = new ViewModelProvider(this).get(BlinkyViewModel.class);

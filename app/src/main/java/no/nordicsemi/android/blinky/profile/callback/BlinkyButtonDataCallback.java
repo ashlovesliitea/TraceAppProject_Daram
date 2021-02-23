@@ -36,8 +36,6 @@ import no.nordicsemi.android.ble.data.Data;
 
 @SuppressWarnings("ConstantConditions")
 public abstract class BlinkyButtonDataCallback implements ProfileDataCallback, BlinkyButtonCallback {
-    private static final int STATE_RELEASED = 0x00;
-    private static final int STATE_PRESSED = 0x01;
     private static final String TAG= "MJBUTTONCALLBACK";
     private byte EMPTY_PASTMODE = 0x11;//-1
     private byte pastMode;
@@ -80,7 +78,7 @@ public abstract class BlinkyButtonDataCallback implements ProfileDataCallback, B
         }
         */
 
-        byte oneb = data.getByte(0);
+        //byte oneb = data.getByte(0);
         /*
         if(pastMode==EMPTY_PASTMODE){
             pastMode = oneb;
