@@ -18,7 +18,7 @@
         android:layout_height="60dp"
         android:layout_marginTop="300dp"
         android:layout_marginHorizontal="20dp"
-        android:hint="아이디"
+        android:hint="이메일"
         android:inputType="textEmailAddress"/>
 
     <EditText
@@ -64,9 +64,17 @@
         android:layout_marginHorizontal="20dp"
         android:background="@drawable/button_round_sign_up"
         android:backgroundTint="#6A6B8C"
-        android:text="회원가입"
+        android:text="구글 계정으로 로그인"
         android:textColor="#6A6B8C"
         android:textSize="18sp"
         app:backgroundTint="#F9F9F9" />
+
+    <TextView
+        android:id="@+id/go_to_x_15"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginTop="40dp"
+        android:text="아이디 찾기 | 비밀번호 찾기 | 회원가입"
+        android:textStyle="bold" />
 
 </LinearLayout>
