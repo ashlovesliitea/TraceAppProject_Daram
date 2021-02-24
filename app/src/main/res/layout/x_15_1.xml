@@ -133,7 +133,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:id = "@+id/phone_numb">
 
         <Spinner
             android:id="@+id/spinner"
@@ -242,6 +243,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:id = "@+id/gender"
         >
         <Button
             android:id="@+id/button4"
@@ -251,6 +253,8 @@
             android:layout_marginLeft="24dp"
             android:layout_marginTop="10dp"
             android:text="남자"
+            android:state_selected="true"
+            android:state_pressed="true"
             app:backgroundTint="#F9F9F9"
             tools:textColor="#6A6B8C" />
 
@@ -261,6 +265,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
             android:text="여자"
+            android:state_selected="true"
+            android:state_pressed="true"
             app:backgroundTint="#6A6B8C" />
 
 
