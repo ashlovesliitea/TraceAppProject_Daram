@@ -20,20 +20,21 @@
         <activity android:name=".TestActivity">
         </activity>
         <activity android:name=".x_1Activity">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity android:name=".reprot_page.MovingFeetHeatmapActivity"></activity>
         <activity android:name=".x_2Activity">
         </activity>
+        <activity android:name=".x9.RecyclerViewActivity"/>
         <activity android:name=".x_15Activity" />
         <activity android:name=".firebaseTest.firebaseTestActivity"
             android:theme="@style/Theme.TraceAppProject_Daram.SplashScreen"
             android:noHistory="true"
             android:launchMode="singleTop">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+
         </activity>
         <activity
             android:name="no.nordicsemi.android.blinky.SplashScreenActivity"
@@ -47,7 +48,7 @@
             android:icon="@drawable/ic_blinky_feature"
             android:label="@string/feature_name"
             android:launchMode="singleTop">
-           
+
         </activity>
         <activity
             android:name="no.nordicsemi.android.blinky.BlinkyActivity"

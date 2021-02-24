@@ -28,7 +28,6 @@
         android:layout_height="30dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="160dp"
-        android:text="반소희"
         android:textColor="@color/text_on_purple"
         android:textSize="20sp" />
 

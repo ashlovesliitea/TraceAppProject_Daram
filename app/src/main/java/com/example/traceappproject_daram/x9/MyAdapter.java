@@ -13,11 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.traceappproject_daram.R;
 import com.example.traceappproject_daram.reprot_page.MovingFeetHeatmapActivity;
 
+import java.util.ArrayList;
+
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     //viewHolder란 각 뷰들을 보관하는 Holder객체를 의미한다.
     //Viewholder는 태그 필드 안에 각 구성 요소 뷰들을 저장하므로 반복적으로 조회하지않고 즉시 액세스 가능하다.
-    private String[] localDataSet;
+    private ArrayList<ItemForm> localdatalist;
 
     /**
      * Provide a reference to the type of views that you are using
@@ -55,12 +57,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     /**
      * Initialize the dataset of the Adapter.
      *
-     * @param dataSet String[] containing the data to populate views to be used
+     * @param datalist ArrayList containing the data to populate views to be used
      * by RecyclerView.
      */
     //생성자에서 데이터 객체를 전달받는다. 자료형은 임의로 결정 가능.
-    public MyAdapter(String[] dataSet) {
-        localDataSet = dataSet;
+    public MyAdapter(ArrayList<ItemForm>datalist) {
+        localdatalist = datalist;
     }
 
     // Create new views (invoked by the layout manager)
@@ -79,15 +81,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     //position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시 (view의 내용을 localDataSet으로 교환)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-
+      ItemForm data=localdatalist.get(position);
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.CardMeasure.setText(localDataSet[position]);
+        viewHolder.CardDate.setText(data.getDate());
+        viewHolder.CardMeasure.setText(data.getMeasure());
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return localDataSet.length;
+        return localdatalist.size();
     }
 }
