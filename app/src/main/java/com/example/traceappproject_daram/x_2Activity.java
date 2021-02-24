@@ -58,34 +58,31 @@ public class x_2Activity extends AppCompatActivity {
         button2 = findViewById(R.id.button2);
 
 
-
         queue = Volley.newRequestQueue(this);
         String url = "https://clean-circuit-303203.appspot.com/communicatewAndroid/loginAndroid.jsp";
 
 
-
-        final StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
+        final StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
                 try {
 
-                    Document doc=Jsoup.parse(response);
-                    Elements a=doc.select("body");
-                    String tmp=a.text();
+                    Document doc = Jsoup.parse(response);
+                    Elements a = doc.select("body");
+                    String tmp = a.text();
                     System.out.println(tmp);
                     JSONObject json = new JSONObject(tmp);
-                    JSONArray jArr=json.getJSONArray("dataSend");
+                    JSONArray jArr = json.getJSONArray("dataSend");
 
-                    json=jArr.getJSONObject(0);
+                    json = jArr.getJSONObject(0);
                     String UserId = json.getString("id");
                     String UserPwd = json.getString("pw");
                     String UserName = json.getString("name");
 
                     Integer success = json.getInt("success");
 
-                    if (success==1) {//로그인 성공시
-
+                    if (success == 1) {//로그인 성공시
 
 
                         Toast.makeText(getApplicationContext(), String.format("%s님 환영합니다.", UserName), Toast.LENGTH_SHORT).show();
@@ -96,12 +93,12 @@ public class x_2Activity extends AppCompatActivity {
                         intent.putExtra("UserPwd", UserPwd);
                         intent.putExtra("UserName", UserName);
 
-                        startActivity(intent);;
+                        startActivity(intent);
+                        ;
 
-                    } else if(success==0){//로그인 실패시
+                    } else if (success == 0) {//로그인 실패시
                         Toast.makeText(getApplicationContext(), "비밀번호가 틀렸습니다!", Toast.LENGTH_SHORT).show();
-                    }
-                    else if(success==-1){//로그인 실패시
+                    } else if (success == -1) {//로그인 실패시
                         Toast.makeText(getApplicationContext(), "해당 아이디가 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
                     }
 
@@ -127,29 +124,7 @@ public class x_2Activity extends AppCompatActivity {
                 return params;
             }
         };
-        button2.setOnClickListener(new View.OnClickListener() {
-
-
-            @Override
-            public void onClick(View view) {
-                if(valid()){
-                    System.out.println(id+" "+pw);
-                    queue.add(stringRequest);}
-            }
-        });
-
-        text = findViewById(R.id.go_to_x_15);
-        text.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(x_2Activity.this, x_15Activity.class);
-                startActivity(intent);
-
-            }
-        });
-
     }
-
     private boolean valid(){
         id = login_id.getText().toString();
         pw= login_password.getText().toString();

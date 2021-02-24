@@ -10,7 +10,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name = "purple_300">#FF6A6B8C</color>
     -->
-
+    <color name = "dark_purple">#FF4A4A61</color>
+    <color name="trace_purple">#FF6A6B8C</color>
+    <color name="text_on_purple">#FFFDFBF3</color>
     <!-- Base theme colors -->
     <color name="colorPrimary">@color/nordicBlue</color>
     <color name="colorOnPrimary">@color/white</color>

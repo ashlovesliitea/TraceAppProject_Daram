@@ -26,8 +26,7 @@
         <activity android:name=".x_2Activity">
         </activity>
         <activity android:name=".x_15Activity" />
-        <activity
-            android:name="no.nordicsemi.android.blinky.SplashScreenActivity"
+        <activity android:name=".firebaseTest.firebaseTestActivity"
             android:theme="@style/Theme.TraceAppProject_Daram.SplashScreen"
             android:noHistory="true"
             android:launchMode="singleTop">
@@ -37,14 +36,18 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="no.nordicsemi.android.blinky.SplashScreenActivity"
+            android:theme="@style/Theme.TraceAppProject_Daram.SplashScreen"
+            android:noHistory="true"
+            android:launchMode="singleTop">
+
+        </activity>
+        <activity
             android:name="no.nordicsemi.android.blinky.ScannerActivity"
             android:icon="@drawable/ic_blinky_feature"
             android:label="@string/feature_name"
             android:launchMode="singleTop">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="no.nordicsemi.android.nrftoolbox.LAUNCHER"/>
-            </intent-filter>
+           
         </activity>
         <activity
             android:name="no.nordicsemi.android.blinky.BlinkyActivity"
