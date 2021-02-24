@@ -51,6 +51,10 @@ public class BlinkyActivity extends AppCompatActivity {
 	private String TAG ="MJBlinkyActivity";
 	@BindView(R.id.led_switch) SwitchMaterial led;
 	@BindView(R.id.button_state) TextView buttonState;
+
+
+
+
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -96,6 +100,9 @@ public class BlinkyActivity extends AppCompatActivity {
 					progressContainer.setVisibility(View.GONE);
 					content.setVisibility(View.VISIBLE);
 					onConnectionStateChanged(true);
+					final Intent controlBlinkIntent = new Intent(this, ScannerActivity.class);
+					//controlBlinkIntent.putExtra(BlinkyActivity.EXTRA_DEVICE, device);
+					startActivity(controlBlinkIntent);
 					break;
 				case DISCONNECTED:
 					if (state instanceof ConnectionState.Disconnected) {

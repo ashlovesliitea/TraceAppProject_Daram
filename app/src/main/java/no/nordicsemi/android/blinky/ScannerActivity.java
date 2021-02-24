@@ -26,6 +26,7 @@ import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.Menu;
@@ -35,6 +36,7 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProvider;
@@ -51,6 +53,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import no.nordicsemi.android.blinky.adapter.DevicesAdapter;
 import no.nordicsemi.android.blinky.adapter.DiscoveredBluetoothDevice;
+import no.nordicsemi.android.blinky.profile.BlinkyManager;
 import no.nordicsemi.android.blinky.utils.Utils;
 import no.nordicsemi.android.blinky.viewmodels.ScannerStateLiveData;
 import no.nordicsemi.android.blinky.viewmodels.ScannerViewModel;
@@ -94,6 +97,23 @@ public class ScannerActivity extends AppCompatActivity implements DevicesAdapter
         final DevicesAdapter adapter = new DevicesAdapter(this, scannerViewModel.getDevices());
         adapter.setOnItemClickListener(this);
         recyclerView.setAdapter(adapter);
+        //여기 작업하기!!
+
+        /*
+        while(true){
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+         */
+
+
+
+
     }
 
     @Override
@@ -131,11 +151,13 @@ public class ScannerActivity extends AppCompatActivity implements DevicesAdapter
         return super.onOptionsItemSelected(item);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onItemClick(@NonNull final DiscoveredBluetoothDevice device) {
         final Intent controlBlinkIntent = new Intent(this, BlinkyActivity.class);
         controlBlinkIntent.putExtra(BlinkyActivity.EXTRA_DEVICE, device);
         startActivity(controlBlinkIntent);
+        //BlinkyManager blinkyManager = new BlinkyManager(this);
     }
 
     @Override

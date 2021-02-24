@@ -26,17 +26,23 @@ import android.bluetooth.BluetoothDevice;
 
 import androidx.annotation.NonNull;
 
+import com.example.traceappproject_daram.data.Cons;
 import com.example.traceappproject_daram.data.Result;
 
 import no.nordicsemi.android.ble.callback.profile.ProfileDataCallback;
 import no.nordicsemi.android.ble.data.Data;
+import no.nordicsemi.android.blinky.profile.data.Constants;
 
 @SuppressWarnings("ConstantConditions")
+
+// 지금은 안쓰는 클래스
+//blinkyButtonDataCallback을 2개를 생성하기 때문에 각각 left만 right만 받을 것이다.
 public abstract class BlinkyButtonDataCallbackLRSep implements ProfileDataCallback, BlinkyButtonCallback {
     private static final String TAG= "MJBUTTONCALLBACK";
     private byte EMPTY_PASTMODE = 0x11;//-1
     private byte pastMode;
     private int idx=0;
+    private byte[] bytes;
     private byte[] leftBytes;
     private byte[] rightBytes;
     private Result result;
@@ -90,13 +96,14 @@ public abstract class BlinkyButtonDataCallbackLRSep implements ProfileDataCallba
         */
 
         //byte oneb = data.getByte(0);
-        /*
+        //나중에 파싱 일단 걍 바이트 어레이에 넣어!
         if(pastMode==EMPTY_PASTMODE){
             pastMode = oneb;
             idx=0;
             if(pastMode == Constants.MODE_MEASURE_LEFT||pastMode == Constants.MODE_MEASURE_RIGHT){
                 //시간 되면 left->right인지도 검사하기
                 bytes = new byte[Cons.SENSOR_NUM_FOOT];
+
             }
             if(pastMode == Constants.MODE_VERSION){
                 //do nothing
@@ -110,21 +117,28 @@ public abstract class BlinkyButtonDataCallbackLRSep implements ProfileDataCallba
             if(pastMode == Constants.MODE_RUN){
                 idx = 0;
             }
-            else if(pastMode == Constants.MODE_MEASURE_LEFT||pastMode == Constants.MODE_MEASURE_RIGHT){
+            else if(pastMode == Constants.MODE_MEASURE_LEFT){
                 bytes[idx] = oneb;
                 idx++;
                 if(idx == Cons.SENSOR_NUM_FOOT){
                     pastMode = EMPTY_PASTMODE;
                     //append to result
-                    result.appendOneFrame(bytes);//왼발 오른발 구분은 left->right라 상관 ㄴ
+                    //result.appendOneFrame(bytes);//왼발 오른발 구분은 left->right라 상관 ㄴ
                 }
             }
-            if(pastMode ==Constants.MODE_VERSION){
+            else if(pastMode == Constants.MODE_MEASURE_RIGHT){
+                bytes[idx] = oneb;
+                idx++;
+                if(idx == Cons.SENSOR_NUM_FOOT){
+                    pastMode = EMPTY_PASTMODE;
+                    //append to result
+                    //result.appendOneFrame(bytes);//왼발 오른발 구분은 left->right라 상관 ㄴ
+                }
+            }
+            if(pastMode == Constants.MODE_VERSION){
                 result.setVersion(3);
             }
-
         }
 
-         */
     }
 }

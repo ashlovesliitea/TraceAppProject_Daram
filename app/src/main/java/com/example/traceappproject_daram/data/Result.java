@@ -6,6 +6,8 @@ import com.example.traceappproject_daram.reprot_page.heatmap.FootOneFrame;
 import java.util.Calendar;
 import java.util.Date;
 
+import no.nordicsemi.android.blinky.profile.data.Constants;
+
 public class Result {
     Calendar calendar;
     LoginInfo loginInfo;
@@ -14,31 +16,106 @@ public class Result {
 
     //string 합치는 작업이 자바는 O(N)이래서 byte[]로 하고 저장할 때 변환하겠습니다
     byte[] data;
+    int endData;
+
+    byte[] leftData;
+    byte[] rightData;
+    int leftidx;
+    int rightidx;
     private int idxInput;
+    public Result(byte[] rawData,int endData){
+        data = rawData;
+        this.endData = endData;
+    }
+
+    //data에다가 모드값을 포함한 모든 것들을 싹다 넣는다
+    //가정은 그냥 300언저리에서 시간이 많이 지났음에도 시간적으로 같은 순간의 데이터를 양 발이 수집했을 것이다
+
+    public FeetMultiFrames parseRaw(){
+        FeetMultiFrames frames = new FeetMultiFrames();
+        FootOneFrame left=null,right=null;
+        for(int i = 300;i<500;i++){
+            if(leftData[i] == Constants.MODE_MEASURE_LEFT&&left ==null){
+                if(isFoot(i+1,leftData)){
+                    left = new FootOneFrame(leftData,i+1);
+                    i+=Cons.SENSOR_NUM_FOOT-1;
+                }
+            }
+            else if(rightData[i] == Constants.MODE_MEASURE_RIGHT&&right == null){
+                if(isFoot(i+1,rightData)){
+                    right = new FootOneFrame(rightData,i+1);
+                    i+=Cons.SENSOR_NUM_FOOT-1;
+                }
+            }
+
+            if(left!=null&&right!=null){
+                frames.appendFootFrame(left,right);
+                left = null;
+                right=null;
+            }
+        }
+        return frames;
+    }
+    //아래는 그냥.,..
     public Result(LoginInfo loginInfo) {
         this.calendar = Calendar.getInstance();
         this.loginInfo = loginInfo;
-        data= new byte[Cons.MAX_FRAMES_NUM];
-        idxInput=0;
+        clearData();
     }
     public void setVersion(int v){
         archLevel = 3;
         backLevel=3;
     }
     public void clearData(){
-        data=new byte[Cons.MAX_FRAMES_NUM];
+        leftData = new byte[Cons.MAX_FRAMES_NUM];
+        leftidx = 0;
+        rightData = new byte[Cons.MAX_FRAMES_NUM];
+        rightidx =0;
+        data = new byte[Cons.MAX_FRAMES_NUM];
         idxInput =0;
     }
-    public void setData(byte[] data) {
-        this.data = data;
+    public void appendLeft(byte[] leftSet){
+        System.arraycopy(leftSet,0,leftData,leftidx,leftidx+Cons.SENSOR_NUM_FOOT-1);
+        leftidx+=8;
     }
-    public byte[] getData(){
-        return data;
+    public void appendRight(byte[] rightSet){
+        System.arraycopy(rightSet,0,rightData,rightidx,Cons.SENSOR_NUM_FOOT-1);
+        rightidx+=8;
+    }
+
+    public void invalidData(int idx, boolean isRight){
+        //0번센서만 0xff로 해도되긴한데
+        if(isRight){
+            for(int j =0;j<Cons.SENSOR_NUM_FOOT;j++){
+                rightData[idx+j] = (byte)0xff;
+            }
+        }
+        else{
+            for(int j =0;j<Cons.SENSOR_NUM_FOOT;j++){
+                leftData[idx+j] = (byte)0xff;
+            }
+        }
+    }
+    public void trimData(){
+        int[] newLeft = new int[leftData.length];
+        int[] newRight = new int[rightData.length];
+        int newIdx =0;
+        for(int i = 0;i<leftData.length&&i<rightData.length;i+=Cons.SENSOR_NUM_FOOT){
+            if(leftData[i]==(byte)0xff||rightData[i] == (byte)0xff){
+                //버리는 frame의 경우
+                continue;
+            }
+            for(int j = 0;j<Cons.SENSOR_NUM_FOOT;j++){//안버리는 frame의 경우 append
+                newLeft[newIdx++] = leftData[i+j];
+                newRight[newIdx++] = rightData[i+j];
+            }
+        }
     }
 
     public Calendar getCalendar() {
         return calendar;
     }
+
 
     public boolean appendOneFrame(byte[] b){//양발 "온전한" 센서값 받기
         //그냥 직렬적으로 data에 쌓아두기
@@ -56,11 +133,11 @@ public class Result {
     public boolean isValidFrames(){
         return idxInput>= Cons.MIN_FRAMES_NUM &&idxInput<= Cons.MAX_FRAMES_NUM;
     }
-    /*
+
     boolean isLeft(int idx){
         return (idx%16< Cons.SENSOR_NUM_FOOT);
     }
-    */
+
     int calcIdx(int frameIdx, boolean isRight,int sensorPos){ //calc idx by frame idx
         return frameIdx* Cons.SENSOR_NUM_FOOT*2+(isRight?Cons.SENSOR_NUM_FOOT:0) +sensorPos;
     }
@@ -95,6 +172,18 @@ public class Result {
     }
     public static boolean isFoot(int sidx){
         return (sidx%Cons.SENSOR_NUM_FOOT==0);
+    }
+    public static boolean isMeasure(byte b){
+        return b!=Constants.MODE_MEASURE_LEFT&&b!=Constants.MODE_MEASURE_RIGHT;
+    }
+    public static boolean isFoot(int sidx, byte[] rawOneFoot){
+        boolean res = true;
+        for(int i = sidx;i<Cons.SENSOR_NUM_FOOT;i++){
+            if(isMeasure(rawOneFoot[i])){
+                res = false;
+            }
+        }
+        return res;
     }
     public int calcEndFSize(){
         return idxInput/(Cons.SENSOR_NUM_FOOT *2);

@@ -51,9 +51,7 @@ public class FootOneFrame {
         }
     }
     public FootOneFrame(byte[] rawData, int sidx){
-        if(!Result.isFoot(sidx)){
-            //not valid
-        }
+
         for(int i = sidx;i<Cons.SENSOR_NUM_FOOT;i++){
             ps[i] = (double)rawData[i];
         }

@@ -40,9 +40,10 @@ public abstract class BlinkyButtonDataCallback implements ProfileDataCallback, B
     private byte EMPTY_PASTMODE = 0x11;//-1
     private byte pastMode;
     private int idx=0;
-    private byte[] bytes;
+    private byte[] bytes;//일단 여기에 명령어고 뭐고 싹 받아 왼발은 왼발끼리, 오른 발은 오른발끼리 받아질 것
     private Result result;
     private long beforeTime;
+    private long afterTime;
     private int inv =0;
     //version 정보도 따로 파
     public BlinkyButtonDataCallback(Result result){
@@ -69,6 +70,14 @@ public abstract class BlinkyButtonDataCallback implements ProfileDataCallback, B
         }
         idx++;
         pastMode =oneb;
+        if(idx == 5000){
+            afterTime = System.currentTimeMillis();
+            Log.i(TAG,device.getAddress()+"시작시간 : "+beforeTime+", 인덱스 "+idx+"번째 시간차이 : "+(afterTime-beforeTime)+" , 패킷로스 : "+inv);
+        }
+        if(idx ==10000){
+            afterTime = System.currentTimeMillis();
+            Log.i(TAG,device.getAddress()+"시작시간 : "+beforeTime+", 인덱스 "+idx+"번째 시간차이 : "+(afterTime-beforeTime)+" , 패킷로스 : "+inv);
+        }
         /*
         if(idx%12 ==0){
             Log.i(TAG,"========================================");
