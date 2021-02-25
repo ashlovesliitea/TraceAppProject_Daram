@@ -48,6 +48,8 @@ import androidx.recyclerview.widget.SimpleItemAnimator;
 import com.example.traceappproject_daram.R;
 import com.google.android.material.appbar.MaterialToolbar;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -55,6 +57,7 @@ import no.nordicsemi.android.blinky.adapter.DevicesAdapter;
 import no.nordicsemi.android.blinky.adapter.DiscoveredBluetoothDevice;
 import no.nordicsemi.android.blinky.profile.BlinkyManager;
 import no.nordicsemi.android.blinky.utils.Utils;
+import no.nordicsemi.android.blinky.viewmodels.DevicesLiveData;
 import no.nordicsemi.android.blinky.viewmodels.ScannerStateLiveData;
 import no.nordicsemi.android.blinky.viewmodels.ScannerViewModel;
 
@@ -99,9 +102,14 @@ public class ScannerActivity extends AppCompatActivity implements DevicesAdapter
         recyclerView.setAdapter(adapter);
         //여기 작업하기!!
 
-        /*
+        DiscoveredBluetoothDevice d1=null,d2=null;
         while(true){
-
+            List<DiscoveredBluetoothDevice> devices = adapter.getDevices();
+            if(devices.get(0).getName()==devices.get(1).getName()){
+                d1=devices.get(0);
+                d2 = devices.get(1);
+                break;
+            }
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -109,7 +117,8 @@ public class ScannerActivity extends AppCompatActivity implements DevicesAdapter
             }
         }
 
-         */
+
+
 
 
 
@@ -160,6 +169,11 @@ public class ScannerActivity extends AppCompatActivity implements DevicesAdapter
         //BlinkyManager blinkyManager = new BlinkyManager(this);
     }
 
+    public void operateWithDevice(@NonNull final DiscoveredBluetoothDevice device){
+        final Intent controlBlinkIntent = new Intent(this, BlinkyActivity.class);
+        controlBlinkIntent.putExtra(BlinkyActivity.EXTRA_DEVICE, device);
+        startActivity(controlBlinkIntent);
+    }
     @Override
     public void onRequestPermissionsResult(final int requestCode,
                                            @NonNull final String[] permissions,

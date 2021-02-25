@@ -66,6 +66,9 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.ViewHold
 			result.dispatchUpdatesTo(this);
 		});
 	}
+	public List<DiscoveredBluetoothDevice> getDevices(){
+		return devices;
+	}
 
 	@NonNull
 	@Override

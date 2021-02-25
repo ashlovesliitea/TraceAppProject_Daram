@@ -24,8 +24,10 @@ package no.nordicsemi.android.blinky.viewmodels;
 
 import android.app.Application;
 import android.bluetooth.BluetoothDevice;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
@@ -39,6 +41,7 @@ public class BlinkyViewModel extends AndroidViewModel {
 	private final BlinkyManager blinkyManager;
 	private BluetoothDevice device;
 
+	@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 	public BlinkyViewModel(@NonNull final Application application) {
 		super(application);
 
