@@ -53,7 +53,7 @@ public class BlinkyActivity extends AppCompatActivity {
 	@BindView(R.id.button_state) TextView buttonState;
 
 
-
+	//어쩌고저쩌고
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
