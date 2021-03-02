@@ -28,8 +28,12 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import no.nordicsemi.android.blinky.profile.data.Constants;
+
+import com.example.traceappproject_daram.Util;
 import com.example.traceappproject_daram.data.Cons;
 import com.example.traceappproject_daram.data.Result;
+
+import java.io.UnsupportedEncodingException;
 
 import no.nordicsemi.android.ble.callback.profile.ProfileDataCallback;
 import no.nordicsemi.android.ble.data.Data;
@@ -61,6 +65,19 @@ public abstract class BlinkyButtonDataCallback implements ProfileDataCallback, B
             beforeTime = System.currentTimeMillis();
         }
         byte oneb = data.getByte(0);
+
+        byte[] bytestobeconverted = data.getValue();
+        /*
+        try {
+            String str = Util.cvtBytesToString(bytestobeconverted);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+         */
+        for(int i = 0;i<bytestobeconverted.length;i++){
+            Log.i(TAG, "recieved byte "+i+" : "+(int)bytestobeconverted[i]);
+        }
         if(oneb==pastMode+1||(pastMode ==0xff&&oneb==0x00)){
 
         }

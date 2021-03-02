@@ -13,6 +13,7 @@ public class Constants {
     public final static byte MODE_STOP = 0X02;
     public final static byte MODE_VERSION = 0X03;
     public final static byte MODE_MEASURE_LEFT = 0X04; //양 발에 대해 센서값을 다
+
     public final static byte MODE_MEASURE_RIGHT = 0X05;
     public final static byte MODE_MEASURE_END = 0x06;
 

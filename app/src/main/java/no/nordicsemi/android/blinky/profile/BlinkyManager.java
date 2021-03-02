@@ -242,7 +242,7 @@ public class BlinkyManager extends ObservableBleManager {
 		writeCharacteristic(ledCharacteristic,Data.opCode(Constants.MODE_VERSION)).with(ledCallback).enqueue();
 
 		 */
-		writeCharacteristic(ledCharacteristic,Data.opCode((byte)(0X33))).with(ledCallback).enqueue();
+		writeCharacteristic(ledCharacteristic,Data.opCode((byte)(0X01))).with(ledCallback).enqueue();
 		//writeCharacteristic(ledCharacteristic,Data.opCode(Constants.MODE_VERSION)).with(ledCallback).enqueue();
 		//반복적으로 10ms마다
 		int ctr = 0;
