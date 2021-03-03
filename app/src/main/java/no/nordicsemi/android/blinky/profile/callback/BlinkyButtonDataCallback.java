@@ -40,7 +40,7 @@ import no.nordicsemi.android.ble.data.Data;
 
 @SuppressWarnings("ConstantConditions")
 public abstract class BlinkyButtonDataCallback implements ProfileDataCallback, BlinkyButtonCallback {
-    private static final String TAG= "MJBUTTONCALLBACK";
+    private static final String TAG = "MJBUTTONCALLBACK";
     private byte EMPTY_PASTMODE = 0x11;//-1
     private byte pastMode;
     private int idx=0;
