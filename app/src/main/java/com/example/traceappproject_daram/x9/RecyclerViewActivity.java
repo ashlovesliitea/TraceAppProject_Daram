@@ -42,7 +42,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
       ArrayList<ItemForm> list=new ArrayList<>();
       list.add(new ItemForm("2020/10/28 22:39","아치 2단계, 꿈치 3단계"));
       list.add(new ItemForm("2020/10/11 21:39","아치 1단계, 꿈치 2단계"));
-        list.add(new ItemForm("2020/10/04 20:39","아치 3단계, 꿈치 1단계"));
+      list.add(new ItemForm("2020/10/04 20:39","아치 3단계, 꿈치 1단계"));
 
         adapter = new MyAdapter(list);
         listview.setAdapter(adapter);
