@@ -3,12 +3,14 @@ package com.example.traceappproject_daram.data;
 import com.example.traceappproject_daram.reprot_page.heatmap.FeetMultiFrames;
 import com.example.traceappproject_daram.reprot_page.heatmap.FootOneFrame;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
 import no.nordicsemi.android.blinky.profile.data.Constants;
 
-public class Result {
+//Serializable 을 이용해 직렬화
+public class Result implements Serializable {
     Calendar calendar;
     LoginInfo loginInfo;
     int archLevel;
@@ -23,6 +25,8 @@ public class Result {
     int leftidx;
     int rightidx;
     private int idxInput;
+
+
     public Result(byte[] rawData,int endData){
         data = rawData;
         this.endData = endData;
