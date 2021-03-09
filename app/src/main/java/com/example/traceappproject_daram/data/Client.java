@@ -30,6 +30,16 @@ public class Client {
         this.weight = weight;
         this.height = height;
     }
+    public Client(){
+        //dummy client
+        this.loginInfo = new LoginInfo();
+        this.gender = "female";
+        this.height = 155;
+        this.feetSize = 235;
+        this.name = "이은아";
+        this.phone = "01012345678";
+        this.weight = 55;
+    }
     public String getID(){
         return loginInfo.getId();
     }

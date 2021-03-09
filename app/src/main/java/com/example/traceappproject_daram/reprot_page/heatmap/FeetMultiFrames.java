@@ -9,6 +9,24 @@ public class FeetMultiFrames {
     private FootOneFrame[][] frames= new FootOneFrame[Cons.HEATMAP_FRAMES_NUM][2];;//첫번째 인덱스는 시간, 두번째는 왼오
     private int insertIdx=0;
     public String TAG = "FootMultiFrames";
+
+    //              0 1 2 3 4 5 6 7
+
+    byte[] empt1 = {5,5,5,0,0,5,5,5};
+    byte[] empt2 = {3,3,5,0,2,5,3,3};
+    byte[] back1 = {0,0,0,0,5,7,7,9};
+    byte[] back2 = {0,0,0,0,3,7,7,9};
+    byte[] bami1 = {8,0,5,7,3,9,9,9};
+    byte[] bami2 = {5,0,5,9,5,7,9,9};
+    byte[] midd1 = {3,8,7,8,5,9,6,9};
+    byte[] midd2 = {7,5,7,7,6,6,6,6};
+    byte[] miar1 = {9,9,9,5,5,7,7,9};
+    byte[] miar2 = {9,9,7,3,9,5,9,9};
+    byte[] arch1 = {9,9,9,7,5,1,3,3};
+    byte[] arch2 = {9,7,5,0,9,0,7,7};
+
+
+
     //나중에 파라미터 받을 수 있게되면 동적할당버전 만들기
     public FeetMultiFrames(){
         initFramesForTest();
@@ -21,16 +39,27 @@ public class FeetMultiFrames {
 
     //foot one frame을 어케 저장할까..
     public void initFramesForTest(){
-        for(int i = 0; i< Cons.HEATMAP_FRAMES_NUM; i++){
-            if(i%2 ==0){
-                frames[i][0] = new FootOneFrame(false,0);
-                frames[i][1] = new FootOneFrame(true,0);
-            }
-            else{
-                frames[i][0] = new FootOneFrame(false,1);
-                frames[i][1] = new FootOneFrame(true,1);
-            }
-        }
+        frames[0][0] = new FootOneFrame(back1,false);
+        frames[0][1] = new FootOneFrame(empt1,true);
+        frames[1][0] = new FootOneFrame(bami1,false);
+        frames[1][1] = new FootOneFrame(empt2,true);
+        frames[2][0] = new FootOneFrame(midd1,false);
+        frames[2][1] = new FootOneFrame(empt1,true);
+        frames[3][0] = new FootOneFrame(miar1,false);
+        frames[3][1] = new FootOneFrame(empt1,true);
+        frames[4][0] = new FootOneFrame(arch1,false);
+        frames[4][1] = new FootOneFrame(empt2,true);
+
+        frames[5][0] = new FootOneFrame(empt1,false);
+        frames[5][1] = new FootOneFrame(back2,true);
+        frames[6][0] = new FootOneFrame(empt1,false);
+        frames[6][1] = new FootOneFrame(bami2,true);
+        frames[6][0] = new FootOneFrame(empt1,false);
+        frames[6][1] = new FootOneFrame(midd2,true);
+        frames[7][0] = new FootOneFrame(empt1,false);
+        frames[7][1] = new FootOneFrame(miar2,true);
+        frames[8][0] = new FootOneFrame(empt1,false);
+        frames[8][1] = new FootOneFrame(arch2,true);
     }
     public int getFramesSz(){
         return frames.length;

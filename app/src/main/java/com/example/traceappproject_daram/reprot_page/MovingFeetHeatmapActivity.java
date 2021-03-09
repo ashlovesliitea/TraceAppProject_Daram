@@ -65,7 +65,7 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
         map.setBottomPadding(0);
         //marker 색깔 바꿀 수 있음 원랜 0xff9400D3
         map.setMarkerCallback(new HeatMapMarkerCallback.CircleHeatMapMarker(0x00000000));
-        map.setRadius(80.0);
+        map.setRadius(150.0);
 
         Map<Float, Integer> colors = new ArrayMap<>();
         //build a color gradient in HSV from red at the center to green at the outside
@@ -73,7 +73,7 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
             float stop = ((float) i) / 20.0f;
             int color;
             //gradient 주는 강도 바꾸고싶으면 여기
-            color = doGradient(i * 5, 0, 100, 0xff0000ff, 0xffff3000);
+            color = doGradient(i * 5, 0, 100, 0xff0000ff, 0xffff0000);
             colors.put(stop, color);
         }
         map.setColorStops(colors);
@@ -83,6 +83,9 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
                 addData();
             }
         });
+        //처음에 누르고 페이지 나오자마자 히트맵 로드되게..?
+
+        drawNewMap();
     }
     public void saveBitmap(Bitmap bitmap,Calendar resultTime,int idx) {
         String strFilePath = Util.makeFolderPath(this, resultTime);
@@ -137,7 +140,7 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
                         drawNewMap();
                         map.forceRefreshOnWorkerThread();
                         //getApplicationContext().getFilesDir().getPath().toString(),"/bitm"+i+".jpg"
-                        saveBitmap(getBitmapFromView(),result.getCalendar(),i);
+                        //saveBitmap(getBitmapFromView(),result.getCalendar(),i);
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -145,7 +148,7 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
                             }
                         });
                         try {
-                            Thread.sleep(1000);
+                            Thread.sleep(500);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }

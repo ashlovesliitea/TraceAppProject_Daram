@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#6A6B8C">
+    android:background="@color/dark_purple">
 
 
     <TextView
@@ -86,7 +86,8 @@
         <com.example.traceappproject_daram.reprot_page.heatmap.HeatMapHolder
             android:id="@+id/feetmap"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="110dp"
             android:layout_weight="1"
             app:blur="0.01"
             app:maxDrawingHeight="200dp"
@@ -141,30 +142,37 @@
         </LinearLayout>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/replay"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/button_round_sign_up"
-        android:text="다시보기"
-        android:textColor="#6A6B8C"
-        android:textStyle="bold"
-        app:backgroundTint="#F9F9F9" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/replay"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:layout_margin="30dp"
+            android:background="@drawable/button_round_sign_up"
+            android:padding="5dp"
+            android:text="걸음거리"
+            android:textColor="#6A6B8C"
+            android:textStyle="bold"
+            app:backgroundTint="#F9F9F9" />
 
 
-    <Button
-        android:id="@+id/start_recording"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_margin="30dp"
-        android:background="@drawable/button_round_sign_up"
-        android:padding="10dp"
-        android:text="녹화시작"
-        android:textColor="#6A6B8C"
-        android:textStyle="bold"
-        android:textSize="30dp"
-        app:backgroundTint="#F9F9F9" />
-
+        <Button
+            android:id="@+id/start_recording"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:layout_margin="30dp"
+            android:background="@drawable/button_round_sign_up"
+            android:padding="5dp"
+            android:text="녹화시작"
+            android:textColor="#6A6B8C"
+            android:textStyle="bold"
+            app:backgroundTint="#F9F9F9" />
+    </LinearLayout>
 
 </LinearLayout>

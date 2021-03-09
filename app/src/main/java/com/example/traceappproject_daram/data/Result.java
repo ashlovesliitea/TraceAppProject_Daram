@@ -210,9 +210,13 @@ public class Result implements Serializable {
         //int ctrLeftBack=0, ctrLeftArch=0,ctrRightBack = 0, ctrRightArch =0;
         for(int fidx = Cons.REP_START_FRAME;fidx<Cons.REP_END_FRAME;fidx++){
             //복사
+            /*
             FootOneFrame left = new FootOneFrame(this.data,calcIdx(fidx,false));
             FootOneFrame right = new FootOneFrame(data, calcIdx(fidx, true));
+
             frames.appendFootFrame(left,right);
+
+             */
         }
         return frames;
     }

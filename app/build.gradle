@@ -71,5 +71,6 @@ dependencies {
 
     //design animation library
     implementation 'com.airbnb.android:lottie:3.6.1'
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
 }
 apply plugin: 'com.google.gms.google-services'
