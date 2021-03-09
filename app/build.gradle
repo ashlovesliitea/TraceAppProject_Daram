@@ -68,5 +68,8 @@ dependencies {
     // and uncomment 2 lines in settings.gradle file.
     // implementation project(":ble-livedata")
     implementation 'org.jsoup:jsoup:1.11.3'
+
+    //design animation library
+    implementation 'com.airbnb.android:lottie:3.6.1'
 }
 apply plugin: 'com.google.gms.google-services'

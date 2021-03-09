@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:textAlignment="center"
+    tools:context=".WalkingActivity">
+
+    <!--상단가이드라인 1-->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#6A6B8C"
+        app:layout_constraintBottom_toBottomOf="@id/guidelinetop2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="걸어주세요"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:textColor="#F9F9F9"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@id/guidelinetop2"
+        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
+        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintTop_toTopOf="@id/guidelinetop1" />
+
+
+    <Button
+        android:id="@+id/stopmeasure"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:text="측정 종료"
+        android:textColor="#F9F9F9"
+        android:textSize="18sp"
+        app:backgroundTint="#6A6B8C"
+        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
+        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintTop_toBottomOf="@id/guidelinebottom" />
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/walk_animation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
+        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintBottom_toTopOf="@id/guidelinebottom"
+        app:layout_constraintTop_toTopOf="@id/guidelinetop2"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="walk.json"
+        app:lottie_loop="true" />
+
+    <!--왼쪽가이드라인-->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineleft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1"></androidx.constraintlayout.widget.Guideline>
+    <!--오른쪽가이드라인-->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineright"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9"></androidx.constraintlayout.widget.Guideline>
+    <!--상단가이드라인 1-->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelinetop1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1"></androidx.constraintlayout.widget.Guideline>
+    <!--상단가이드라인 2-->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelinetop2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25"></androidx.constraintlayout.widget.Guideline>
+    <!--하단가이드라인-->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelinebottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8"></androidx.constraintlayout.widget.Guideline>
+</androidx.constraintlayout.widget.ConstraintLayout>

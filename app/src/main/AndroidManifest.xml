@@ -2,14 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.traceappproject_daram">
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="no.nordicsemi.android.LOG"/>
-    <uses-feature
-        android:name="android.hardware.bluetooth_le"
-        android:required="true"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,45 +9,49 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TraceAppProject_Daram">
-        <activity android:name=".TestActivity">
-        </activity>
+        <activity android:name=".AnalyzeActivity"></activity>
+        <activity android:name=".WalkingActivity" />
+        <activity android:name=".TestActivity" />
         <activity android:name=".x_1Activity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".reprot_page.MovingFeetHeatmapActivity"></activity>
-        <activity android:name=".x_2Activity">
-        </activity>
-        <activity android:name=".x9.RecyclerViewActivity"/>
+        <activity android:name=".reprot_page.MovingFeetHeatmapActivity" />
+        <activity android:name=".x_2Activity" />
+        <activity android:name=".x9.RecyclerViewActivity" />
         <activity android:name=".x_15Activity" />
-        <activity android:name=".firebaseTest.firebaseTestActivity"
-            android:theme="@style/Theme.TraceAppProject_Daram.SplashScreen"
+        <activity
+            android:name=".firebaseTest.firebaseTestActivity"
+            android:launchMode="singleTop"
             android:noHistory="true"
-            android:launchMode="singleTop">
-
-        </activity>
+            android:theme="@style/Theme.TraceAppProject_Daram.SplashScreen" />
         <activity
             android:name="no.nordicsemi.android.blinky.SplashScreenActivity"
-            android:theme="@style/Theme.TraceAppProject_Daram.SplashScreen"
+            android:launchMode="singleTop"
             android:noHistory="true"
-            android:launchMode="singleTop">
-
-        </activity>
+            android:theme="@style/Theme.TraceAppProject_Daram.SplashScreen" />
         <activity
             android:name="no.nordicsemi.android.blinky.ScannerActivity"
             android:icon="@drawable/ic_blinky_feature"
             android:label="@string/feature_name"
-            android:launchMode="singleTop">
-
-        </activity>
+            android:launchMode="singleTop" />
         <activity
             android:name="no.nordicsemi.android.blinky.BlinkyActivity"
             android:launchMode="singleTop"
-            android:parentActivityName="no.nordicsemi.android.blinky.ScannerActivity">
-        </activity>
-
+            android:parentActivityName="no.nordicsemi.android.blinky.ScannerActivity" />
     </application>
+
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="no.nordicsemi.android.LOG" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
 </manifest>

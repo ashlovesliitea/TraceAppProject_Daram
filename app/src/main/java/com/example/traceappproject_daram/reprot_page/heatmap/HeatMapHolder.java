@@ -20,6 +20,7 @@ public class HeatMapHolder extends HeatMap {
     private int idResource;
     private static final String TAG ="HeatMapHolder";
     //2개 발 넣음됨
+
     public HeatMapHolder(Context context, int idResource) {
         super(context);
         this.idResource=idResource;

@@ -3,6 +3,8 @@ package com.example.traceappproject_daram.x9;
 import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.traceappproject_daram.R;
+import com.example.traceappproject_daram.WalkingActivity;
 
 import java.util.ArrayList;
 
@@ -20,6 +23,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private String userName;
     private String userId;
+    private Button measureButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +34,20 @@ public class RecyclerViewActivity extends AppCompatActivity {
         userName=intent.getStringExtra("UserName");
         userId=intent.getStringExtra("UserId");
 
+        measureButton=(Button)findViewById(R.id.measureStart);
+
         name=findViewById(R.id.name);
         name.setText(userName);
 
        // CommunicateWithWeb();
+
+        measureButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent measureintent = new Intent(RecyclerViewActivity.this, WalkingActivity.class);
+                startActivity(measureintent);
+            }
+        });
 
         listview = findViewById(R.id.MyRecyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
