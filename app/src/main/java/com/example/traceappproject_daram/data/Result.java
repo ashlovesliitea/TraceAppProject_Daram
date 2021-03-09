@@ -25,7 +25,8 @@ public class Result implements Serializable {
     int leftidx;
     int rightidx;
     private int idxInput;
-
+    //frames
+    public FeetMultiFrames frames;
 
     public Result(byte[] rawData,int endData){
         data = rawData;
@@ -34,7 +35,11 @@ public class Result implements Serializable {
 
     //data에다가 모드값을 포함한 모든 것들을 싹다 넣는다
     //가정은 그냥 300언저리에서 시간이 많이 지났음에도 시간적으로 같은 순간의 데이터를 양 발이 수집했을 것이다
-
+    //지금은 그냥 값 박아넣을게요 ㅠㅠㅠ parsing하는 거 테스트를 내일- 낼모레 해볼예정이라
+    public int getFrameNumber(){
+        return 5;
+    }
+    //이 함수를 무조건 호출해야 frames가 생성되고 frame 개수는 frames에서 찾아쓰게 할 예정
     public FeetMultiFrames parseRaw(){
         FeetMultiFrames frames = new FeetMultiFrames();
         FootOneFrame left=null,right=null;
