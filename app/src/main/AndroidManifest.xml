@@ -13,13 +13,17 @@
         <activity android:name=".WalkingActivity" />
         <activity android:name=".TestActivity" />
         <activity android:name=".x_1Activity">
+
+        </activity>
+        <activity android:name=".reprot_page.MovingFeetHeatmapActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+
         </activity>
-        <activity android:name=".reprot_page.MovingFeetHeatmapActivity" />
         <activity android:name=".x_2Activity" />
         <activity android:name=".x9.RecyclerViewActivity" />
         <activity android:name=".x_15Activity" />
@@ -41,7 +45,9 @@
         <activity
             android:name="no.nordicsemi.android.blinky.BlinkyActivity"
             android:launchMode="singleTop"
-            android:parentActivityName="no.nordicsemi.android.blinky.ScannerActivity" />
+            android:parentActivityName="no.nordicsemi.android.blinky.ScannerActivity" >
+
+        </activity>
     </application>
 
     <uses-feature

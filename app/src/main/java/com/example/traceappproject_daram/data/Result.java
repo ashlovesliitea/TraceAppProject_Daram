@@ -66,6 +66,9 @@ public class Result implements Serializable {
         this.loginInfo = loginInfo;
         clearData();
     }
+    public String getID(){
+        return this.loginInfo.getId();
+    }
     public void setVersion(int v){
         archLevel = 3;
         backLevel=3;

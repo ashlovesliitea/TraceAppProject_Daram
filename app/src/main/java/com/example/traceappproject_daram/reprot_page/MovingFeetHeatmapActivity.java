@@ -21,6 +21,7 @@ import androidx.collection.ArrayMap;
 import com.example.traceappproject_daram.R;
 import com.example.traceappproject_daram.Util;
 import com.example.traceappproject_daram.data.Cons;
+import com.example.traceappproject_daram.data.LoginInfo;
 import com.example.traceappproject_daram.data.Result;
 import com.example.traceappproject_daram.reprot_page.heatmap.FeetMultiFrames;
 import com.example.traceappproject_daram.reprot_page.heatmap.FootOneFrame;
@@ -28,6 +29,7 @@ import com.example.traceappproject_daram.reprot_page.heatmap.HeatMapHolder;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,7 +50,8 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
     public int showIdx = 0;
     private static final String TAG = "MovingFeetHeatmap";
     private Button btnReplay;
-    private Result result;
+
+    private Result result = new Result(new LoginInfo("rhalwls","daram"));//일단 여기선 더미데이터 만들게요 ㅠ
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +87,18 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
             }
         });
     }
+    public void uploadResultImgs(){
+        try {
+            for(int i = 0;i<frames.getFramesSz();i++) {
+                Util.clickUpload(this,result.getID(), result.getCalendar(), i);
+                Log.i(TAG,"UPLOAD IMAGE : "+i);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public void saveBitmap(Bitmap bitmap,Calendar resultTime,int idx) {
         String strFilePath = Util.makeFolderPath(this, resultTime);
 
@@ -150,6 +165,8 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
                             e.printStackTrace();
                         }
                     }
+                    //사실 최초1회만 해야하는데... 급해서 그냥 합니다 ㅠ
+                    uploadResultImgs();
                 }
             });
         } else {
