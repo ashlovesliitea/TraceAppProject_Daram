@@ -7,13 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.traceappproject_daram.R;
 import com.example.traceappproject_daram.reprot_page.MovingFeetHeatmapActivity;
 
 import java.util.ArrayList;
+
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.recyclerview.widget.RecyclerView;
+import no.nordicsemi.android.nrftoolbox.R;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
@@ -61,7 +62,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
      * by RecyclerView.
      */
     //생성자에서 데이터 객체를 전달받는다. 자료형은 임의로 결정 가능.
-    public MyAdapter(ArrayList<ItemForm>datalist) {
+    public MyAdapter(ArrayList<ItemForm> datalist) {
         localdatalist = datalist;
     }
 

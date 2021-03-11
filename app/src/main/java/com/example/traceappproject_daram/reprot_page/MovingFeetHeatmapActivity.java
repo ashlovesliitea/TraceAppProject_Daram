@@ -18,7 +18,6 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.collection.ArrayMap;
 
-import com.example.traceappproject_daram.R;
 import com.example.traceappproject_daram.Util;
 import com.example.traceappproject_daram.data.Cons;
 import com.example.traceappproject_daram.data.LoginInfo;
@@ -40,6 +39,7 @@ import java.util.Random;
 
 import ca.hss.heatmaplib.HeatMap;
 import ca.hss.heatmaplib.HeatMapMarkerCallback;
+import no.nordicsemi.android.nrftoolbox.R;
 
 public class MovingFeetHeatmapActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
     //reportpage
@@ -87,6 +87,7 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
             }
         });
     }
+
     public void uploadResultImgs(){
         try {
             for(int i = 0;i<frames.getFramesSz();i++) {
@@ -97,7 +98,6 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
             e.printStackTrace();
         }
     }
-
 
     public void saveBitmap(Bitmap bitmap,Calendar resultTime,int idx) {
         String strFilePath = Util.makeFolderPath(this, resultTime);

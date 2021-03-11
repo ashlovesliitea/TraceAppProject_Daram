@@ -4,7 +4,7 @@ public class ItemForm {
     private String Date;
     private String Measure;
 
-    public ItemForm(String Date,String Measure){
+    public ItemForm(String Date, String Measure){
         this.Date=Date;
         this.Measure=Measure;
 

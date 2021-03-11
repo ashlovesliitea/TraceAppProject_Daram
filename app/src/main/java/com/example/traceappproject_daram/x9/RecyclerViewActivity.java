@@ -1,20 +1,19 @@
 package com.example.traceappproject_daram.x9;
 
-import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.traceappproject_daram.R;
 import com.example.traceappproject_daram.WalkingActivity;
 
 import java.util.ArrayList;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import no.nordicsemi.android.nrftoolbox.R;
 
 public class RecyclerViewActivity extends AppCompatActivity {
 

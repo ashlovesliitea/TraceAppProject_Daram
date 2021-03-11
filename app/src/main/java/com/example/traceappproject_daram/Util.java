@@ -3,14 +3,7 @@ package com.example.traceappproject_daram;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.util.Log;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.traceappproject_daram.data.Cons;
-import com.example.traceappproject_daram.firebaseTest.firebaseTestActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -25,6 +18,10 @@ import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import static com.example.traceappproject_daram.data.Cons.IMG_EXT;
 
@@ -63,7 +60,6 @@ public class Util {
         });
         a.show();
     }
-
     //overload
     public static void clickUpload(Context context,String id, Calendar calendar, int idx) throws FileNotFoundException {
         //firebase storage에 업로드하기
@@ -109,7 +105,4 @@ public class Util {
         //업로드한 파일의 경로를 firebaseDB에 저장하면 게시판 같은 앱도 구현할 수 있음.
 
     }
-
-
-
 }

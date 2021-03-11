@@ -11,7 +11,6 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.collection.ArrayMap;
 
-import com.example.traceappproject_daram.R;
 import com.example.traceappproject_daram.data.Cons;
 import com.example.traceappproject_daram.reprot_page.heatmap.FootOneFrame;
 import com.example.traceappproject_daram.reprot_page.heatmap.HeatMapHolder;
@@ -21,6 +20,7 @@ import java.util.Random;
 
 import ca.hss.heatmaplib.HeatMap;
 import ca.hss.heatmaplib.HeatMapMarkerCallback;
+import no.nordicsemi.android.nrftoolbox.R;
 
 public class HeatMapFeetOneFrame extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
     //한번은 화면 터치해야 점들이 나와요

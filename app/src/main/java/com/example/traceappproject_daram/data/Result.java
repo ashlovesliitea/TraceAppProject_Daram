@@ -3,54 +3,52 @@ package com.example.traceappproject_daram.data;
 import com.example.traceappproject_daram.reprot_page.heatmap.FeetMultiFrames;
 import com.example.traceappproject_daram.reprot_page.heatmap.FootOneFrame;
 
-import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Date;
 
-import no.nordicsemi.android.blinky.profile.data.Constants;
-
-//Serializable 을 이용해 직렬화
-public class Result implements Serializable {
+public class Result {
     Calendar calendar;
     LoginInfo loginInfo;
     int archLevel;
     int backLevel;
 
     //string 합치는 작업이 자바는 O(N)이래서 byte[]로 하고 저장할 때 변환하겠습니다
-    byte[] data;
+    /*
+    byte[] data;//deceperated
     int endData;
-
+    */
     byte[] leftData;
     byte[] rightData;
     int leftidx;
     int rightidx;
     private int idxInput;
-    //frames
-    public FeetMultiFrames frames;
-
+    /*
     public Result(byte[] rawData,int endData){
         data = rawData;
         this.endData = endData;
     }
-
+    */
+    public Result(LoginInfo loginInfo) {
+        //dummy
+        this.calendar = Calendar.getInstance();
+        this.loginInfo = loginInfo;
+        clearData();
+    }
+    public String getID(){
+        return this.loginInfo.getId();
+    }
     //data에다가 모드값을 포함한 모든 것들을 싹다 넣는다
     //가정은 그냥 300언저리에서 시간이 많이 지났음에도 시간적으로 같은 순간의 데이터를 양 발이 수집했을 것이다
-    //지금은 그냥 값 박아넣을게요 ㅠㅠㅠ parsing하는 거 테스트를 내일- 낼모레 해볼예정이라
-    public int getFrameNumber(){
-        return 5;
-    }
-    //이 함수를 무조건 호출해야 frames가 생성되고 frame 개수는 frames에서 찾아쓰게 할 예정
-    public FeetMultiFrames parseRaw(){
+    public FeetMultiFrames parseRaw(){//validation을 하면서 유효한 frame 만건져서 띄우기
         FeetMultiFrames frames = new FeetMultiFrames();
         FootOneFrame left=null,right=null;
         for(int i = 300;i<500;i++){
-            if(leftData[i] == Constants.MODE_MEASURE_LEFT&&left ==null){
+            if(leftData[i] == no.nordicsemi.android.nrftoolbox.uart.Cons.MODE_MEASURE_LEFT&&left ==null){
                 if(isFoot(i+1,leftData)){
                     left = new FootOneFrame(leftData,i+1);
-                    i+=Cons.SENSOR_NUM_FOOT-1;
+                    i+=Cons.SENSOR_NUM_FOOT-1;//성공했을 시에는 확 뛰어버리기
                 }
             }
-            else if(rightData[i] == Constants.MODE_MEASURE_RIGHT&&right == null){
+            else if(rightData[i] == no.nordicsemi.android.nrftoolbox.uart.Cons.MODE_MEASURE_RIGHT&&right == null){
                 if(isFoot(i+1,rightData)){
                     right = new FootOneFrame(rightData,i+1);
                     i+=Cons.SENSOR_NUM_FOOT-1;
@@ -65,15 +63,7 @@ public class Result implements Serializable {
         }
         return frames;
     }
-    //아래는 그냥.,..
-    public Result(LoginInfo loginInfo) {
-        this.calendar = Calendar.getInstance();
-        this.loginInfo = loginInfo;
-        clearData();
-    }
-    public String getID(){
-        return this.loginInfo.getId();
-    }
+
     public void setVersion(int v){
         archLevel = 3;
         backLevel=3;
@@ -83,19 +73,24 @@ public class Result implements Serializable {
         leftidx = 0;
         rightData = new byte[Cons.MAX_FRAMES_NUM];
         rightidx =0;
-        data = new byte[Cons.MAX_FRAMES_NUM];
+        //data = new byte[Cons.MAX_FRAMES_NUM];
         idxInput =0;
     }
-    public void appendLeft(byte[] leftSet){
-        System.arraycopy(leftSet,0,leftData,leftidx,leftidx+Cons.SENSOR_NUM_FOOT-1);
-        leftidx+=8;
+
+    //append 시 맨앞 s랑 echo는 안 넣는 걸로
+    public void appendLeft(byte[] leftSet){ //append multiple data
+        // do not check validity
+        int howmany = leftSet.length-2;
+        System.arraycopy(leftSet,2,leftData,leftidx,leftidx+howmany);
+        leftidx+=howmany;
     }
-    public void appendRight(byte[] rightSet){
-        System.arraycopy(rightSet,0,rightData,rightidx,Cons.SENSOR_NUM_FOOT-1);
-        rightidx+=8;
+    public void appendRight(byte[] rightSet){ //append
+        int howmany = rightSet.length-2;
+        System.arraycopy(rightSet,2,rightData,rightidx,rightidx+howmany);
+        rightidx+=howmany;
     }
 
-    public void invalidData(int idx, boolean isRight){
+    public void makeinvalid (int idx, boolean isRight){
         //0번센서만 0xff로 해도되긴한데
         if(isRight){
             for(int j =0;j<Cons.SENSOR_NUM_FOOT;j++){
@@ -108,7 +103,34 @@ public class Result implements Serializable {
             }
         }
     }
-    public void trimData(){
+    //여기까지만 쓸 듯
+
+    public static boolean isFoot(int sidx){
+        return (sidx%Cons.SENSOR_NUM_FOOT==0);
+    }
+
+
+    public static boolean isFoot(int sidx, byte[] rawOneFoot){
+        //measure command 없는 정사이즈의 발인지
+        boolean res = true;
+        for(int i = sidx;i<Cons.SENSOR_NUM_FOOT;i++){
+            if(isMeasure(rawOneFoot[i])){
+                res = false;
+            }
+        }
+        return res;
+    }
+    public static boolean isMeasure(byte b){
+        return b!= no.nordicsemi.android.nrftoolbox.uart.Cons.MODE_MEASURE_LEFT&&b!= no.nordicsemi.android.nrftoolbox.uart.Cons.MODE_MEASURE_RIGHT;
+    }
+    public Calendar getCalendar() {
+        return calendar;
+    }
+    /*
+    //deceperated
+    //왜냐면 raw는 그냥 저장하고 띄울때만 검사할 거기 때문에
+    public void trimData(){ //만약 한쪽이라도 invalid 하다면 해당 시간에 있는 양 발을 다 버린다
+
         int[] newLeft = new int[leftData.length];
         int[] newRight = new int[rightData.length];
         int newIdx =0;
@@ -124,9 +146,7 @@ public class Result implements Serializable {
         }
     }
 
-    public Calendar getCalendar() {
-        return calendar;
-    }
+
 
 
     public boolean appendOneFrame(byte[] b){//양발 "온전한" 센서값 받기
@@ -182,21 +202,11 @@ public class Result implements Serializable {
         }
         return allActivated;
     }
-    public static boolean isFoot(int sidx){
-        return (sidx%Cons.SENSOR_NUM_FOOT==0);
-    }
+
     public static boolean isMeasure(byte b){
         return b!=Constants.MODE_MEASURE_LEFT&&b!=Constants.MODE_MEASURE_RIGHT;
     }
-    public static boolean isFoot(int sidx, byte[] rawOneFoot){
-        boolean res = true;
-        for(int i = sidx;i<Cons.SENSOR_NUM_FOOT;i++){
-            if(isMeasure(rawOneFoot[i])){
-                res = false;
-            }
-        }
-        return res;
-    }
+
     public int calcEndFSize(){
         return idxInput/(Cons.SENSOR_NUM_FOOT *2);
     }
@@ -224,8 +234,5 @@ public class Result implements Serializable {
         }
         return frames;
     }
-
-
-
-
+     */
 }

@@ -26,7 +26,13 @@ public class ClientHelper {
         }
         return m;
     }
-    /*
+
+
+    //그냥 순차적으로 왼발 따로 오른발 따로 받는다 치기
+
+
+    //1월에 만들어뒀던거 버전이 아마 byte[] 1차원에 양 발 데이터가 들어있는듯
+
     public int parseDataSlicedByteVersion(byte[] barr){//홀수일 때만 의미있는 값이겠지만 일단은 리턴
         int b = barr[0];
         if(idx %2 ==0){//윗부분, refresh
@@ -78,6 +84,5 @@ public class ClientHelper {
         return data;
     }
     //s-m-d(16)-e 순으로 들어오는데 한 개의 byte로 받는 경우
-     */
 
 }

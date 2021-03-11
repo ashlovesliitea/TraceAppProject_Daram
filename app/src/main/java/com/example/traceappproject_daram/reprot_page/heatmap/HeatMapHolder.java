@@ -12,15 +12,14 @@ import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.util.Log;
 
-import com.example.traceappproject_daram.R;
 
 import ca.hss.heatmaplib.HeatMap;
+import no.nordicsemi.android.nrftoolbox.R;
 
 public class HeatMapHolder extends HeatMap {
     private int idResource;
     private static final String TAG ="HeatMapHolder";
     //2개 발 넣음됨
-
     public HeatMapHolder(Context context, int idResource) {
         super(context);
         this.idResource=idResource;
