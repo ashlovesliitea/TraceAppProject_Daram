@@ -1,9 +1,0 @@
-no/nordicsemi/android/nrftoolbox/common/BuildConfig.java
- no.nordicsemi.android.nrftoolbox.common.BuildConfig
-no/nordicsemi/android/nrftoolbox/wearable/common/Constants.java
- no.nordicsemi.android.nrftoolbox.wearable.common.Constants
- no.nordicsemi.android.nrftoolbox.wearable.common.Constants$UART
- no.nordicsemi.android.nrftoolbox.wearable.common.Constants$UART$Configuration
- no.nordicsemi.android.nrftoolbox.wearable.common.Constants$UART$Configuration$Command
-no/nordicsemi/android/nrftoolbox/utility/DebugLogger.java
- no.nordicsemi.android.nrftoolbox.utility.DebugLogger
