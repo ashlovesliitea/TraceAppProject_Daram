@@ -64,6 +64,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -264,7 +265,7 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
 		super.onDestroy();
 		wearableSynchronizer.close();
 	}
-
+	private Button measureButton;
 	@Override
 	protected void onCreateView(final Bundle savedInstanceState) {
 		setContentView(R.layout.activity_feature_uart);
@@ -272,6 +273,15 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
 		container = findViewById(R.id.container);
 		// Setup the sliding pane if it exist
 		final LinearLayout slidingPane = slider = findViewById(R.id.sliding_pane);
+		measureButton = findViewById(R.id.measure_button);
+		measureButton.setOnClickListener(new Button.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				// TODO : click event
+				UARTActivity.this.connectionMode = 2;
+				onMode(2);
+			}
+		});
 
 	}
 
@@ -357,6 +367,18 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
 	}
 
 	 */
+	public void onMode(int connectionMode){
+		//measure button clicked
+		//mode 2, 3예정
+		this.connectionMode = connectionMode;
+		ScannerNoUI scannerNoUI = new ScannerNoUI(getFilterUUID(),this,2);
+		//receiver에서 바꿔야댐
+		//connectionMode=3;
+	}
+	public void onMode4(){
+
+	}
+
 	@Override
 	protected int getDefaultDeviceName() {
 		return R.string.uart_default_name;
@@ -700,7 +722,7 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
 
 	/**
 	 * Updates the ActionBar background color depending on whether we are in edit mode or not.
-	 * 
+	 *
 	 * @param editMode
 	 *            <code>true</code> to show edit mode, <code>false</code> otherwise
 	 * @param change

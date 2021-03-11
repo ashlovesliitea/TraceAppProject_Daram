@@ -282,7 +282,12 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 
 		LocalBroadcastManager.getInstance(this).registerReceiver(commonBroadcastReceiver, makeIntentFilter());
 	}
+	@Override
+	protected void onPause() {
+		super.onPause();
+		Log.i(TAG,"main Activity is paused due to fragment");
 
+	}
 	@Override
 	protected void onStart() {
 		super.onStart();
@@ -485,7 +490,6 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 			showBLEDialog();//권한 요청
 		}
 	}
-
 
 
 	public void onConnectClickedOld(final View view) {

@@ -240,7 +240,6 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
 
             return;
         }
-        appendToArr(data.getBytes());
         //없앨 예정
         if(data.length() != 237){ //마지막거는 똑같이 mtu 237 받을 거 같은데?
             Log.i("UARTService","wrong length data "+ data.length());
@@ -251,15 +250,33 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
                 (char)data.charAt(1) == (char) Cons.MODE_MEASURE_RIGHT;
         Log.i("UARTService","how many rcvd = "+howManyRcv+data+"\n is measure?"+isMeasure);
         Log.i("UARTService","difference in int : "+(int)data.charAt(1)+" , "+ (int) Cons.MODE_MEASURE_LEFT+ ","+ (int) Cons.MODE_MEASURE_RIGHT);
-        if(isMeasure){
-            long cur =System.currentTimeMillis();
-            Log.i("UARTService","send subsquent measure command : "+cur+" , "+(cur- beforetime));
-            if(cur-beforetime<Cons.MIN_MEASURE_SEC*1000) {
-                //uartmanager의 write 함수 써야댐
+        if(isMeasure&&idx<900){
+            //테스트를 위해 한계 걸어둠
+            //첫번째 세트 delimeter
+            if(data.charAt(10) !=0xff) {
+                //다시 보내기
                 manager.send("" + data.charAt(1));
+
+                appendToArr(data.getBytes());
+                /*
+                long cur = System.currentTimeMillis();
+                Log.i("UARTService", "send subsquent measure command : " + cur + " , " + (cur - beforetime));
+                if (cur - beforetime < Cons.MIN_MEASURE_SEC * 1000) {
+                    //uartmanager의 write 함수 써야댐
+                    manager.send("" + data.charAt(1));
+                } else { //if not end write subsequently
+                    manager.send("" + (char) Cons.MODE_STOP);
+                }
+
+                 */
             }
-            else{ //if not end write subsequently
-                manager.send(""+ (char) Cons.MODE_STOP);
+            else{
+                manager.send("" + (char) Cons.MODE_STOP);
+                //한쪽발에 대해서 measure 종료됐다는 broadcast
+                final Intent broadcast2 = new Intent(BleProfileService.BROADCAST_CONNECTION_STATE);
+                //broadcast2.setAction(BleProfileService.BROADCAST_CONNECTION_STATE);
+                broadcast2.putExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.CUSTOM_LEFT_DATA_DONE);
+                LocalBroadcastManager.getInstance(this).sendBroadcast(broadcast2);
             }
         }
         /*

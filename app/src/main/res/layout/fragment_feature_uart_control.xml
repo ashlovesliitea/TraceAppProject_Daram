@@ -82,7 +82,11 @@
 		android:layout_width="150dp"
 		android:layout_height="wrap_content"
 		android:layout_above="@+id/spacer"
-		android:layout_centerHorizontal="true"
+		android:layout_alignParentStart="true"
+		android:layout_alignParentEnd="true"
+		android:layout_marginStart="5dp"
+		android:layout_marginEnd="256dp"
+		android:layout_marginBottom="-5dp"
 		android:onClick="onConnectClicked"
 		android:text="@string/action_connect" />
 
@@ -91,5 +95,19 @@
 		android:layout_width="wrap_content"
 		android:layout_height="@dimen/activity_vertical_margin_bottom"
 		android:layout_alignParentBottom="true"/>
+
+	<Button
+		android:id="@+id/measure_button"
+		android:layout_width="170dp"
+		android:layout_height="wrap_content"
+		android:layout_alignParentStart="true"
+		android:layout_alignParentTop="true"
+		android:layout_alignParentEnd="true"
+		android:layout_alignParentBottom="true"
+		android:layout_marginStart="229dp"
+		android:layout_marginTop="650dp"
+		android:layout_marginEnd="12dp"
+		android:layout_marginBottom="33dp"
+		android:text="m 커맨드로 쭉 받기" />
 
 </RelativeLayout>

@@ -102,14 +102,14 @@ public class ScannerNoUI {
         @Override
         public void onScanResult(final int callbackType, @NonNull final ScanResult result) {
             // do nothing
-            Log.i("ScannerFragment","onScanResult called : "+ result.getDevice().getAddress());
+            Log.i(TAG,"onScanResult called : "+ result.getDevice().getAddress());
             //여기서 나중에 sacn result 중에 내가 원하는 기기 있는지 체크 후 자동연결
             //result에는 하나의 bluetooth device밖에 없음
             BluetoothDevice device = result.getDevice();
 
             if(device.getName()!=null&&device.getName().startsWith("HD")){
                 //do connection work by mother
-                Log.i("ScannerFragment","HD device : " + device.getName());
+                Log.i(TAG,"HD device : " + device.getName());
 
 
                 mother.onDeviceSelected(device, device.getName());
@@ -127,9 +127,9 @@ public class ScannerNoUI {
         public void onBatchScanResults(@NonNull final List<ScanResult> results) {
             //이게 실질적으로 호출됨
             //adapter.update(results);
-            Log.i("ScannerFragment","onBatchScanResult called");
+            Log.i(TAG,"onBatchScanResult called");
 
-            Log.i("DeviceListAdapter","update called");
+            Log.i(TAG,"update called");
             for (final ScanResult result : results) {
                 //final ExtendedBluetoothDevice device = findDevice(result);
                 final ExtendedBluetoothDevice device = new ExtendedBluetoothDevice(result);

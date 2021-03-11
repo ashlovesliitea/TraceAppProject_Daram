@@ -161,16 +161,18 @@ public class UARTConnector {
 					//이걸 받았을 때 왼발이 끊어진 상태가 아닐수도 잇슴
 					//mother.makeScanNConnect();
 					Log.i(TAG,"receiver CUSTOM_LEFT_INIT_DONE received");
+					mother.onMode(1);
 					onStop();
-
-
 					break;
 				case BleProfileService.CUSTOM_RIGHT_INIT_DONE:
-					
-					break; 
-					case BleProfileService.CUSTOM_LEFT_DATA_DONE:
+					//엄마가 걷기 페이지로 옮겨가야댐
+					break;
+				case BleProfileService.CUSTOM_LEFT_DATA_DONE:
+					//오른발 연결해서 measure 해야댐
+					mother.onMode(3);
 
-						break;
+					break;
+
 				default:
 					// there should be no other actions
 					break;
@@ -265,7 +267,7 @@ public class UARTConnector {
 				//sendDataInitially(Cons.MODE_RUN);
 				break;
 			case 2:
-				//sendDataInitially(Cons.MODE_MEASURE_LEFT);
+				sendDataInitially(Cons.MODE_MEASURE_LEFT);
 				break;
 			case 3:
 				//sendDataInitially(Cons.MODE_MEASURE_RIGHT);
