@@ -1,0 +1,1 @@
+[{"outputType":{"type":"MERGED_MANIFESTS"},"apkData":{"type":"MAIN","splits":[],"versionCode":292907701,"versionName":"2.8.4","enabled":true,"outputFile":"wear-debug.apk","fullName":"debug","baseName":"debug","dirName":""},"path":"AndroidManifest.xml","properties":{"packageId":"no.nordicsemi.android.nrftoolbox","split":"","minSdkVersion":"23"}}]

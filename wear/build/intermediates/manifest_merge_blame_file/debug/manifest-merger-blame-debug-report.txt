@@ -1,0 +1,199 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<!--
+3  ~ Copyright (c) 2015, Nordic Semiconductor
+4  ~ All rights reserved.
+5  ~
+6  ~ Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+7  ~
+8  ~ 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+9  ~
+10  ~ 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the
+11  ~ documentation and/or other materials provided with the distribution.
+12  ~
+13  ~ 3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this
+14  ~ software without specific prior written permission.
+15  ~
+16  ~ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+17  ~ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+18  ~ HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+19  ~ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+20  ~ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
+21  ~ USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+22-->
+23<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+24    package="no.nordicsemi.android.nrftoolbox"
+25    android:versionCode="292907701"
+26    android:versionName="2.8.4" >
+27
+28    <uses-sdk
+29        android:minSdkVersion="23"
+29-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml
+30        android:targetSdkVersion="29" />
+30-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml
+31
+32    <uses-feature android:name="android.hardware.type.watch" />
+32-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:28:2-60
+32-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:28:16-58
+33
+34    <uses-permission android:name="android.permission.BLUETOOTH" />
+34-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:30:2-64
+34-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:30:19-62
+35    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+35-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:31:2-70
+35-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:31:19-68
+36    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+36-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:32:2-76
+36-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:32:19-73
+37
+38    <application
+38-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:34:2-81:16
+39        android:allowBackup="true"
+39-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:35:3-29
+40        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+40-->[androidx.core:core:1.3.0-alpha02] /Users/junhyeokpark/.gradle/caches/transforms-2/files-2.1/e371563808274fe82f127cdd24e803ce/core-1.3.0-alpha02/AndroidManifest.xml:24:18-86
+41        android:debuggable="true"
+42        android:extractNativeLibs="false"
+43        android:fullBackupContent="true"
+43-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:36:3-35
+44        android:icon="@mipmap/ic_launcher"
+44-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:37:3-37
+45        android:label="@string/app_name"
+45-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:39:3-35
+46        android:roundIcon="@mipmap/ic_launcher_round"
+46-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:38:3-48
+47        android:theme="@android:style/Theme.DeviceDefault.Light" >
+47-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:40:3-59
+48        <meta-data
+48-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:43:3-45:28
+49            android:name="com.google.android.wearable.standalone"
+49-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:44:4-57
+50            android:value="false" />
+50-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:45:4-25
+51        <meta-data
+51-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:46:3-48:60
+52            android:name="com.google.android.gms.version"
+52-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:47:4-49
+53            android:value="@integer/google_play_services_version" />
+53-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:48:4-57
+54
+55        <activity
+55-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:50:3-59:14
+56            android:name="no.nordicsemi.android.nrftoolbox.ScannerActivity"
+56-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:51:4-35
+57            android:label="@string/app_name"
+57-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:52:4-36
+58            android:launchMode="singleTop" >
+58-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:53:4-34
+59            <intent-filter>
+59-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:54:4-58:20
+60                <action android:name="android.intent.action.MAIN" />
+60-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:55:5-56
+60-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:55:13-54
+61
+62                <category android:name="android.intent.category.LAUNCHER" />
+62-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:57:5-64
+62-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:57:15-62
+63            </intent-filter>
+64        </activity>
+65
+66        <service android:name="no.nordicsemi.android.nrftoolbox.ble.BleProfileService" />
+66-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:60:3-52
+66-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:60:12-49
+67
+68        <activity
+68-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:61:3-62:36
+69            android:name="no.nordicsemi.android.nrftoolbox.uart.UARTConfigurationsActivity"
+69-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:61:13-60
+70            android:launchMode="singleTop" />
+70-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:62:4-34
+71        <activity
+71-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:63:3-64:36
+72            android:name="no.nordicsemi.android.nrftoolbox.uart.UARTCommandsActivity"
+72-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:63:13-54
+73            android:launchMode="singleTop" />
+73-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:64:4-34
+74
+75        <!-- This receiver needs to be exported as it listens for notification broadcasts. -->
+76        <receiver android:name="no.nordicsemi.android.nrftoolbox.wearable.ActionReceiver" >
+76-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:67:3-71:14
+76-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:67:13-52
+77            <intent-filter>
+77-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:68:4-70:20
+78                <action android:name="no.nordicsemi.android.nrftoolbox.ACTION_DISCONNECT" />
+78-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:69:5-81
+78-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:69:13-78
+79            </intent-filter>
+80        </receiver>
+81
+82        <!-- Service for handling Android Wear synchronization events. -->
+83        <service android:name="no.nordicsemi.android.nrftoolbox.wearable.MainWearableListenerService" >
+83-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:74:3-80:13
+83-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:74:12-64
+84            <intent-filter>
+84-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:75:4-79:20
+85                <action android:name="com.google.android.gms.wearable.DATA_CHANGED" />
+85-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:76:5-75
+85-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:76:13-72
+86                <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
+86-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:77:5-79
+86-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:77:13-76
+87
+88                <data
+88-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:78:5-85
+89                    android:host="*"
+89-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:78:33-49
+90                    android:pathPrefix="/nrftoolbox"
+90-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:78:50-82
+91                    android:scheme="wear" />
+91-->/Users/junhyeokpark/Desktop/short3/Android-nRF-Toolbox/wear/src/main/AndroidManifest.xml:78:11-32
+92            </intent-filter>
+93        </service>
+94
+95        <uses-library
+95-->[com.google.android.support:wearable:2.7.0] /Users/junhyeokpark/.gradle/caches/transforms-2/files-2.1/1bd1fd4f0ad0af824682a51eef75e0cf/jetified-wearable-2.7.0/AndroidManifest.xml:10:9-12:40
+96            android:name="com.google.android.wearable"
+96-->[com.google.android.support:wearable:2.7.0] /Users/junhyeokpark/.gradle/caches/transforms-2/files-2.1/1bd1fd4f0ad0af824682a51eef75e0cf/jetified-wearable-2.7.0/AndroidManifest.xml:11:13-55
+97            android:required="false" />
+97-->[com.google.android.support:wearable:2.7.0] /Users/junhyeokpark/.gradle/caches/transforms-2/files-2.1/1bd1fd4f0ad0af824682a51eef75e0cf/jetified-wearable-2.7.0/AndroidManifest.xml:12:13-37
+98        <!--
+99		Service used to scan in background to emulate scanning with
+100		PendingIntent on Android 4.3 - 7.x. Service will scan in background with given
+101		settings and filters.
+102        -->
+103        <service
+103-->[no.nordicsemi.android.support.v18:scanner:1.4.3] /Users/junhyeokpark/.gradle/caches/transforms-2/files-2.1/1c23d8daeea364274a2c640005fa4d5c/jetified-scanner-1.4.3/AndroidManifest.xml:31:9-33:40
+104            android:name="no.nordicsemi.android.support.v18.scanner.ScannerService"
+104-->[no.nordicsemi.android.support.v18:scanner:1.4.3] /Users/junhyeokpark/.gradle/caches/transforms-2/files-2.1/1c23d8daeea364274a2c640005fa4d5c/jetified-scanner-1.4.3/AndroidManifest.xml:32:13-84
+105            android:exported="false" />
+105-->[no.nordicsemi.android.support.v18:scanner:1.4.3] /Users/junhyeokpark/.gradle/caches/transforms-2/files-2.1/1c23d8daeea364274a2c640005fa4d5c/jetified-scanner-1.4.3/AndroidManifest.xml:33:13-37
+106        <!--
+107		The receiver used to scan with PendingIntent on Android 8+.
+108		It will translate results from android.bluetooth.le package to
+109		no.nordicsemi.android.support.v18, apply filters or perform batching,
+110		depending on the settings.
+111        -->
+112        <receiver
+112-->[no.nordicsemi.android.support.v18:scanner:1.4.3] /Users/junhyeokpark/.gradle/caches/transforms-2/files-2.1/1c23d8daeea364274a2c640005fa4d5c/jetified-scanner-1.4.3/AndroidManifest.xml:41:9-48:20
+113            android:name="no.nordicsemi.android.support.v18.scanner.PendingIntentReceiver"
+113-->[no.nordicsemi.android.support.v18:scanner:1.4.3] /Users/junhyeokpark/.gradle/caches/transforms-2/files-2.1/1c23d8daeea364274a2c640005fa4d5c/jetified-scanner-1.4.3/AndroidManifest.xml:42:13-91
+114            android:exported="true" >
+114-->[no.nordicsemi.android.support.v18:scanner:1.4.3] /Users/junhyeokpark/.gradle/caches/transforms-2/files-2.1/1c23d8daeea364274a2c640005fa4d5c/jetified-scanner-1.4.3/AndroidManifest.xml:43:13-36
+115            <intent-filter>
+115-->[no.nordicsemi.android.support.v18:scanner:1.4.3] /Users/junhyeokpark/.gradle/caches/transforms-2/files-2.1/1c23d8daeea364274a2c640005fa4d5c/jetified-scanner-1.4.3/AndroidManifest.xml:45:13-47:29
+116                <action android:name="no.nordicsemi.android.support.v18.ACTION_FOUND" />
+116-->[no.nordicsemi.android.support.v18:scanner:1.4.3] /Users/junhyeokpark/.gradle/caches/transforms-2/files-2.1/1c23d8daeea364274a2c640005fa4d5c/jetified-scanner-1.4.3/AndroidManifest.xml:46:17-89
+116-->[no.nordicsemi.android.support.v18:scanner:1.4.3] /Users/junhyeokpark/.gradle/caches/transforms-2/files-2.1/1c23d8daeea364274a2c640005fa4d5c/jetified-scanner-1.4.3/AndroidManifest.xml:46:25-86
+117            </intent-filter>
+118        </receiver>
+119
+120        <activity
+120-->[com.google.android.gms:play-services-base:10.2.0] /Users/junhyeokpark/.gradle/caches/transforms-2/files-2.1/8c8257c9e21913031a034af4ca9174a2/jetified-play-services-base-10.2.0/AndroidManifest.xml:19:9-172
+121            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+121-->[com.google.android.gms:play-services-base:10.2.0] /Users/junhyeokpark/.gradle/caches/transforms-2/files-2.1/8c8257c9e21913031a034af4ca9174a2/jetified-play-services-base-10.2.0/AndroidManifest.xml:19:19-85
+122            android:exported="false"
+122-->[com.google.android.gms:play-services-base:10.2.0] /Users/junhyeokpark/.gradle/caches/transforms-2/files-2.1/8c8257c9e21913031a034af4ca9174a2/jetified-play-services-base-10.2.0/AndroidManifest.xml:19:146-170
+123            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+123-->[com.google.android.gms:play-services-base:10.2.0] /Users/junhyeokpark/.gradle/caches/transforms-2/files-2.1/8c8257c9e21913031a034af4ca9174a2/jetified-play-services-base-10.2.0/AndroidManifest.xml:19:86-145
+124    </application>
+125
+126</manifest>

@@ -1,0 +1,10 @@
+no.nordicsemi.android.nrftoolbox.common
+string bonded
+string bonding
+string bonding_failed
+string channel_connected_devices_description
+string channel_connected_devices_title
+string channel_files_description
+string channel_files_title
+string channel_proximity_warnings_description
+string channel_proximity_warnings_title
