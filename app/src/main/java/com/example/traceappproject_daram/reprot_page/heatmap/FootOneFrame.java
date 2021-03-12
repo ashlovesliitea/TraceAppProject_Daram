@@ -76,22 +76,26 @@ public class FootOneFrame {
     public void setPtIdx(int idx, double p){//assign pressure to points
         ps[idx] = p;
     }
-    public void makeMeRight(){
+    /*
+    public void makeMeRight() {
         //양발이 같은 높이이기 때문에 w만 대칭
-        for(int i = 0; i< Cons.SENSOR_NUM_FOOT; i++) {
-            ratioW[i] = (float) ratioW[i] + (float)((float)800/(double)EX_FULL_WIDTH);
+        for (int i = 0; i < Cons.SENSOR_NUM_FOOT; i++) {
+            ratioW[i] = (float) ratioW[i] + (float) ((float) 800 / (double) EX_FULL_WIDTH);
         }
 
         calcRatio();
-    public void setPtIdx(int idx, double p){//assign pressure to points
-        ps[idx] = p;
     }
+
+     */
+
     public void makeMeRight(){
         //양발이 같은 높이이기 때문에 w만 대칭
         for(int i = 0; i< Cons.SENSOR_NUM_FOOT; i++) {
             ratioW[i] = (float) ratioW[i] + (float)((float)800/(double)EX_FULL_WIDTH);
         }
     }
+
+
     //calc ratio of the picture
     public void calcRatio(){
 
