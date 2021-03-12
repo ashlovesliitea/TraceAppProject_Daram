@@ -79,7 +79,7 @@
 	<com.google.android.material.button.MaterialButton
 		android:id="@+id/action_connect"
 		style="@style/Widget.Connect"
-		android:layout_width="150dp"
+		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_above="@+id/spacer"
 		android:layout_alignParentStart="true"
@@ -98,7 +98,7 @@
 
 	<Button
 		android:id="@+id/measure_button"
-		android:layout_width="170dp"
+		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_alignParentStart="true"
 		android:layout_alignParentTop="true"

@@ -253,7 +253,7 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
         if(isMeasure&&idx<900){
             //테스트를 위해 한계 걸어둠
             //첫번째 세트 delimeter
-            if(data.charAt(10) !=0xff) {
+            if(data.length() ==4) {
                 //다시 보내기
                 manager.send("" + data.charAt(1));
 

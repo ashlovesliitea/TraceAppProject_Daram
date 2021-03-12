@@ -38,6 +38,7 @@ public class Result {
     }
     //data에다가 모드값을 포함한 모든 것들을 싹다 넣는다
     //가정은 그냥 300언저리에서 시간이 많이 지났음에도 시간적으로 같은 순간의 데이터를 양 발이 수집했을 것이다
+    //시간적으로 일치하지 않을 가능성 있음
     public FeetMultiFrames parseRaw(){//validation을 하면서 유효한 frame 만건져서 띄우기
         FeetMultiFrames frames = new FeetMultiFrames();
         FootOneFrame left=null,right=null;
