@@ -40,6 +40,7 @@ android {
 dependencies {
     implementation project(':common')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(path: ':toolbox')
     wearApp project(path: ':wear')
     implementation 'com.android.support:multidex:1.0.3'
 
