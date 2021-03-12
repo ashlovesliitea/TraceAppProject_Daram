@@ -166,6 +166,7 @@ public class UARTConnector {
 					break;
 				case BleProfileService.CUSTOM_RIGHT_INIT_DONE:
 					//엄마가 걷기 페이지로 옮겨가야댐
+
 					break;
 				case BleProfileService.CUSTOM_LEFT_DATA_DONE:
 					//오른발 연결해서 measure 해야댐

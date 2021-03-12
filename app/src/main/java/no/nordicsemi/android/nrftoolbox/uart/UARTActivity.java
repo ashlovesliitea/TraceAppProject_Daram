@@ -185,6 +185,7 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
 	@Override
 	protected void onServiceUnbound() {
 		serviceBinder = null;
+		Log.i(TAG,"onServiceUnbound");
 	}
 
 	@Override
@@ -202,7 +203,6 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
 		result = new Result(new LoginInfo("mijin","mijin"));
 
 	}
-
 	/**
 	 * Method called when Google API Client connects to Wearable.API.
 	 */
@@ -288,12 +288,15 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
 
 	@Override
 	protected void onViewCreated(final Bundle savedInstanceState) {
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
-
+		//getSupportActionBar().setDisplayShowTitleEnabled(false);
+		this.configurationSpinner = findViewById(R.id.toolbar_spinner);
+		/*
 		final ClosableSpinner configurationSpinner = this.configurationSpinner = findViewById(R.id.toolbar_spinner);
 		configurationSpinner.setOnItemSelectedListener(this);
 		configurationSpinner.setAdapter(configurationsAdapter);
 		configurationSpinner.setSelection(configurationsAdapter.getItemPosition(preferences.getLong(PREFS_CONFIGURATION, 0)));
+
+		 */
 	}
 
 	@Override

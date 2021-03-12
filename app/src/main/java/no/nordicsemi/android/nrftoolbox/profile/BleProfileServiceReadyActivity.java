@@ -410,7 +410,7 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 	 */
 	protected final void setUpView() {
 		// set GUI
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		//getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		connectButton = findViewById(R.id.action_connect);
 		deviceNameView = findViewById(R.id.device_name);
 	}

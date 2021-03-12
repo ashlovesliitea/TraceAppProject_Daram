@@ -35,10 +35,13 @@ public class AnalyzeActivity extends AppCompatActivity {
         //종료!!
         finish();
         //WalkingActivity 도 종료
+        /*
         ScanningActivity scanningActivity = (ScanningActivity)ScanningActivity.ScanningActivity;
         scanningActivity.finish();
        WalkingActivity walkingActivity = (WalkingActivity)WalkingActivity.WalkingActivity;
         walkingActivity.finish();
+
+         */
     }
     @Override
     public void onBackPressed() {
