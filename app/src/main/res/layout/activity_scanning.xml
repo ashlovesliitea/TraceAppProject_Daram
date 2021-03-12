@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:textAlignment="center"
-    tools:context="com.example.traceappproject_daram.measure_page.WalkingActivity">
-
+    tools:context="com.example.traceappproject_daram.measure_page.ScanningActivity">
     <!--상단가이드라인 1-->
     <LinearLayout
         android:layout_width="0dp"
@@ -20,8 +18,8 @@
         android:id="@+id/textView14"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="걸어주세요"
-        android:textSize="40sp"
+        android:text="기기와 연결중입니다"
+        android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="#F9F9F9"
         android:gravity="center"
@@ -30,18 +28,6 @@
         app:layout_constraintRight_toRightOf="@id/guidelineright"
         app:layout_constraintTop_toTopOf="@id/guidelinetop1" />
 
-
-    <Button
-        android:id="@+id/stopmeasure"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:text="측정 종료"
-        android:textColor="#F9F9F9"
-        android:textSize="18sp"
-        app:backgroundTint="#6A6B8C"
-        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
-        app:layout_constraintRight_toRightOf="@id/guidelineright"
-        app:layout_constraintTop_toBottomOf="@id/guidelinebottom" />
 
 
     <com.airbnb.lottie.LottieAnimationView
@@ -53,7 +39,7 @@
         app:layout_constraintBottom_toTopOf="@id/guidelinebottom"
         app:layout_constraintTop_toTopOf="@id/guidelinetop2"
         app:lottie_autoPlay="true"
-        app:lottie_fileName="walk.json"
+        app:lottie_fileName="bluetooth.json"
         app:lottie_loop="true" />
 
     <!--왼쪽가이드라인-->

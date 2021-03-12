@@ -1,9 +1,10 @@
-package com.example.traceappproject_daram;
+package com.example.traceappproject_daram.measure_page;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.traceappproject_daram.measure_page.WalkingActivity;
 import com.example.traceappproject_daram.reprot_page.MovingFeetHeatmapActivity;
 
 import java.util.Timer;
@@ -34,6 +35,8 @@ public class AnalyzeActivity extends AppCompatActivity {
         //종료!!
         finish();
         //WalkingActivity 도 종료
+        ScanningActivity scanningActivity = (ScanningActivity)ScanningActivity.ScanningActivity;
+        scanningActivity.finish();
        WalkingActivity walkingActivity = (WalkingActivity)WalkingActivity.WalkingActivity;
         walkingActivity.finish();
     }
