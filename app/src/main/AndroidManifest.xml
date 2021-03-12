@@ -58,8 +58,9 @@
 		<activity android:name="com.example.traceappproject_daram.x_2Activity" />
 		<activity android:name="com.example.traceappproject_daram.x9.RecyclerViewActivity" />
 		<activity android:name="com.example.traceappproject_daram.x_15Activity" />
-		<activity android:name="com.example.traceappproject_daram.AnalyzeActivity"></activity>
-		<activity android:name="com.example.traceappproject_daram.WalkingActivity" />
+		<activity android:name="com.example.traceappproject_daram.measure_page.AnalyzeActivity"></activity>
+		<activity android:name="com.example.traceappproject_daram.measure_page.WalkingActivity" />
+		<activity android:name="com.example.traceappproject_daram.measure_page.ScanningActivity"></activity>
 		<activity android:name="com.example.traceappproject_daram.TestActivity" />
 		<activity android:name="com.example.traceappproject_daram.reprot_page.MovingFeetHeatmapActivity">
 
