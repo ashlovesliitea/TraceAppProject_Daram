@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.traceappproject_daram.WalkingActivity;
+import com.example.traceappproject_daram.measure_page.ScanningActivity;
 
 import java.util.ArrayList;
 
@@ -43,7 +43,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
         measureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent measureintent = new Intent(RecyclerViewActivity.this, WalkingActivity.class);
+                Intent measureintent = new Intent(RecyclerViewActivity.this, ScanningActivity.class);
                 startActivity(measureintent);
             }
         });

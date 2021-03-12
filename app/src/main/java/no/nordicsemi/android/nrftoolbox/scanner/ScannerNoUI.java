@@ -34,7 +34,7 @@ import no.nordicsemi.android.support.v18.scanner.ScanFilter;
 import no.nordicsemi.android.support.v18.scanner.ScanResult;
 import no.nordicsemi.android.support.v18.scanner.ScanSettings;
 
-public class ScannerNoUI {
+public class ScannerNoUI{
     private final static String TAG = "ScannerNoUI";
 
     private final static String PARAM_UUID = "param_uuid";
