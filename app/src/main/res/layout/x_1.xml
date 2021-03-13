@@ -41,7 +41,7 @@
     </androidx.constraintlayout.widget.Guideline>
     <!--왼쪽가이드라인-->
     <androidx.constraintlayout.widget.Guideline
-        app:layout_constraintGuide_percent="0.1"
+        app:layout_constraintGuide_percent="0.2"
         android:id="@+id/guidelineleft"
         android:orientation="vertical"
         android:layout_width="wrap_content"
@@ -49,7 +49,7 @@
     </androidx.constraintlayout.widget.Guideline>
     <!--오른쪽가이드라인-->
     <androidx.constraintlayout.widget.Guideline
-        app:layout_constraintGuide_percent="0.9"
+        app:layout_constraintGuide_percent="0.8"
         android:id="@+id/guidelineright"
         android:orientation="vertical"
         android:layout_width="wrap_content"
@@ -59,7 +59,7 @@
     <Button
         android:id="@+id/button_login"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
         android:background="@drawable/button_round"
         android:backgroundTint="#6A6B8C"
@@ -76,7 +76,7 @@
     <Button
         android:id="@+id/button_sign"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:background="@drawable/button_round_sign_up"
         android:backgroundTint="#F9F9F9"
         android:text="회원가입"

@@ -62,6 +62,23 @@
         android:layout_height="wrap_content">
     </androidx.constraintlayout.widget.Guideline>
 
+    <!--왼쪽가이드라인-->
+    <androidx.constraintlayout.widget.Guideline
+        app:layout_constraintGuide_percent="0.2"
+        android:id="@+id/guidelineleft2"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </androidx.constraintlayout.widget.Guideline>
+    <!--오른쪽가이드라인-->
+    <androidx.constraintlayout.widget.Guideline
+        app:layout_constraintGuide_percent="0.8"
+        android:id="@+id/guidelineright2"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </androidx.constraintlayout.widget.Guideline>
+
     <EditText
         android:id="@+id/login_id"
         android:layout_width="0dp"
@@ -91,15 +108,15 @@
     <Button
         android:id="@+id/button2"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:background="@drawable/button_round"
         android:backgroundTint="#6A6B8C"
         android:text="로그인"
         android:textColor="#F9F9F9"
         android:textSize="18sp"
         app:backgroundTint="#6A6B8C"
-        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
-        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintLeft_toLeftOf="@id/guidelineleft2"
+        app:layout_constraintRight_toRightOf="@id/guidelineright2"
         app:layout_constraintTop_toBottomOf="@id/guidelinemiddle"
         app:layout_constraintBottom_toTopOf="@id/button3"/>
 
@@ -107,7 +124,7 @@
     <Button
         android:id="@+id/button3"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:background="@drawable/button_round_sign_up"
         android:backgroundTint="#6A6B8C"
         android:text="회원가입"
@@ -115,8 +132,8 @@
         android:textSize="18sp"
         app:backgroundTint="#F9F9F9"
         app:layout_constraintTop_toBottomOf="@id/button2"
-        app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
-        app:layout_constraintRight_toRightOf="@id/guidelineright"
+        app:layout_constraintLeft_toLeftOf="@id/guidelineleft2"
+        app:layout_constraintRight_toRightOf="@id/guidelineright2"
         app:layout_constraintBottom_toTopOf="@id/guidelinebottom"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

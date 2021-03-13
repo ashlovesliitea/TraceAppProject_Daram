@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 
@@ -32,6 +33,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         private final TextView CardMeasure;
         private final AppCompatButton button_send;
         private final AppCompatButton button_delete;
+
 
         public ViewHolder(View view) {
             super(view);
@@ -82,7 +84,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     //position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시 (view의 내용을 localDataSet으로 교환)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
+
       ItemForm data=localdatalist.get(position);
+
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         viewHolder.CardDate.setText(data.getDate());
