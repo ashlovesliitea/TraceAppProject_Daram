@@ -62,7 +62,7 @@
 		<activity android:name="com.example.traceappproject_daram.x_15Activity" />
 		<activity android:name="com.example.traceappproject_daram.measure_page.AnalyzeActivity"></activity>
 		<activity android:name="com.example.traceappproject_daram.measure_page.WalkingActivity" />
-		<activity android:name="com.example.traceappproject_daram.measure_page.ScanningActivity"></activity>
+		<activity android:name="com.example.traceappproject_daram.measure_page.ScanningActivityPlane"></activity>
 		<activity android:name="com.example.traceappproject_daram.measure_page.ScanningActivityExtends"></activity>
 		<activity android:name="com.example.traceappproject_daram.measure_page.ScanningActivityModified"></activity>
 		<activity android:name="com.example.traceappproject_daram.TestActivity" />

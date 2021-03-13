@@ -161,8 +161,9 @@ public class UARTConnector {
 					//이걸 받았을 때 왼발이 끊어진 상태가 아닐수도 잇슴
 					//mother.makeScanNConnect();
 					Log.i(TAG,"receiver CUSTOM_LEFT_INIT_DONE received");
-					mother.onMode(1);
 					onStop();
+					mother.onMode(1);
+
 					break;
 				case BleProfileService.CUSTOM_RIGHT_INIT_DONE:
 					//엄마가 걷기 페이지로 옮겨가야댐

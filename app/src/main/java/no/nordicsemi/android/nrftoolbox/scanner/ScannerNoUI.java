@@ -137,9 +137,12 @@ public class ScannerNoUI {
                 device.rssi = result.getRssi();
 
                 Log.i("DeviceListAdapter","linear search : "+(result.getDevice().getName()==null ? "null" : device.name));
+                if(device.name!=null&&device.name.startsWith("HD")){
+                    Log.i(TAG,"found HD device , "+device.name+" , "+device.device.getAddress());
+                }
                 if(device.name!=null&&device.name.equals(DEVICE_NAMES[connectionMode])){
                     //HD면 바로 연결
-                    Log.i("DeviceListAdapter","found HD device , connectionMode , name"+connectionMode+device.name);
+                    Log.i("DeviceListAdapter","found correct device , connectionMode , name"+connectionMode+device.name);
                     // 클릭한 효과주기
                     mother.onDeviceSelected(device.device,device.name);
                     break;

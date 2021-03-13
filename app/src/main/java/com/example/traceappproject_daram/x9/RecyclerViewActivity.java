@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.traceappproject_daram.measure_page.ScanningActivity;
 import com.example.traceappproject_daram.measure_page.ScanningActivityExtends;
 
 import java.util.ArrayList;

@@ -545,10 +545,12 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 			leftDevice = device;
 			leftName = name;
 		}
+		/*
 		else{
 			rightDevice = device;
 			rightName= name;
-		}
+		}*
+		 */
 		// The device may not be in the range but the service will try to connect to it if it reach it
 		Log.d(TAG, "Creating service...");
 		final Intent service = new Intent(this, getServiceClass());
@@ -570,7 +572,8 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 			mapADevice(device,name,true);
 		}
 		else{
-			mapADevice(device,name,false);
+			//Log.i(TAG,"leftDevice not null");
+			mapADevice(device,name,true);
 		}
 
 	}

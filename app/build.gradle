@@ -40,6 +40,7 @@ android {
 dependencies {
     implementation project(':common')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
     wearApp project(path: ':wear')
     implementation 'com.android.support:multidex:1.0.3'
 

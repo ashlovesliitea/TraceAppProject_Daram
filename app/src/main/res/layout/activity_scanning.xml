@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.traceappproject_daram.measure_page.ScanningActivity">
+    tools:context="com.example.traceappproject_daram.measure_page.ScanningActivityPlane">
     <!--상단가이드라인 1-->
     <LinearLayout
         android:layout_width="0dp"

@@ -49,7 +49,7 @@ public class ScanningActivityExtends extends UARTActivity {
                 nextActivity();
                 finish();
             }
-        },5000);
+        },20000);
 
         this.onMode(0);
         //블루투스 기능 숨기기
