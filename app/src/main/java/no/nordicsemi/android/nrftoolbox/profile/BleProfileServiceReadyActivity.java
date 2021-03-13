@@ -91,7 +91,7 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 	private TextView deviceNameView;
 	private Button connectButton;
 
-	private ILogSession logSession;
+	//private ILogSession logSession;
 	//2개의 device 두기 가능
 
 	private BluetoothDevice leftDevice = null;
@@ -215,8 +215,8 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 		public void onServiceConnected(final ComponentName name, final IBinder service) {
 			final E bleService = BleProfileServiceReadyActivity.this.service = (E) service;
 			leftDevice = bleService.getBluetoothDevice();
-			logSession = bleService.getLogSession();
-			Logger.d(logSession, "Activity bound to the service");
+			//logSession = bleService.getLogSession();
+			Log.d(TAG, "Activity bound to the service");
 			onServiceBound(bleService);
 
 			// Update UI
@@ -240,14 +240,14 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 			// not when it stops itself or is stopped by the activity.
 			// It will be called only when there is critically low memory, in practice never
 			// when the activity is in foreground.
-			Logger.d(logSession, "Activity disconnected from the service");
+			Log.d(TAG, "Activity disconnected from the service");
 			deviceNameView.setText(getDefaultDeviceName());
 			connectButton.setText(R.string.action_connect);
 
 			service = null;
 			leftName = null;
 			leftDevice = null;
-			logSession = null;
+			//logSession = null;
 			onServiceUnbound();
 		}
 	};
@@ -264,7 +264,7 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 		// Restore the old log session
 		if (savedInstanceState != null) {
 			final Uri logUri = savedInstanceState.getParcelable(LOG_URI);
-			logSession = Logger.openSession(getApplicationContext(), logUri);
+			//logSession = Logger.openSession(getApplicationContext(), logUri);
 		}
 
 		// In onInitialize method a final class may register local broadcast receivers that will listen for events from the service
@@ -323,11 +323,11 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 			unbindService(serviceConnection);
 			service = null;
 
-			Logger.d(logSession, "Activity unbound from the service");
+			Log.d(TAG, "Activity unbound from the service");
 			onServiceUnbound();
 			leftName = null;
 			leftDevice = null;
-			logSession = null;
+			//logSession = null;
 		} catch (final IllegalArgumentException e) {
 			// do nothing, we were not connected to the sensor
 		}
@@ -420,8 +420,11 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 		super.onSaveInstanceState(outState);
 		outState.putString(SIS_DEVICE_NAME, leftName);
 		outState.putParcelable(SIS_DEVICE, leftDevice);
+		/*
 		if (logSession != null)
 			outState.putParcelable(LOG_URI, logSession.getSessionUri());
+
+		 */
 	}
 
 	@Override
@@ -526,13 +529,16 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 	}
 	//결국에 scannerfragment에서 눌렸을 때 실행됨
 	public void mapADevice(@NonNull final BluetoothDevice device, final String name, boolean isLeft){
+		Log.i(TAG,"super mapADevice(onDeviceSelected)");
 		final int titleId = getLoggerProfileTitle();
 		if (titleId > 0) {
+			/*
 			logSession = Logger.newSession(getApplicationContext(), getString(titleId), device.getAddress(), name);
 			// If nRF Logger is not installed we may want to use local logger
 			if (logSession == null && getLocalAuthorityLogger() != null) {
 				logSession = LocalLogSession.newSession(getApplicationContext(), getLocalAuthorityLogger(), device.getAddress(), name);
 			}
+			 */
 		}
 
 		if(isLeft) {
@@ -544,14 +550,16 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 			rightName= name;
 		}
 		// The device may not be in the range but the service will try to connect to it if it reach it
-		Logger.d(logSession, "Creating service...");
+		Log.d(TAG, "Creating service...");
 		final Intent service = new Intent(this, getServiceClass());
 		service.putExtra(BleProfileService.EXTRA_DEVICE_ADDRESS, device.getAddress());
 		service.putExtra(BleProfileService.EXTRA_DEVICE_NAME, name);
+		/*
 		if (logSession != null)
 			service.putExtra(BleProfileService.EXTRA_LOG_URI, logSession.getSessionUri());
+		 */
 		startService(service);
-		Logger.d(logSession, "Binding to the service...");
+		Log.d(TAG, "Binding to the service...");
 		bindService(service, serviceConnection, 0);
 
 	}
@@ -596,15 +604,15 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 		deviceNameView.setText(getDefaultDeviceName());
 
 		try {
-			Logger.d(logSession, "Unbinding from the service...");
+			Log.d(TAG, "Unbinding from the service...");
 			unbindService(serviceConnection);
 			service = null;
 
-			Logger.d(logSession, "Activity unbound from the service");
+			Log.d(TAG, "Activity unbound from the service");
 			onServiceUnbound();
 			leftName = null;
 			leftDevice = null;
-			logSession = null;
+			//logSession = null;
 		} catch (final IllegalArgumentException e) {
 			// do nothing. This should never happen but does...
 		}
@@ -741,9 +749,12 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 	 *
 	 * @return the logger session or <code>null</code>
 	 */
+	/*
 	protected ILogSession getLogSession() {
 		return logSession;
 	}
+
+	 */
 
 	private void ensureBLESupported() {
 		if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {

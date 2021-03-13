@@ -107,9 +107,9 @@ public class ScannerNoUI {
             //result에는 하나의 bluetooth device밖에 없음
             BluetoothDevice device = result.getDevice();
 
-            if(device.getName()!=null&&device.getName().startsWith("HD")){
+            if(device.getName()!=null&&device.getName().equals(DEVICE_NAMES[connectionMode])){
                 //do connection work by mother
-                Log.i(TAG,"HD device : " + device.getName());
+                Log.i(TAG,"HD device : " + device.getName()+" , connection mode : "+connectionMode);
 
 
                 mother.onDeviceSelected(device, device.getName());
