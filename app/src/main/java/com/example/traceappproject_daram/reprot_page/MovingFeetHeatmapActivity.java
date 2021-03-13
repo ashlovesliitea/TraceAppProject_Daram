@@ -167,6 +167,7 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
+                        saveBitmap(getBitmapFromView(),result.getCalendar(),i);
                     }
                     //사실 최초1회만 해야하는데... 급해서 그냥 합니다 ㅠ
                     uploadResultImgs();
