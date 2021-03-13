@@ -41,15 +41,15 @@ public class ScanningActivityExtends extends UARTActivity {
         setContentView(R.layout.activity_scanning);
 
         ScanningActivity = com.example.traceappproject_daram.measure_page.ScanningActivityExtends.this;
-
+        hideUI();
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 nextActivity();
+                finish();
             }
         },5000);
-
 
         this.onMode(0);
         //블루투스 기능 숨기기

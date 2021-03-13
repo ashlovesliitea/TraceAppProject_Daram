@@ -374,7 +374,7 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
 		//measure button clicked
 		//mode 2, 3예정
 		this.connectionMode = connectionMode;
-		ScannerNoUI scannerNoUI = new ScannerNoUI(getFilterUUID(),this,2);
+		ScannerNoUI scannerNoUI = new ScannerNoUI(getFilterUUID(),this,connectionMode);
 		//receiver에서 바꿔야댐
 		//connectionMode=3;
 	}
