@@ -55,6 +55,8 @@ import androidx.loader.content.Loader;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.traceappproject_daram.data.Result;
+import com.example.traceappproject_daram.measure_page.ScanningActivityExtends;
+import com.example.traceappproject_daram.measure_page.WalkingActivity;
 
 import no.nordicsemi.android.log.ILogSession;
 import no.nordicsemi.android.log.LogContract;
@@ -195,7 +197,7 @@ public class UARTConnector {
 							public void run() {
 								mother.onMode(1);
 							}
-						}, 10000);
+						}, 5000);
 
 					}
 					break;
@@ -206,14 +208,14 @@ public class UARTConnector {
 						Log.i(TAG, "receiver CUSTOM_RIGHT_INIT_DONE received");
 						//broad cast를 mother에게 보낸다
 						mother.disconnectCurrent();
+
 						Handler handler = new Handler();
 						handler.postDelayed(new Runnable() {
 							@Override
 							public void run() {
-								mother.nextActivity();
+								mother.nextActivity(WalkingActivity.class);
 							}
-						}, 10000);
-
+						}, 5000);
 					}
 					//엄마가 걷기 페이지로 옮겨가야댐
 					break;
@@ -238,7 +240,7 @@ public class UARTConnector {
 			uartInterface = bleService;
 
 			// and notify user if device is connected
-			if (bleService.isConnected())
+			if (bleService.isConnected()&&uartInterface!=null)
 				onDeviceConnected();
 		}
 

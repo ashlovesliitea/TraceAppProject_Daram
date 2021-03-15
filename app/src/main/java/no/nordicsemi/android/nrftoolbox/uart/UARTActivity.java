@@ -50,6 +50,8 @@ import androidx.annotation.NonNull;
 
 import com.example.traceappproject_daram.data.LoginInfo;
 
+import com.example.traceappproject_daram.measure_page.ScanningActivityExtends;
+import com.example.traceappproject_daram.measure_page.WalkingActivity;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.RequiresApi;
@@ -175,9 +177,12 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
 	protected void setDefaultUI() {
 		// empty
 	}
-	public void nextActivity(){
-		//do nothing
-	}
+	public void nextActivity(Class<?> cls){
+		this.finish();
+		Log.i(TAG,"nextActivity called ");
+		Intent intent = new Intent(this, cls);
+		startActivity(intent);
+	};
 	@Override
 	protected void onServiceBound(final UARTService.UARTBinder binder) {
 		serviceBinder = binder;

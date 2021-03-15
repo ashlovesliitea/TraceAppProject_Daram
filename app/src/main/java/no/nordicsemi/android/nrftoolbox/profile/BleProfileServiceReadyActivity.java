@@ -761,7 +761,7 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 	}
 
 	 */
-	abstract public void nextActivity();
+	//abstract public void nextActivity();
 
 	private void ensureBLESupported() {
 		if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {

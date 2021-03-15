@@ -9,6 +9,7 @@ import no.nordicsemi.android.nrftoolbox.uart.UARTActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -47,13 +48,11 @@ public class ScanningActivityExtends extends UARTActivity {
         //UARTActivity에 구현해둔 버튼 onclicklistener하면될듯
 
     }
-
+    public static String TAG = "ScanningActivityExtends";
 
 
     public void nextActivity(){
 
-        Intent intent = new Intent(ScanningActivityExtends.this, WalkingActivity.class);
-        startActivity(intent);
 
     }
 }
