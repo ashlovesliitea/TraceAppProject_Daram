@@ -22,6 +22,7 @@
 
 package no.nordicsemi.android.nrftoolbox.uart;
 
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -59,6 +60,12 @@ import no.nordicsemi.android.log.ILogSession;
 import no.nordicsemi.android.log.LogContract;
 import no.nordicsemi.android.nrftoolbox.R;
 import no.nordicsemi.android.nrftoolbox.profile.BleProfileService;
+
+import static no.nordicsemi.android.nrftoolbox.profile.BleProfileService.EXTRA_DEVICE;
+import static no.nordicsemi.android.nrftoolbox.uart.UARTService.ACTION_DISCONNECT;
+import static no.nordicsemi.android.nrftoolbox.uart.UARTService.EXTRA_SOURCE;
+import static no.nordicsemi.android.nrftoolbox.uart.UARTService.SOURCE_NOTIFICATION;
+
 //UARTLogFragment의 변형
 public class UARTConnector {
 	private static final String SIS_LOG_SCROLL_POSITION = "sis_scroll_position";
@@ -154,6 +161,7 @@ public class UARTConnector {
 					//모드에 맞게 파싱할 수 있어야댐
 					break;
 				case BleProfileService.CUSTOM_READY:
+
 					sendData(Cons.MODE_MEASURE_LEFT);
 					break;
 				case BleProfileService.CUSTOM_LEFT_INIT_DONE:
@@ -161,7 +169,22 @@ public class UARTConnector {
 					//이걸 받았을 때 왼발이 끊어진 상태가 아닐수도 잇슴
 					//mother.makeScanNConnect();
 					Log.i(TAG,"receiver CUSTOM_LEFT_INIT_DONE received");
-					onStop();
+					//broad cast를 mother에게 보낸다
+					final Intent disconnect = new Intent(ACTION_DISCONNECT);
+					intent.setAction("com.example.broadcast.MY_NOTIFICATION");
+					intent.putExtra("data","Notice me senpai!");
+					disconnect.putExtra(EXTRA_DEVICE, mother.getDevice());
+					LocalBroadcastManager.getInstance(mother).sendBroadcast(intent);
+					///mother.onDeviceDisconnected(mother.getDevice());
+					//onStop();
+
+					try {
+						Thread.sleep(15000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+
+
 					mother.onMode(1);
 
 					break;

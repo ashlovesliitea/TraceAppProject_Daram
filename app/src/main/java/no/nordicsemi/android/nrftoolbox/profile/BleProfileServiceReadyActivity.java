@@ -98,7 +98,9 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 	private String leftName=null;
 	private BluetoothDevice rightDevice=null;
 	private String rightName=null;
-
+	public BluetoothDevice getDevice(){
+		return leftDevice;
+	}
 	private final BroadcastReceiver commonBroadcastReceiver = new BroadcastReceiver() {
 		@RequiresApi(api = Build.VERSION_CODES.M)
 		@Override
@@ -559,7 +561,7 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 		/*
 		if (logSession != null)
 			service.putExtra(BleProfileService.EXTRA_LOG_URI, logSession.getSessionUri());
-		 */
+		*/
 		startService(service);
 		Log.d(TAG, "Binding to the service...");
 		bindService(service, serviceConnection, 0);
