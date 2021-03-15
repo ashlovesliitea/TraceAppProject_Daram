@@ -102,12 +102,15 @@ public class UARTConnector {
 	private int logScrollPosition;
 	private UARTActivity mother;
 	public UARTConnector(UARTActivity mother,int connectionMode){
+		Log.i(TAG,"UARTConnector constructor called , "+connectionMode);
 		this.mother = mother;
 		this.connectionMode = connectionMode;
 		onCreate();
 	}
 	public static boolean opened = false;
-
+	public void clearOpend(){
+		opened = false;
+	}
 	public void sendDataInitially(byte mode){
 		if(opened){
 			return;
@@ -122,7 +125,7 @@ public class UARTConnector {
 				final String ml = "" + (char) mode; //errorneous
 				uartInterface.send(ml);
 			}
-		}, 7000);
+		}, 10000);
 
 	}
 	public void sendData(byte mode){
@@ -134,6 +137,9 @@ public class UARTConnector {
 	 * The receiver that listens for {@link BleProfileService#BROADCAST_CONNECTION_STATE} action.
 	 */
 	private final BroadcastReceiver commonBroadcastReceiver = new BroadcastReceiver() {
+
+		boolean leftInitDoneActivated = false;
+		boolean rightInitDoneActivated = false;
 		@RequiresApi(api = Build.VERSION_CODES.M)
 		@Override
 		public void onReceive(final Context context, final Intent intent) {
@@ -168,8 +174,13 @@ public class UARTConnector {
 					//sendData(Cons.MODE_RUN);//근데 이건 uartconnector를 새로 만들어야할듯
 					//이걸 받았을 때 왼발이 끊어진 상태가 아닐수도 잇슴
 					//mother.makeScanNConnect();
-					Log.i(TAG,"receiver CUSTOM_LEFT_INIT_DONE received");
-					//broad cast를 mother에게 보낸다
+					if(!leftInitDoneActivated) {
+						leftInitDoneActivated = true;
+						clearOpend();
+						Log.i(TAG, "receiver CUSTOM_LEFT_INIT_DONE received");
+						//broad cast를 mother에게 보낸다
+						mother.disconnectCurrent();
+					/*
 					final Intent disconnect = new Intent(ACTION_DISCONNECT);
 					intent.setAction("com.example.broadcast.MY_NOTIFICATION");
 					intent.putExtra("data","Notice me senpai!");
@@ -177,20 +188,34 @@ public class UARTConnector {
 					LocalBroadcastManager.getInstance(mother).sendBroadcast(intent);
 					///mother.onDeviceDisconnected(mother.getDevice());
 					//onStop();
+					*/
+						Handler handler = new Handler();
+						handler.postDelayed(new Runnable() {
+							@Override
+							public void run() {
+								mother.onMode(1);
+							}
+						}, 10000);
 
-					try {
-						Thread.sleep(15000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
 					}
-
-
-					mother.onMode(1);
-
 					break;
 				case BleProfileService.CUSTOM_RIGHT_INIT_DONE:
-					//엄마가 걷기 페이지로 옮겨가야댐
+					if(!rightInitDoneActivated) {
+						rightInitDoneActivated = true;
+						clearOpend();
+						Log.i(TAG, "receiver CUSTOM_RIGHT_INIT_DONE received");
+						//broad cast를 mother에게 보낸다
+						mother.disconnectCurrent();
+						Handler handler = new Handler();
+						handler.postDelayed(new Runnable() {
+							@Override
+							public void run() {
+								mother.nextActivity();
+							}
+						}, 10000);
 
+					}
+					//엄마가 걷기 페이지로 옮겨가야댐
 					break;
 				case BleProfileService.CUSTOM_LEFT_DATA_DONE:
 					//오른발 연결해서 measure 해야댐
@@ -289,13 +314,13 @@ public class UARTConnector {
 				sendDataInitially(Cons.MODE_RUN);
 				break;
 			case 1:
-				//sendDataInitially(Cons.MODE_RUN);
+				sendDataInitially(Cons.MODE_RUN);
 				break;
 			case 2:
 				sendDataInitially(Cons.MODE_MEASURE_LEFT);
 				break;
 			case 3:
-				//sendDataInitially(Cons.MODE_MEASURE_RIGHT);
+				sendDataInitially(Cons.MODE_MEASURE_RIGHT);
 				break;
 		}
 	}

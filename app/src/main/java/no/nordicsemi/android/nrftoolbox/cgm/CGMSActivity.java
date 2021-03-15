@@ -52,7 +52,9 @@ public class CGMSActivity extends BleProfileServiceReadyActivity<CGMService.CGMS
 	private ListView recordsListView;
 	private TextView batteryLevelView;
 	private CGMRecordsAdapter CGMRecordsAdapter;
-
+	public void nextActivity(){
+		//do nothing
+	}
 	private CGMService.CGMSBinder binder;
 
 	@Override

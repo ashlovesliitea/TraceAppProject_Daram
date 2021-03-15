@@ -42,15 +42,6 @@ public class ScanningActivityExtends extends UARTActivity {
 
         ScanningActivity = com.example.traceappproject_daram.measure_page.ScanningActivityExtends.this;
         hideUI();
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                nextActivity();
-                finish();
-            }
-        },30000);
-
         this.onMode(0);
         //블루투스 기능 숨기기
         //UARTActivity에 구현해둔 버튼 onclicklistener하면될듯
@@ -59,7 +50,7 @@ public class ScanningActivityExtends extends UARTActivity {
 
 
 
-    private void nextActivity(){
+    public void nextActivity(){
 
         Intent intent = new Intent(ScanningActivityExtends.this, WalkingActivity.class);
         startActivity(intent);

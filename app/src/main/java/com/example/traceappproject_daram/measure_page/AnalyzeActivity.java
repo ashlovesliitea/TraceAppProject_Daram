@@ -58,14 +58,14 @@ public class AnalyzeActivity extends UARTActivity {
             public void run() {
                 nextActivity();
             }
-        },5000);
-        this.onMode(0);
+        },60000);
+        this.onMode(2);
         hideUI();
     }
     private int toPx(int a){
         return (int) (a * Resources.getSystem().getDisplayMetrics().density);
     }
-    private void nextActivity(){
+    public void nextActivity(){
 
         Intent intent = new Intent(AnalyzeActivity.this, MovingFeetHeatmapActivity.class);
         startActivity(intent);

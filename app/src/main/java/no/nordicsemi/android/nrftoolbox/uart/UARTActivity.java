@@ -175,7 +175,9 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
 	protected void setDefaultUI() {
 		// empty
 	}
-
+	public void nextActivity(){
+		//do nothing
+	}
 	@Override
 	protected void onServiceBound(final UARTService.UARTBinder binder) {
 		serviceBinder = binder;
@@ -203,6 +205,7 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
 		result = new Result(new LoginInfo("mijin","mijin"));
 
 	}
+
 	/**
 	 * Method called when Google API Client connects to Wearable.API.
 	 */

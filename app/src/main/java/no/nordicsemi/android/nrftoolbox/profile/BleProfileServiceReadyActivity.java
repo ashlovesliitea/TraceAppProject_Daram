@@ -452,7 +452,6 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 		// Overwrite when using menu other than R.menu.help
 		return false;
 	}
-
 	@Override
 	public boolean onOptionsItemSelected(final MenuItem item) {
 		final int id = item.getItemId();
@@ -495,7 +494,9 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 			showBLEDialog();//권한 요청
 		}
 	}
-
+	public void disconnectCurrent(){
+		service.disconnect();
+	}
 
 	public void onConnectClickedOld(final View view) {
 		if (isBLEEnabled()) {
@@ -760,6 +761,7 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 	}
 
 	 */
+	abstract public void nextActivity();
 
 	private void ensureBLESupported() {
 		if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {

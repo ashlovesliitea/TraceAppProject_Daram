@@ -181,7 +181,9 @@ public class ScanningActivityModified extends BleProfileServiceReadyActivity<UAR
     protected void setDefaultUI() {
         // empty
     }
-
+    public void nextActivity(){
+        //do nothing
+    }
     @Override
     protected void onServiceBound(final UARTService.UARTBinder binder) {
         serviceBinder = binder;

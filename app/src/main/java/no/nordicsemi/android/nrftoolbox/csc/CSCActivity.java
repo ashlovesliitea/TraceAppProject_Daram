@@ -55,7 +55,9 @@ public class CSCActivity extends BleProfileServiceReadyActivity<CSCService.CSCBi
 	private TextView totalDistanceUnitView;
 	private TextView gearRatioView;
 	private TextView batteryLevelView;
-
+	public void nextActivity(){
+		//do nothing
+	}
 	@Override
 	protected void onCreateView(final Bundle savedInstanceState) {
 		setContentView(R.layout.activity_feature_csc);

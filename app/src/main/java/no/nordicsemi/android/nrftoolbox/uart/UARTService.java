@@ -195,6 +195,7 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
         System.arraycopy(byteSet,2,UARTConnector.arr,idx,howmany);
         idx+=howmany;
     }
+
     @Override
     public void onDataReceived(@NonNull final BluetoothDevice device, final String data) {
 
@@ -205,7 +206,7 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
 
 
         if(data.charAt(1) == Cons.MODE_RUN){
-            if(UARTConnector.connectionMode == 0) {
+            if(UARTConnector.connectionMode == 0||UARTConnector.connectionMode==1) {
                 manager.send("" + (char) Cons.MODE_VERSION);
             }
             else{
@@ -221,6 +222,12 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
                 //broadcast2.setAction(BleProfileService.BROADCAST_CONNECTION_STATE);
                 broadcast2.putExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.CUSTOM_LEFT_INIT_DONE);
                 LocalBroadcastManager.getInstance(this).sendBroadcast(broadcast2);
+            }
+            if(UARTConnector.connectionMode == 1){
+                final Intent rightInitDone = new Intent(BleProfileService.BROADCAST_CONNECTION_STATE);
+                //broadcast2.setAction(BleProfileService.BROADCAST_CONNECTION_STATE);
+                rightInitDone.putExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.CUSTOM_LEFT_INIT_DONE);
+                LocalBroadcastManager.getInstance(this).sendBroadcast(rightInitDone);
             }
             //일단은 disconnect
             return;
