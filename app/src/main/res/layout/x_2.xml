@@ -39,7 +39,7 @@
     </androidx.constraintlayout.widget.Guideline>
     <!--중간가이드라인-->
     <androidx.constraintlayout.widget.Guideline
-        app:layout_constraintGuide_percent="0.65"
+        app:layout_constraintGuide_percent="0.70"
         android:id="@+id/guidelinemiddle"
         android:orientation="horizontal"
         android:layout_width="wrap_content"
