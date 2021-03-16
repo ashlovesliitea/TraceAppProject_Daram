@@ -35,6 +35,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.example.traceappproject_daram.data.Result;
+import com.example.traceappproject_daram.measure_page.AnalyzeActivity;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.wearable.MessageApi;
 import com.google.android.gms.wearable.Node;
@@ -226,7 +227,7 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
             if(UARTConnector.connectionMode == 1){
                 final Intent rightInitDone = new Intent(BleProfileService.BROADCAST_CONNECTION_STATE);
                 //broadcast2.setAction(BleProfileService.BROADCAST_CONNECTION_STATE);
-                rightInitDone.putExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.CUSTOM_LEFT_INIT_DONE);
+                rightInitDone.putExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.CUSTOM_RIGHT_INIT_DONE);
                 LocalBroadcastManager.getInstance(this).sendBroadcast(rightInitDone);
             }
             //일단은 disconnect
@@ -260,7 +261,8 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
         if(isMeasure&&idx<900){
             //테스트를 위해 한계 걸어둠
             //첫번째 세트 delimeter
-            if(data.charAt(10) !=0xff) {
+            if(/*data.charAt(10) !=0xff*/ idx <500) {
+                Log.i(TAG,"not 10th char : "+(data.length()>=11?data.charAt(10):"there is no 10th char"));
                 //다시 보내기
                 manager.send("" + data.charAt(1));
 
@@ -274,16 +276,26 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
                 } else { //if not end write subsequently
                     manager.send("" + (char) Cons.MODE_STOP);
                 }
-
                  */
             }
             else{
+                Log.i(TAG,"measure reply 10th char : "+data.charAt(10));
                 manager.send("" + (char) Cons.MODE_STOP);
                 //한쪽발에 대해서 measure 종료됐다는 broadcast
+
                 final Intent broadcast2 = new Intent(BleProfileService.BROADCAST_CONNECTION_STATE);
-                //broadcast2.setAction(BleProfileService.BROADCAST_CONNECTION_STATE);
-                broadcast2.putExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.CUSTOM_LEFT_DATA_DONE);
+                if(UARTConnector.connectionMode ==2){
+
+                    AnalyzeActivity.result.setLeftData(UARTConnector.arr,idx);
+                    broadcast2.putExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.CUSTOM_LEFT_DATA_DONE);
+                }
+                if(UARTConnector.connectionMode ==3){
+
+                    AnalyzeActivity.result.setLeftData(UARTConnector.arr,idx);
+                    broadcast2.putExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.CUSTOM_LEFT_DATA_DONE);
+                }
                 LocalBroadcastManager.getInstance(this).sendBroadcast(broadcast2);
+
             }
         }
         /*

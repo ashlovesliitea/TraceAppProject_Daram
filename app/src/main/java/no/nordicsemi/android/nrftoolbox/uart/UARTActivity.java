@@ -178,10 +178,10 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
 		// empty
 	}
 	public void nextActivity(Class<?> cls){
-		this.finish();
 		Log.i(TAG,"nextActivity called ");
 		Intent intent = new Intent(this, cls);
 		startActivity(intent);
+		this.finish();
 	};
 	@Override
 	protected void onServiceBound(final UARTService.UARTBinder binder) {

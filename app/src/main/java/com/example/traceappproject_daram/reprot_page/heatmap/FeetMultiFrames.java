@@ -4,10 +4,13 @@ import android.util.Log;
 
 import com.example.traceappproject_daram.data.Cons;
 
-public class FeetMultiFrames {
+import java.io.Serializable;
+
+public class FeetMultiFrames implements Serializable {
     //frame이 상수로 박혀있는 건 좋지 않은 듯
     private FootOneFrame[][] frames= new FootOneFrame[Cons.HEATMAP_FRAMES_NUM][2];;//첫번째 인덱스는 시간, 두번째는 왼오
     private int insertIdx=0;
+    public int frameNum;
     public String TAG = "FootMultiFrames";
 
     //              0 1 2 3 4 5 6 7
@@ -26,11 +29,15 @@ public class FeetMultiFrames {
     byte[] arch2 = {9,7,5,0,9,0,7,7};
 
 
+    public FeetMultiFrames(){
 
+    }
     //나중에 파라미터 받을 수 있게되면 동적할당버전 만들기
+    /*
     public FeetMultiFrames(){
         initFramesForTest();
     }
+     */
     public void appendFootFrame(FootOneFrame left, FootOneFrame right){ //시간적으로 일치해야만 append 가능
         //일단은 counter 2개 다 두면서 일치할 때만 넣는걸로
         //왼발은 실측값으로 오른 발은 그냥 더미로
@@ -64,8 +71,15 @@ public class FeetMultiFrames {
         frames[8][0] = new FootOneFrame(empt1,false);
         frames[8][1] = new FootOneFrame(arch2,true);
     }
+
+    public void setFrameNum(int frameNum) {
+        this.frameNum = frameNum;
+    }
+
     public int getFramesSz(){
-        return frames.length;
+        return frameNum;
+        // 일케 말고 frame 계싼해야댐
+        //return frames.length;
     }
     public FootOneFrame[] retrieveFrame(int idx){
         Log.i(TAG,"retrieving frame idx "+idx);

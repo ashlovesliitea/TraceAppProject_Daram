@@ -34,6 +34,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -48,6 +49,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.traceappproject_daram.measure_page.AnalyzeActivity;
+import com.example.traceappproject_daram.measure_page.WalkingActivity;
+import com.example.traceappproject_daram.reprot_page.MovingFeetHeatmapActivity;
 
 import java.util.UUID;
 
@@ -151,13 +156,17 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 							//sendData(Cons.MODE_RUN);//근데 이건 uartconnector를 새로 만들어야할듯
 							//이걸 받았을 때 왼발이 끊어진 상태가 아닐수도 잇슴
 							//mother.makeScanNConnect();
-							Log.i(BleProfileServiceReadyActivity.this.TAG,"receiver CUSTOM_LEFT_INIT_DONE received");
-							ScannerNoUI rightInitScanner = new ScannerNoUI(getFilterUUID(),BleProfileServiceReadyActivity.this,1);
-
-
 							break;
 						case BleProfileService.CUSTOM_RIGHT_INIT_DONE:
-
+							service.disconnect();
+							Log.i(BleProfileServiceReadyActivity.this.TAG,"receiver CUSTOM_RIGHT_INIT_DONE received");
+							new Handler().postDelayed(new Runnable() {// 1 초 후에 실행
+								@Override
+								public void run() {
+									// 실행할 동작 코딩
+									nextActivity(WalkingActivity.class);
+								}
+							}, 5000);
 							break;
 						case BleProfileService.CUSTOM_LEFT_DATA_DONE:
 
@@ -215,7 +224,9 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 		@SuppressWarnings("unchecked")
 		@Override
 		public void onServiceConnected(final ComponentName name, final IBinder service) {
+
 			final E bleService = BleProfileServiceReadyActivity.this.service = (E) service;
+			Log.i(TAG,"onServiceConnected : is null? "+ (BleProfileServiceReadyActivity.this.service==null));
 			leftDevice = bleService.getBluetoothDevice();
 			//logSession = bleService.getLogSession();
 			Log.d(TAG, "Activity bound to the service");
@@ -253,7 +264,11 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 			onServiceUnbound();
 		}
 	};
-
+	public void nextActivity(Class<?> cls){
+		finish();
+		Intent intent = new Intent(this, cls);
+		startActivity(intent);
+	}
 	@Override
 	protected final void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -299,7 +314,7 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 		 * However, if it's running, the Activity will bind to it and notified via serviceConnection.
 		 */
 		final Intent service = new Intent(this, getServiceClass());
-		// We pass 0 as a flag so the service will not be created if not exists.
+		// We pass 0 as a flag so the service will not be create d if not exists.
 		bindService(service, serviceConnection, 0);
 
 		/*
@@ -495,6 +510,7 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 		}
 	}
 	public void disconnectCurrent(){
+		Log.i(TAG,"disconnectCurrent called");
 		service.disconnect();
 	}
 
@@ -503,8 +519,6 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 			if (service == null) {
 				setDefaultUI();
 				showDeviceScanningDialog(getFilterUUID());
-
-
 			} else {
 				service.disconnect();
 			}

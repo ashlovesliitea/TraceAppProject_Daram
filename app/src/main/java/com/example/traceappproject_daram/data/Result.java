@@ -3,9 +3,10 @@ package com.example.traceappproject_daram.data;
 import com.example.traceappproject_daram.reprot_page.heatmap.FeetMultiFrames;
 import com.example.traceappproject_daram.reprot_page.heatmap.FootOneFrame;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class Result {
+public class Result implements Serializable {
     Calendar calendar;
     LoginInfo loginInfo;
     int archLevel;
@@ -27,11 +28,21 @@ public class Result {
         this.endData = endData;
     }
     */
+
     public Result(LoginInfo loginInfo) {
         //dummy
         this.calendar = Calendar.getInstance();
         this.loginInfo = loginInfo;
         clearData();
+    }
+    public void setLeftData(byte[] arr,int len){
+        leftData = arr.clone();
+        leftidx = len;
+        //index의 limit을 어떻게 할것인가
+    }
+    public void setRightData(byte[] arr, int len){
+        rightData = arr.clone();
+        rightidx = len;
     }
     public String getID(){
         return this.loginInfo.getId();
@@ -42,26 +53,28 @@ public class Result {
     public FeetMultiFrames parseRaw(){//validation을 하면서 유효한 frame 만건져서 띄우기
         FeetMultiFrames frames = new FeetMultiFrames();
         FootOneFrame left=null,right=null;
+        int numFrame=0;
         for(int i = 300;i<500;i++){
+            //BIAS가 들어가야할 수도 있음
             if(leftData[i] == no.nordicsemi.android.nrftoolbox.uart.Cons.MODE_MEASURE_LEFT&&left ==null){
                 if(isFoot(i+1,leftData)){
                     left = new FootOneFrame(leftData,i+1);
-                    i+=Cons.SENSOR_NUM_FOOT-1;//성공했을 시에는 확 뛰어버리기
                 }
             }
             else if(rightData[i] == no.nordicsemi.android.nrftoolbox.uart.Cons.MODE_MEASURE_RIGHT&&right == null){
                 if(isFoot(i+1,rightData)){
                     right = new FootOneFrame(rightData,i+1);
-                    i+=Cons.SENSOR_NUM_FOOT-1;
                 }
             }
 
             if(left!=null&&right!=null){
                 frames.appendFootFrame(left,right);
+                numFrame++;
                 left = null;
                 right=null;
             }
         }
+        frames.setFrameNum(numFrame);
         return frames;
     }
 

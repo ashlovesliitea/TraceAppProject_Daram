@@ -64,6 +64,7 @@
 		<activity android:name="com.example.traceappproject_daram.measure_page.WalkingActivity" />
 		<activity android:name="com.example.traceappproject_daram.measure_page.ScanningActivityPlane"></activity>
 		<activity android:name="com.example.traceappproject_daram.measure_page.ScanningActivityExtends"></activity>
+		<activity android:name="com.example.traceappproject_daram.measure_page.ScanningActivityExtendsR"></activity>
 		<activity android:name="com.example.traceappproject_daram.measure_page.ScanningActivityModified"></activity>
 		<activity android:name="com.example.traceappproject_daram.TestActivity" />
 		<activity android:name="com.example.traceappproject_daram.reprot_page.MovingFeetHeatmapActivity">
@@ -112,12 +113,7 @@
 				<category android:name="no.nordicsemi.android.nrftoolbox.LAUNCHER" />
 			</intent-filter>
 		</activity>
-		<activity
-			android:name="no.nordicsemi.android.nrftoolbox.template.settings.SettingsActivity"
-			android:label="@string/template_settings_title" />
-		<service
-			android:name="no.nordicsemi.android.nrftoolbox.template.TemplateService"
-			android:label="@string/template_feature_title" />
+
 
 		<!-- Plug-in activities -->
 		<activity

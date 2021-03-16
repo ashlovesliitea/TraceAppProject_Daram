@@ -97,7 +97,7 @@ public class ScannerNoUI {
     }
 
 
-    private String DEVICE_NAMES[] = {"HD-CS-02L","HD-CS-02R","HD-CS-02L","HD-CS-02R"};
+    private String DEVICE_NAMES[] = {"HD-CS-02L","HD-CS-02R","HD-CS-02R","HD-CS-02L"};
     private ScanCallback scanCallback = new ScanCallback() {
         @Override
         public void onScanResult(final int callbackType, @NonNull final ScanResult result) {

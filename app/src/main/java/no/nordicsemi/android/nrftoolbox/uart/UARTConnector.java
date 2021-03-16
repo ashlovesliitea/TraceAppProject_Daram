@@ -55,8 +55,12 @@ import androidx.loader.content.Loader;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.traceappproject_daram.data.Result;
+import com.example.traceappproject_daram.measure_page.AnalyzeActivity;
 import com.example.traceappproject_daram.measure_page.ScanningActivityExtends;
+import com.example.traceappproject_daram.measure_page.ScanningActivityExtendsR;
 import com.example.traceappproject_daram.measure_page.WalkingActivity;
+import com.example.traceappproject_daram.reprot_page.MovingFeetHeatmapActivity;
+import com.example.traceappproject_daram.reprot_page.heatmap.FeetMultiFrames;
 
 import no.nordicsemi.android.log.ILogSession;
 import no.nordicsemi.android.log.LogContract;
@@ -114,7 +118,7 @@ public class UARTConnector {
 		opened = false;
 	}
 	public void sendDataInitially(byte mode){
-		if(opened){
+		if(opened||uartInterface == null){
 			return;
 		}
 		opened = true;
@@ -125,6 +129,7 @@ public class UARTConnector {
 			@Override
 			public void run() {
 				final String ml = "" + (char) mode; //errorneous
+
 				uartInterface.send(ml);
 			}
 		}, 10000);
@@ -142,6 +147,8 @@ public class UARTConnector {
 
 		boolean leftInitDoneActivated = false;
 		boolean rightInitDoneActivated = false;
+		boolean leftDataDoneActivated = false;
+		boolean rightDataDoneActivated = false;
 		@RequiresApi(api = Build.VERSION_CODES.M)
 		@Override
 		public void onReceive(final Context context, final Intent intent) {
@@ -152,7 +159,7 @@ public class UARTConnector {
 
 			switch (state) {
 				case BleProfileService.STATE_CONNECTED: {
-					Log.i("UARTLogFragment","state connected");
+					Log.i("UARTLogFragment", "state connected");
 					onDeviceConnected();
 					break;
 				}
@@ -176,7 +183,7 @@ public class UARTConnector {
 					//sendData(Cons.MODE_RUN);//근데 이건 uartconnector를 새로 만들어야할듯
 					//이걸 받았을 때 왼발이 끊어진 상태가 아닐수도 잇슴
 					//mother.makeScanNConnect();
-					if(!leftInitDoneActivated) {
+					if (!leftInitDoneActivated) {
 						leftInitDoneActivated = true;
 						clearOpend();
 						Log.i(TAG, "receiver CUSTOM_LEFT_INIT_DONE received");
@@ -191,6 +198,7 @@ public class UARTConnector {
 					///mother.onDeviceDisconnected(mother.getDevice());
 					//onStop();
 					*/
+
 						Handler handler = new Handler();
 						handler.postDelayed(new Runnable() {
 							@Override
@@ -202,13 +210,12 @@ public class UARTConnector {
 					}
 					break;
 				case BleProfileService.CUSTOM_RIGHT_INIT_DONE:
-					if(!rightInitDoneActivated) {
+					if (!rightInitDoneActivated) {
 						rightInitDoneActivated = true;
 						clearOpend();
 						Log.i(TAG, "receiver CUSTOM_RIGHT_INIT_DONE received");
 						//broad cast를 mother에게 보낸다
 						mother.disconnectCurrent();
-
 						Handler handler = new Handler();
 						handler.postDelayed(new Runnable() {
 							@Override
@@ -221,14 +228,39 @@ public class UARTConnector {
 					break;
 				case BleProfileService.CUSTOM_LEFT_DATA_DONE:
 					//오른발 연결해서 measure 해야댐
-					mother.onMode(3);
-
+					if (!leftInitDoneActivated) {
+						leftInitDoneActivated = true;
+						clearOpend();
+						Log.i(TAG, "receiver CUSTOM_LEFT_DATA_DONE received");
+						//broad cast를 mother에게 보낸다
+						//mother.disconnectCurrent();
+						Handler handler = new Handler();
+						handler.postDelayed(new Runnable() {
+							@Override
+							public void run() {
+								mother.onMode(3);
+							}
+						}, 5000);
+						}
 					break;
-
+				case BleProfileService.CUSTOM_RIGHT_DATA_DONE:
+					if(!rightDataDoneActivated){
+						rightDataDoneActivated = true;
+						clearOpend();
+						Log.i(TAG,"receiver CUSTOM_LEFT_INIT_DONE received");
+						//mother.disconnectCurrent();
+						//parse result and connect to Heatmap activity
+						FeetMultiFrames frames = AnalyzeActivity.result.parseRaw();
+						new Handler().postDelayed(new Runnable(){
+							public void run(){
+								mother.nextActivity(MovingFeetHeatmapActivity.class);
+							}
+						},5000);
+					}
+					break;
 				default:
-					// there should be no other actions
 					break;
-			}
+				}
 		}
 	};
 	//logger 관련된 모든 것들 지웟다
@@ -240,7 +272,7 @@ public class UARTConnector {
 			uartInterface = bleService;
 
 			// and notify user if device is connected
-			if (bleService.isConnected()&&uartInterface!=null)
+			if (bleService.isConnected() && uartInterface != null)
 				onDeviceConnected();
 		}
 

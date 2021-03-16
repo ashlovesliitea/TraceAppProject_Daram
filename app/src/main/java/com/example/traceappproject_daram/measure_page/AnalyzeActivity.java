@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.traceappproject_daram.data.LoginInfo;
+import com.example.traceappproject_daram.data.Result;
 import com.example.traceappproject_daram.measure_page.WalkingActivity;
 import com.example.traceappproject_daram.reprot_page.MovingFeetHeatmapActivity;
 
@@ -26,6 +28,8 @@ import no.nordicsemi.android.nrftoolbox.uart.UARTActivity;
 
 public class AnalyzeActivity extends UARTActivity {
     private Timer timer;
+    public static Result result;//어디서나 접근가능함
+
     private void hideUI(){
         runOnUiThread(new Runnable(){
             @Override
@@ -40,6 +44,7 @@ public class AnalyzeActivity extends UARTActivity {
     @Override
     protected void onCreateView(Bundle savedInstanceState) {
         //super.onCreate(savedInstanceState);
+        result = new Result(new LoginInfo("id example","pwexample"));
         setContentView(R.layout.activity_analyze);
         LayoutInflater layoutInflater = getLayoutInflater();
         View layout = layoutInflater.inflate(R.layout.custom_toast,(ViewGroup)findViewById(R.id.custom_toast_container));
@@ -68,6 +73,11 @@ public class AnalyzeActivity extends UARTActivity {
     public void nextActivity(){
 
         Intent intent = new Intent(AnalyzeActivity.this, MovingFeetHeatmapActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("result", result);   // Object 넘기기
+        bundle.putSerializable("frames",result.parseRaw());
+        //Add the bundle to the intent
+        intent.putExtras(bundle);
         startActivity(intent);
         //종료!!
         finish();
