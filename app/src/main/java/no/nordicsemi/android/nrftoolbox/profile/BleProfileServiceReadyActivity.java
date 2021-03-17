@@ -511,6 +511,7 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 	}
 	public void disconnectCurrent(){
 		Log.i(TAG,"disconnectCurrent called");
+		if(service!=null)
 		service.disconnect();
 	}
 

@@ -119,6 +119,7 @@ public class UARTConnector {
 	}
 	public void sendDataInitially(byte mode){
 		if(opened||uartInterface == null){
+			Log.i(TAG,"failed sendDataInitially : "+opened+" , "+(uartInterface==null));
 			return;
 		}
 		opened = true;
@@ -143,12 +144,13 @@ public class UARTConnector {
 	/**
 	 * The receiver that listens for {@link BleProfileService#BROADCAST_CONNECTION_STATE} action.
 	 */
+	boolean leftInitDoneActivated = false;
+	boolean rightInitDoneActivated = false;
+	boolean leftDataDoneActivated = false;
+	boolean rightDataDoneActivated = false;
 	private final BroadcastReceiver commonBroadcastReceiver = new BroadcastReceiver() {
 
-		boolean leftInitDoneActivated = false;
-		boolean rightInitDoneActivated = false;
-		boolean leftDataDoneActivated = false;
-		boolean rightDataDoneActivated = false;
+
 		@RequiresApi(api = Build.VERSION_CODES.M)
 		@Override
 		public void onReceive(final Context context, final Intent intent) {
@@ -228,14 +230,18 @@ public class UARTConnector {
 					break;
 				case BleProfileService.CUSTOM_LEFT_DATA_DONE:
 					//오른발 연결해서 measure 해야댐
-					if (!leftInitDoneActivated) {
-						leftInitDoneActivated = true;
+					if (!leftDataDoneActivated) {
+						leftDataDoneActivated = true;
 						clearOpend();
 						Log.i(TAG, "receiver CUSTOM_LEFT_DATA_DONE received");
 						//broad cast를 mother에게 보낸다
-						//mother.disconnectCurrent();
-						Handler handler = new Handler();
-						handler.postDelayed(new Runnable() {
+						new Handler().postDelayed(new Runnable() {
+							@Override
+							public void run() {
+								mother.disconnectCurrent();
+							}
+						}, 5000);
+						new Handler().postDelayed(new Runnable() {
 							@Override
 							public void run() {
 								mother.onMode(3);
@@ -283,6 +289,17 @@ public class UARTConnector {
 
 			uartInterface = null;
 		}
+
+		@Override
+		public void onBindingDied(ComponentName name) {
+			Log.i(TAG,"service onBindingDied , reason : "+name.flattenToString());
+		}
+
+		@Override
+		public void onNullBinding(ComponentName name) {
+			Log.i(TAG,"service onNullBinding , reason : "+name.flattenToString());
+		}
+
 	};
 	//bundle 받는 거 삭제
 	//이미 UARTActivity에 receiver를 등록해놓은 것

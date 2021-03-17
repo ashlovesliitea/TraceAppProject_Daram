@@ -157,6 +157,12 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
     }
 
     @Override
+    public void onBondingFailed(@NonNull BluetoothDevice device) {
+        super.onBondingFailed(device);
+        Log.i(TAG,"onBondingFailed : "+device.getName()+" , "+UARTConnector.connectionMode);
+    }
+
+    @Override
     protected boolean stopWhenDisconnected() {
         return false;
     }
@@ -291,8 +297,8 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
                 }
                 if(UARTConnector.connectionMode ==3){
 
-                    AnalyzeActivity.result.setLeftData(UARTConnector.arr,idx);
-                    broadcast2.putExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.CUSTOM_LEFT_DATA_DONE);
+                    AnalyzeActivity.result.setRightData(UARTConnector.arr,idx);
+                    broadcast2.putExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.CUSTOM_RIGHT_DATA_DONE);
                 }
                 LocalBroadcastManager.getInstance(this).sendBroadcast(broadcast2);
 

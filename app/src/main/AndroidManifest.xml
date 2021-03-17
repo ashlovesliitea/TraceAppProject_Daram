@@ -264,18 +264,6 @@
 		</activity>
 
 		<service
-			android:name="no.nordicsemi.android.nrftoolbox.cgm.CGMService"
-			android:label="@string/cgms_feature_title" />
-		<service
-			android:name="no.nordicsemi.android.nrftoolbox.rsc.RSCService"
-			android:label="@string/rsc_feature_title" />
-		<service
-			android:name="no.nordicsemi.android.nrftoolbox.csc.CSCService"
-			android:label="@string/csc_feature_title" />
-		<service
-			android:name="no.nordicsemi.android.nrftoolbox.ht.HTService"
-			android:label="@string/hts_feature_title" />
-		<service
 			android:name="no.nordicsemi.android.nrftoolbox.uart.UARTService"
 			android:label="@string/uart_feature_title" />
 		<service android:name=".wearable.MainWearableListenerService">
