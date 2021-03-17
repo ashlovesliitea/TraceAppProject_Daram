@@ -60,7 +60,7 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
         btnReplay = (Button) findViewById(R.id.replay);
         //frames = new FeetMultiFrames();//일단은 여기서 프레임들 다 초기화됨
 
-        result = (Result) savedInstanceState.getSerializable("result");
+         result = (Result) savedInstanceState.getSerializable("result");
         frames = (FeetMultiFrames) savedInstanceState.getSerializable("frames");
         Log.i(TAG,"reuslt passed and print owner of this result "+result.getID());
         Log.i(TAG,"frames passed and length of this frame is : "+frames.getFramesSz());

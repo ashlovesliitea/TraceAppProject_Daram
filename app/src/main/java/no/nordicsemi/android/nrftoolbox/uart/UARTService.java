@@ -285,7 +285,7 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
                  */
             }
             else{
-                Log.i(TAG,"measure reply 10th char : "+data.charAt(10));
+                Log.i(TAG,"measure reply 10th char : "+(data.length()>=11?(data.charAt(10)):"less then 10 : "+data.length()));
                 //manager.send("" + (char) Cons.MODE_STOP);
                 //한쪽발에 대해서 measure 종료됐다는 broadcast
 

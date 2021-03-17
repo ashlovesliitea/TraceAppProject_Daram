@@ -60,6 +60,7 @@
 			</intent-filter>
 		</activity>
 		<activity android:name="com.example.traceappproject_daram.x_15Activity" />
+		<activity android:name="com.example.traceappproject_daram.measure_page.AnalyzeActivityR"></activity>
 		<activity android:name="com.example.traceappproject_daram.measure_page.AnalyzeActivity"></activity>
 		<activity android:name="com.example.traceappproject_daram.measure_page.WalkingActivity" />
 		<activity android:name="com.example.traceappproject_daram.measure_page.ScanningActivityPlane"></activity>

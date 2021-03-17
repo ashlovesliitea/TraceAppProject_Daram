@@ -38,7 +38,7 @@ public class ScannerNoUI {
     private final static String TAG = "ScannerNoUI";
 
     private final static String PARAM_UUID = "param_uuid";
-    private final static long SCAN_DURATION = 5000;
+    private final static long SCAN_DURATION = 7000;
 
     private final static int REQUEST_PERMISSION_REQ_CODE = 34; // any 8-bit number
 
@@ -97,7 +97,7 @@ public class ScannerNoUI {
     }
 
 
-    private String DEVICE_NAMES[] = {"HD-CS-02L","HD-CS-02R","HD-CS-02L","HD-CS-02L"};
+    private String DEVICE_NAMES[] = {"HD-CS-02L","HD-CS-02R","HD-CS-02L","HD-CS-02R"};
     private ScanCallback scanCallback = new ScanCallback() {
         @Override
         public void onScanResult(final int callbackType, @NonNull final ScanResult result) {
@@ -110,8 +110,6 @@ public class ScannerNoUI {
             if(device.getName()!=null&&device.getName().equals(DEVICE_NAMES[connectionMode])){
                 //do connection work by mother
                 Log.i(TAG,"HD device : " + device.getName()+" , connection mode : "+connectionMode);
-
-
                 mother.onDeviceSelected(device, device.getName());
             }
             else {

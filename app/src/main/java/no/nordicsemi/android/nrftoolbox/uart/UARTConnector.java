@@ -56,6 +56,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.traceappproject_daram.data.Result;
 import com.example.traceappproject_daram.measure_page.AnalyzeActivity;
+import com.example.traceappproject_daram.measure_page.AnalyzeActivityR;
 import com.example.traceappproject_daram.measure_page.ScanningActivityExtends;
 import com.example.traceappproject_daram.measure_page.ScanningActivityExtendsR;
 import com.example.traceappproject_daram.measure_page.WalkingActivity;
@@ -223,8 +224,9 @@ public class UARTConnector {
 							@Override
 							public void run() {
 								mother.nextActivity(WalkingActivity.class);
+								//mother.onMode(2);
 							}
-						}, 5000);
+						}, 10000);
 					}
 					//엄마가 걷기 페이지로 옮겨가야댐
 					break;
@@ -247,9 +249,10 @@ public class UARTConnector {
 						new Handler().postDelayed(new Runnable() {
 							@Override
 							public void run() {
-								mother.onMode(3);
+								//mother.onMode(3);
+								mother.nextActivity(AnalyzeActivityR.class);
 							}
-						}, 30000);
+						}, 10000);
 						}
 					break;
 				case BleProfileService.CUSTOM_RIGHT_DATA_DONE:
@@ -383,7 +386,7 @@ public class UARTConnector {
 				},12000);
 				 */
 				//sendDataInitially(Cons.MODE_MEASURE_RIGHT);
-				sendData(Cons.MODE_MEASURE_RIGHT);
+				sendDataInitially(Cons.MODE_MEASURE_RIGHT);
 				break;
 		}
 	}
