@@ -286,21 +286,20 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
             }
             else{
                 Log.i(TAG,"measure reply 10th char : "+data.charAt(10));
-                manager.send("" + (char) Cons.MODE_STOP);
+                //manager.send("" + (char) Cons.MODE_STOP);
                 //한쪽발에 대해서 measure 종료됐다는 broadcast
 
-                final Intent broadcast2 = new Intent(BleProfileService.BROADCAST_CONNECTION_STATE);
+                final Intent broadcast3 = new Intent(BleProfileService.BROADCAST_CONNECTION_STATE);
                 if(UARTConnector.connectionMode ==2){
 
-                    AnalyzeActivity.result.setLeftData(UARTConnector.arr,idx);
-                    broadcast2.putExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.CUSTOM_LEFT_DATA_DONE);
+                    //AnalyzeActivity.result.setLeftData(UARTConnector.arr,idx);
+                    broadcast3.putExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.CUSTOM_LEFT_DATA_DONE);
                 }
                 if(UARTConnector.connectionMode ==3){
-
-                    AnalyzeActivity.result.setRightData(UARTConnector.arr,idx);
-                    broadcast2.putExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.CUSTOM_RIGHT_DATA_DONE);
+                    //AnalyzeActivity.result.setRightData(UARTConnector.arr,idx);
+                    broadcast3.putExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.CUSTOM_RIGHT_DATA_DONE);
                 }
-                LocalBroadcastManager.getInstance(this).sendBroadcast(broadcast2);
+                LocalBroadcastManager.getInstance(this).sendBroadcast(broadcast3);
 
             }
         }

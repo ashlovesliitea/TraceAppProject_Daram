@@ -133,7 +133,7 @@ public class UARTConnector {
 
 				uartInterface.send(ml);
 			}
-		}, 10000);
+		}, 5000);
 
 	}
 	public void sendData(byte mode){
@@ -235,25 +235,28 @@ public class UARTConnector {
 						clearOpend();
 						Log.i(TAG, "receiver CUSTOM_LEFT_DATA_DONE received");
 						//broad cast를 mother에게 보낸다
+						//mother.disconnectCurrent();
+
 						new Handler().postDelayed(new Runnable() {
 							@Override
 							public void run() {
 								mother.disconnectCurrent();
 							}
-						}, 5000);
+						}, 3000);
+
 						new Handler().postDelayed(new Runnable() {
 							@Override
 							public void run() {
 								mother.onMode(3);
 							}
-						}, 5000);
+						}, 30000);
 						}
 					break;
 				case BleProfileService.CUSTOM_RIGHT_DATA_DONE:
 					if(!rightDataDoneActivated){
 						rightDataDoneActivated = true;
 						clearOpend();
-						Log.i(TAG,"receiver CUSTOM_LEFT_INIT_DONE received");
+						Log.i(TAG,"receiver CUSTOM_RIGHT_DATA_DONE received");
 						//mother.disconnectCurrent();
 						//parse result and connect to Heatmap activity
 						FeetMultiFrames frames = AnalyzeActivity.result.parseRaw();
@@ -371,7 +374,16 @@ public class UARTConnector {
 				sendDataInitially(Cons.MODE_MEASURE_LEFT);
 				break;
 			case 3:
-				sendDataInitially(Cons.MODE_MEASURE_RIGHT);
+				/*
+				new Handler().postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						sendDataInitially(Cons.MODE_MEASURE_RIGHT);
+					}
+				},12000);
+				 */
+				//sendDataInitially(Cons.MODE_MEASURE_RIGHT);
+				sendData(Cons.MODE_MEASURE_RIGHT);
 				break;
 		}
 	}

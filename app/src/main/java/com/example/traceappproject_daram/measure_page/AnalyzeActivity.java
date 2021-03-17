@@ -57,6 +57,7 @@ public class AnalyzeActivity extends UARTActivity {
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.setView(layout);
         toast.show();
+        /*
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -64,6 +65,7 @@ public class AnalyzeActivity extends UARTActivity {
                 nextActivity();
             }
         },60000);
+         */
         this.onMode(2);
         hideUI();
     }
