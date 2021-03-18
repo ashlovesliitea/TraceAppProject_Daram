@@ -224,6 +224,7 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
         }
         //version일 때 UARTConnector 변수에 저장해둬야함
         if(data.charAt(1)==Cons.MODE_VERSION){
+            Log.i(TAG,"깔창 종류 파싱 : "+String.format("%8s", Integer.toBinaryString((int)data.charAt(2) & 0xFF)).replace(' ', '0'));
             if(UARTConnector.connectionMode == 0) {
                 final Intent broadcast2 = new Intent(BleProfileService.BROADCAST_CONNECTION_STATE);
                 //broadcast2.setAction(BleProfileService.BROADCAST_CONNECTION_STATE);

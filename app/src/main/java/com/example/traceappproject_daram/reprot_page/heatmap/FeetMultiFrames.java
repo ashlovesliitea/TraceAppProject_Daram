@@ -33,11 +33,11 @@ public class FeetMultiFrames implements Serializable {
 
     }
     //나중에 파라미터 받을 수 있게되면 동적할당버전 만들기
-    /*
-    public FeetMultiFrames(){
+
+    public FeetMultiFrames(String test){
         initFramesForTest();
     }
-     */
+
     public void appendFootFrame(FootOneFrame left, FootOneFrame right){ //시간적으로 일치해야만 append 가능
         //일단은 counter 2개 다 두면서 일치할 때만 넣는걸로
         //왼발은 실측값으로 오른 발은 그냥 더미로
