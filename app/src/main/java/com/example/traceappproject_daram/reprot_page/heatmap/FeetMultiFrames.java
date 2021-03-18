@@ -36,6 +36,7 @@ public class FeetMultiFrames implements Serializable {
 
     public FeetMultiFrames(String test){
         initFramesForTest();
+        frameNum = 9;
     }
 
     public void appendFootFrame(FootOneFrame left, FootOneFrame right){ //시간적으로 일치해야만 append 가능

@@ -58,16 +58,16 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
         super.onCreate(savedInstanceState);
         setContentView(R.layout.x13);
         btnReplay = (Button) findViewById(R.id.replay);
-        frames = new FeetMultiFrames("test");//일단은 여기서 프레임들 다 초기화됨
+        //frames = new FeetMultiFrames("test");//일단은 여기서 프레임들 다 초기화됨
 
-        //result = (Result) savedInstanceState.getSerializable("result");
-        //frames = (FeetMultiFrames) savedInstanceState.getSerializable("frames");
+        result = (Result) savedInstanceState.getSerializable("result");
+        frames = (FeetMultiFrames) savedInstanceState.getSerializable("frames");
         Log.i(TAG,"reuslt passed and print owner of this result "+result.getID());
         Log.i(TAG,"frames passed and length of this frame is : "+frames.getFramesSz());
 
         map = (HeatMapHolder) findViewById(R.id.feetmap);
         map.setMinimum(0.0);
-        map.setMaximum(9.0);//강도의 최대값은 얼마냐
+        map.setMaximum(40.0);//강도의 최대값은 얼마냐
         map.setLeftPadding(0);
         map.setRightPadding(0);
         map.setTopPadding(0);
@@ -153,6 +153,7 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
         return returnedBitmap;
     }
     private void addData() {
+        Log.i(TAG,"button replay : addData");
         if (testAsync) {
             AsyncTask.execute(new Runnable() {
                 @Override

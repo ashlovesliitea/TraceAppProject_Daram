@@ -3,9 +3,11 @@ package com.example.traceappproject_daram.reprot_page.heatmap;
 import com.example.traceappproject_daram.data.Cons;
 import com.example.traceappproject_daram.data.Result;
 
+import java.io.Serializable;
+
 //왼발 오른발 관계 없이
 //발 한 짝
-public class FootOneFrame {
+public class FootOneFrame implements Serializable {
     public double[] ps = new double[Cons.SENSOR_NUM_FOOT];
     //일단 거의 고정돼있음
     //얘네는 static 하면 지금은 안됨! 왼발 오른발에 따라 계산하고 있어서

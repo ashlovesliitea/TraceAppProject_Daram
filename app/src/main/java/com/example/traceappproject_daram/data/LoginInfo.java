@@ -1,6 +1,8 @@
 package com.example.traceappproject_daram.data;
 
-public class LoginInfo {
+import java.io.Serializable;
+
+public class LoginInfo implements Serializable {
     private String id;
     private String pw;
 

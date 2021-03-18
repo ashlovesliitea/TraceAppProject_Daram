@@ -50,8 +50,10 @@ import androidx.annotation.NonNull;
 
 import com.example.traceappproject_daram.data.LoginInfo;
 
+import com.example.traceappproject_daram.measure_page.AnalyzeActivity;
 import com.example.traceappproject_daram.measure_page.ScanningActivityExtends;
 import com.example.traceappproject_daram.measure_page.WalkingActivity;
+import com.example.traceappproject_daram.reprot_page.MovingFeetHeatmapActivity;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.RequiresApi;
@@ -178,11 +180,32 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
 		// empty
 	}
 	public void nextActivity(Class<?> cls){
-		Log.i(TAG,"nextActivity called ");
+		Log.i(TAG, "nextActivity called ");
 		Intent intent = new Intent(this, cls);
 		startActivity(intent);
 		this.finish();
 	};
+	public void nextReportPage(){
+
+		Intent intent = new Intent(UARTActivity.this, MovingFeetHeatmapActivity.class);
+		Bundle bundle = new Bundle();
+		bundle.putSerializable("result", result);   // Object 넘기기
+		bundle.putSerializable("frames",result.parseRaw());
+		//Add the bundle to the intent
+		intent.putExtras(bundle);
+		startActivity(intent);
+		//종료!!
+		finish();
+		//WalkingActivity 도 종료
+        /*
+        ScanningActivity scanningActivity = (ScanningActivity)ScanningActivity.ScanningActivity;
+        scanningActivity.finish();
+       WalkingActivity walkingActivity = (WalkingActivity)WalkingActivity.WalkingActivity;
+        walkingActivity.finish();
+
+         */
+	}
+
 	@Override
 	protected void onServiceBound(final UARTService.UARTBinder binder) {
 		serviceBinder = binder;

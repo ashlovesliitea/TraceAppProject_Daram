@@ -262,10 +262,10 @@ public class UARTConnector {
 						Log.i(TAG,"receiver CUSTOM_RIGHT_DATA_DONE received");
 						//mother.disconnectCurrent();
 						//parse result and connect to Heatmap activity
-						FeetMultiFrames frames = AnalyzeActivity.result.parseRaw();
+
 						new Handler().postDelayed(new Runnable(){
 							public void run(){
-								mother.nextActivity(MovingFeetHeatmapActivity.class);
+								mother.nextReportPage();
 							}
 						},5000);
 					}
