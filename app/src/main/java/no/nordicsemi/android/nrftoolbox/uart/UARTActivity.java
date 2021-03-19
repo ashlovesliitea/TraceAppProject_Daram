@@ -112,9 +112,6 @@ import no.nordicsemi.android.nrftoolbox.uart.domain.UartConfiguration;
 import no.nordicsemi.android.nrftoolbox.uart.wearable.UARTConfigurationSynchronizer;
 import no.nordicsemi.android.nrftoolbox.utility.FileHelper;
 import no.nordicsemi.android.nrftoolbox.widget.ClosableSpinner;
-
-
-import com.example.traceappproject_daram.data.Result;
 public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UARTBinder> implements UARTInterface,
 		UARTNewConfigurationDialogFragment.NewConfigurationDialogListener, UARTConfigurationsAdapter.ActionListener, AdapterView.OnItemSelectedListener,
 		GoogleApiClient.ConnectionCallbacks {
@@ -145,8 +142,6 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
 	private UARTService.UARTBinder serviceBinder;
 	private ConfigurationListener configurationListener;
 	private boolean editMode;
-
-	private Result result; //측정을 시작할 result
 
 
 
@@ -189,8 +184,8 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
 
 		Intent intent = new Intent(UARTActivity.this, MovingFeetHeatmapActivity.class);
 		Bundle bundle = new Bundle();
-		bundle.putSerializable("result", result);   // Object 넘기기
-		bundle.putSerializable("frames",result.parseRaw());
+		//bundle.putSerializable("result", AnalyzeActivity.result);   // Object 넘기기
+		bundle.putSerializable("frames",AnalyzeActivity.result.parseRaw());
 		//Add the bundle to the intent
 		intent.putExtras(bundle);
 		startActivity(intent);
@@ -229,8 +224,6 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
 		wearableSynchronizer = UARTConfigurationSynchronizer.from(this, this);
 		//여기서 원래는 bundle에서 빈 (설정은 돼있는 result 객체 받아오겠지만)
 		//일단 빈 result 객체 생성
-
-		result = new Result(new LoginInfo("mijin","mijin"));
 
 	}
 

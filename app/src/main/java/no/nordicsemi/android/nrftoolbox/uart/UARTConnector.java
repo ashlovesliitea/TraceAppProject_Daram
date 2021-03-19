@@ -54,6 +54,7 @@ import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import com.example.traceappproject_daram.data.LoginInfo;
 import com.example.traceappproject_daram.data.Result;
 import com.example.traceappproject_daram.measure_page.AnalyzeActivity;
 import com.example.traceappproject_daram.measure_page.AnalyzeActivityR;
@@ -83,7 +84,7 @@ public class UARTConnector {
 	private static final String[] LOG_PROJECTION = {LogContract.Log._ID, LogContract.Log.TIME, LogContract.Log.LEVEL, LogContract.Log.DATA};
 	//같은 객체 쓰기
 
-	private Result result;
+	private static final Result result = new Result(new LoginInfo("exampleid","examplepw"));
 	public static final byte arr[] = new byte[1000000];
 
 	/**

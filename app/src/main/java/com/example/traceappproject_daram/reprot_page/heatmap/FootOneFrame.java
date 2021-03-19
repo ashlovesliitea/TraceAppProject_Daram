@@ -1,5 +1,7 @@
 package com.example.traceappproject_daram.reprot_page.heatmap;
 
+import android.util.Log;
+
 import com.example.traceappproject_daram.data.Cons;
 import com.example.traceappproject_daram.data.Result;
 
@@ -52,14 +54,20 @@ public class FootOneFrame implements Serializable {
         }
 
     }
-    public FootOneFrame(byte[] rawData, int sidx){
+    public String TAG = "FootOneFrame";
+    public FootOneFrame(byte[] rawData, int sidx,boolean isRight){
         if(!Result.isFoot(sidx)){
             //not valid
         }
         for(int i = sidx;i<Cons.SENSOR_NUM_FOOT;i++){
             ps[i] = (double)rawData[i];
         }
-
+        calcRatio();
+        Log.i(TAG,"after calcRatio : "+ ratioW[0]+ratioH[0]);
+        if(isRight){
+            //이게 맞는 거 같은데 반대일수도있음
+            makeMeRight();
+        }
     }
     
     public FootOneFrame(byte[] rawData,boolean isRight){
@@ -92,6 +100,8 @@ public class FootOneFrame implements Serializable {
 
     public void makeMeRight(){
         //양발이 같은 높이이기 때문에 w만 대칭
+        //데모는 대칭으로 해야 편한 건 맞는데
+        //실측값은 그대로 0-7센서가 왼발이랑 똑같이 들어오니까 평행이동으로 처리해야댐
         for(int i = 0; i< Cons.SENSOR_NUM_FOOT; i++) {
             ratioW[i] = (float) ratioW[i] + (float)((float)800/(double)EX_FULL_WIDTH);
         }
@@ -100,8 +110,6 @@ public class FootOneFrame implements Serializable {
 
     //calc ratio of the picture
     public void calcRatio(){
-
-
         for(int i = 0; i< Cons.SENSOR_NUM_FOOT; i++){
             ratioW[i] = (float) EX_WIDTH[i]/(float) EX_FULL_WIDTH;
             ratioH[i] = (float) EX_HEIGHT[i]/(float) EX_FULL_HEIGHT;

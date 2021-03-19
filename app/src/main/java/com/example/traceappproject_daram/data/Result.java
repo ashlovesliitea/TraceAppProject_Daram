@@ -1,5 +1,7 @@
 package com.example.traceappproject_daram.data;
 
+import android.util.Log;
+
 import com.example.traceappproject_daram.reprot_page.heatmap.FeetMultiFrames;
 import com.example.traceappproject_daram.reprot_page.heatmap.FootOneFrame;
 
@@ -50,20 +52,23 @@ public class Result implements Serializable {
     //data에다가 모드값을 포함한 모든 것들을 싹다 넣는다
     //가정은 그냥 300언저리에서 시간이 많이 지났음에도 시간적으로 같은 순간의 데이터를 양 발이 수집했을 것이다
     //시간적으로 일치하지 않을 가능성 있음
+    public static String TAG = "Result";
     public FeetMultiFrames parseRaw(){//validation을 하면서 유효한 frame 만건져서 띄우기
         FeetMultiFrames frames = new FeetMultiFrames();
         FootOneFrame left=null,right=null;
         int numFrame=0;
+        Log.i(TAG,"parseRaw : "+leftData.length+" , "+rightData.length);
         for(int i = 300;i<500;i++){
             //BIAS가 들어가야할 수도 있음
-            if(leftData[i] == no.nordicsemi.android.nrftoolbox.uart.Cons.MODE_MEASURE_LEFT&&left ==null){
+            Log.i(TAG,"idx : "+i+" , each value : "+leftData[i]+" , "+rightData[i]);
+            if(leftData[i] == no.nordicsemi.android.nrftoolbox.uart.Cons.DEL&&left ==null){
                 if(isFoot(i+1,leftData)){
-                    left = new FootOneFrame(leftData,i+1);
+                    left = new FootOneFrame(leftData,i+1,false);
                 }
             }
-            else if(rightData[i] == no.nordicsemi.android.nrftoolbox.uart.Cons.MODE_MEASURE_RIGHT&&right == null){
+            else if(rightData[i] == no.nordicsemi.android.nrftoolbox.uart.Cons.DEL&&right == null){
                 if(isFoot(i+1,rightData)){
-                    right = new FootOneFrame(rightData,i+1);
+                    right = new FootOneFrame(rightData,i+1,true);
                 }
             }
 
@@ -75,6 +80,7 @@ public class Result implements Serializable {
             }
         }
         frames.setFrameNum(numFrame);
+        Log.i(TAG,"setting FrameNumber : "+frames.getFramesSz());
         return frames;
     }
 
@@ -253,4 +259,7 @@ public class Result implements Serializable {
         return frames;
     }
     */
+
+
+
 }
