@@ -67,7 +67,8 @@
 		<activity android:name="com.example.traceappproject_daram.measure_page.ScanningActivityExtends"></activity>
 		<activity android:name="com.example.traceappproject_daram.measure_page.ScanningActivityExtendsR"></activity>
 		<activity android:name="com.example.traceappproject_daram.measure_page.ScanningActivityModified"></activity>
-		<activity android:name="com.example.traceappproject_daram.TestActivity" />
+		<activity android:name="com.example.traceappproject_daram.TestActivity" >
+		</activity>
 		<activity android:name="com.example.traceappproject_daram.reprot_page.MovingFeetHeatmapActivity">
 
 		</activity>

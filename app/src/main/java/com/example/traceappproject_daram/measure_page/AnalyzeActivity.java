@@ -3,6 +3,7 @@ package com.example.traceappproject_daram.measure_page;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -14,17 +15,25 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.traceappproject_daram.Util;
 import com.example.traceappproject_daram.data.LoginInfo;
 import com.example.traceappproject_daram.data.Result;
 import com.example.traceappproject_daram.measure_page.WalkingActivity;
 import com.example.traceappproject_daram.reprot_page.MovingFeetHeatmapActivity;
+import com.example.traceappproject_daram.reprot_page.heatmap.FeetMultiFrames;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import androidx.appcompat.app.AppCompatActivity;
 import no.nordicsemi.android.nrftoolbox.R;
 import no.nordicsemi.android.nrftoolbox.uart.UARTActivity;
+
+import static com.example.traceappproject_daram.Util.makeFolderPath;
 
 public class AnalyzeActivity extends UARTActivity {
     private Timer timer;
@@ -72,17 +81,37 @@ public class AnalyzeActivity extends UARTActivity {
     private int toPx(int a){
         return (int) (a * Resources.getSystem().getDisplayMetrics().density);
     }
+    String dateString = "2017-3-26 16:40";
+
     public void nextActivity(){
 
         Intent intent = new Intent(AnalyzeActivity.this, MovingFeetHeatmapActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("result", result);   // Object 넘기기
-        bundle.putSerializable("frames",result.parseRaw());
+        //bundle.putSerializable("result", result);   // Object 넘기기
+        //bundle.putSerializable("frames",result.parseRaw());
+        Calendar calendar = Calendar.getInstance();
+        // parse.
+        try {
+            Date formatData = new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(dateString);
+            calendar.setTime(formatData);
+            Util.storeObject(result,makeFolderPath(this,calendar),0);
+            FeetMultiFrames frames = result.parseRaw();
+            Util.storeObject(frames,makeFolderPath(this, calendar),1);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         //Add the bundle to the intent
         intent.putExtras(bundle);
-        startActivity(intent);
-        //종료!!
-        finish();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(intent);
+                //종료!!
+                finish();
+            }
+        },5000);
+
         //WalkingActivity 도 종료
         /*
         ScanningActivity scanningActivity = (ScanningActivity)ScanningActivity.ScanningActivity;

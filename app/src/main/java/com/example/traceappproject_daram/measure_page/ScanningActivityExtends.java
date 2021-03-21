@@ -34,7 +34,6 @@ public class ScanningActivityExtends extends UARTActivity {
                 TextView view = findViewById(R.id.device_name);
                 view.setVisibility(View.INVISIBLE);
             } });
-
     }
     @Override
     protected void onCreateView(Bundle savedInstanceState) {

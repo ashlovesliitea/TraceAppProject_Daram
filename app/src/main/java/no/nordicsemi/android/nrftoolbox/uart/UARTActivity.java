@@ -96,6 +96,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.Serializable;
 import java.io.StringWriter;
 import java.util.UUID;
 
@@ -180,11 +181,14 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
 		startActivity(intent);
 		this.finish();
 	};
+
 	public void nextReportPage(){
 
 		Intent intent = new Intent(UARTActivity.this, MovingFeetHeatmapActivity.class);
 		Bundle bundle = new Bundle();
 		//bundle.putSerializable("result", AnalyzeActivity.result);   // Object 넘기기
+		//bundle 전달 대신 하드에 저장
+
 		bundle.putSerializable("frames",AnalyzeActivity.result.parseRaw());
 		//Add the bundle to the intent
 		intent.putExtras(bundle);

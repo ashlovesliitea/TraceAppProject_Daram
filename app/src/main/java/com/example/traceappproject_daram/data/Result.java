@@ -58,7 +58,7 @@ public class Result implements Serializable {
         FootOneFrame left=null,right=null;
         int numFrame=0;
         Log.i(TAG,"parseRaw : "+leftData.length+" , "+rightData.length);
-        for(int i = 300;i<500;i++){
+        for(int i = 0;i<200;i++){
             //BIAS가 들어가야할 수도 있음
             Log.i(TAG,"idx : "+i+" , each value : "+leftData[i]+" , "+rightData[i]);
             if(leftData[i] == no.nordicsemi.android.nrftoolbox.uart.Cons.DEL&&left ==null){

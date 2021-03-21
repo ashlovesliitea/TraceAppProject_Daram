@@ -34,6 +34,7 @@ import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.example.traceappproject_daram.Util;
 import com.example.traceappproject_daram.data.Result;
 import com.example.traceappproject_daram.measure_page.AnalyzeActivity;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -59,8 +60,6 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
     public static final String BROADCAST_UART_TX = "no.nordicsemi.android.nrftoolbox.uart.BROADCAST_UART_TX";
     public static final String BROADCAST_UART_RX = "no.nordicsemi.android.nrftoolbox.uart.BROADCAST_UART_RX";
     public static final String EXTRA_DATA = "no.nordicsemi.android.nrftoolbox.uart.EXTRA_DATA";
-
-    private int idx= 0;
     /**
      * A broadcast message with this action and the message in {@link Intent#EXTRA_TEXT} will be sent t the UART device.
      */
@@ -199,8 +198,9 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
     public void appendToArr(byte[] byteSet){ //append multiple data
         // do not check validity
         int howmany = byteSet.length-2;
-        System.arraycopy(byteSet,2,UARTConnector.arr,idx,howmany);
-        idx+=howmany;
+        System.arraycopy(byteSet,2,UARTConnector.arr, Util.idx,howmany);
+        Util.idx+=howmany;
+        Log.i(TAG,"appendToArr에서의 idx 변화 : "+ Util.idx);
     }
 
     @Override
@@ -211,7 +211,7 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
         broadcast.putExtra(EXTRA_DATA, data);
         LocalBroadcastManager.getInstance(this).sendBroadcast(broadcast);
 
-
+        Log.i(TAG,"onDataReceived : "+data.length()+" , "+ Util.idx);
         if(data.charAt(1) == Cons.MODE_RUN){
             if(UARTConnector.connectionMode == 0||UARTConnector.connectionMode==1) {
                 manager.send("" + (char) Cons.MODE_VERSION);
@@ -241,19 +241,9 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
             return;
         }
 
-
-
         if(howManyRcv==0) {
             beforetime = System.currentTimeMillis();
             Log.i("UARTService", "first data recieved : " + beforetime);
-        }
-        //0xff 가 mode 값으로 주어졌을 때 종료를 broadcast
-        if(howManyRcv == 100){
-            //last data recieved
-            long aftertime = System.currentTimeMillis();
-            Log.i("UARTService","100 recieved : "+(aftertime-beforetime));
-
-            return;
         }
         //없앨 예정
         if(data.length() != 237){ //마지막거는 똑같이 mtu 237 받을 거 같은데?
@@ -261,17 +251,17 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
             //나중에 시간 여건되면 validity 여기서 체크해도 댐
         }
 
-        boolean isMeasure = (char)data.charAt(1) == (char) Cons.MODE_MEASURE_LEFT||
-                (char)data.charAt(1) == (char) Cons.MODE_MEASURE_RIGHT;
+        boolean isMeasure = (int)data.charAt(1) == (int) 1||
+                (int)data.charAt(1) == (int) 1;
         Log.i("UARTService","how many rcvd = "+howManyRcv+data+"\n is measure?"+isMeasure);
-        Log.i("UARTService","difference in int : "+(int)data.charAt(1)+" , "+ (int) Cons.MODE_MEASURE_LEFT+ ","+ (int) Cons.MODE_MEASURE_RIGHT);
-        if(isMeasure&&idx<900){
+        Log.i("UARTService","difference in int : "+(int)data.charAt(1)+" , "+ (int)Cons.MODE_MEASURE_LEFT+ ","+ (int) Cons.MODE_MEASURE_RIGHT);
+        if(isMeasure&& Util.idx < 1200){
             //테스트를 위해 한계 걸어둠
             //첫번째 세트 delimeter
-            if(/*data.charAt(10) !=0xff*/ idx <500) {
-                Log.i(TAG,"not 10th char : "+(data.length()>=11?data.charAt(10):"there is no 10th char"));
-                //다시 보내기
-                manager.send("" + data.charAt(1));
+            if(/*data.charAt(10) !=0xff*/ true) {
+                //Log.i(TAG,"not 10th char : "+(data.length()>=11?data.charAt(10):"there is no 10th char"));
+                //다시 보내기는 잠시 주석
+                //manager.send("" + data.charAt(1));
 
                 appendToArr(data.getBytes());
                 /*
@@ -284,6 +274,22 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
                     manager.send("" + (char) Cons.MODE_STOP);
                 }
                  */
+                Log.i(TAG,"measure reply 10th char : "+(data.length()>=11?(data.charAt(10)):("less then 10 : "+data.length())));
+                //manager.send("" + (char) Cons.MODE_STOP);
+                //한쪽발에 대해서 measure 종료됐다는 broadcast
+                //result에 arr를 전달해야한다.
+
+                final Intent broadcast3 = new Intent(BleProfileService.BROADCAST_CONNECTION_STATE);
+                if(UARTConnector.connectionMode ==2){
+                    AnalyzeActivity.result.setLeftData(UARTConnector.arr, Util.idx);
+                    broadcast3.putExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.CUSTOM_LEFT_DATA_DONE);
+                }
+                if(UARTConnector.connectionMode ==3) {
+                    AnalyzeActivity.result.setRightData(UARTConnector.arr, Util.idx);
+                    broadcast3.putExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.CUSTOM_RIGHT_DATA_DONE);
+                }
+                LocalBroadcastManager.getInstance(this).sendBroadcast(broadcast3);
+                Log.i(TAG,"sending broadcast : ");
             }
             else{
                 Log.i(TAG,"measure reply 10th char : "+(data.length()>=11?(data.charAt(10)):"less then 10 : "+data.length()));
@@ -293,12 +299,12 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
 
                 final Intent broadcast3 = new Intent(BleProfileService.BROADCAST_CONNECTION_STATE);
                 if(UARTConnector.connectionMode ==2){
-
-                    AnalyzeActivity.result.setLeftData(UARTConnector.arr,idx);
+                    AnalyzeActivity.result.setLeftData(UARTConnector.arr, Util.idx);
                     broadcast3.putExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.CUSTOM_LEFT_DATA_DONE);
+
                 }
                 if(UARTConnector.connectionMode ==3){
-                    AnalyzeActivity.result.setRightData(UARTConnector.arr,idx);
+                    AnalyzeActivity.result.setRightData(UARTConnector.arr, Util.idx);
                     broadcast3.putExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.CUSTOM_RIGHT_DATA_DONE);
                 }
                 LocalBroadcastManager.getInstance(this).sendBroadcast(broadcast3);
@@ -322,8 +328,7 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
             logAppend +=id+"/" + (int)data.charAt(id)+",";
         }
         Log.i("UARTService",logAppend);
-
-         */
+        */
 
         howManyRcv++;
     }

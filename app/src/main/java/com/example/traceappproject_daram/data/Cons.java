@@ -26,5 +26,7 @@ public class Cons {//constants
 
     */
     public static final String IMG_EXT = ".png";
+    //type 0 : result, type 1= frames
+    public static final String NAME_EXT[] = {"result.bin", "frames.bin"};
 
 }

@@ -22,57 +22,28 @@
 
 package no.nordicsemi.android.nrftoolbox.uart;
 
-import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
-import android.database.Cursor;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.CursorAdapter;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.fragment.app.ListFragment;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.CursorLoader;
-import androidx.loader.content.Loader;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import com.example.traceappproject_daram.Util;
 import com.example.traceappproject_daram.data.LoginInfo;
 import com.example.traceappproject_daram.data.Result;
-import com.example.traceappproject_daram.measure_page.AnalyzeActivity;
 import com.example.traceappproject_daram.measure_page.AnalyzeActivityR;
-import com.example.traceappproject_daram.measure_page.ScanningActivityExtends;
-import com.example.traceappproject_daram.measure_page.ScanningActivityExtendsR;
 import com.example.traceappproject_daram.measure_page.WalkingActivity;
-import com.example.traceappproject_daram.reprot_page.MovingFeetHeatmapActivity;
-import com.example.traceappproject_daram.reprot_page.heatmap.FeetMultiFrames;
 
-import no.nordicsemi.android.log.ILogSession;
 import no.nordicsemi.android.log.LogContract;
-import no.nordicsemi.android.nrftoolbox.R;
 import no.nordicsemi.android.nrftoolbox.profile.BleProfileService;
-
-import static no.nordicsemi.android.nrftoolbox.profile.BleProfileService.EXTRA_DEVICE;
-import static no.nordicsemi.android.nrftoolbox.uart.UARTService.ACTION_DISCONNECT;
-import static no.nordicsemi.android.nrftoolbox.uart.UARTService.EXTRA_SOURCE;
-import static no.nordicsemi.android.nrftoolbox.uart.UARTService.SOURCE_NOTIFICATION;
 
 //UARTLogFragment의 변형
 public class UARTConnector {
@@ -86,7 +57,6 @@ public class UARTConnector {
 
 	private static final Result result = new Result(new LoginInfo("exampleid","examplepw"));
 	public static final byte arr[] = new byte[1000000];
-
 	/**
 	 * The service UART interface that may be used to send data to the target.
 	 */
@@ -146,10 +116,10 @@ public class UARTConnector {
 	/**
 	 * The receiver that listens for {@link BleProfileService#BROADCAST_CONNECTION_STATE} action.
 	 */
-	boolean leftInitDoneActivated = false;
-	boolean rightInitDoneActivated = false;
-	boolean leftDataDoneActivated = false;
-	boolean rightDataDoneActivated = false;
+	private static boolean leftInitDoneActivated = false;
+	private static boolean rightInitDoneActivated = false;
+	private static boolean leftDataDoneActivated = false;
+	private static boolean rightDataDoneActivated = false;
 	private final BroadcastReceiver commonBroadcastReceiver = new BroadcastReceiver() {
 
 
@@ -227,7 +197,7 @@ public class UARTConnector {
 								mother.nextActivity(WalkingActivity.class);
 								//mother.onMode(2);
 							}
-						}, 10000);
+						}, 5000);
 					}
 					//엄마가 걷기 페이지로 옮겨가야댐
 					break;
@@ -237,6 +207,7 @@ public class UARTConnector {
 						leftDataDoneActivated = true;
 						clearOpend();
 						Log.i(TAG, "receiver CUSTOM_LEFT_DATA_DONE received");
+						Util.idx= 0;
 						//broad cast를 mother에게 보낸다
 						//mother.disconnectCurrent();
 
@@ -244,6 +215,7 @@ public class UARTConnector {
 							@Override
 							public void run() {
 								mother.disconnectCurrent();
+								Log.i(TAG,"disconnecting left data");
 							}
 						}, 3000);
 
