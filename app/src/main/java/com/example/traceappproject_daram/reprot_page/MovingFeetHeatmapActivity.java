@@ -18,6 +18,13 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.collection.ArrayMap;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.traceappproject_daram.Util;
 import com.example.traceappproject_daram.data.Cons;
 import com.example.traceappproject_daram.data.LoginInfo;
@@ -33,7 +40,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
@@ -50,7 +60,7 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
     public int showIdx = 0;
     private static final String TAG = "MovingFeetHeatmap";
     private Button btnReplay;
-
+    private Button btnSend;
     private Result result = new Result(new LoginInfo("rhalwls","daram"));//일단 여기선 더미데이터 만들게요 ㅠ
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -61,9 +71,9 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
         //frames = new FeetMultiFrames("test");//일단은 여기서 프레임들 다 초기화됨
         Log.i(TAG,"is savedInstanceState null ? "+(savedInstanceState == null));
         Bundle b = getIntent().getExtras();
-        result = (Result) b.getSerializable("result");
+        //result = (Result) b.getSerializable("result");
         frames = (FeetMultiFrames) b.getSerializable("frames");
-        Log.i(TAG,"reuslt passed and print owner of this result "+result.getID());
+        //Log.i(TAG,"reuslt passed and print owner of this result "+result.getID());
         Log.i(TAG,"frames passed and length of this frame is : "+frames.getFramesSz());
 
         map = (HeatMapHolder) findViewById(R.id.feetmap);
@@ -93,10 +103,21 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
                 addData();
             }
         });
-        //처음에 누르고 페이지 나오자마자 히트맵 로드되게..?
 
+        //처음에 누르고 페이지 나오자마자 히트맵 로드되게..?
         drawNewMap();
+        //영상을 다 본다음에 버튼을 눌러야댐
+
+        btnSend = (Button) findViewById(R.id.send_admin);
+        btnSend.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                onClickSendButton();
+            }
+        });
     }
+
+
 
     public void uploadResultImgs(){
         try {
@@ -111,7 +132,6 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
 
     public void saveBitmap(Bitmap bitmap,Calendar resultTime,int idx) {
         String strFilePath = Util.makeFolderPath(this, resultTime);
-
         File file = new File(strFilePath);
         Log.i(TAG,"bitmap path : "+file.getAbsolutePath());
         if (!file.exists())
@@ -120,9 +140,11 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
         Log.i(TAG,"bitmap path : "+fileCacheItem.getAbsolutePath());
         OutputStream out = null;
         try {
+
             fileCacheItem.createNewFile();
             out = new FileOutputStream(fileCacheItem);
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -159,7 +181,9 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
             AsyncTask.execute(new Runnable() {
                 @Override
                 public void run() {
-                    for(int i =0;i<frames.getFramesSz();i++) {
+                    Log.i(TAG,"frame 개수 : "+frames.getFramesSz());
+                    //TODO: i<9 라는 디버그 옵션 지우기
+                    for(int i =0;i<frames.getFramesSz()&&i<9;i++) {
                         drawNewMap();
                         map.forceRefreshOnWorkerThread();
                         //getApplicationContext().getFilesDir().getPath().toString(),"/bitm"+i+".jpg"
@@ -195,12 +219,16 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
         FootOneFrame[] feet = frames.retrieveFrame(showIdx);
         passFeetToHeatMap(feet[0],map);
         passFeetToHeatMap(feet[1],map);
+        for(int i = 0;i<Cons.SENSOR_NUM_FOOT;i++){
+            Log.i(TAG,"sensor value comp : "+feet[0].ps[i]+","+feet[1].ps[i]);
+        }
         Log.i(TAG,"left or right of each foot : "+feet[0].isRight +" , "+feet[1].isRight);
         showIdx++;
         if(showIdx>= Cons.HEATMAP_FRAMES_NUM){
             showIdx =0;
         }
     }
+
     private void passFeetToHeatMap(FootOneFrame footOneFrame, HeatMapHolder map) {
         for (int i = 0; i < Cons.SENSOR_NUM_FOOT; i++) {
             float c1 = footOneFrame.ratioW[i];
@@ -248,5 +276,51 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
         testAsync = !testAsync;
+    }
+    public void onClickSendButton(){
+        RequestQueue queue;
+        String id=LoginInfo.getId();
+        SimpleDateFormat sdf= new SimpleDateFormat("yyyyMMddhhmmss");
+        //TODO 나중에 result의 것으로 바꾸기
+        //String measure_date=sdf.format(new Date());
+        String measure_date = "201702030303";
+        String folderpath= id+"/"+measure_date+ "/";
+        String arch=Integer.toString(3);//아치 단계
+        String heel=Integer.toString(2);//꿈치 단계
+        String admin_send="true";
+
+
+
+        queue = Volley.newRequestQueue(this);
+        String url = "https://clean-circuit-303203.appspot.com/communicatewAndroid/sendMeasure.jsp";
+
+        final StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("id",id);
+                params.put("measure_date",measure_date);
+                params.put("folderpath",folderpath);
+                params.put("arch",arch);
+                params.put("heel",heel);
+                params.put("admin_send",admin_send);
+
+                return params;
+            }
+        };
+
+        stringRequest.setTag("main");
+        queue.add(stringRequest);
+
     }
 }

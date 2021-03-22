@@ -156,20 +156,20 @@
             android:layout_margin="30dp"
             android:background="@drawable/button_round_sign_up"
             android:padding="5dp"
-            android:text="걸음걸이"
+            android:text="걸음거리"
             android:textColor="#6A6B8C"
             android:textStyle="bold"
             app:backgroundTint="#F9F9F9" />
 
 
         <Button
-            android:id="@+id/start_recording"
+            android:id="@+id/send_admin"
             android:layout_width="150dp"
             android:layout_height="60dp"
             android:layout_margin="30dp"
             android:background="@drawable/button_round_sign_up"
             android:padding="5dp"
-            android:text="녹화시작"
+            android:text="관리자 전송"
             android:textColor="#6A6B8C"
             android:textStyle="bold"
             app:backgroundTint="#F9F9F9" />

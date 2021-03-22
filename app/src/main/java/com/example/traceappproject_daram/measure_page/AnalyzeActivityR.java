@@ -22,7 +22,6 @@ import no.nordicsemi.android.nrftoolbox.uart.UARTActivity;
 
 public class AnalyzeActivityR extends UARTActivity {
     private Timer timer;
-    public static Result result;//어디서나 접근가능함
 
     private void hideUI(){
         runOnUiThread(new Runnable(){
@@ -38,7 +37,6 @@ public class AnalyzeActivityR extends UARTActivity {
     @Override
     protected void onCreateView(Bundle savedInstanceState) {
         //super.onCreate(savedInstanceState);
-        result = new Result(new LoginInfo("id example","pwexample"));
         setContentView(R.layout.activity_analyze);
         LayoutInflater layoutInflater = getLayoutInflater();
         View layout = layoutInflater.inflate(R.layout.custom_toast,(ViewGroup)findViewById(R.id.custom_toast_container));
@@ -70,23 +68,6 @@ public class AnalyzeActivityR extends UARTActivity {
     }
     public void nextActivity(){
 
-        Intent intent = new Intent(AnalyzeActivityR.this, MovingFeetHeatmapActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("result", result);   // Object 넘기기
-        bundle.putSerializable("frames",result.parseRaw());
-        //Add the bundle to the intent
-        intent.putExtras(bundle);
-        startActivity(intent);
-        //종료!!
-        finish();
-        //WalkingActivity 도 종료
-        /*
-        ScanningActivity scanningActivity = (ScanningActivity)ScanningActivity.ScanningActivity;
-        scanningActivity.finish();
-       WalkingActivity walkingActivity = (WalkingActivity)WalkingActivity.WalkingActivity;
-        walkingActivity.finish();
-
-         */
     }
     @Override
     public void onBackPressed() {

@@ -1,6 +1,9 @@
 package com.example.traceappproject_daram.reprot_page.heatmap;
 
+import android.os.Build;
 import android.util.Log;
+
+import androidx.annotation.RequiresApi;
 
 import com.example.traceappproject_daram.data.Cons;
 import com.example.traceappproject_daram.data.Result;
@@ -24,7 +27,7 @@ public class FootOneFrame implements Serializable {
     */
     //밑에건 그냥 임의로 예쁘게 매핑한거
     //사진 크롭하게 되면서 FINAL 이 빠지게됨
-    public static int[] EX_WIDTH =  {500,750,600,400,700,600,500,750};
+    public static int[] EX_WIDTH =  {600,500,750,400,700,600,500,750};
     public static int[] EX_HEIGHT = {500,500,850,1200,1200,1800,2350,2350};
 
     //crop후 width
@@ -33,9 +36,15 @@ public class FootOneFrame implements Serializable {
 
     public boolean isRight = false;
 
+    public String getVals(){
+        String ret= "";
+        for(int i = 0;i<Cons.SENSOR_NUM_FOOT;i++){
+            ret+=Double.toString(this.ps[i])+" ";
+        }
+        return ret;
+    }
 
-
-
+    /*
     public FootOneFrame(boolean isRight){
         //calcRatio();//이건 static 하게 만들어서 처음에 한 번만 호출되게 하자
         calcRatio();
@@ -46,6 +55,7 @@ public class FootOneFrame implements Serializable {
             setPsAsExample2();
         }
     }
+
     public FootOneFrame(boolean isRight, int version){
         calcRatio();
         this.isRight = isRight;
@@ -54,22 +64,23 @@ public class FootOneFrame implements Serializable {
         }
 
     }
+     */
     public String TAG = "FootOneFrame";
-    public FootOneFrame(byte[] rawData, int sidx,boolean isRight){
-        if(!Result.isFoot(sidx)){
-            //not valid
-        }
-        for(int i = sidx;i<Cons.SENSOR_NUM_FOOT;i++){
-            ps[i] = (double)rawData[i];
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public FootOneFrame(byte[] rawData, int sidx, boolean isRight){
+        Log.i(TAG,"foot one frame called"+Cons.SENSOR_NUM_FOOT+" , "+sidx+" , "+rawData[sidx]+","+rawData[sidx+1]+rawData[sidx+2]);
+        for(int i = 0;i<Cons.SENSOR_NUM_FOOT;i++){
+            ps[i] = (double)Byte.toUnsignedInt(rawData[sidx+i]);
+            //Log.i(TAG,"RAW DATA CONVERSION : "+rawData[sidx+i]+","+(int) rawData[sidx+i]+","+(double)(int)rawData[sidx+i]);
         }
         calcRatio();
-        Log.i(TAG,"after calcRatio : "+ ratioW[0]+ratioH[0]);
+        Log.i(TAG,"after calcRatio : "+ ratioW[0]+","+ratioH[0]+","+ps[0]+","+ps[1]);
         if(isRight){
             //이게 맞는 거 같은데 반대일수도있음
             makeMeRight();
         }
     }
-    
+    /*
     public FootOneFrame(byte[] rawData,boolean isRight){
         calcRatio();
         if(isRight){
@@ -78,9 +89,8 @@ public class FootOneFrame implements Serializable {
         for(int i = 0;i<Cons.SENSOR_NUM_FOOT;i++){
             ps[i] = (double)rawData[i];
         }
-
     }
-
+    */
 
       //  calcRatio();
     public void setPtIdx(int idx, double p){//assign pressure to points
@@ -92,18 +102,17 @@ public class FootOneFrame implements Serializable {
         for (int i = 0; i < Cons.SENSOR_NUM_FOOT; i++) {
             ratioW[i] = (float) ratioW[i] + (float) ((float) 800 / (double) EX_FULL_WIDTH);
         }
-
         calcRatio();
     }
-
-     */
+    */
 
     public void makeMeRight(){
         //양발이 같은 높이이기 때문에 w만 대칭
         //데모는 대칭으로 해야 편한 건 맞는데
         //실측값은 그대로 0-7센서가 왼발이랑 똑같이 들어오니까 평행이동으로 처리해야댐
+        this.isRight =true;
         for(int i = 0; i< Cons.SENSOR_NUM_FOOT; i++) {
-            ratioW[i] = (float) ratioW[i] + (float)((float)800/(double)EX_FULL_WIDTH);
+            ratioW[i] = (float) ratioW[i] + (float)((float)800/ (double) EX_FULL_WIDTH);
         }
     }
 
@@ -115,6 +124,7 @@ public class FootOneFrame implements Serializable {
             ratioH[i] = (float) EX_HEIGHT[i]/(float) EX_FULL_HEIGHT;
         }
     }
+    /*
     public void setPsAsExample2() {
         //어떻게 하면 툭 튀어나오는 걸 막을 수 있을까.. 강도를 gradient 끝에보다 약하게 하면 좋을 텐데
         double ds[] = {7, 9, 9, 5, 4, 3, 7, 8, 8};
@@ -129,4 +139,5 @@ public class FootOneFrame implements Serializable {
             ps[i] = ds[i];
         }
     }
+     */
 }

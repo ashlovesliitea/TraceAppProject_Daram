@@ -17,7 +17,7 @@ public class Cons {//constants
     public static final int MAX_MEASURE_SEC = 30;
     public static final int MIN_FRAMES_NUM = MEASURE_NUM_1SEC*MIN_MEASURE_SEC;
     public static final int MAX_FRAMES_NUM = MEASURE_NUM_1SEC*MAX_MEASURE_SEC;//10ms마다 측정&20초 걷기
-    public static final byte DEL = 0x2c;
+    public static final byte DEL = 0x2C;//','
 
     /*
 

@@ -135,11 +135,13 @@ public class HeatMapFeetOneFrame extends AppCompatActivity implements CompoundBu
         point = new HeatMap.DataPoint(c1, c2, c3);
         map.addData(point);
          */
-
+        /*
         FootOneFrame left = new FootOneFrame(false);
         FootOneFrame right = new FootOneFrame(true);
         passFeetToHeatMap(left, map);
         passFeetToHeatMap(right,map);
+        
+         */
     }
 
     private void passFeetToHeatMap(FootOneFrame footOneFrame, HeatMapHolder map) {

@@ -3,8 +3,8 @@ package com.example.traceappproject_daram.data;
 import java.io.Serializable;
 
 public class LoginInfo implements Serializable {
-    private String id;
-    private String pw;
+    private static String id = "not assigned id";
+    private static String pw = "not assigned pw";
 
     public LoginInfo(String id, String pw) {
         this.id = id;
@@ -15,19 +15,19 @@ public class LoginInfo implements Serializable {
         this.id = "daram01";
         this.pw = "dldmsdk";
     }
-    public String getId() {
+    public static String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public static void setId(String i) {
+        id = i;
     }
 
-    public String getPw() {
+    public static String getPw() {
         return pw;
     }
 
-    public void setPw(String pw) {
-        this.pw = pw;
+    public static void setPw(String p) {
+        pw = p;
     }
 }

@@ -1,7 +1,11 @@
 package com.example.traceappproject_daram.data;
 
+import android.os.Build;
 import android.util.Log;
 
+import androidx.annotation.RequiresApi;
+
+import com.example.traceappproject_daram.Util;
 import com.example.traceappproject_daram.reprot_page.heatmap.FeetMultiFrames;
 import com.example.traceappproject_daram.reprot_page.heatmap.FootOneFrame;
 
@@ -35,15 +39,20 @@ public class Result implements Serializable {
         //dummy
         this.calendar = Calendar.getInstance();
         this.loginInfo = loginInfo;
+        this.leftData = new byte[3000];
+        this.rightData = new byte[3000];
         clearData();
     }
     public void setLeftData(byte[] arr,int len){
-        leftData = arr.clone();
+
+        System.arraycopy(arr, 0, leftData, 0, len);
         leftidx = len;
         //index의 limit을 어떻게 할것인가
     }
     public void setRightData(byte[] arr, int len){
-        rightData = arr.clone();
+        Log.i(TAG,"setting right data : "+len+", "+arr[0]+","+arr[1]+","+arr[2]);
+        System.arraycopy(arr, 0, rightData, 0, len);
+        Log.i(TAG,"setting right data after copy : "+len+", "+rightData[0]+","+rightData[1]+","+rightData[2]);
         rightidx = len;
     }
     public String getID(){
@@ -53,11 +62,37 @@ public class Result implements Serializable {
     //가정은 그냥 300언저리에서 시간이 많이 지났음에도 시간적으로 같은 순간의 데이터를 양 발이 수집했을 것이다
     //시간적으로 일치하지 않을 가능성 있음
     public static String TAG = "Result";
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public FeetMultiFrames parseRaw(){//validation을 하면서 유효한 frame 만건져서 띄우기
         FeetMultiFrames frames = new FeetMultiFrames();
         FootOneFrame left=null,right=null;
-        int numFrame=0;
+        int numLFrame=0;
         Log.i(TAG,"parseRaw : "+leftData.length+" , "+rightData.length);
+
+        for(int i = 0;i<200&&numLFrame<10;i++) {
+            if(leftData[i] == no.nordicsemi.android.nrftoolbox.uart.Cons.DEL){
+                Log.i(TAG,"appending left data at : "+i+" ,,, " +leftData[i]+","+leftData[i+1]+","+leftData[i+2]);
+                left = new FootOneFrame(leftData,i+1,false);
+                frames.appendAFrame(left,numLFrame,false);
+                numLFrame++;
+            }
+        }
+
+        int numRFrame = 0;
+        for(int i = 0 ; i<200 && numRFrame<10 ;i++){
+            if(rightData[i] == no.nordicsemi.android.nrftoolbox.uart.Cons.DEL){
+                Log.i(TAG,"appending right data at : " + i + " ,,, " + rightData[i] + "," + rightData[i + 1]+","+rightData[i+2]);
+                right = new FootOneFrame(rightData,i+1,true);
+                frames.appendAFrame(right,numRFrame,true);
+                numRFrame++;
+            }
+        }
+
+        frames.setFrameNum(Math.min(numRFrame,numLFrame));
+        Log.i(TAG,"MIN FRAME NUM"+frames.getFramesSz()+","+Math.min(numLFrame,numRFrame));
+
+        /*
+
         for(int i = 0;i<200;i++){
             //BIAS가 들어가야할 수도 있음
             Log.i(TAG,"idx : "+i+" , each value : "+leftData[i]+" , "+rightData[i]);
@@ -79,11 +114,13 @@ public class Result implements Serializable {
                 right=null;
             }
         }
-        frames.setFrameNum(numFrame);
+         */
         Log.i(TAG,"setting FrameNumber : "+frames.getFramesSz());
         return frames;
     }
+    public void sendToServer(){
 
+    }
     public void setVersion(int v){
         archLevel = 3;
         backLevel=3;
@@ -96,7 +133,9 @@ public class Result implements Serializable {
         //data = new byte[Cons.MAX_FRAMES_NUM];
         idxInput =0;
     }
-
+    public byte[] getRightData(){
+        return rightData;
+    }
     //append 시 맨앞 s랑 echo는 안 넣는 걸로
     public void appendLeft(byte[] leftSet){ //append multiple data
         // do not check validity
@@ -145,6 +184,52 @@ public class Result implements Serializable {
     }
     public Calendar getCalendar() {
         return calendar;
+    }
+    public boolean isBack(byte data[],int frameIdx){
+        boolean allActivated = true;
+        //아치가 먼저임
+        for(int sensorPos = Cons.ARCH_SENSOR_NUM; sensorPos< Cons.BACK_SENSOR_NUM; sensorPos++){
+            if(data[frameIdx+sensorPos]< Cons.THRESH_ACTIVATED){
+                allActivated = false;
+                break;
+            }
+        }
+        return allActivated;
+    }
+    //BACK을 제외한 모든 센서가 9찍어야 하는데 이런 경우는 거의 없을 거같음
+    public boolean isArch(byte data[],int frameIdx){
+        boolean allActivated = true;
+        for(int sensorPos = 0; sensorPos< Cons.ARCH_SENSOR_NUM; sensorPos++){
+            if(data[frameIdx+sensorPos]< Cons.THRESH_ACTIVATED){
+                allActivated = false;
+                break;
+            }
+        }
+        return allActivated;
+    }
+    public int calcBackIdx(byte data[]){
+        for(int i = 0;i<data.length;i++){
+            if(data[i] == (byte)',') {
+                if (isBack(data, i)) {
+                    Log.i(TAG,"back idx : "+i);
+                    return i;
+                }
+            }
+        }
+        Log.i(TAG,"back idx : fail");
+        return 2;
+    }
+    public int calcArchIdx(byte data[]){
+        for(int i = 0;i<data.length;i++){
+            if(data[i] == (byte)',') {
+                if (isArch(data, i)) {
+                    Log.i(TAG,"arch idx : found "+i);
+                    return i;
+                }
+            }
+        }
+        Log.i(TAG,"arch idx : fail ");
+        return 2;
     }
     /*
     //deceperated
@@ -199,6 +284,9 @@ public class Result implements Serializable {
     int calcIdx(int frameIdx, boolean isRight){
         return calcIdx(frameIdx, isRight, 0);
     }
+    */
+    //data 배열을 누구를 주느냐에 따라 왼발/오른발 결정
+    /*
     //딥러닝 써서 할 수도 있겠지만 일단 산술적인 코드
     public boolean isBack(int frameIdx,boolean isRight){
         boolean allActivated = true;
@@ -222,7 +310,7 @@ public class Result implements Serializable {
         }
         return allActivated;
     }
-
+    /*
     public static boolean isMeasure(byte b){
         return b!=Constants.MODE_MEASURE_LEFT&&b!=Constants.MODE_MEASURE_RIGHT;
     }
@@ -259,7 +347,5 @@ public class Result implements Serializable {
         return frames;
     }
     */
-
-
 
 }

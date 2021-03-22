@@ -143,6 +143,7 @@ public class Util {
             e.printStackTrace();
         }
     }
+
     //나중에 형변환 필요
     public static Result reviveResult(String path){
         path +="/"+NAME_EXT[0];

@@ -39,6 +39,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import com.example.traceappproject_daram.Util;
 import com.example.traceappproject_daram.data.LoginInfo;
 import com.example.traceappproject_daram.data.Result;
+import com.example.traceappproject_daram.measure_page.AnalyzeActivity;
 import com.example.traceappproject_daram.measure_page.AnalyzeActivityR;
 import com.example.traceappproject_daram.measure_page.WalkingActivity;
 
@@ -207,7 +208,7 @@ public class UARTConnector {
 						leftDataDoneActivated = true;
 						clearOpend();
 						Log.i(TAG, "receiver CUSTOM_LEFT_DATA_DONE received");
-						Util.idx= 0;
+
 						//broad cast를 mother에게 보낸다
 						//mother.disconnectCurrent();
 
@@ -223,6 +224,7 @@ public class UARTConnector {
 							@Override
 							public void run() {
 								//mother.onMode(3);
+								Util.idx= 0;
 								mother.nextActivity(AnalyzeActivityR.class);
 							}
 						}, 10000);
@@ -233,6 +235,12 @@ public class UARTConnector {
 						rightDataDoneActivated = true;
 						clearOpend();
 						Log.i(TAG,"receiver CUSTOM_RIGHT_DATA_DONE received");
+						String rightLog="";
+						for(int i = 0;i<50;i++){
+							int v = AnalyzeActivity.result.getRightData()[i];
+							rightLog+=" 0x"+Integer.toHexString(v);
+						}
+						//Log.i(TAG,"right data : "+ rightLog);
 						//mother.disconnectCurrent();
 						//parse result and connect to Heatmap activity
 

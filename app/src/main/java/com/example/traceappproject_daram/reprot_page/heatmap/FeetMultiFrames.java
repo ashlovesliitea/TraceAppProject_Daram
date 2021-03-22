@@ -38,7 +38,11 @@ public class FeetMultiFrames implements Serializable {
         initFramesForTest();
         frameNum = 9;
     }
-
+    public void appendAFrame(FootOneFrame frame, int idx, boolean isRight){
+        Log.i(TAG,"appending a frame : "+ idx+ " , "+isRight+" , "+frame.ratioH[0]+" , "+frame.ratioW[0]+" , "+frame.ps[0]);
+        frames[idx][(isRight?1:0)] = frame;
+    }
+    /*
     public void appendFootFrame(FootOneFrame left, FootOneFrame right){ //시간적으로 일치해야만 append 가능
         //일단은 counter 2개 다 두면서 일치할 때만 넣는걸로
         //왼발은 실측값으로 오른 발은 그냥 더미로
@@ -47,9 +51,10 @@ public class FeetMultiFrames implements Serializable {
         frames[insertIdx][1] = right;
         insertIdx++;
     }
-
+    */
     //foot one frame을 어케 저장할까..
     public void initFramesForTest(){
+        /*
         frames[0][0] = new FootOneFrame(back1,false);
         frames[0][1] = new FootOneFrame(empt1,true);
         frames[1][0] = new FootOneFrame(bami1,false);
@@ -71,6 +76,8 @@ public class FeetMultiFrames implements Serializable {
         frames[7][1] = new FootOneFrame(miar2,true);
         frames[8][0] = new FootOneFrame(empt1,false);
         frames[8][1] = new FootOneFrame(arch2,true);
+
+         */
     }
 
     public void setFrameNum(int frameNum) {
@@ -82,9 +89,10 @@ public class FeetMultiFrames implements Serializable {
         // 일케 말고 frame 계싼해야댐
         //return frames.length;
     }
+
     public FootOneFrame[] retrieveFrame(int idx){
         Log.i(TAG,"retrieving frame idx "+idx);
-        Log.i(TAG,"first value of each foot "+frames[idx][0].ratioW[0]+" , "+frames[idx][1].ratioW[0]);
+        Log.i(TAG,"first value of each foot "+frames[idx][0].ratioW[0] + " , " + frames[idx][1].ratioW[0]);
         Log.i(TAG,"first value of each foot "+frames[idx][0].ps[2]+" , "+frames[idx][1].ps[2]);
         return frames[idx];
     }

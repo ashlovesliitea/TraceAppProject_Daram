@@ -54,6 +54,7 @@ import com.example.traceappproject_daram.measure_page.AnalyzeActivity;
 import com.example.traceappproject_daram.measure_page.ScanningActivityExtends;
 import com.example.traceappproject_daram.measure_page.WalkingActivity;
 import com.example.traceappproject_daram.reprot_page.MovingFeetHeatmapActivity;
+import com.example.traceappproject_daram.reprot_page.heatmap.FeetMultiFrames;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.RequiresApi;
@@ -188,9 +189,10 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
 		Bundle bundle = new Bundle();
 		//bundle.putSerializable("result", AnalyzeActivity.result);   // Object 넘기기
 		//bundle 전달 대신 하드에 저장
-
-		bundle.putSerializable("frames",AnalyzeActivity.result.parseRaw());
+		FeetMultiFrames frames = AnalyzeActivity.result.parseRaw();
+		bundle.putSerializable("frames",frames);
 		//Add the bundle to the intent
+		Log.i(TAG,"frames null? : "+(frames==null));
 		intent.putExtras(bundle);
 		startActivity(intent);
 		//종료!!
@@ -201,7 +203,6 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
         scanningActivity.finish();
        WalkingActivity walkingActivity = (WalkingActivity)WalkingActivity.WalkingActivity;
         walkingActivity.finish();
-
          */
 	}
 

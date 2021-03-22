@@ -46,8 +46,9 @@ public class TestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
+        convTest();
         //testComm();
-        storeDummy(this);
+        //storeDummy(this);
         /*
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -64,7 +65,7 @@ public class TestActivity extends AppCompatActivity {
             }
         },5000);
         */
-        fetchResults();
+        //fetchResults();
     }
 
     public void testComm(){
@@ -104,5 +105,9 @@ public class TestActivity extends AppCompatActivity {
             Log.w("test"," f : "+f.getPath() +" , "+f.getPath().endsWith(".gif"));
             Log.i("test"," f : "+f.getName() +" , "+f.getName().endsWith(".gif"));
         }
+    }
+    public void convTest(){
+        byte b = (byte) 0xff;
+        Log.i(TAG,"BYTE : "+(int)b+" , "+(byte)(int)b);
     }
 }

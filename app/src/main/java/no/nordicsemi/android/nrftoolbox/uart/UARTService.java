@@ -37,6 +37,7 @@ import android.util.Log;
 import com.example.traceappproject_daram.Util;
 import com.example.traceappproject_daram.data.Result;
 import com.example.traceappproject_daram.measure_page.AnalyzeActivity;
+import com.example.traceappproject_daram.measure_page.AnalyzeActivityR;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.wearable.MessageApi;
 import com.google.android.gms.wearable.Node;
@@ -250,9 +251,10 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
             Log.i("UARTService","wrong length data "+ data.length());
             //나중에 시간 여건되면 validity 여기서 체크해도 댐
         }
+        //하드웨어가 달라져서 넣는 코드
 
         boolean isMeasure = (int)data.charAt(1) == (int) 1||
-                (int)data.charAt(1) == (int) 1;
+                (int)data.charAt(1) == (int) Cons.MODE_MEASURE_LEFT||(int) data.charAt(1) ==(int) Cons.MODE_MEASURE_RIGHT;
         Log.i("UARTService","how many rcvd = "+howManyRcv+data+"\n is measure?"+isMeasure);
         Log.i("UARTService","difference in int : "+(int)data.charAt(1)+" , "+ (int)Cons.MODE_MEASURE_LEFT+ ","+ (int) Cons.MODE_MEASURE_RIGHT);
         if(isMeasure&& Util.idx < 1200){
@@ -264,22 +266,14 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
                 //manager.send("" + data.charAt(1));
 
                 appendToArr(data.getBytes());
-                /*
-                long cur = System.currentTimeMillis();
-                Log.i("UARTService", "send subsquent measure command : " + cur + " , " + (cur - beforetime));
-                if (cur - beforetime < Cons.MIN_MEASURE_SEC * 1000) {
-                    //uartmanager의 write 함수 써야댐
-                    manager.send("" + data.charAt(1));
-                } else { //if not end write subsequently
-                    manager.send("" + (char) Cons.MODE_STOP);
-                }
-                 */
+
                 Log.i(TAG,"measure reply 10th char : "+(data.length()>=11?(data.charAt(10)):("less then 10 : "+data.length())));
                 //manager.send("" + (char) Cons.MODE_STOP);
                 //한쪽발에 대해서 measure 종료됐다는 broadcast
                 //result에 arr를 전달해야한다.
 
                 final Intent broadcast3 = new Intent(BleProfileService.BROADCAST_CONNECTION_STATE);
+                Log.i(TAG,"setting data to result : "+Util.idx+" , ");
                 if(UARTConnector.connectionMode ==2){
                     AnalyzeActivity.result.setLeftData(UARTConnector.arr, Util.idx);
                     broadcast3.putExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.CUSTOM_LEFT_DATA_DONE);
@@ -290,9 +284,10 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
                 }
                 LocalBroadcastManager.getInstance(this).sendBroadcast(broadcast3);
                 Log.i(TAG,"sending broadcast : ");
+
             }
             else{
-                Log.i(TAG,"measure reply 10th char : "+(data.length()>=11?(data.charAt(10)):"less then 10 : "+data.length()));
+                Log.i(TAG,"measure reply 10th char else: "+(data.length()>=11?(data.charAt(10)):" less then 10 : "+data.length()));
                 //manager.send("" + (char) Cons.MODE_STOP);
                 //한쪽발에 대해서 measure 종료됐다는 broadcast
                 //result에 arr를 전달해야한다.

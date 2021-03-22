@@ -131,8 +131,12 @@ public class OldShowFeetHeatmap extends AppCompatActivity implements CompoundBut
         point = new HeatMap.DataPoint(c1, c2, c3);
         map.addData(point);
          */
+        /*
+
         FootOneFrame footOneFrame = new FootOneFrame(false);
         passFeetToHeatMap(footOneFrame, map);
+
+         */
     }
     private void passFeetToHeatMap(FootOneFrame footOneFrame, HeatMapHolder map){
         for(int i = 0; i< Cons.SENSOR_NUM_FOOT; i++){
