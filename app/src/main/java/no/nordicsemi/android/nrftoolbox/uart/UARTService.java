@@ -45,6 +45,7 @@ import com.google.android.gms.wearable.NodeApi;
 import com.google.android.gms.wearable.Wearable;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import no.nordicsemi.android.log.Logger;
@@ -204,6 +205,7 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
         Log.i(TAG,"appendToArr에서의 idx 변화 : "+ Util.idx);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onDataReceived(@NonNull final BluetoothDevice device, final String data) {
 
@@ -276,10 +278,14 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
                 Log.i(TAG,"setting data to result : "+Util.idx+" , ");
                 if(UARTConnector.connectionMode ==2){
                     AnalyzeActivity.result.setLeftData(UARTConnector.arr, Util.idx);
+                    //TODO: 더미로 단순 증가하게 설정한 거 지워야댐
+                    //AnalyzeActivity.result.setLeftAsDummy();
                     broadcast3.putExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.CUSTOM_LEFT_DATA_DONE);
                 }
                 if(UARTConnector.connectionMode ==3) {
                     AnalyzeActivity.result.setRightData(UARTConnector.arr, Util.idx);
+                    //TODO: 더미로 단순 증가하게 설정한 거 지워야댐
+                    //AnalyzeActivity.result.setRightAsDummy();
                     broadcast3.putExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.CUSTOM_RIGHT_DATA_DONE);
                 }
                 LocalBroadcastManager.getInstance(this).sendBroadcast(broadcast3);

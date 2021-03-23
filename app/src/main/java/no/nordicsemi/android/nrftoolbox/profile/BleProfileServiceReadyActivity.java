@@ -499,7 +499,6 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 				final ScannerFragment dialog = ScannerFragment.getInstance(getFilterUUID());
 				dialog.show(getSupportFragmentManager(), "scan_fragment");
 				dialog.setMomActivity(this);
-
 				 */
 
 			} else {
@@ -511,7 +510,7 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 	}
 	public void disconnectCurrent(){
 		Log.i(TAG,"disconnectCurrent called");
-		if(service!=null)
+		//if(service!=null)
 		service.disconnect();
 	}
 

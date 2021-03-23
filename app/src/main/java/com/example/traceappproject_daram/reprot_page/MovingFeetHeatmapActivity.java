@@ -72,6 +72,7 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
         Log.i(TAG,"is savedInstanceState null ? "+(savedInstanceState == null));
         Bundle b = getIntent().getExtras();
         result = (Result) b.getSerializable("result");
+
         frames = (FeetMultiFrames) b.getSerializable("frames");
         //Log.i(TAG,"reuslt passed and print owner of this result "+result.getID());
         Log.i(TAG,"frames passed and length of this frame is : "+frames.getFramesSz());

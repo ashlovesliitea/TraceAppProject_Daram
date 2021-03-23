@@ -154,6 +154,7 @@ public class UARTConnector {
 
 					sendData(Cons.MODE_MEASURE_LEFT);
 					break;
+
 				case BleProfileService.CUSTOM_LEFT_INIT_DONE:
 					//sendData(Cons.MODE_RUN);//근데 이건 uartconnector를 새로 만들어야할듯
 					//이걸 받았을 때 왼발이 끊어진 상태가 아닐수도 잇슴
@@ -215,7 +216,7 @@ public class UARTConnector {
 						new Handler().postDelayed(new Runnable() {
 							@Override
 							public void run() {
-								mother.disconnectCurrent();
+								//mother.disconnectCurrent();
 								Log.i(TAG,"disconnecting left data");
 							}
 						}, 3000);

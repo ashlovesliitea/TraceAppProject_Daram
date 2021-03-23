@@ -178,9 +178,10 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
 	}
 	public void nextActivity(Class<?> cls){
 		Log.i(TAG, "nextActivity called ");
+		this.finish();
 		Intent intent = new Intent(this, cls);
 		startActivity(intent);
-		this.finish();
+
 	};
 
 	@RequiresApi(api = Build.VERSION_CODES.O)

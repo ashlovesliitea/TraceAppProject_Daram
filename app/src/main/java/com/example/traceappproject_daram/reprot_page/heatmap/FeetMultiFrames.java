@@ -53,7 +53,6 @@ public class FeetMultiFrames implements Serializable {
     */
     //foot one frame을 어케 저장할까..
     public void initFramesForTest(){
-
         frames[0][0] = new FootOneFrame(back1,false);
         frames[0][1] = new FootOneFrame(empt1,true);
         frames[1][0] = new FootOneFrame(bami1,false);

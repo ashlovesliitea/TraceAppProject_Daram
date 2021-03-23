@@ -9,6 +9,8 @@ import com.example.traceappproject_daram.Util;
 import com.example.traceappproject_daram.reprot_page.heatmap.FeetMultiFrames;
 import com.example.traceappproject_daram.reprot_page.heatmap.FootOneFrame;
 
+import org.jsoup.select.Evaluator;
+
 import java.io.Serializable;
 import java.util.Calendar;
 
@@ -42,6 +44,30 @@ public class Result implements Serializable {
         this.leftData = new byte[3000];
         this.rightData = new byte[3000];
         clearData();
+    }
+    public void setLeftAsDummy(){
+        for(int i = 0;i<230;i++){
+            if(i%8 == 0){
+                leftData[i] = (byte)',';
+                continue;
+            }
+            leftData[i] = (byte)i;
+        }
+    }
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void setRightAsDummy(){
+        for(byte i = (byte)0xff;i>=0;i--){
+            if(i%8==0){
+                rightData[i] = (byte) ',';
+                continue;
+            }
+            rightData[i] = (byte)i;
+        }
+        String str = "";
+        for(int i =100;i>=0;i--){
+            str+= Integer.toHexString(Byte.toUnsignedInt(rightData[i]))+" ";
+        }
+        Log.i(TAG,"RIGHT DATA : "+str);
     }
     public void setLeftData(byte[] arr,int len){
 
