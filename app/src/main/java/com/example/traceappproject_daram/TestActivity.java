@@ -43,13 +43,16 @@ import static com.example.traceappproject_daram.Util.uploadObjToFire;
 public class TestActivity extends AppCompatActivity {
     private String TAG = "TESTACTIVITY";
     private Button btnSave;
-    public Result result;
+    public Result result ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
         btnSave  = (Button) findViewById(R.id.test_save_button);
+
+
+        /*
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,6 +78,12 @@ public class TestActivity extends AppCompatActivity {
                 },3000);
             }
         });
+
+         */
+    }
+    public void dummyMeasure(){
+        Result result = new Result(new LoginInfo("lovely","kei"));
+
     }
     public void testComm(){
         SendImg sendImg = new SendImg("sdfg",3,this);

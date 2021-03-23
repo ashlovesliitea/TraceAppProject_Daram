@@ -50,7 +50,10 @@
 		tools:ignore="GoogleAppIndexingWarning" >
 
 		<activity android:name="com.example.traceappproject_daram.x_1Activity">
-
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
 		</activity>
 		<activity android:name="com.example.traceappproject_daram.x_2Activity" />
 		<activity android:name="com.example.traceappproject_daram.x9.RecyclerViewActivity">
@@ -65,11 +68,6 @@
 		<activity android:name="com.example.traceappproject_daram.measure_page.ScanningActivityExtendsR"></activity>
 		<activity android:name="com.example.traceappproject_daram.measure_page.ScanningActivityModified"></activity>
 		<activity android:name="com.example.traceappproject_daram.TestActivity" >
-
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-				<category android:name="android.intent.category.LAUNCHER" />
-			</intent-filter>
 		</activity>
 		<activity android:name="com.example.traceappproject_daram.reprot_page.MovingFeetHeatmapActivity">
 

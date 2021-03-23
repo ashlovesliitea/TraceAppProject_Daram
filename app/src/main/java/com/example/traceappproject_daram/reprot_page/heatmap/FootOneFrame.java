@@ -80,7 +80,7 @@ public class FootOneFrame implements Serializable {
             makeMeRight();
         }
     }
-    /*
+
     public FootOneFrame(byte[] rawData,boolean isRight){
         calcRatio();
         if(isRight){
@@ -90,7 +90,7 @@ public class FootOneFrame implements Serializable {
             ps[i] = (double)rawData[i];
         }
     }
-    */
+
 
       //  calcRatio();
     public void setPtIdx(int idx, double p){//assign pressure to points

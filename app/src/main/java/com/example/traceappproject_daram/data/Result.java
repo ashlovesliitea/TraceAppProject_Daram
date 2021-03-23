@@ -64,6 +64,7 @@ public class Result implements Serializable {
         FeetMultiFrames frames = new FeetMultiFrames();
         FootOneFrame left=null,right=null;
         int numLFrame=0;
+        //left raw와 right raw를 전부 출력하자.
         Log.i(TAG,"parseRaw : "+leftData.length+" , "+rightData.length);
 
         for(int i = 0;i<200&&numLFrame<10;i++) {

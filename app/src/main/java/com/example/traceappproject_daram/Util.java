@@ -93,7 +93,7 @@ public class Util {
         //파일 명이 중복되지 않도록 날짜를 이용
 
         SimpleDateFormat sdf= new SimpleDateFormat("yyyyMMddhhmmss");
-        String filename= id+"/"+sdf.format(calendar)+idx+ IMG_EXT/*".png"*/;//현재 시간으로 파일명 지정 20191023142634
+        String filename= id+"/"+sdf.format(calendar.getTime())+idx+ IMG_EXT/*".png"*/;//현재 시간으로 파일명 지정 20191023142634
 
 
         //원래 확장자는 파일의 실제 확장자를 얻어와서 사용해야함. 그러려면 이미지의 절대 주소를 구해야함.

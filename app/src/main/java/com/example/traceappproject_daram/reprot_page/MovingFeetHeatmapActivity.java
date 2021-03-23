@@ -100,6 +100,7 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
         btnReplay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                showIdx = 0;
                 addData();
             }
         });
@@ -120,6 +121,7 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
 
 
     public void uploadResultImgs(){
+        Log.i(TAG,"LOGIN INFO : "+ LoginInfo.getId());
         try {
             for(int i = 0;i<frames.getFramesSz();i++) {
                 Util.clickUpload(this, LoginInfo.getId(), result.getCalendar(), i);
@@ -182,8 +184,8 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
                 @Override
                 public void run() {
                     Log.i(TAG,"frame 개수 : "+frames.getFramesSz());
-                    //TODO: i<9 라는 디버그 옵션 지우기
-                    for(int i =0;i<frames.getFramesSz()&&i<9;i++) {
+
+                    for(int i =0;i<frames.getFramesSz();i++) {
                         drawNewMap();
                         map.forceRefreshOnWorkerThread();
                         //getApplicationContext().getFilesDir().getPath().toString(),"/bitm"+i+".jpg"

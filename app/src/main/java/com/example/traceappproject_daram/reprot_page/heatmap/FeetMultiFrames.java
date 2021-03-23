@@ -14,7 +14,6 @@ public class FeetMultiFrames implements Serializable {
     public String TAG = "FootMultiFrames";
 
     //              0 1 2 3 4 5 6 7
-
     byte[] empt1 = {5,5,5,0,0,5,5,5};
     byte[] empt2 = {3,3,5,0,2,5,3,3};
     byte[] back1 = {0,0,0,0,5,7,7,9};
@@ -54,7 +53,7 @@ public class FeetMultiFrames implements Serializable {
     */
     //foot one frame을 어케 저장할까..
     public void initFramesForTest(){
-        /*
+
         frames[0][0] = new FootOneFrame(back1,false);
         frames[0][1] = new FootOneFrame(empt1,true);
         frames[1][0] = new FootOneFrame(bami1,false);
@@ -77,7 +76,6 @@ public class FeetMultiFrames implements Serializable {
         frames[8][0] = new FootOneFrame(empt1,false);
         frames[8][1] = new FootOneFrame(arch2,true);
 
-         */
     }
 
     public void setFrameNum(int frameNum) {
