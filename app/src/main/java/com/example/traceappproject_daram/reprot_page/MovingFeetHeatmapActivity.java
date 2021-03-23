@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.AnyThread;
 import androidx.annotation.RequiresApi;
@@ -72,14 +74,16 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
         Log.i(TAG,"is savedInstanceState null ? "+(savedInstanceState == null));
         Bundle b = getIntent().getExtras();
         result = (Result) b.getSerializable("result");
-
+        Log.i(TAG,"arch :"+result.getArchLevel()+", back : "+result.getBackLevel());
+        Toast myToast = Toast.makeText(this.getApplicationContext(),"arch :"+result.getArchLevel()+", back : "+result.getBackLevel(), Toast.LENGTH_LONG);
+        myToast.show();
         frames = (FeetMultiFrames) b.getSerializable("frames");
         //Log.i(TAG,"reuslt passed and print owner of this result "+result.getID());
         Log.i(TAG,"frames passed and length of this frame is : "+frames.getFramesSz());
 
         map = (HeatMapHolder) findViewById(R.id.feetmap);
         map.setMinimum(0.0);
-        map.setMaximum(40.0);//강도의 최대값은 얼마냐
+        map.setMaximum(200.0);//강도의 최대값은 얼마냐
         map.setLeftPadding(0);
         map.setRightPadding(0);
         map.setTopPadding(0);
@@ -87,7 +91,15 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
         //marker 색깔 바꿀 수 있음 원랜 0xff9400D3
         map.setMarkerCallback(new HeatMapMarkerCallback.CircleHeatMapMarker(0x00000000));
         map.setRadius(150.0);
-
+        arch0 = findViewById(R.id.arch0);
+        arch1 =findViewById(R.id.arch1);
+        arch2 = findViewById(R.id.arch2);
+        back0 = findViewById(R.id.back0);
+        back1 = findViewById(R.id.back1);
+        back2 = findViewById(R.id.back2);
+        txtArch = findViewById(R.id.txt_arch);
+        txtBack = findViewById(R.id.txt_back);
+        setLevelUI(result.getArchLevel(),result.getBackLevel());
         Map<Float, Integer> colors = new ArrayMap<>();
         //build a color gradient in HSV from red at the center to green at the outside
         for (int i = 0; i < 21; i++) {
@@ -177,6 +189,16 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
         view.draw(canvas);//이건 왜 필요한겨..?
         //return the bitmap
         return returnedBitmap;
+    }
+    private TextView arch0,arch1,arch2;
+    private TextView back0,back1,back2;
+    private TextView txtArch,txtBack;
+    private void setLevelUI(int arch, int back){
+        txtArch.setText("아치"+arch+"단계");
+        txtBack.setText("꿈치"+back+"단계");
+        int y = Color.parseColor("#FFE090"), g = Color.parseColor("#C4C4C4");
+        arch0.setBackgroundColor(arch>=1?y:g);arch1.setBackgroundColor(arch>=2?y:g);arch2.setBackgroundColor(arch>=3?y:g);
+        back0.setBackgroundColor(back>=1?y:g);back1.setBackgroundColor(back>=2?y:g);back2.setBackgroundColor(back>=3?y:g);
     }
     private void addData() {
         Log.i(TAG,"button replay : addData");

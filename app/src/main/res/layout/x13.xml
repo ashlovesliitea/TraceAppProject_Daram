@@ -73,14 +73,15 @@
                 android:text="" />
 
             <TextView
+                android:id="@+id/txt_arch"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:paddingLeft="10dp"
                 android:text=" 아치 "
                 android:textColor="#F9F9F9"
-                android:textStyle="bold"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <com.example.traceappproject_daram.reprot_page.heatmap.HeatMapHolder
@@ -130,14 +131,15 @@
                 android:text="" />
 
             <TextView
+                android:id="@+id/txt_back"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:gravity="center"
                 android:paddingRight="10dp"
                 android:text="뒤꿈치"
-                android:textStyle="bold"
                 android:textColor="#F9F9F9"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </LinearLayout>

@@ -211,22 +211,14 @@ public class UARTConnector {
 						Log.i(TAG, "receiver CUSTOM_LEFT_DATA_DONE received");
 
 						//broad cast를 mother에게 보낸다
-						//mother.disconnectCurrent();
+						mother.disconnectCurrent();
+
 
 						new Handler().postDelayed(new Runnable() {
 							@Override
 							public void run() {
-								//mother.disconnectCurrent();
-								Log.i(TAG,"disconnecting left data");
-							}
-						}, 3000);
-
-						new Handler().postDelayed(new Runnable() {
-							@Override
-							public void run() {
-								//mother.onMode(3);
+								mother.onMode(3);
 								Util.idx= 0;
-								mother.nextActivity(AnalyzeActivityR.class);
 							}
 						}, 10000);
 						}

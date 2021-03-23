@@ -3,6 +3,7 @@ package com.example.traceappproject_daram;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -253,10 +254,13 @@ public class Util {
             @Override
             public void onResponse(String response) {
                 Log.i(TAG,"send record to server resp : "+response);
+                Toast myToast = Toast.makeText(context,"서버 전달 완료!", Toast.LENGTH_SHORT);
+                myToast.show();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Toast myToast = Toast.makeText(context,"서버 전달 실패!", Toast.LENGTH_SHORT);
                 Log.i(TAG,"send record fail : "+error.getMessage());
             }
         }) {

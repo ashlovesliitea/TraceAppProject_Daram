@@ -215,29 +215,21 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
         LocalBroadcastManager.getInstance(this).sendBroadcast(broadcast);
 
         Log.i(TAG,"onDataReceived : "+data.length()+" , "+ Util.idx);
-        if(data.charAt(1) == Cons.MODE_RUN){
-            if(UARTConnector.connectionMode == 0||UARTConnector.connectionMode==1) {
-                manager.send("" + (char) Cons.MODE_VERSION);
-            }
-            else{
-                manager.send(""+(char) Cons.MODE_MEASURE_RIGHT);
-            }
-            //this.stopService();
-            return;
-        }
+
         //version일 때 UARTConnector 변수에 저장해둬야함
         if(data.charAt(1)==Cons.MODE_VERSION){
+            AnalyzeActivity.result.setVersion((int)data.charAt(2));
             Log.i(TAG,"깔창 종류 파싱 : "+String.format("%8s", Integer.toBinaryString((int)data.charAt(2) & 0xFF)).replace(' ', '0'));
-            if(UARTConnector.connectionMode == 0) {
+            if(UARTConnector.connectionMode == 2) {
                 final Intent broadcast2 = new Intent(BleProfileService.BROADCAST_CONNECTION_STATE);
                 //broadcast2.setAction(BleProfileService.BROADCAST_CONNECTION_STATE);
-                broadcast2.putExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.CUSTOM_LEFT_INIT_DONE);
+                broadcast2.putExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.CUSTOM_LEFT_DATA_DONE);
                 LocalBroadcastManager.getInstance(this).sendBroadcast(broadcast2);
             }
-            if(UARTConnector.connectionMode == 1){
+            if(UARTConnector.connectionMode == 3){
                 final Intent rightInitDone = new Intent(BleProfileService.BROADCAST_CONNECTION_STATE);
                 //broadcast2.setAction(BleProfileService.BROADCAST_CONNECTION_STATE);
-                rightInitDone.putExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.CUSTOM_RIGHT_INIT_DONE);
+                rightInitDone.putExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.CUSTOM_RIGHT_DATA_DONE);
                 LocalBroadcastManager.getInstance(this).sendBroadcast(rightInitDone);
             }
             //일단은 disconnect
@@ -255,8 +247,8 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
         }
         //하드웨어가 달라져서 넣는 코드
 
-        boolean isMeasure = (int)data.charAt(1) == (int) 1||
-                (int)data.charAt(1) == (int) Cons.MODE_MEASURE_LEFT||(int) data.charAt(1) ==(int) Cons.MODE_MEASURE_RIGHT;
+        boolean isMeasure = (int)data.charAt(1) == (int) 0||
+                (int)data.charAt(1) == (int) 1||(int) data.charAt(1) ==(int) Cons.MODE_MEASURE_RIGHT;
         Log.i("UARTService","how many rcvd = "+howManyRcv+data+"\n is measure?"+isMeasure);
         Log.i("UARTService","difference in int : "+(int)data.charAt(1)+" , "+ (int)Cons.MODE_MEASURE_LEFT+ ","+ (int) Cons.MODE_MEASURE_RIGHT);
         if(isMeasure&& Util.idx < 1200){
@@ -280,15 +272,16 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
                     AnalyzeActivity.result.setLeftData(UARTConnector.arr, Util.idx);
                     //TODO: 더미로 단순 증가하게 설정한 거 지워야댐
                     //AnalyzeActivity.result.setLeftAsDummy();
-                    broadcast3.putExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.CUSTOM_LEFT_DATA_DONE);
+                    //broadcast3.putExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.CUSTOM_LEFT_DATA_DONE);
                 }
                 if(UARTConnector.connectionMode ==3) {
                     AnalyzeActivity.result.setRightData(UARTConnector.arr, Util.idx);
                     //TODO: 더미로 단순 증가하게 설정한 거 지워야댐
                     //AnalyzeActivity.result.setRightAsDummy();
-                    broadcast3.putExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.CUSTOM_RIGHT_DATA_DONE);
+                    //broadcast3.putExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.CUSTOM_RIGHT_DATA_DONE);
                 }
-                LocalBroadcastManager.getInstance(this).sendBroadcast(broadcast3);
+                //LocalBroadcastManager.getInstance(this).sendBroadcast(broadcast3);
+                manager.send("3");
                 Log.i(TAG,"sending broadcast : ");
 
             }
