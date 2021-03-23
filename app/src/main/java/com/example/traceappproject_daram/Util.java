@@ -4,6 +4,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.util.Log;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.traceappproject_daram.data.LoginInfo;
 import com.example.traceappproject_daram.data.Result;
 import com.example.traceappproject_daram.reprot_page.heatmap.FeetMultiFrames;
@@ -27,6 +34,8 @@ import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -225,7 +234,48 @@ public class Util {
                 Log.i("Util","firebase file upload success :");
             }
         });
-
-
     }
+    private static String TAG = "Util";
+    public static void sendResultRecord(Context context,Result result) {
+        String id=LoginInfo.getId();
+        SimpleDateFormat sdf= new SimpleDateFormat("yyyyMMddhhmmss");
+        String measure_date=sdf.format(result.getCalendar().getTime());
+        String folderpath= id+"/"+measure_date+ "/";
+        String arch=Integer.toString(result.getArchLevel());//아치 단계
+        String heel=Integer.toString(result.getBackLevel());//꿈치 단계
+        String admin_send="true";
+
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String url = "https://clean-circuit-303203.appspot.com/communicatewAndroid/sendMeasure.jsp";
+
+        final StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG,"send record to server resp : "+response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i(TAG,"send record fail : "+error.getMessage());
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("id",id);
+                params.put("measure_date",measure_date);
+                params.put("folderpath",folderpath);
+                params.put("arch",arch);
+                params.put("heel",heel);
+                params.put("admin_send",admin_send);
+                return params;
+            }
+        };
+
+        stringRequest.setTag("main");
+        queue.add(stringRequest);
+    }
+
 }

@@ -71,7 +71,7 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
         //frames = new FeetMultiFrames("test");//일단은 여기서 프레임들 다 초기화됨
         Log.i(TAG,"is savedInstanceState null ? "+(savedInstanceState == null));
         Bundle b = getIntent().getExtras();
-        //result = (Result) b.getSerializable("result");
+        result = (Result) b.getSerializable("result");
         frames = (FeetMultiFrames) b.getSerializable("frames");
         //Log.i(TAG,"reuslt passed and print owner of this result "+result.getID());
         Log.i(TAG,"frames passed and length of this frame is : "+frames.getFramesSz());
@@ -122,7 +122,7 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
     public void uploadResultImgs(){
         try {
             for(int i = 0;i<frames.getFramesSz();i++) {
-                Util.clickUpload(this,result.getID(), result.getCalendar(), i);
+                Util.clickUpload(this, LoginInfo.getId(), result.getCalendar(), i);
                 Log.i(TAG,"UPLOAD IMAGE : "+i);
             }
         } catch (FileNotFoundException e) {
@@ -278,49 +278,6 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
         testAsync = !testAsync;
     }
     public void onClickSendButton(){
-        RequestQueue queue;
-        String id=LoginInfo.getId();
-        SimpleDateFormat sdf= new SimpleDateFormat("yyyyMMddhhmmss");
-        //TODO 나중에 result의 것으로 바꾸기
-        //String measure_date=sdf.format(new Date());
-        String measure_date = "201702030303";
-        String folderpath= id+"/"+measure_date+ "/";
-        String arch=Integer.toString(3);//아치 단계
-        String heel=Integer.toString(2);//꿈치 단계
-        String admin_send="true";
-
-
-
-        queue = Volley.newRequestQueue(this);
-        String url = "https://clean-circuit-303203.appspot.com/communicatewAndroid/sendMeasure.jsp";
-
-        final StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-
-                params.put("id",id);
-                params.put("measure_date",measure_date);
-                params.put("folderpath",folderpath);
-                params.put("arch",arch);
-                params.put("heel",heel);
-                params.put("admin_send",admin_send);
-
-                return params;
-            }
-        };
-
-        stringRequest.setTag("main");
-        queue.add(stringRequest);
-
+        Util.sendResultRecord(this, result);
     }
 }

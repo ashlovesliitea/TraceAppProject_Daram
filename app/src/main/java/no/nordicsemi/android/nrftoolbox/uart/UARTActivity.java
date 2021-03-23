@@ -183,11 +183,12 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
 		this.finish();
 	};
 
+	@RequiresApi(api = Build.VERSION_CODES.O)
 	public void nextReportPage(){
 
 		Intent intent = new Intent(UARTActivity.this, MovingFeetHeatmapActivity.class);
 		Bundle bundle = new Bundle();
-		//bundle.putSerializable("result", AnalyzeActivity.result);   // Object 넘기기
+		bundle.putSerializable("result", AnalyzeActivity.result);   // Object 넘기기
 		//bundle 전달 대신 하드에 저장
 		FeetMultiFrames frames = AnalyzeActivity.result.parseRaw();
 		bundle.putSerializable("frames",frames);

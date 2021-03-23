@@ -55,9 +55,6 @@ public class Result implements Serializable {
         Log.i(TAG,"setting right data after copy : "+len+", "+rightData[0]+","+rightData[1]+","+rightData[2]);
         rightidx = len;
     }
-    public String getID(){
-        return this.loginInfo.getId();
-    }
     //data에다가 모드값을 포함한 모든 것들을 싹다 넣는다
     //가정은 그냥 300언저리에서 시간이 많이 지났음에도 시간적으로 같은 순간의 데이터를 양 발이 수집했을 것이다
     //시간적으로 일치하지 않을 가능성 있음
@@ -121,9 +118,16 @@ public class Result implements Serializable {
     public void sendToServer(){
 
     }
+    //              0 1 2 3 4 5 6 7 8
+    int revIdx[] = {0,1,2,0,3};
+    //TODO:setVersion 함수 수정한 거 디버깅 하기!
     public void setVersion(int v){
-        archLevel = 3;
-        backLevel=3;
+        //아치 위에서 3개 뒷꿈 왼에서 3개 순서
+        int arch = (v&0b111000)>>3;
+        archLevel = revIdx[arch];
+        int back= v&0b111;
+        Log.i(TAG,"version parsing  : "+arch+","+back);
+        backLevel = revIdx[back];
     }
     public void clearData(){
         leftData = new byte[Cons.MAX_FRAMES_NUM];
@@ -347,5 +351,10 @@ public class Result implements Serializable {
         return frames;
     }
     */
-
+    public int getArchLevel(){
+        return archLevel;
+    }
+    public int getBackLevel(){
+        return backLevel;
+    }
 }
