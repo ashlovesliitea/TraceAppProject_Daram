@@ -16,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.traceappproject_daram.data.LoginInfo;
 import com.example.traceappproject_daram.x9.RecyclerViewActivity;
 
 import org.json.JSONArray;
@@ -89,7 +90,8 @@ public class x_2Activity extends AppCompatActivity {
                         intent.putExtra("UserEmail", UserId);
                         intent.putExtra("UserPwd", UserPwd);
                         intent.putExtra("UserName", UserName);
-
+                        LoginInfo.setId(UserId);
+                        LoginInfo.setPw(UserPwd);
                         startActivity(intent);
 
                     } else if(success==0){//로그인 실패시

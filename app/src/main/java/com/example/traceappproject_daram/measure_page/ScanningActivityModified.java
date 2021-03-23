@@ -207,7 +207,7 @@ public class ScanningActivityModified extends BleProfileServiceReadyActivity<UAR
         //여기서 원래는 bundle에서 빈 (설정은 돼있는 result 객체 받아오겠지만)
         //일단 빈 result 객체 생성
 
-        result = new Result(new LoginInfo("mijin","mijin"));
+        result = new Result(new LoginInfo(LoginInfo.getId(),LoginInfo.getPw()));
 
     }
 

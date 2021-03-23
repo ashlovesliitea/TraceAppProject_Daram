@@ -27,6 +27,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.traceappproject_daram.Picker;
 import com.example.traceappproject_daram.Util;
 import com.example.traceappproject_daram.data.Cons;
 import com.example.traceappproject_daram.data.LoginInfo;
@@ -63,27 +64,28 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
     private static final String TAG = "MovingFeetHeatmap";
     private Button btnReplay;
     private Button btnSend;
-    private Result result = new Result(new LoginInfo("rhalwls","daram"));//일단 여기선 더미데이터 만들게요 ㅠ
+    private Result result = new Result(new LoginInfo(LoginInfo.getId(),LoginInfo.getPw()));//일단 여기선 더미데이터 만들게요 ㅠ
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.x13);
         btnReplay = (Button) findViewById(R.id.replay);
-        //frames = new FeetMultiFrames("test");//일단은 여기서 프레임들 다 초기화됨
+        //frames = new FeetMultiFrames();//일단은 여기서 프레임들 다 초기화됨
         Log.i(TAG,"is savedInstanceState null ? "+(savedInstanceState == null));
         Bundle b = getIntent().getExtras();
         result = (Result) b.getSerializable("result");
         Log.i(TAG,"arch :"+result.getArchLevel()+", back : "+result.getBackLevel());
         Toast myToast = Toast.makeText(this.getApplicationContext(),"arch :"+result.getArchLevel()+", back : "+result.getBackLevel(), Toast.LENGTH_LONG);
         myToast.show();
-        frames = (FeetMultiFrames) b.getSerializable("frames");
+        //frames = (FeetMultiFrames) b.getSerializable("frames");
         //Log.i(TAG,"reuslt passed and print owner of this result "+result.getID());
+        frames = new FeetMultiFrames(peekctr());
         Log.i(TAG,"frames passed and length of this frame is : "+frames.getFramesSz());
 
         map = (HeatMapHolder) findViewById(R.id.feetmap);
         map.setMinimum(0.0);
-        map.setMaximum(200.0);//강도의 최대값은 얼마냐
+        map.setMaximum(10.0);//강도의 최대값은 얼마냐
         map.setLeftPadding(0);
         map.setRightPadding(0);
         map.setTopPadding(0);
@@ -132,7 +134,24 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
     }
 
 
-
+    public int peekctr(){
+        //context로 파일 오픈
+        Picker picker = Util.retrievePicker(this);
+        Random random = new Random();
+        int ret = random.nextInt(3);
+        if(picker ==null){
+            Picker first= new Picker();
+            ret = first.getI();
+            first.up();
+            Util.savePicker(this,first);
+        }
+        else{
+            ret= picker.getI();
+            picker.up();
+            Util.savePicker(this,picker);
+        }
+        return ret;
+    }
     public void uploadResultImgs(){
         Log.i(TAG,"LOGIN INFO : "+ LoginInfo.getId());
         try {
@@ -194,8 +213,8 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
     private TextView back0,back1,back2;
     private TextView txtArch,txtBack;
     private void setLevelUI(int arch, int back){
-        txtArch.setText("아치"+arch+"단계");
-        txtBack.setText("꿈치"+back+"단계");
+        txtArch.setText("아치"+arch);
+        txtBack.setText("꿈치"+back);
         int y = Color.parseColor("#FFE090"), g = Color.parseColor("#C4C4C4");
         arch0.setBackgroundColor(arch>=1?y:g);arch1.setBackgroundColor(arch>=2?y:g);arch2.setBackgroundColor(arch>=3?y:g);
         back0.setBackgroundColor(back>=1?y:g);back1.setBackgroundColor(back>=2?y:g);back2.setBackgroundColor(back>=3?y:g);

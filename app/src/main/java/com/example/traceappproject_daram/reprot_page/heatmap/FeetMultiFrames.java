@@ -13,27 +13,70 @@ public class FeetMultiFrames implements Serializable {
     public int frameNum;
     public String TAG = "FootMultiFrames";
 
-    //              0 1 2 3 4 5 6 7
-    byte[] empt1 = {5,5,5,0,0,5,5,5};
-    byte[] empt2 = {3,3,5,0,2,5,3,3};
-    byte[] back1 = {0,0,0,0,5,7,7,9};
-    byte[] back2 = {0,0,0,0,3,7,7,9};
-    byte[] bami1 = {8,0,5,7,3,9,9,9};
-    byte[] bami2 = {5,0,5,9,5,7,9,9};
-    byte[] midd1 = {3,8,7,8,5,9,6,9};
-    byte[] midd2 = {7,5,7,7,6,6,6,6};
-    byte[] miar1 = {9,9,9,5,5,7,7,9};
-    byte[] miar2 = {9,9,7,3,9,5,9,9};
-    byte[] arch1 = {9,9,9,7,5,1,3,3};
-    byte[] arch2 = {9,7,5,0,9,0,7,7};
 
+    //              0 1 2 3 4 5 6 7
+    byte[] empt1;
+    byte[] empt2;
+    byte[] back1;
+    byte[] back2 ;
+    byte[] bami1;
+    byte[] bami2;
+    byte[] midd1;
+    byte[] midd2;
+    byte[] miar1;
+    byte[] miar2;
+    byte[] arch1;
+    byte[] arch2;
 
     public FeetMultiFrames(){
 
     }
     //나중에 파라미터 받을 수 있게되면 동적할당버전 만들기
 
-    public FeetMultiFrames(String test){
+    public FeetMultiFrames(int tc){
+        if(tc ==0) {
+            //              0 1 2 3 4 5 6 7
+            empt1 = new byte[]{6,5,4,0,0,4,5,5};
+            empt2 = new byte[]{3,4,5,0,2,5,3,4};
+            back1 = new byte[]{0,0,0,0,5,8,9,9};
+            back2 = new byte[]{0,0,0,0,4,7,9,9};
+            bami1 = new byte[]{7,1,5,6,2,9,8,9};
+            bami2 = new byte[]{5,1,6,9,4,6,9,9};
+            midd1 = new byte[]{3,8,7,7,7,9,6,9};
+            midd2 = new byte[]{2,8,6,7,6,8,7,9};
+            miar1 = new byte[]{9,9,8,5,4,7,7,9};
+            miar2 = new byte[]{9,9,7,2,7,5,9,9};
+            arch1 = new byte[]{9,9,9,7,5,1,3,3};
+            arch2 = new byte[]{7,7,4,0,8,0,7,6};
+        }
+        else if(tc ==1){
+            empt1 = new byte[]{7,8,1,2,3,1,9,8};
+            empt2 = new byte[]{4,8,2,0,1,3,9,8};
+            back1 = new byte[]{0,0,0,5,3,2,7,8};
+            back2 = new byte[]{0,0,0,6,0,4,2,9};
+            bami1 = new byte[]{9,1,2,6,2,7,8,8};
+            bami2 = new byte[]{4,5,8,1,2,4,9,8};
+            midd1 = new byte[]{4,4,2,8,1,9,7,9};
+            midd2 = new byte[]{8,5,2,9,3,9,8,9};
+            miar1 = new byte[]{9,9,7,9,2,3,8,2};
+            miar2 = new byte[]{7,9,7,5,4,5,7,9};
+            arch1 = new byte[]{8,9,9,3,4,2,0,8};
+            arch2 = new byte[]{7,7,4,1,8,9,9,9};
+        }
+        else if(tc ==2){
+            empt1 = new byte[]{7,5,2,0,1,3,5,5};
+            empt2 = new byte[]{6,5,5,0,0,3,6,4};
+            back1 = new byte[]{0,0,1,0,6,9,9,9};
+            back2 = new byte[]{0,0,0,2,2,9,8,9};
+            bami1 = new byte[]{6,1,5,6,1,9,8,8};
+            bami2 = new byte[]{4,0,7,9,2,6,9,9};
+            midd1 = new byte[]{3,8,7,9,7,9,6,9};
+            midd2 = new byte[]{2,7,6,7,8,8,9,8};
+            miar1 = new byte[]{9,9,6,5,3,7,8,9};
+            miar2 = new byte[]{9,9,7,1,8,4,9,8};
+            arch1 = new byte[]{9,9,8,7,7,2,2,2};
+            arch2 = new byte[]{9,7,3,0,9,0,8,6};
+        }
         initFramesForTest();
         frameNum = 9;
     }

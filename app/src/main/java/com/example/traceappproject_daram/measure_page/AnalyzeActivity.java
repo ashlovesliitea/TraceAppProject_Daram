@@ -37,7 +37,7 @@ import static com.example.traceappproject_daram.Util.makeFolderPath;
 
 public class AnalyzeActivity extends UARTActivity {
     private Timer timer;
-    public static Result result= new Result(new LoginInfo("id example","pwexample"));//어디서나 접근가능함
+    public static Result result= new Result(new LoginInfo(LoginInfo.getId(),LoginInfo.getPw()));//어디서나 접근가능함
 
     private void hideUI(){
         runOnUiThread(new Runnable(){
