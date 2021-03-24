@@ -91,11 +91,11 @@ public class TestActivity extends AppCompatActivity {
         Log.i(TAG,"test comm end ");
     }
     public void uploadDummy(){
-        uploadObjToFire(calendar,this,0,"rhalwlsdummy");
+        uploadObjToFire(calendar,this,0,LoginInfo.getId());
     }
     public Calendar calendar;
     public void storeDummy(Context context){
-        Result result = new Result(new LoginInfo("rhalwlsdummy","rhalwls pw"));
+        Result result = new Result(new LoginInfo(LoginInfo.getId(),LoginInfo.getPw()));
         calendar = result.getCalendar();
 
         storeObject(result,makeFolderPath(context,calendar),0);

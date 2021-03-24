@@ -56,7 +56,7 @@ public class UARTConnector {
 	private static final String[] LOG_PROJECTION = {LogContract.Log._ID, LogContract.Log.TIME, LogContract.Log.LEVEL, LogContract.Log.DATA};
 	//같은 객체 쓰기
 
-	private static final Result result = new Result(new LoginInfo("exampleid","examplepw"));
+	private static final Result result = new Result(new LoginInfo(LoginInfo.getId(),LoginInfo.getPw()));
 	public static final byte arr[] = new byte[1000000];
 	/**
 	 * The service UART interface that may be used to send data to the target.

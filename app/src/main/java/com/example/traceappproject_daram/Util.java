@@ -94,7 +94,7 @@ public class Util {
         //파일 명이 중복되지 않도록 날짜를 이용
 
         SimpleDateFormat sdf= new SimpleDateFormat("yyyyMMddhhmmss");
-        String filename= id+"/"+sdf.format(calendar.getTime())+idx+ IMG_EXT/*".png"*/;//현재 시간으로 파일명 지정 20191023142634
+        String filename= id+"/"+sdf.format(calendar.getTime())+"/"+idx+ IMG_EXT/*".png"*/;//현재 시간으로 파일명 지정 20191023142634
 
 
         //원래 확장자는 파일의 실제 확장자를 얻어와서 사용해야함. 그러려면 이미지의 절대 주소를 구해야함.
@@ -152,6 +152,43 @@ public class Util {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void savePicker(Context context,Picker p){
+        String upperPath = context.getFilesDir().getPath().toString();//그냥 캐시 path
+
+        FileOutputStream fout = null;
+        try {
+            fout = new FileOutputStream(upperPath+"/picker.bin");
+            ObjectOutputStream oos = new ObjectOutputStream(fout);
+            oos.writeObject(p);
+            fout.close();
+            oos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public static Picker retrievePicker(Context context){
+        String upperPath = context.getFilesDir().getPath().toString();//그냥 캐시 path
+        FileInputStream fin = null;
+        File file = new File("picker.bin");
+        Picker picker =null;
+        try {
+            fin = new FileInputStream(upperPath+"/picker.bin");
+            ObjectInputStream ois = new ObjectInputStream(fin);
+            picker=(Picker) ois.readObject();
+            fin.close();
+            ois.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return picker;
     }
 
     //나중에 형변환 필요
@@ -241,7 +278,7 @@ public class Util {
         String id=LoginInfo.getId();
         SimpleDateFormat sdf= new SimpleDateFormat("yyyyMMddhhmmss");
         String measure_date=sdf.format(result.getCalendar().getTime());
-        String folderpath= id+"/"+measure_date+ "/";
+        String folderpath= id+"/"+measure_date;
         String arch=Integer.toString(result.getArchLevel());//아치 단계
         String heel=Integer.toString(result.getBackLevel());//꿈치 단계
         String admin_send="true";

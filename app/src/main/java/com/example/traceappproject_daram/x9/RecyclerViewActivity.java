@@ -19,6 +19,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import no.nordicsemi.android.nrftoolbox.R;
 import com.example.traceappproject_daram.data.Result;
+import com.example.traceappproject_daram.measure_page.ScanningActivityPlane;
+
 public class RecyclerViewActivity extends AppCompatActivity {
 
     private TextView name;
@@ -47,7 +49,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
         measureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent measureintent = new Intent(RecyclerViewActivity.this, ScanningActivityExtends.class);
+                Intent measureintent = new Intent(RecyclerViewActivity.this, ScanningActivityPlane.class);
                 startActivity(measureintent);
             }
         });

@@ -37,7 +37,7 @@ import static com.example.traceappproject_daram.Util.makeFolderPath;
 
 public class AnalyzeActivity extends UARTActivity {
     private Timer timer;
-    public static Result result= new Result(new LoginInfo("id example","pwexample"));//어디서나 접근가능함
+    public static Result result= new Result(new LoginInfo(LoginInfo.getId(),LoginInfo.getPw()));//어디서나 접근가능함
 
     private void hideUI(){
         runOnUiThread(new Runnable(){
@@ -58,7 +58,7 @@ public class AnalyzeActivity extends UARTActivity {
         LayoutInflater layoutInflater = getLayoutInflater();
         View layout = layoutInflater.inflate(R.layout.custom_toast,(ViewGroup)findViewById(R.id.custom_toast_container));
         TextView text = (TextView) layout.findViewById(R.id.text);
-        text.setText("잠시 기다려주세요!");
+        text.setText("걸음을 측정중입니다");
 
         Toast toast = new Toast(getApplicationContext());
         //바닥에서 20dp 떨어져서 토스트 생성
