@@ -48,6 +48,7 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import androidx.annotation.NonNull;
 
+import com.example.traceappproject_daram.Util;
 import com.example.traceappproject_daram.data.LoginInfo;
 
 import com.example.traceappproject_daram.measure_page.AnalyzeActivity;
@@ -191,6 +192,7 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
 		Bundle bundle = new Bundle();
 		bundle.putSerializable("result", AnalyzeActivity.result);   // Object 넘기기
 		//bundle 전달 대신 하드에 저장
+		Util.storeObject(AnalyzeActivity.result,Util.makeFolderPath(getApplicationContext(),AnalyzeActivity.result.getCalendar()),0);
 		FeetMultiFrames frames = AnalyzeActivity.result.parseRaw();
 		bundle.putSerializable("frames",frames);
 		//Add the bundle to the intent

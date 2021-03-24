@@ -2,12 +2,13 @@ package com.example.traceappproject_daram.x9;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
-
+import com.example.traceappproject_daram.data.Result;
 
 import com.example.traceappproject_daram.reprot_page.MovingFeetHeatmapActivity;
 
@@ -33,7 +34,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         private final TextView CardMeasure;
         private final AppCompatButton button_send;
         private final AppCompatButton button_delete;
-
+        public Result result;
 
         public ViewHolder(View view) {
             super(view);
@@ -49,6 +50,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 public void onClick(View v) {
                     Context context= view.getContext();
                     Intent intent = new Intent(context, MovingFeetHeatmapActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("result",result);
                     context.startActivity(intent);
                 }
             });
@@ -91,6 +94,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // contents of the view with that element
         viewHolder.CardDate.setText(data.getDate());
         viewHolder.CardMeasure.setText(data.getMeasure());
+        viewHolder.result = data.getResult();
     }
 
     // Return the size of your dataset (invoked by the layout manager)

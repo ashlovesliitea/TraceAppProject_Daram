@@ -58,14 +58,15 @@ public class RecyclerViewActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         listview.setLayoutManager(layoutManager);
           ArrayList<ItemForm> list=new ArrayList<>();
+          /*
           list.add(new ItemForm("2020/10/28 22:39","아치 2단계, 꿈치 3단계"));
           list.add(new ItemForm("2020/10/11 21:39","아치 1단계, 꿈치 2단계"));
           list.add(new ItemForm("2020/10/04 20:39","아치 3단계, 꿈치 1단계"));
 
-
+           */
         //TODO: 경로에 있는 모든 내역들 다 읽어서 띄우기
         Result[] results = readAllResults();
-        /*
+
         for(int i = 0;i<results.length;i++) {
             if(results[i] == null){
                 Log.i(TAG,"result was null");
@@ -76,9 +77,9 @@ public class RecyclerViewActivity extends AppCompatActivity {
             String strDate = sdf.format(result.getCalendar().getTime());
 
             Log.i(TAG,"appendig item to page : "+ strDate+","+result.getArchLevel()+","+result.getArchLevel());
-            list.add(new ItemForm(strDate,"아치 "+result.getArchLevel()+"단계 뒷꿈치 "+result.getBackLevel()));
+            list.add(new ItemForm(strDate,"아치 "+result.getArchLevel()+"단계 뒷꿈치 "+result.getBackLevel(),result));
         }
-        */
+
         adapter = new MyAdapter(list);
         listview.setAdapter(adapter);
 
