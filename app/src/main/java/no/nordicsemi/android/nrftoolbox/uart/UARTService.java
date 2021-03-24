@@ -254,15 +254,15 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
         if(isMeasure&& Util.idx < 1200){
             //테스트를 위해 한계 걸어둠
             //첫번째 세트 delimeter
-            if(/*data.charAt(10) !=0xff*/ true) {
+            if(Util.idx <300) {
                 //Log.i(TAG,"not 10th char : "+(data.length()>=11?data.charAt(10):"there is no 10th char"));
                 //다시 보내기는 잠시 주석
-                //manager.send("" + data.charAt(1));
+                manager.send("" + data.charAt(1));
 
                 appendToArr(data.getBytes());
 
                 Log.i(TAG,"measure reply 10th char : "+(data.length()>=11?(data.charAt(10)):("less then 10 : "+data.length())));
-                //manager.send("" + (char) Cons.MODE_STOP);
+                //manager.send("" + (char) Cons.);
                 //한쪽발에 대해서 measure 종료됐다는 broadcast
                 //result에 arr를 전달해야한다.
 
