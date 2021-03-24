@@ -78,9 +78,9 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
         Log.i(TAG,"arch :"+result.getArchLevel()+", back : "+result.getBackLevel());
         Toast myToast = Toast.makeText(this.getApplicationContext(),"arch :"+result.getArchLevel()+", back : "+result.getBackLevel(), Toast.LENGTH_LONG);
         myToast.show();
-        //frames = (FeetMultiFrames) b.getSerializable("frames");
+        frames = (FeetMultiFrames) b.getSerializable("frames");
         //Log.i(TAG,"reuslt passed and print owner of this result "+result.getID());
-        frames = new FeetMultiFrames(peekctr());
+        //frames = new FeetMultiFrames(peekctr());
         Log.i(TAG,"frames passed and length of this frame is : "+frames.getFramesSz());
 
         map = (HeatMapHolder) findViewById(R.id.feetmap);
