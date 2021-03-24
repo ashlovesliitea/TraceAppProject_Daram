@@ -278,7 +278,7 @@ public class Util {
         String id=LoginInfo.getId();
         SimpleDateFormat sdf= new SimpleDateFormat("yyyyMMddhhmmss");
         String measure_date=sdf.format(result.getCalendar().getTime());
-        String folderpath= id+"/"+measure_date+ "/";
+        String folderpath= id+"/"+measure_date;
         String arch=Integer.toString(result.getArchLevel());//아치 단계
         String heel=Integer.toString(result.getBackLevel());//꿈치 단계
         String admin_send="true";
