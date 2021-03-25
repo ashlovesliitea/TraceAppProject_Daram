@@ -1,13 +1,17 @@
 package com.example.traceappproject_daram.x9;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
+
+import com.example.traceappproject_daram.Util;
 import com.example.traceappproject_daram.data.Result;
 
 import com.example.traceappproject_daram.reprot_page.MovingFeetHeatmapActivity;
@@ -23,6 +27,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     //viewHolder란 각 뷰들을 보관하는 Holder객체를 의미한다.
     //Viewholder는 태그 필드 안에 각 구성 요소 뷰들을 저장하므로 반복적으로 조회하지않고 즉시 액세스 가능하다.
     private ArrayList<ItemForm> localdatalist;
+    private Context context;
 
     /**
      * Provide a reference to the type of views that you are using
@@ -51,15 +56,27 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                     Context context= view.getContext();
                     Intent intent = new Intent(context, MovingFeetHeatmapActivity.class);
                     Bundle bundle = new Bundle();
+                    Log.i(TAG,"card clicked : "+(result==null));
                     bundle.putSerializable("result",result);
+                    intent.putExtras(bundle);
                     context.startActivity(intent);
                 }
             });
+
         }
 
 
     }
+    public void removeAt(int position) {
+        //하드에서 먼저 지운후 ui에 반영하기
+        Result target = localdatalist.get(position).getResult();
 
+        Util.deleteObject(target,Util.makeFolderPath(context,target.getCalendar()),0);
+        localdatalist.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, localdatalist.size());
+
+    }
     /**
      * Initialize the dataset of the Adapter.
      *
@@ -67,8 +84,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
      * by RecyclerView.
      */
     //생성자에서 데이터 객체를 전달받는다. 자료형은 임의로 결정 가능.
-    public MyAdapter(ArrayList<ItemForm> datalist) {
+    public MyAdapter(ArrayList<ItemForm> datalist, Context context) {
         localdatalist = datalist;
+        this.context = context;
     }
 
     // Create new views (invoked by the layout manager)
@@ -82,6 +100,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         return new ViewHolder(view);
     }
+    private static String TAG = "MyAdapter";
 
     // Replace the contents of a view (invoked by the layout manager)
     //position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시 (view의 내용을 localDataSet으로 교환)
@@ -89,12 +108,26 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
       ItemForm data=localdatalist.get(position);
-
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         viewHolder.CardDate.setText(data.getDate());
         viewHolder.CardMeasure.setText(data.getMeasure());
         viewHolder.result = data.getResult();
+        Log.i(TAG,"result 받은 거 "+(viewHolder.result==null)+viewHolder.result.getBackLevel());
+        viewHolder.button_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyAdapter.this.removeAt(position);
+            }
+        });
+        viewHolder.button_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Result target = MyAdapter.this.localdatalist.get(position).getResult();
+                Util.sendResultRecord(context, target);
+            }
+        });
+
     }
 
     // Return the size of your dataset (invoked by the layout manager)

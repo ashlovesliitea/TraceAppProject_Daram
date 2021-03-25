@@ -41,12 +41,13 @@
 	<application
 		android:fullBackupContent="true"
 		android:allowBackup="true"
-		android:icon="@mipmap/ic_launcher"
-		android:roundIcon="@mipmap/ic_launcher_round"
+		android:icon="@mipmap/trace_luncher"
+		android:roundIcon="@mipmap/trace_luncher"
 		android:label="@string/app_name"
 		android:theme="@style/Theme.TraceAppProject_Daram"
 		android:supportsRtl="true"
 		android:name=".ToolboxApplication"
+		android:debuggable="false"
 		tools:ignore="GoogleAppIndexingWarning" >
 
 		<activity android:name="com.example.traceappproject_daram.x_1Activity">

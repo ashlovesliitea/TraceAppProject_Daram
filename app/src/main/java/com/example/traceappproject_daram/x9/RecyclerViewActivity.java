@@ -80,7 +80,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
             list.add(new ItemForm(strDate,"아치 "+result.getArchLevel()+"단계 뒷꿈치 "+result.getBackLevel(),result));
         }
 
-        adapter = new MyAdapter(list);
+        adapter = new MyAdapter(list,this);
         listview.setAdapter(adapter);
 
         MyListDecoration decoration = new MyListDecoration();

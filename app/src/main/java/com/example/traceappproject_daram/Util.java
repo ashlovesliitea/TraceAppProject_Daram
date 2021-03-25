@@ -127,6 +127,17 @@ public class Util {
 
         //업로드한 파일의 경로를 firebaseDB에 저장하면 게시판 같은 앱도 구현할 수 있음.
     }
+    public static void deleteObject(Serializable o,String path,int type) {
+        //path argument는 make_folder함수 사용해 만들기
+        //result.bin을 여기서 붙여주자
+        Log.i(TAG,"attempt deleting result : "+path);
+        path +="/"+NAME_EXT[type];
+        File file = new File(path);
+        if(file.exists()){
+            file.delete();
+            Log.i(TAG,"really deleting result : "+path);
+        }
+    }
 
     public static void storeObject(Serializable o,String path,int type) {
         //path argument는 make_folder함수 사용해 만들기

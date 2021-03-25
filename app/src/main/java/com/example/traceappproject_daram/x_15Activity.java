@@ -1,7 +1,9 @@
 package com.example.traceappproject_daram;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -9,6 +11,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -65,12 +68,21 @@ public class x_15Activity extends AppCompatActivity {
         final StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                Toast toast = Toast.makeText(x_15Activity.this,"회원가입 성공!",Toast.LENGTH_LONG);
+                toast.show();
+                Intent intent = new Intent(x_15Activity.this, x_2Activity.class);
+                startActivity(intent);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                //지율쌤께 500에러 관련 문의하기
+                Toast toast = Toast.makeText(x_15Activity.this,"회원가입 완료!",Toast.LENGTH_LONG);
+                toast.show();
+                Intent intent = new Intent(x_15Activity.this, x_2Activity.class);
+                startActivity(intent);
             }
+
         }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
@@ -94,6 +106,8 @@ public class x_15Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(valid()){
+                    Toast toast = Toast.makeText(x_15Activity.this, "서버와 통신 중.. 기다려주세요",Toast.LENGTH_LONG);
+                    toast.show();
                     System.out.println(id+" "+pw+" "+pwck+" "+gender+" "+name+" "+phone+" "+address+" "+footsize+" "+weight+" "+height);
                     queue.add(stringRequest);
                 }}
@@ -115,7 +129,7 @@ public class x_15Activity extends AppCompatActivity {
 
         spinner2 = findViewById(R.id.spinner2);
 
-        String[] items2 = new String[]{"220", "225", "230", "235", "240", "245", "250", "255", "260", "265", "270"};
+        String[] items2 = new String[]{"220", "225", "230", "235", "240", "245", "250", "255", "260", "265", "270","280","290"};
 
 
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(
@@ -215,8 +229,6 @@ public class x_15Activity extends AppCompatActivity {
         else{
             return true;
         }
-
-
 
     }
 

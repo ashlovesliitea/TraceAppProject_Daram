@@ -74,6 +74,7 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
         //frames = new FeetMultiFrames();//일단은 여기서 프레임들 다 초기화됨
         Log.i(TAG,"is savedInstanceState null ? "+(savedInstanceState == null));
         Bundle b = getIntent().getExtras();
+        Log.i(TAG,"is bunddle null ? "+(b==null));
         result = (Result) b.getSerializable("result");
         Log.i(TAG,"arch :"+result.getArchLevel()+", back : "+result.getBackLevel());
         Toast myToast = Toast.makeText(this.getApplicationContext(),"arch :"+result.getArchLevel()+", back : "+result.getBackLevel(), Toast.LENGTH_LONG);
