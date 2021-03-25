@@ -41,8 +41,7 @@ dependencies {
     implementation project(':common')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
-    debugWearApp project(path:':wear', configuration: 'debug')
-    releaseWearApp project(path:':wear', configuration: 'release')
+
     implementation 'com.android.support:multidex:1.0.3'
 
     // nRF Toolbox is using Play Service 10.2.0 in order to make the app working in China:
