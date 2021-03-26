@@ -50,28 +50,28 @@
 		android:debuggable="false"
 		tools:ignore="GoogleAppIndexingWarning" >
 
-		<activity android:name="com.example.traceappproject_daram.x_1Activity">
+		<activity android:name="com.daram.trace.x_1Activity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
-		<activity android:name="com.example.traceappproject_daram.x_2Activity" />
-		<activity android:name="com.example.traceappproject_daram.x9.RecyclerViewActivity">
+		<activity android:name="com.daram.trace.x_2Activity" />
+		<activity android:name="com.daram.trace.x9.RecyclerViewActivity">
 
 		</activity>
-		<activity android:name="com.example.traceappproject_daram.x_15Activity" />
-		<activity android:name="com.example.traceappproject_daram.measure_page.AnalyzeActivity">
+		<activity android:name="com.daram.trace.x_15Activity" />
+		<activity android:name="com.daram.trace.measure_page.AnalyzeActivity">
 
 		</activity>
-		<activity android:name="com.example.traceappproject_daram.measure_page.WalkingActivity" />
-		<activity android:name="com.example.traceappproject_daram.measure_page.ScanningActivityPlane"></activity>
-		<activity android:name="com.example.traceappproject_daram.measure_page.ScanningActivityExtends"></activity>
-		<activity android:name="com.example.traceappproject_daram.measure_page.ScanningActivityExtendsR"></activity>
-		<activity android:name="com.example.traceappproject_daram.measure_page.ScanningActivityModified"></activity>
-		<activity android:name="com.example.traceappproject_daram.TestActivity" >
+		<activity android:name="com.daram.trace.measure_page.WalkingActivity" />
+		<activity android:name="com.daram.trace.measure_page.ScanningActivityPlane"></activity>
+		<activity android:name="com.daram.trace.measure_page.ScanningActivityExtends"></activity>
+		<activity android:name="com.daram.trace.measure_page.ScanningActivityExtendsR"></activity>
+		<activity android:name="com.daram.trace.measure_page.ScanningActivityModified"></activity>
+		<activity android:name="com.daram.trace.TestActivity" >
 		</activity>
-		<activity android:name="com.example.traceappproject_daram.reprot_page.MovingFeetHeatmapActivity">
+		<activity android:name="com.daram.trace.reprot_page.MovingFeetHeatmapActivity">
 
 		</activity>
 		<meta-data

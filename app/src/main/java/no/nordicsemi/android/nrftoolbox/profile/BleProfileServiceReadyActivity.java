@@ -50,21 +50,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.traceappproject_daram.measure_page.AnalyzeActivity;
-import com.example.traceappproject_daram.measure_page.WalkingActivity;
-import com.example.traceappproject_daram.reprot_page.MovingFeetHeatmapActivity;
+import com.daram.trace.measure_page.WalkingActivity;
 
 import java.util.UUID;
 
 import no.nordicsemi.android.ble.BleManagerCallbacks;
-import no.nordicsemi.android.log.ILogSession;
-import no.nordicsemi.android.log.LocalLogSession;
-import no.nordicsemi.android.log.Logger;
 import no.nordicsemi.android.nrftoolbox.AppHelpFragment;
 import no.nordicsemi.android.nrftoolbox.R;
 import no.nordicsemi.android.nrftoolbox.scanner.ScannerFragment;
 import no.nordicsemi.android.nrftoolbox.scanner.ScannerNoUI;
-import no.nordicsemi.android.nrftoolbox.uart.Cons;
 import no.nordicsemi.android.nrftoolbox.utility.DebugLogger;
 
 /**

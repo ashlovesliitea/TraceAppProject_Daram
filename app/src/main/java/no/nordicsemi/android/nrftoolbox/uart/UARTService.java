@@ -34,10 +34,9 @@ import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.example.traceappproject_daram.Util;
-import com.example.traceappproject_daram.data.Result;
-import com.example.traceappproject_daram.measure_page.AnalyzeActivity;
-import com.example.traceappproject_daram.measure_page.AnalyzeActivityR;
+import com.daram.trace.Util;
+import com.daram.trace.data.Result;
+import com.daram.trace.measure_page.AnalyzeActivity;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.wearable.MessageApi;
 import com.google.android.gms.wearable.Node;

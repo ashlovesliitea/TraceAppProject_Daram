@@ -1,10 +1,40 @@
 {
   "project_info": {
     "project_number": "51128598053",
+    "firebase_url": "https://tracemobileapp-de9b1-default-rtdb.firebaseio.com",
     "project_id": "tracemobileapp-de9b1",
     "storage_bucket": "tracemobileapp-de9b1.appspot.com"
   },
   "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:51128598053:android:da1b24536955500a46c9cc",
+        "android_client_info": {
+          "package_name": "com.daram.trace"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "51128598053-3sv6e16aci68t81trv11efqr3jeb41q7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANFdgYHjtBeoA9ZidbsO3b7DooTkFzGx4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "51128598053-3sv6e16aci68t81trv11efqr3jeb41q7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
     {
       "client_info": {
         "mobilesdk_app_id": "1:51128598053:android:902ad4554c98246746c9cc",

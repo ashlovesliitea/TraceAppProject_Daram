@@ -36,12 +36,11 @@ import android.util.Log;
 import androidx.annotation.RequiresApi;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import com.example.traceappproject_daram.Util;
-import com.example.traceappproject_daram.data.LoginInfo;
-import com.example.traceappproject_daram.data.Result;
-import com.example.traceappproject_daram.measure_page.AnalyzeActivity;
-import com.example.traceappproject_daram.measure_page.AnalyzeActivityR;
-import com.example.traceappproject_daram.measure_page.WalkingActivity;
+import com.daram.trace.Util;
+import com.daram.trace.data.LoginInfo;
+import com.daram.trace.data.Result;
+import com.daram.trace.measure_page.AnalyzeActivity;
+import com.daram.trace.measure_page.WalkingActivity;
 
 import no.nordicsemi.android.log.LogContract;
 import no.nordicsemi.android.nrftoolbox.profile.BleProfileService;

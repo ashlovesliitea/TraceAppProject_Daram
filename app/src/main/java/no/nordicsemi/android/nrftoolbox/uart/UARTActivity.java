@@ -22,7 +22,6 @@
 
 package no.nordicsemi.android.nrftoolbox.uart;
 
-import android.Manifest;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
@@ -35,9 +34,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.net.Uri;
@@ -48,23 +45,17 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import androidx.annotation.NonNull;
 
-import com.example.traceappproject_daram.Util;
-import com.example.traceappproject_daram.data.LoginInfo;
+import com.daram.trace.Util;
 
-import com.example.traceappproject_daram.measure_page.AnalyzeActivity;
-import com.example.traceappproject_daram.measure_page.ScanningActivityExtends;
-import com.example.traceappproject_daram.measure_page.WalkingActivity;
-import com.example.traceappproject_daram.reprot_page.MovingFeetHeatmapActivity;
-import com.example.traceappproject_daram.reprot_page.heatmap.FeetMultiFrames;
+import com.daram.trace.measure_page.AnalyzeActivity;
+import com.daram.trace.reprot_page.MovingFeetHeatmapActivity;
+import com.daram.trace.reprot_page.heatmap.FeetMultiFrames;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.RequiresApi;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.slidingpanelayout.widget.SlidingPaneLayout;
 import androidx.appcompat.app.AlertDialog;
 import android.util.Log;
 import android.view.Menu;
@@ -98,7 +89,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.Serializable;
 import java.io.StringWriter;
 import java.util.UUID;
 
@@ -107,7 +97,6 @@ import no.nordicsemi.android.nrftoolbox.ToolboxApplication;
 import no.nordicsemi.android.nrftoolbox.dfu.adapter.FileBrowserAppsAdapter;
 import no.nordicsemi.android.nrftoolbox.profile.BleProfileService;
 import no.nordicsemi.android.nrftoolbox.profile.BleProfileServiceReadyActivity;
-import no.nordicsemi.android.nrftoolbox.scanner.ScannerFragment;
 import no.nordicsemi.android.nrftoolbox.scanner.ScannerNoUI;
 import no.nordicsemi.android.nrftoolbox.uart.database.DatabaseHelper;
 import no.nordicsemi.android.nrftoolbox.uart.domain.Command;

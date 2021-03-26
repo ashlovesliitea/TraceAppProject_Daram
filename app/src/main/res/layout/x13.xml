@@ -84,7 +84,7 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <com.example.traceappproject_daram.reprot_page.heatmap.HeatMapHolder
+        <com.daram.trace.reprot_page.heatmap.HeatMapHolder
             android:id="@+id/feetmap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

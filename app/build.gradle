@@ -8,7 +8,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.example.traceappproject_daram"
+        applicationId "com.daram.trace"
         minSdkVersion 23
         targetSdkVersion 30
         multiDexEnabled true

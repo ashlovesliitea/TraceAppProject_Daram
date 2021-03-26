@@ -49,7 +49,7 @@ import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.example.traceappproject_daram.data.Result;
+import com.daram.trace.data.Result;
 
 import no.nordicsemi.android.log.ILogSession;
 import no.nordicsemi.android.log.LogContract;
