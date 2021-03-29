@@ -74,7 +74,7 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
 
         map = (HeatMapHolder) findViewById(R.id.feetmap);
         map.setMinimum(0.0);
-        map.setMaximum(20.0);//강도의 최대값은 얼마냐
+        map.setMaximum(200.0);//강도의 최대값은 얼마냐
         map.setLeftPadding(0);
         map.setRightPadding(0);
         map.setTopPadding(0);

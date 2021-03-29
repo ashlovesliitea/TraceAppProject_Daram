@@ -86,10 +86,33 @@ public class Result implements Serializable {
     public FeetMultiFrames parseRaw(){//validation을 하면서 유효한 frame 만건져서 띄우기
         FeetMultiFrames frames = new FeetMultiFrames();
         FootOneFrame left=null,right=null;
-        int numLFrame=0;
+
         //left raw와 right raw를 전부 출력하자.
         Log.i(TAG,"parseRaw : "+leftData.length+" , "+rightData.length);
-
+        int leftBack = calcBackIdx(leftData);
+        int rightEmpty = calcEmptyIdx(rightData);
+        Log.i(TAG,"leftback : "+leftBack+" ,  rightEmpty: "+rightEmpty);
+        int leftArch = calcArchIdx(leftData),rightBack = calcBackIdx(rightData),rightArch = calcArchIdx(rightData);
+        Log.i(TAG,"나머지 지점 : "+leftArch+" , "+rightBack+" , "+rightArch);
+        int numLFrame=0;
+        for(int i = leftBack;i<200;i++){
+            if(leftData[i] == no.nordicsemi.android.nrftoolbox.uart.Cons.DEL){
+                Log.i(TAG,"appending left data at : "+i+" ,,, " +leftData[i]+","+leftData[i+1]+","+leftData[i+2]);
+                left = new FootOneFrame(leftData,i+1,false);
+                frames.appendAFrame(left,numLFrame,false);
+                numLFrame++;
+            }
+        }
+        int numRFrame = 0;
+        for(int i = rightEmpty; i<200 && numRFrame<10 ;i++){
+            if(rightData[i] == no.nordicsemi.android.nrftoolbox.uart.Cons.DEL){
+                Log.i(TAG,"appending right data at : " + i + " ,,, " + rightData[i] + "," + rightData[i + 1]+","+rightData[i+2]);
+                right = new FootOneFrame(rightData,i+1,true);
+                frames.appendAFrame(right,numRFrame,true);
+                numRFrame++;
+            }
+        }
+        /*
         for(int i = 0;i<200&&numLFrame<10;i++) {
             if(leftData[i] == no.nordicsemi.android.nrftoolbox.uart.Cons.DEL){
                 Log.i(TAG,"appending left data at : "+i+" ,,, " +leftData[i]+","+leftData[i+1]+","+leftData[i+2]);
@@ -108,34 +131,11 @@ public class Result implements Serializable {
                 numRFrame++;
             }
         }
-
+        */
         frames.setFrameNum(Math.min(numRFrame,numLFrame));
         Log.i(TAG,"MIN FRAME NUM"+frames.getFramesSz()+","+Math.min(numLFrame,numRFrame));
 
-        /*
 
-        for(int i = 0;i<200;i++){
-            //BIAS가 들어가야할 수도 있음
-            Log.i(TAG,"idx : "+i+" , each value : "+leftData[i]+" , "+rightData[i]);
-            if(leftData[i] == no.nordicsemi.android.nrftoolbox.uart.Cons.DEL&&left ==null){
-                if(isFoot(i+1,leftData)){
-                    left = new FootOneFrame(leftData,i+1,false);
-                }
-            }
-            else if(rightData[i] == no.nordicsemi.android.nrftoolbox.uart.Cons.DEL&&right == null){
-                if(isFoot(i+1,rightData)){
-                    right = new FootOneFrame(rightData,i+1,true);
-                }
-            }
-
-            if(left!=null&&right!=null){
-                frames.appendFootFrame(left,right);
-                numFrame++;
-                left = null;
-                right=null;
-            }
-        }
-         */
         Log.i(TAG,"setting FrameNumber : "+frames.getFramesSz());
         return frames;
     }
@@ -232,11 +232,21 @@ public class Result implements Serializable {
         }
         return allActivated;
     }
+    public boolean isEmpty(byte data[], int frameIdx){
+        boolean allDeactivated = true;
+        for(int sensorPos = 0; sensorPos< Cons.ARCH_SENSOR_NUM; sensorPos++){
+            if(data[frameIdx+sensorPos]> Cons.THRESH_ACTIVATED){
+                allDeactivated = false;
+                break;
+            }
+        }
+        return allDeactivated;
+    }
     public int calcBackIdx(byte data[]){
         for(int i = 0;i<data.length;i++){
             if(data[i] == (byte)',') {
-                if (isBack(data, i)) {
-                    Log.i(TAG,"back idx : "+i);
+                if (isBack(data, i+1)) {
+                    Log.i(TAG,"back idx : "+(i+1));
                     return i;
                 }
             }
@@ -254,6 +264,20 @@ public class Result implements Serializable {
             }
         }
         Log.i(TAG,"arch idx : fail ");
+        return 2;
+    }
+
+    public int calcEmptyIdx(byte data[]){
+        for(int i = 0;i<data.length;i++){
+            if(data[i] == (byte)',') {
+                if (isEmpty(data, i+1)) {
+                    Log.i(TAG,"empty idx : found "+i);
+                    return i;
+                }
+            }
+        }
+
+        Log.i(TAG,"empty idx : fail ");
         return 2;
     }
     /*
