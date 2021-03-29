@@ -257,8 +257,8 @@ public class Result implements Serializable {
     public int calcArchIdx(byte data[]){
         for(int i = 0;i<data.length;i++){
             if(data[i] == (byte)',') {
-                if (isArch(data, i)) {
-                    Log.i(TAG,"arch idx : found "+i);
+                if (isArch(data, i+1)) {
+                    Log.i(TAG,"arch idx : found "+i+1);
                     return i;
                 }
             }
@@ -271,7 +271,7 @@ public class Result implements Serializable {
         for(int i = 0;i<data.length;i++){
             if(data[i] == (byte)',') {
                 if (isEmpty(data, i+1)) {
-                    Log.i(TAG,"empty idx : found "+i);
+                    Log.i(TAG,"empty idx : found "+i+1);
                     return i;
                 }
             }
