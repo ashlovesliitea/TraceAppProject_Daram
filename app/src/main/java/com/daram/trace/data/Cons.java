@@ -5,7 +5,7 @@ public class Cons {//constants
     public static final int HEATMAP_FRAMES_NUM = 100;//Result.java에선 안 쓸거고 heatmap 폴더에서만 적용돼있음
     public static final int SENSOR_NUM_FOOT =8;
     public static final int BACK_SENSOR_NUM = 3;
-    public static final int THRESH_ACTIVATED = 0x20;
+    public static final int THRESH_ACTIVATED = 0x30;
     public static final int REP_START_SEC = 5;
     public static final int REP_END_SEC = 7;
     public static final int ARCH_SENSOR_NUM= SENSOR_NUM_FOOT -BACK_SENSOR_NUM;

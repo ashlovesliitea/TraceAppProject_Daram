@@ -47,7 +47,8 @@ public class Cons {//constants
     //Todo: 하드웨어 구현된 거 보고 다시 맞추기
     public final static byte MODE_RUN = 0X31;
     public final static byte MODE_STOP = 0X32;
-    public final static byte MODE_VERSION = 0X33;
+    public final static byte MODE_MOLD = 0X33;
+
     public final static byte MODE_MEASURE_LEFT = 0X34; //양 발에 대해 센서값을 다
     public final static byte MODE_MEASURE_RIGHT = 0X35;
     public final static byte MODE_SENSOR = 0X35;

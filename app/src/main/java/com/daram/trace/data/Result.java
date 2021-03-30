@@ -40,6 +40,8 @@ public class Result implements Serializable {
         this.loginInfo = loginInfo;
         this.leftData = new byte[3000];
         this.rightData = new byte[3000];
+        this.leftData[0] = (byte)0xff;
+        this.rightData[0] = (byte)0xff;
         clearData();
     }
     public void setLeftAsDummy(){
@@ -104,7 +106,7 @@ public class Result implements Serializable {
             }
         }
         int numRFrame = 0;
-        for(int i = rightEmpty; i<200 && numRFrame<10 ;i++){
+        for(int i = rightEmpty; i<200 && numRFrame<15 ;i++){
             if(rightData[i] == no.nordicsemi.android.nrftoolbox.uart.Cons.DEL){
                 Log.i(TAG,"appending right data at : " + i + " ,,, " + rightData[i] + "," + rightData[i + 1]+","+rightData[i+2]);
                 right = new FootOneFrame(rightData,i+1,true);
@@ -140,7 +142,7 @@ public class Result implements Serializable {
         return frames;
     }
     //              0 1 2 3 4 5 6 7 8
-    int revIdx[] = {0,1,2,0,3};
+    int revIdx[] = {0,1,2,0,3,0,0};
     //TODO:setVersion 함수 수정한 거 디버깅 하기!
     public void setVersion(int v){
         //아치 위에서 3개 뒷꿈 왼에서 3개 순서
@@ -254,6 +256,7 @@ public class Result implements Serializable {
         Log.i(TAG,"back idx : fail");
         return 2;
     }
+
     public int calcArchIdx(byte data[]){
         for(int i = 0;i<data.length;i++){
             if(data[i] == (byte)',') {
@@ -267,6 +270,16 @@ public class Result implements Serializable {
         return 2;
     }
 
+    public boolean isUnFilled(boolean isRight){
+        Log.i(TAG,"is unfilled running"+(int)rightData[0]+","+(int)rightData[1]+","+(int)leftData[0]+","+(int)leftData[1]);
+
+        if(isRight){
+            return rightData[0] != 0xff;
+        }
+        else{
+            return leftData[0] != 0xff;
+        }
+    }
     public int calcEmptyIdx(byte data[]){
         for(int i = 0;i<data.length;i++){
             if(data[i] == (byte)',') {

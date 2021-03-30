@@ -302,6 +302,7 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
 				// TODO : click event
 				UARTActivity.this.connectionMode = 2;
 				onMode(2);
+
 			}
 		});
 

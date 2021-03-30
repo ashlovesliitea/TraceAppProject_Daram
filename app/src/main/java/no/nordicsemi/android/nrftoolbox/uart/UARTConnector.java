@@ -143,17 +143,13 @@ public class UARTConnector {
 				}
 				case BleProfileService.STATE_CONNECTING:
 					break;
-
 				case BleProfileService.STATE_DISCONNECTING:
-
 					// current implementation does nothing in this states
 					//모드에 맞게 파싱할 수 있어야댐
 					break;
 				case BleProfileService.CUSTOM_READY:
-
 					sendData(Cons.MODE_MEASURE_LEFT);
 					break;
-
 				case BleProfileService.CUSTOM_LEFT_INIT_DONE:
 					//sendData(Cons.MODE_RUN);//근데 이건 uartconnector를 새로 만들어야할듯
 					//이걸 받았을 때 왼발이 끊어진 상태가 아닐수도 잇슴

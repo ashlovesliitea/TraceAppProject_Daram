@@ -216,7 +216,7 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
         Log.i(TAG,"onDataReceived : "+data.length()+" , "+ Util.idx);
 
         //version일 때 UARTConnector 변수에 저장해둬야함
-        if(data.charAt(1)==Cons.MODE_VERSION){
+        if(data.charAt(1)==Cons.MODE_MOLD){
             AnalyzeActivity.result.setVersion((int)data.charAt(2));
             Log.i(TAG,"깔창 종류 파싱 : "+String.format("%8s", Integer.toBinaryString((int)data.charAt(2) & 0xFF)).replace(' ', '0'));
             if(UARTConnector.connectionMode == 2) {
@@ -280,7 +280,7 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
                     //broadcast3.putExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.CUSTOM_RIGHT_DATA_DONE);
                 }
                 //LocalBroadcastManager.getInstance(this).sendBroadcast(broadcast3);
-                manager.send("3");
+                manager.send(""+(char)Cons.MODE_MOLD);
                 Log.i(TAG,"sending broadcast : ");
 
             }
