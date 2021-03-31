@@ -43,8 +43,7 @@ public class Result implements Serializable {
         this.loginInfo = loginInfo;
         this.leftData = new byte[3000];
         this.rightData = new byte[3000];
-        this.leftData[0] = (byte)0xff;
-        this.rightData[0] = (byte)0xff;
+
         clearData();
     }
     public void setLeftAsDummy(){
@@ -230,16 +229,38 @@ public class Result implements Serializable {
 //        Log.e(TAG,"setting FrameNumber : "+frames.getFramesSz());
         return frames;
     }
+    public int parseOneHot(int n){
+        if(n == 0b1) return 1;
+        if(n == 0b10) return 2;
+        if(n == 0b100) return 3;
+        return 0;
+    }
+
     //              0 1 2 3 4 5 6 7 8
-    int revIdx[] = {0,1,2,0,3,0,0};
+    int revBack[] = {0,1,2,0,3};
+    int revArch[] = {0,0,0,0,0};
     //TODO:setVersion 함수 수정한 거 디버깅 하기!
     public void setVersion(int v){
         //아치 위에서 3개 뒷꿈 왼에서 3개 순서
+        /*
         int arch = (v&0b111000)>>3;
-        archLevel = revIdx[arch];
+        arch = parseOneHot(arch);
+        archLevel = revArch[arch];
         int back= v&0b111;
+        back = parseOneHot(back);
         Log.i(TAG,"version parsing  : "+arch+","+back);
-        backLevel = revIdx[back];
+        backLevel = revBack[back];
+         */
+        int back = v&0b111;
+        if(back == 0b111) backLevel= 3;
+        if(back == 0b101) backLevel=2;
+        if(back == 0b011) backLevel=1;
+        int arch =  (v&0b111000)>>3;
+        if(arch == 0b101) archLevel =3;
+        if(arch == 0b011) archLevel =2;
+        if(arch == 0b110) archLevel =1;
+
+        Log.i(TAG,"version parsing  : "+arch+","+back+","+archLevel+","+backLevel);
     }
     public void clearData(){
         leftData = new byte[Cons.MAX_FRAMES_NUM];
@@ -301,32 +322,34 @@ public class Result implements Serializable {
     public Calendar getCalendar() {
         return calendar;
     }
-    public boolean isBack(byte data[],int frameIdx){
-        boolean allActivated = true;
+    public boolean isBack(byte data[],int firstidx){
+        boolean allActivated = false;
         //아치가 먼저임
-        for(int sensorPos = Cons.ARCH_SENSOR_NUM; sensorPos< Cons.BACK_SENSOR_NUM; sensorPos++){
-            if(data[frameIdx+sensorPos]< Cons.THRESH_ACTIVATED){
-                allActivated = false;
+        for(int sensorPos = Cons.ARCH_SENSOR_NUM; sensorPos< Cons.SENSOR_NUM_FOOT; sensorPos++){
+            if(data[firstidx+sensorPos]> Cons.THRESH_ACTIVATED){
+                allActivated = true;
                 break;
             }
         }
         return allActivated;
     }
-    //BACK을 제외한 모든 센서가 9찍어야 하는데 이런 경우는 거의 없을 거같음
-    public boolean isArch(byte data[],int frameIdx){
+    //BACK을 제외한 모든 센서가 찍어야 하는데 이런 경우는 거의 없을 거같음
+    public boolean isArch(byte data[],int firstidx){
         boolean allActivated = true;
         for(int sensorPos = 0; sensorPos< Cons.ARCH_SENSOR_NUM; sensorPos++){
-            if(data[frameIdx+sensorPos]< Cons.THRESH_ACTIVATED){
+            if(data[firstidx+sensorPos]< Cons.THRESH_ACTIVATED){
                 allActivated = false;
                 break;
             }
         }
         return allActivated;
     }
-    public boolean isEmpty(byte data[], int frameIdx){
+
+    public boolean isEmpty(byte data[], int firstidx){
         boolean allDeactivated = true;
-        for(int sensorPos = 0; sensorPos< Cons.ARCH_SENSOR_NUM; sensorPos++){
-            if(data[frameIdx+sensorPos]> Cons.THRESH_ACTIVATED){
+        for(int sensorPos = 0; sensorPos< Cons.SENSOR_NUM_FOOT; sensorPos++){
+            if(data[firstidx+sensorPos]> 0x70){
+
                 allDeactivated = false;
                 break;
             }
@@ -363,10 +386,10 @@ public class Result implements Serializable {
         Log.i(TAG,"is unfilled running"+(int)rightData[0]+","+(int)rightData[1]+","+(int)leftData[0]+","+(int)leftData[1]);
 
         if(isRight){
-            return rightData[0] != 0xff;
+            return rightData[0] ==0;
         }
         else{
-            return leftData[0] != 0xff;
+            return leftData[0] ==0;
         }
     }
     public int calcEmptyIdx(byte data[]){
