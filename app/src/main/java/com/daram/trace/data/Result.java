@@ -24,9 +24,12 @@ public class Result implements Serializable {
     */
     byte[] leftData;
     byte[] rightData;
+    int total_len= 225;
     int leftidx;
     int rightidx;
     private int idxInput;
+    private int period=300;
+    private int threshold=32;
     /*
     public Result(byte[] rawData,int endData){
         data = rawData;
@@ -69,20 +72,60 @@ public class Result implements Serializable {
         Log.i(TAG,"RIGHT DATA : "+str);
     }
     public void setLeftData(byte[] arr,int len){
-
         System.arraycopy(arr, 0, leftData, 0, len);
         leftidx = len;
         //index의 limit을 어떻게 할것인가
     }
     public void setRightData(byte[] arr, int len){
-        Log.i(TAG,"setting right data : "+len+", "+arr[0]+","+arr[1]+","+arr[2]);
+//        Log.i(TAG,"setting right data : "+len+", "+arr[0]+","+arr[1]+","+arr[2]);
         System.arraycopy(arr, 0, rightData, 0, len);
-        Log.i(TAG,"setting right data after copy : "+len+", "+rightData[0]+","+rightData[1]+","+rightData[2]);
+//        Log.i(TAG,"setting right data after copy : "+len+", "+rightData[0]+","+rightData[1]+","+rightData[2]);
         rightidx = len;
     }
     //data에다가 모드값을 포함한 모든 것들을 싹다 넣는다
     //가정은 그냥 300언저리에서 시간이 많이 지났음에도 시간적으로 같은 순간의 데이터를 양 발이 수집했을 것이다
     //시간적으로 일치하지 않을 가능성 있음
+    enum FootState{
+        Front,
+        Back,
+        Empty
+    }
+    enum FootName{
+        Right,
+        Left
+    }
+//    true: a, false: b
+    boolean get_mini(byte a, byte b){
+        if (a==0){
+            return false;
+        }
+        if (b==0){
+            return true;
+        }
+        return a/b>0;
+    }
+    FootState genFootState(byte[] one_frame, FootName foot){
+        if (foot==FootName.Right){
+            if (one_frame[1]<threshold&&one_frame[6]<threshold){
+                return FootState.Empty;
+            }
+            if (get_mini(one_frame[1],one_frame[6])){
+                return FootState.Front;
+            }else{
+                return FootState.Back;
+            }
+        }else{
+            if (one_frame[2]<threshold&&one_frame[7]<threshold){
+                return FootState.Empty;
+            }
+            if (get_mini(one_frame[2],one_frame[7])){
+                return FootState.Front;
+            }else{
+                return FootState.Back;
+            }
+        }
+    }
+
     public static String TAG = "Result";
     @RequiresApi(api = Build.VERSION_CODES.O)
     public FeetMultiFrames parseRaw(){//validation을 하면서 유효한 frame 만건져서 띄우기
@@ -90,30 +133,76 @@ public class Result implements Serializable {
         FootOneFrame left=null,right=null;
 
         //left raw와 right raw를 전부 출력하자.
-        Log.i(TAG,"parseRaw : "+leftData.length+" , "+rightData.length);
-        int leftBack = calcBackIdx(leftData);
-        int rightEmpty = calcEmptyIdx(rightData);
-        Log.i(TAG,"leftback : "+leftBack+" ,  rightEmpty: "+rightEmpty);
-        int leftArch = calcArchIdx(leftData),rightBack = calcBackIdx(rightData),rightArch = calcArchIdx(rightData);
-        Log.i(TAG,"나머지 지점 : "+leftArch+" , "+rightBack+" , "+rightArch);
+//        Log.e(TAG,"parseRaw : "+leftData.length+" , "+rightData.length);
+//        int leftBack = calcBackIdx(leftData);
+//        int leftArch = calcArchIdx(leftData);
+//        Log.e(TAG,"leftback : "+leftBack+" ,  rightEmpty: "+rightEmpty);
+
+//        int rightEmpty = calcEmptyIdx(rightData);
+//        int rightBack = calcBackIdx(rightData);
+//        int rightArch = calcArchIdx(rightData);
+//        Log.e(TAG,"나머지 지점 : "+leftArch+" , "+rightBack+" , "+rightArch);
         int numLFrame=0;
-        for(int i = leftBack;i<200;i++){
-            if(leftData[i] == no.nordicsemi.android.nrftoolbox.uart.Cons.DEL){
-                Log.i(TAG,"appending left data at : "+i+" ,,, " +leftData[i]+","+leftData[i+1]+","+leftData[i+2]);
-                left = new FootOneFrame(leftData,i+1,false);
-                frames.appendAFrame(left,numLFrame,false);
-                numLFrame++;
+//        25set
+        int sets_Frame=25;
+        int skip_index=-1;
+        int term=0;
+        // true: right , false: left
+        boolean whofirst=false;
+        for(int i=0; i<sets_Frame; i++){
+            byte[] left_one=new byte[8];
+            System.arraycopy(leftData, i*9,left_one , 0, 8);
+            byte[] right_one=new byte[8];
+            System.arraycopy(rightData, i*9,right_one,0,8);
+
+            FootState rstate=genFootState(right_one,FootName.Right);
+            FootState lstate=genFootState(left_one,FootName.Left);
+            if (rstate!=lstate){
+                if (rstate==FootState.Empty||lstate==FootState.Empty){
+                    if (skip_index>=0){
+                        term=i-skip_index;
+                    }
+                    whofirst= rstate == FootState.Empty;
+                    break;
+                }
+            }else{
+               if (skip_index<0){
+                   skip_index=i;
+               }
             }
         }
-        int numRFrame = 0;
-        for(int i = rightEmpty; i<200 && numRFrame<15 ;i++){
-            if(rightData[i] == no.nordicsemi.android.nrftoolbox.uart.Cons.DEL){
-                Log.i(TAG,"appending right data at : " + i + " ,,, " + rightData[i] + "," + rightData[i + 1]+","+rightData[i+2]);
-                right = new FootOneFrame(rightData,i+1,true);
-                frames.appendAFrame(right,numRFrame,true);
-                numRFrame++;
+        for (int i=0; i<sets_Frame; i++){
+            if (whofirst){
+//                right
+                left = new FootOneFrame(leftData,((i+term)%sets_Frame)*9,false);
+                right = new FootOneFrame(rightData,i*9,true);
+            }else{
+//                left
+                left = new FootOneFrame(leftData,i*9,false);
+                right = new FootOneFrame(rightData,((i+term)%sets_Frame)*9,true);
             }
+
+            frames.appendAFrame(left,false);
+            frames.appendAFrame(right,true);
         }
+//        for(int i = 0;i<total_len;i++){
+//            if(leftData[i] == no.nordicsemi.android.nrftoolbox.uart.Cons.DEL){
+////                Log.e(TAG,"appending left data at : "+i+" ,,, " +leftData[i]+","+leftData[i+1]+","+leftData[i+2]);
+//                left = new FootOneFrame(leftData,i+1,false);
+//                frames.appendAFrame(left,numLFrame,false);
+//                numLFrame++;
+//            }
+//        }
+//        int numRFrame = 0;
+//        for(int i = 0; i<total_len && numRFrame<15 ;i++){
+//            if(rightData[i] == no.nordicsemi.android.nrftoolbox.uart.Cons.DEL){
+////                Log.e(TAG,"appending right data at : " + i + " ,,, " + rightData[i] + "," + rightData[i + 1]+","+rightData[i+2]);
+//                right = new FootOneFrame(rightData,i+1,true);
+//                frames.appendAFrame(right,numRFrame,true);
+//                numRFrame++;
+//            }
+//        }
+
         /*
         for(int i = 0;i<200&&numLFrame<10;i++) {
             if(leftData[i] == no.nordicsemi.android.nrftoolbox.uart.Cons.DEL){
@@ -134,11 +223,11 @@ public class Result implements Serializable {
             }
         }
         */
-        frames.setFrameNum(Math.min(numRFrame,numLFrame));
-        Log.i(TAG,"MIN FRAME NUM"+frames.getFramesSz()+","+Math.min(numLFrame,numRFrame));
+        frames.setFrameNum();
+//        Log.e(TAG,"MIN FRAME NUM"+frames.getFramesSz()+","+Math.min(numLFrame,numRFrame));
 
 
-        Log.i(TAG,"setting FrameNumber : "+frames.getFramesSz());
+//        Log.e(TAG,"setting FrameNumber : "+frames.getFramesSz());
         return frames;
     }
     //              0 1 2 3 4 5 6 7 8

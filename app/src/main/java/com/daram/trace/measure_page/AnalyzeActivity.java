@@ -73,39 +73,7 @@ public class AnalyzeActivity extends UARTActivity {
          */
         this.onMode(2);
         hideUI();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                //check if left is empty
-                if(AnalyzeActivity.result.isUnFilled(false)){
-                    Log.i(TAG,"result unfilled : ");
-                    text.setText("연결 오류! 양 발 전원을 확인 후 앱 재시작해주세요.");
-                    Toast toast = new Toast(getApplicationContext());
-                    //바닥에서 20dp 떨어져서 토스트 생성
-                    toast.setGravity(Gravity.BOTTOM,0,toPx(30));
-                    toast.setDuration(Toast.LENGTH_SHORT);
-                    toast.setView(layout);
-                    toast.show();
-                }
-            }
 
-        },30000);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                //check if right is empty
-                if(AnalyzeActivity.result.isUnFilled(true)){
-                    Log.i(TAG,"result unfilled : ");
-                    text.setText("연결 오류! 양 발 전원을 확인 후 앱 재시작해주세요.");
-                    Toast toast = new Toast(getApplicationContext());
-                    //바닥에서 20dp 떨어져서 토스트 생성
-                    toast.setGravity(Gravity.BOTTOM,0,toPx(30));
-                    toast.setDuration(Toast.LENGTH_LONG);
-                    toast.setView(layout);
-                    toast.show();
-                }
-            }
-        },70000);
     }
     private int toPx(int a){
         return (int) (a * Resources.getSystem().getDisplayMetrics().density);

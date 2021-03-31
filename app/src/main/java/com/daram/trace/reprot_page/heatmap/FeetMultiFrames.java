@@ -12,6 +12,8 @@ public class FeetMultiFrames implements Serializable {
     private int insertIdx=0;
     public int frameNum;
     public String TAG = "FootMultiFrames";
+    private int numL=0;
+    private int numR=0;
 
 
     //              0 1 2 3 4 5 6 7
@@ -80,9 +82,17 @@ public class FeetMultiFrames implements Serializable {
         initFramesForTest();
         frameNum = 9;
     }
-    public void appendAFrame(FootOneFrame frame, int idx, boolean isRight){
-        Log.i(TAG,"appending a frame : "+ idx+ " , "+isRight+" , "+frame.ratioH[0]+" , "+frame.ratioW[0]+" , "+frame.ps[0]);
-        frames[idx][(isRight?1:0)] = frame;
+    public void appendAFrame(FootOneFrame frame, boolean isRight){
+//        Log.i(TAG,"appending a frame : "+ idx+ " , "+isRight+" , "+frame.ratioH[0]+" , "+frame.ratioW[0]+" , "+frame.ps[0]);
+        int temp=0;
+        if (isRight){
+            temp=this.numR;
+            this.numR+=1;
+        }else{
+            temp=this.numL;
+            this.numL+=1;
+        }
+        frames[temp][(isRight?1:0)] = frame;
     }
     /*
     public void appendFootFrame(FootOneFrame left, FootOneFrame right){ //시간적으로 일치해야만 append 가능
@@ -120,8 +130,8 @@ public class FeetMultiFrames implements Serializable {
 
     }
 
-    public void setFrameNum(int frameNum) {
-        this.frameNum = frameNum;
+    public void setFrameNum() {
+        this.frameNum = Math.min(this.numL,this.numR);
     }
 
     public int getFramesSz(){
