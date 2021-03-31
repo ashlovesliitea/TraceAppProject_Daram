@@ -52,7 +52,7 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
     private Button btnReplay;
     private Button btnSend;
     private Result result = new Result(new LoginInfo(LoginInfo.getId(),LoginInfo.getPw()));//일단 여기선 더미데이터 만들게요 ㅠ
-    @RequiresApi(api = Build.VERSION_CODES.M)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,12 +82,12 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
         //marker 색깔 바꿀 수 있음 원랜 0xff9400D3
         map.setMarkerCallback(new HeatMapMarkerCallback.CircleHeatMapMarker(0x00000000));
         map.setRadius(150.0);
-        arch0 = findViewById(R.id.arch0);
-        arch1 =findViewById(R.id.arch1);
-        arch2 = findViewById(R.id.arch2);
-        back0 = findViewById(R.id.back0);
-        back1 = findViewById(R.id.back1);
-        back2 = findViewById(R.id.back2);
+        arch0 = findViewById(R.id.arch1);
+        arch1 =findViewById(R.id.arch2);
+        arch2 = findViewById(R.id.arch3);
+        back0 = findViewById(R.id.back1);
+        back1 = findViewById(R.id.back2);
+        back2 = findViewById(R.id.back3);
         txtArch = findViewById(R.id.txt_arch);
         txtBack = findViewById(R.id.txt_back);
         setLevelUI(result.getArchLevel(),result.getBackLevel());
