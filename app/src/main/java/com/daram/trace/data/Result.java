@@ -253,12 +253,12 @@ public class Result implements Serializable {
          */
         int back = v&0b111;
         if(back == 0b111) backLevel= 3;
-        if(back == 0b101) backLevel=2;
+        if(back == 0b001) backLevel=2;
         if(back == 0b011) backLevel=1;
         int arch =  (v&0b111000)>>3;
         if(arch == 0b101) archLevel =3;
         if(arch == 0b011) archLevel =2;
-        if(arch == 0b110) archLevel =1;
+        if(arch == 0b111) archLevel =1;
 
         Log.i(TAG,"version parsing  : "+arch+","+back+","+archLevel+","+backLevel);
     }
