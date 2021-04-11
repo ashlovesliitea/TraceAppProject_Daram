@@ -163,7 +163,6 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
         Log.i(TAG,"bitmap path : "+fileCacheItem.getAbsolutePath());
         OutputStream out = null;
         try {
-
             fileCacheItem.createNewFile();
             out = new FileOutputStream(fileCacheItem);
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
@@ -204,6 +203,7 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
     private void setLevelUI(int arch, int back){
         txtArch.setText("아치"+arch);
         txtBack.setText("꿈치"+back);
+        Log.i(TAG,"아치 꿈치 그리기 : "+arch+","+back);
         int y = Color.parseColor("#FFE090"), g = Color.parseColor("#C4C4C4");
         arch0.setBackgroundColor(arch>=1?y:g);arch1.setBackgroundColor(arch>=2?y:g);arch2.setBackgroundColor(arch>=3?y:g);
         back0.setBackgroundColor(back>=1?y:g);back1.setBackgroundColor(back>=2?y:g);back2.setBackgroundColor(back>=3?y:g);

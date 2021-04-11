@@ -230,27 +230,44 @@ public class Result implements Serializable {
         return frames;
     }
     public int parseOneHot(int n){
-        if(n == 0b1) return 1;
-        if(n == 0b10) return 2;
+        if(n == 0b001) return 1;
+        if(n == 0b010) return 2;
         if(n == 0b100) return 3;
         return 0;
     }
 
+    public int parseBackOneHot(int n){
+        if(n == 0b011) return 1;
+        if(n == 0b101) return 2;
+        if(n == 0b110) return 3;
+        return 0;
+    }
+
+    public int parseArchOneHot(int n){
+        if(n == 0b110) return 1;
+        if(n == 0b011) return 2;
+        if(n == 0b101) return 3;
+        return 0;
+    }
+
     //              0 1 2 3 4 5 6 7 8
+    /*
     int revBack[] = {0,1,2,0,3};
     int revArch[] = {0,0,0,0,0};
+
+     */
     //TODO:setVersion 함수 수정한 거 디버깅 하기!
     public void setVersion(int v){
         //아치 위에서 3개 뒷꿈 왼에서 3개 순서
-        /*
+
         int arch = (v&0b111000)>>3;
-        arch = parseOneHot(arch);
-        archLevel = revArch[arch];
+        arch = parseArchOneHot(arch);
+        archLevel = arch;
         int back= v&0b111;
-        back = parseOneHot(back);
+        back = parseBackOneHot(back);
         Log.i(TAG,"version parsing  : "+arch+","+back);
-        backLevel = revBack[back];
-         */
+        backLevel = back;
+        /*
         int back = v&0b111;
         if(back == 0b111) backLevel= 3;
         if(back == 0b001) backLevel=2;
@@ -259,7 +276,7 @@ public class Result implements Serializable {
         if(arch == 0b101) archLevel =3;
         if(arch == 0b011) archLevel =2;
         if(arch == 0b111) archLevel =1;
-
+        */
         Log.i(TAG,"version parsing  : "+arch+","+back+","+archLevel+","+backLevel);
     }
     public void clearData(){
