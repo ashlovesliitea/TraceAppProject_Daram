@@ -55,7 +55,7 @@
     <string name="no_application">Web Browser application is not available.</string>
     <string name="no_uri_application">There is no application that can open this URI.</string>
     <string name="no_application_play">Google Play not installed.</string>
-    <string name="no_required_permission">Permission denied.</string>
+    <string name="no_required_permission">앱을 재시작해주세요.</string>
     <string name="scanner_title">Select device:</string>
     <string name="scanner_empty">No device found</string>
     <string name="scanner_action_scan">Scan</string>

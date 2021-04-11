@@ -37,7 +37,12 @@ public class RecyclerViewActivity extends AppCompatActivity {
         Intent intent=getIntent();
         userName=intent.getStringExtra("UserName");
         userId=intent.getStringExtra("UserId");
-
+        if(userName == null){
+            userName = "exname";
+        }
+        if(userId==null){
+            userId = "exid";
+        }
         measureButton=(Button)findViewById(R.id.measureStart);
 
         name=findViewById(R.id.name);

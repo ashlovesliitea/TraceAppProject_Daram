@@ -79,16 +79,15 @@
         android:layout_height="50dp"
         android:background="@drawable/button_round_sign_up"
         android:backgroundTint="#F9F9F9"
-        android:text="회원가입"
+        android:text="회원 가입"
         android:textColor="#6A6B8C"
         android:textSize="18dp"
         app:backgroundTint="#F9F9F9"
+        app:layout_constraintBottom_toTopOf="@id/guidelinebottom"
         app:layout_constraintLeft_toLeftOf="@id/guidelineleft"
         app:layout_constraintRight_toRightOf="@id/guidelineright"
         app:layout_constraintTop_toBottomOf="@+id/button_login"
-        app:layout_constraintBottom_toTopOf="@id/guidelinebottom"
-        app:layout_constraintVertical_bias="0.5"
-         />
+        app:layout_constraintVertical_bias="0.5" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

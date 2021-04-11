@@ -1,10 +1,8 @@
 package com.daram.trace.measure_page;
 
-import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,27 +11,18 @@ import android.widget.TextView;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.daram.trace.Util;
 import com.daram.trace.data.LoginInfo;
 import com.daram.trace.data.Result;
-import com.daram.trace.reprot_page.MovingFeetHeatmapActivity;
-import com.daram.trace.reprot_page.heatmap.FeetMultiFrames;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Timer;
 
 import no.nordicsemi.android.nrftoolbox.R;
 import no.nordicsemi.android.nrftoolbox.uart.UARTActivity;
 
-import static com.daram.trace.Util.makeFolderPath;
-
 public class AnalyzeActivity extends UARTActivity {
     private Timer timer;
     public static Result result= new Result(new LoginInfo(LoginInfo.getId(),LoginInfo.getPw()));//어디서나 접근가능함
-
+    public TextView textAnal;
     private void hideUI(){
         runOnUiThread(new Runnable(){
             @Override
@@ -62,15 +51,44 @@ public class AnalyzeActivity extends UARTActivity {
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.setView(layout);
         toast.show();
-        /*
+        textAnal = (TextView) findViewById(R.id.analyzetext);
         timer = new Timer();
+        new Handler().postDelayed(new Runnable() {
+                                      @Override
+                                      public void run() {
+                                          if(result.isEmpty(false)){
+                                              textAnal.setText("왼발통신 실패! 앱을 재시작하세요");
+                                          }
+                                      }
+                                  }, 18000);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(result.isEmpty(true)){
+                    textAnal.setText("오른발통신 실패! 앱을 재시작하세요");
+                }
+            }
+        }, 30000);
+        /*
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                nextActivity();
+                if(result.isEmpty(false)){
+                    alert.setText("왼발통신 실패! 앱을 재시작하세요");
+                }
+            }
+        },30000);
+        Timer t = new Timer();
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if(result.isEmpty(false)){
+                    alert.setText("오른발통신 실패! 앱을 재시작하세요");
+                }
             }
         },60000);
          */
+
         this.onMode(2);
         hideUI();
 
@@ -79,44 +97,7 @@ public class AnalyzeActivity extends UARTActivity {
         return (int) (a * Resources.getSystem().getDisplayMetrics().density);
     }
     String dateString = "2017-3-26 16:40";
-    /*
-    public void nextActivity(){
 
-        Intent intent = new Intent(AnalyzeActivity.this, MovingFeetHeatmapActivity.class);
-        Bundle bundle = new Bundle();
-        //bundle.putSerializable("result", result);   // Object 넘기기
-        //bundle.putSerializable("frames",result.parseRaw());
-        Calendar calendar = Calendar.getInstance();
-        // parse.
-        try {
-            Date formatData = new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(dateString);
-            calendar.setTime(formatData);
-            Util.storeObject(result,makeFolderPath(this,calendar),0);
-            FeetMultiFrames frames = result.parseRaw();
-            Util.storeObject(frames,makeFolderPath(this, calendar),1);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        //Add the bundle to the intent
-        intent.putExtras(bundle);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(intent);
-                //종료!!
-                finish();
-            }
-        },5000);
-
-        //WalkingActivity 도 종료
-        /*
-        ScanningActivity scanningActivity = (ScanningActivity)ScanningActivity.ScanningActivity;
-        scanningActivity.finish();
-       WalkingActivity walkingActivity = (WalkingActivity)WalkingActivity.WalkingActivity;
-        walkingActivity.finish();
-    }
-    */
     @Override
     public void onBackPressed() {
         super.onBackPressed();

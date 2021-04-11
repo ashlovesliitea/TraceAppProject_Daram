@@ -81,6 +81,15 @@ public class Result implements Serializable {
 //        Log.i(TAG,"setting right data after copy : "+len+", "+rightData[0]+","+rightData[1]+","+rightData[2]);
         rightidx = len;
     }
+    public boolean isEmpty(boolean isRight){
+        Log.i(TAG,"is empty : "+leftData[0]+" , "+rightData[0]);
+        if(isRight){
+            return rightData[0] == 0;
+        }
+        else{
+            return leftData[0] == 0;
+        }
+    }
     //data에다가 모드값을 포함한 모든 것들을 싹다 넣는다
     //가정은 그냥 300언저리에서 시간이 많이 지났음에도 시간적으로 같은 순간의 데이터를 양 발이 수집했을 것이다
     //시간적으로 일치하지 않을 가능성 있음
