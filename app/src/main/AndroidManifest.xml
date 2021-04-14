@@ -58,10 +58,6 @@
 		</activity>
 		<activity android:name="com.daram.trace.x_2Activity" />
 		<activity android:name="com.daram.trace.x9.RecyclerViewActivity">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-				<category android:name="android.intent.category.LAUNCHER" />
-			</intent-filter>
 		</activity>
 		<activity android:name="com.daram.trace.x_15Activity" />
 		<activity android:name="com.daram.trace.measure_page.AnalyzeActivity">

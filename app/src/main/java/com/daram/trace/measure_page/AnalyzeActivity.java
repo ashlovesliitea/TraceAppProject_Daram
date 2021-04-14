@@ -53,6 +53,7 @@ public class AnalyzeActivity extends UARTActivity {
         toast.show();
         textAnal = (TextView) findViewById(R.id.analyzetext);
         timer = new Timer();
+
         new Handler().postDelayed(new Runnable() {
                                       @Override
                                       public void run() {
@@ -60,7 +61,7 @@ public class AnalyzeActivity extends UARTActivity {
                                               textAnal.setText("왼발통신 실패! 앱을 재시작하세요");
                                           }
                                       }
-                                  }, 18000);
+                                  }, 30000);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -68,7 +69,9 @@ public class AnalyzeActivity extends UARTActivity {
                     textAnal.setText("오른발통신 실패! 앱을 재시작하세요");
                 }
             }
-        }, 30000);
+        }, 50000);
+
+
         /*
         timer.schedule(new TimerTask() {
             @Override

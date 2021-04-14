@@ -24,6 +24,7 @@ import com.daram.trace.Util;
 import com.daram.trace.data.Cons;
 import com.daram.trace.data.LoginInfo;
 import com.daram.trace.data.Result;
+import com.daram.trace.measure_page.AnalyzeActivity;
 import com.daram.trace.reprot_page.heatmap.FeetMultiFrames;
 import com.daram.trace.reprot_page.heatmap.FootOneFrame;
 import com.daram.trace.reprot_page.heatmap.HeatMapHolder;
@@ -312,5 +313,7 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
     }
     public void onClickSendButton(){
         Util.sendResultRecord(this, result);
+        //TODO: 이거 되는지 실험해보기
+        AnalyzeActivity.result = new Result(new LoginInfo(LoginInfo.getId(),LoginInfo.getPw()));
     }
 }

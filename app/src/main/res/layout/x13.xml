@@ -158,7 +158,7 @@
             android:layout_margin="30dp"
             android:background="@drawable/button_round_sign_up"
             android:padding="5dp"
-            android:text="걸음거리"
+            android:text="걸음걸이"
             android:textColor="#6A6B8C"
             android:textStyle="bold"
             app:backgroundTint="#F9F9F9" />
