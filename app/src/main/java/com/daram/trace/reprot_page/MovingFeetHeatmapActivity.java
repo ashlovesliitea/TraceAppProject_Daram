@@ -53,6 +53,7 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
     private Button btnReplay;
     private Button btnSend;
     private Result result = new Result(new LoginInfo(LoginInfo.getId(),LoginInfo.getPw()));//일단 여기선 더미데이터 만들게요 ㅠ
+    private TextView padSpec;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +65,8 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
         Bundle b = getIntent().getExtras();
         Log.i(TAG,"is bunddle null ? "+(b==null));
         result = (Result) b.getSerializable("result");
-        Log.i(TAG,"arch :"+result.getArchLevel()+", back : "+result.getBackLevel());
-        Toast myToast = Toast.makeText(this.getApplicationContext(),"arch :"+result.getArchLevel()+", back : "+result.getBackLevel(), Toast.LENGTH_LONG);
+        Log.i(TAG,"arch :"+result.getLeftArchLevel()+", back : "+result.getLeftBackLevel());
+        Toast myToast = Toast.makeText(this.getApplicationContext(),"arch :"+result.getLeftArchLevel()+", back : "+result.getLeftBackLevel(), Toast.LENGTH_LONG);
         myToast.show();
         //frames = (FeetMultiFrames) b.getSerializable("frames");
         frames = result.parseRaw();
@@ -91,7 +92,8 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
         back2 = findViewById(R.id.back3);
         txtArch = findViewById(R.id.txt_arch);
         txtBack = findViewById(R.id.txt_back);
-        setLevelUI(result.getArchLevel(),result.getBackLevel());
+        padSpec = findViewById(R.id.pad_spec);
+        setLevelUI(result.getLeftArchLevel(),result.getLeftBackLevel());
         Map<Float, Integer> colors = new ArrayMap<>();
         //build a color gradient in HSV from red at the center to green at the outside
         for (int i = 0; i < 21; i++) {
@@ -208,6 +210,8 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
         int y = Color.parseColor("#FFE090"), g = Color.parseColor("#C4C4C4");
         arch0.setBackgroundColor(arch>=1?y:g);arch1.setBackgroundColor(arch>=2?y:g);arch2.setBackgroundColor(arch>=3?y:g);
         back0.setBackgroundColor(back>=1?y:g);back1.setBackgroundColor(back>=2?y:g);back2.setBackgroundColor(back>=3?y:g);
+        padSpec.setText("왼발 : 아치"+result.getLeftArchLevel()+" & 뒷꿈치"+result.getLeftBackLevel()+"\n오른발 : 아치"+result.getRightArchLevel()+" & 뒷꿈치"
+        +result.getRightBackLevel());
     }
     private void addData() {
         Log.i(TAG,"button replay : addData");
@@ -315,5 +319,8 @@ public class MovingFeetHeatmapActivity extends AppCompatActivity implements Comp
         Util.sendResultRecord(this, result);
         //TODO: 이거 되는지 실험해보기
         AnalyzeActivity.result = new Result(new LoginInfo(LoginInfo.getId(),LoginInfo.getPw()));
+        //finish();
+        //Intent retToMain = new Intent(this, RecyclerViewActivity.class);
+        //startActivity(retToMain);
     }
 }

@@ -208,7 +208,6 @@ public class UARTConnector {
 						//broad cast를 mother에게 보낸다
 						mother.disconnectCurrent();
 
-
 						new Handler().postDelayed(new Runnable() {
 							@Override
 							public void run() {
@@ -222,6 +221,8 @@ public class UARTConnector {
 					if(!rightDataDoneActivated){
 						rightDataDoneActivated = true;
 						clearOpend();
+						//broad cast를 mother에게 보낸다
+						mother.disconnectCurrent();
 						Log.i(TAG,"receiver CUSTOM_RIGHT_DATA_DONE received");
 						String rightLog="";
 						for(int i = 0;i<50;i++){

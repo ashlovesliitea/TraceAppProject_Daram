@@ -12,22 +12,22 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="30dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:paddingLeft="30dp"
-        android:text="걸음수"
-        android:textColor="#FFE090"/>
+        android:text="상세정보"
+        android:textColor="#FFE090" />
 
     <TextView
-        android:id="@+id/num_walk_text"
+        android:id="@+id/pad_spec"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="30dp"
         android:paddingBottom="10dp"
-        android:text="20/50"
-        android:textStyle="bold"
-        android:textSize="30dp"
-        android:textColor="#FFFFFF"/>
+        android:text="결과 페이지"
+        android:textColor="#FFFFFF"
+        android:textSize="15dp"
+        android:textStyle="bold" />
 
 
     <!-- 태블릿의 경우엔 잘 안될지도..

@@ -80,8 +80,8 @@ public class RecyclerViewActivity extends AppCompatActivity {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd hh:mm");//날짜(시간까지)
             String strDate = sdf.format(result.getCalendar().getTime());
 
-            Log.i(TAG,"appendig item to page : "+ strDate+","+result.getArchLevel()+","+result.getArchLevel());
-            list.add(new ItemForm(strDate,"아치 "+result.getArchLevel()+"단계 뒷꿈치 "+result.getBackLevel(),result));
+            Log.i(TAG,"appendig item to page : "+ strDate+","+result.getLeftArchLevel()+","+result.getLeftArchLevel());
+            list.add(new ItemForm(strDate,"아치 "+result.getLeftArchLevel()+"단계 뒷꿈치 "+result.getLeftBackLevel(),result));
         }
 
         adapter = new MyAdapter(list,this);

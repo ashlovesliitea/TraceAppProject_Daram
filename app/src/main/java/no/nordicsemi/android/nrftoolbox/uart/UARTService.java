@@ -219,14 +219,16 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
         if(data.charAt(1)==Cons.MODE_MOLD){
             Log.i(TAG,"깔창 종류 파싱 : "+String.format("%8s", Integer.toBinaryString((int)data.charAt(2) & 0xFF)).replace(' ', '0'));
 
-            AnalyzeActivity.result.setVersion((int)data.charAt(2));
+
             if(UARTConnector.connectionMode == 2) {
+                AnalyzeActivity.result.setVersion((int)data.charAt(2),false);
                 final Intent broadcast2 = new Intent(BleProfileService.BROADCAST_CONNECTION_STATE);
                 //broadcast2.setAction(BleProfileService.BROADCAST_CONNECTION_STATE);
                 broadcast2.putExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.CUSTOM_LEFT_DATA_DONE);
                 LocalBroadcastManager.getInstance(this).sendBroadcast(broadcast2);
             }
             if(UARTConnector.connectionMode == 3){
+                AnalyzeActivity.result.setVersion((int)data.charAt(2),true);
                 final Intent rightInitDone = new Intent(BleProfileService.BROADCAST_CONNECTION_STATE);
                 //broadcast2.setAction(BleProfileService.BROADCAST_CONNECTION_STATE);
                 rightInitDone.putExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.CUSTOM_RIGHT_DATA_DONE);

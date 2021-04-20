@@ -287,8 +287,8 @@ public class Util {
         SimpleDateFormat sdf= new SimpleDateFormat("yyyyMMddhhmmss");
         String measure_date=sdf.format(result.getCalendar().getTime());
         String folderpath= id+"/"+measure_date;
-        String arch=Integer.toString(result.getArchLevel());//아치 단계
-        String heel=Integer.toString(result.getBackLevel());//꿈치 단계
+        String arch=Integer.toString(result.getLeftArchLevel());//아치 단계
+        String heel=Integer.toString(result.getLeftBackLevel());//꿈치 단계
         String admin_send="true";
 
 

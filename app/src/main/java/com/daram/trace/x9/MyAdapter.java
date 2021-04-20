@@ -111,7 +111,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         viewHolder.CardDate.setText(data.getDate());
         viewHolder.CardMeasure.setText(data.getMeasure());
         viewHolder.result = data.getResult();
-        Log.i(TAG,"result 받은 거 "+(viewHolder.result==null)+viewHolder.result.getBackLevel());
+        Log.i(TAG,"result 받은 거 "+(viewHolder.result==null)+viewHolder.result.getLeftBackLevel());
         viewHolder.button_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

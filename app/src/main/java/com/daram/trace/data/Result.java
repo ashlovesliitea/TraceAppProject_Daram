@@ -14,8 +14,13 @@ import java.util.Calendar;
 public class Result implements Serializable {
     Calendar calendar;
     LoginInfo loginInfo;
-    int archLevel;
-    int backLevel;
+    int leftArchLevel;
+    int leftBackLevel;
+
+
+
+    int rightArchLevel;
+    int rightBackLevel;
 
     //string 합치는 작업이 자바는 O(N)이래서 byte[]로 하고 저장할 때 변환하겠습니다
     /*
@@ -229,12 +234,7 @@ public class Result implements Serializable {
 //        Log.e(TAG,"setting FrameNumber : "+frames.getFramesSz());
         return frames;
     }
-    public int parseOneHot(int n){
-        if(n == 0b001) return 1;
-        if(n == 0b010) return 2;
-        if(n == 0b100) return 3;
-        return 0;
-    }
+
     public int parseBackOneHot(int n){
         if(n == 0b011) return 1;
         if(n == 0b101) return 2;
@@ -255,27 +255,22 @@ public class Result implements Serializable {
 
      */
     //TODO:setVersion 함수 수정한 거 디버깅 하기!
-    public void setVersion(int v){
+    public void setVersion(int v,boolean isRight){
         //아치 위에서 3개 뒷꿈 왼에서 3개 순서
-
         int arch = (v&0b111000)>>3;
         arch = parseArchOneHot(arch);
-        archLevel = arch;
         int back= v&0b111;
         back = parseBackOneHot(back);
-        Log.i(TAG,"version parsing  : "+arch+","+back);
-        backLevel = back;
-        /*
-        int back = v&0b111;
-        if(back == 0b111) backLevel= 3;
-        if(back == 0b001) backLevel=2;
-        if(back == 0b011) backLevel=1;
-        int arch =  (v&0b111000)>>3;
-        if(arch == 0b101) archLevel =3;
-        if(arch == 0b011) archLevel =2;
-        if(arch == 0b111) archLevel =1;
-        */
-        Log.i(TAG,"version parsing  : "+arch+","+back+","+archLevel+","+backLevel);
+        Log.i(TAG,"version parsing  : "+isRight+","+arch+","+back);
+        if(isRight){
+            rightArchLevel = arch;
+            rightBackLevel = back;
+        }
+        else{
+            leftArchLevel = arch;
+            leftBackLevel = back;
+        }
+        Log.i(TAG,"version parsing  : "+isRight+","+arch+","+back+","+ leftArchLevel +","+ leftBackLevel);
     }
     public void clearData(){
         leftData = new byte[Cons.MAX_FRAMES_NUM];
@@ -540,10 +535,17 @@ public class Result implements Serializable {
         return frames;
     }
     */
-    public int getArchLevel(){
-        return archLevel;
+    public int getLeftArchLevel(){
+        return leftArchLevel;
     }
-    public int getBackLevel(){
-        return backLevel;
+    public int getLeftBackLevel(){
+        return leftBackLevel;
+    }
+    public int getRightArchLevel() {
+        return rightArchLevel;
+    }
+
+    public int getRightBackLevel() {
+        return rightBackLevel;
     }
 }
